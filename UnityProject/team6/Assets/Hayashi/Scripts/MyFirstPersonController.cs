@@ -36,7 +36,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_StepCycle;
         private float m_NextStep;
         private bool m_Jumping;
-        private bool onMoveObject;
         private RaycastHit rayHitDown;
         private int layerMask;
 
@@ -52,7 +51,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
 			m_MouseLook.Init(transform , m_Camera.transform);
-            onMoveObject = false;
             layerMask = ~(1 << 9);
         }
 
@@ -80,7 +78,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir.y = 0f;
             }
 
-            if(Physics.SphereCast(transform.position,0.57f,Vector3.down,out rayHitDown,0.5f,layerMask))
+            if (Physics.SphereCast(transform.position,0.4f,Vector3.down,out rayHitDown,0.6f,layerMask))
             {
                 if (rayHitDown.collider.gameObject.tag == "ChangeObject")
                 {
@@ -141,7 +139,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
             }
-            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
+            m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
 
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
