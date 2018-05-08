@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 254866778}
   m_Layer: 0
   m_Name: switchObj
-  m_TagString: Untagged
+  m_TagString: rotateObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1430,7 +1430,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 626714574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.71, y: -1.433, z: 7.67}
+  m_LocalPosition: {x: 0.77, y: -1.433, z: 7.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1889,13 +1889,13 @@ GameObject:
   m_Component:
   - component: {fileID: 908468719}
   - component: {fileID: 908468722}
-  - component: {fileID: 908468721}
   - component: {fileID: 908468720}
-  - component: {fileID: 908468723}
   - component: {fileID: 908468724}
+  - component: {fileID: 908468723}
+  - component: {fileID: 908468721}
   m_Layer: 0
   m_Name: switch
-  m_TagString: Untagged
+  m_TagString: swich
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1908,7 +1908,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 908468718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.77499986, y: -2.81524, z: 7.6505795}
+  m_LocalPosition: {x: 0.77499986, y: -2.84, z: 7.6505795}
   m_LocalScale: {x: 1, y: 0.0986671, z: 1}
   m_Children: []
   m_Father: {fileID: 1968496210}
@@ -1949,20 +1949,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &908468721
-CapsuleCollider:
+--- !u!65 &908468721
+BoxCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 136074018494773268, guid: 8d894afd44ce0954aa76a5726911ebfc,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 908468718}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!33 &908468722
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1979,10 +1977,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 908468718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e67abadff18038e44a64c51dac89f922, type: 3}
+  m_Script: {fileID: 11500000, guid: 42526444f53be64438d51df7cdfb24b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkSwitch: 0
+  targets_:
+  - {fileID: 1975963074}
+  - {fileID: 254866776}
 --- !u!54 &908468724
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3826,7 +3826,7 @@ GameObject:
   - component: {fileID: 1975963076}
   m_Layer: 0
   m_Name: switchObj
-  m_TagString: Untagged
+  m_TagString: rotateObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
