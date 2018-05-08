@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ChangeObject
   - Bullet
+  - swich
+  - rotateObj
   layers:
   - Default
   - TransparentFX

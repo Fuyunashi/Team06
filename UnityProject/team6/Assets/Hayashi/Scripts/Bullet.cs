@@ -8,14 +8,12 @@ public class Bullet : MonoBehaviour {
     private float speed=2.0f;
 
     private GameObject hitObject;
-    private bool isHit;
 
-    private Shooter m_test;
+    private Shooter m_Shooter;
 
 	// Use this for initialization
 	void Start () {
-        isHit = false;
-        m_test = GameObject.Find("GameManager").GetComponent<Shooter>();
+        m_Shooter = GameObject.Find("GameManager").GetComponent<Shooter>();
         Destroy(this.gameObject, 2.0f);
 	}
 	
@@ -29,7 +27,7 @@ public class Bullet : MonoBehaviour {
         if (other.gameObject.tag == "ChangeObject")
         {
             hitObject = other.gameObject;
-            m_test.HitBullet(hitObject);
+            m_Shooter.HitBullet(hitObject);
         }
         Destroy(this.gameObject);
     }
