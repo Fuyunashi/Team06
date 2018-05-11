@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using XInputDotNetPure;
+
 public class Shooter : MonoBehaviour
 {
     //軸のタイプ
     enum AxisType
     {
-        Xaxis, //x軸
-        Yaxis, //y軸
-        Zaxis  //z軸
+        X, //x軸
+        Y, //y軸
+        Z  //z軸
     }
     //変更する値の指定
     enum ChangeType
     {
         Position, //位置
-        Scale,    //大きさ
-        Rotate    //回転
+        Scale    //大きさ
     }
     //銃のタイプ指定
     enum ShotType
@@ -25,9 +26,14 @@ public class Shooter : MonoBehaviour
         Shifting    //転置
     }
 
-    private AxisType axisType = AxisType.Xaxis;
+    private AxisType axisType = AxisType.X;
     private ChangeType changeType = ChangeType.Position;
     private ShotType shotType = ShotType.Getting;
+
+    private bool playerIndexSet = false;
+    private PlayerIndex playerIndex;
+    private GamePadState state;
+    private GamePadState prevState;
 
     [SerializeField]
     private GameObject bulletPrefabs;   //弾のプレハブ
@@ -36,25 +42,34 @@ public class Shooter : MonoBehaviour
     private Transform bulletShotPos;    //発射位置
 
     [SerializeField]
-    private Text axisText;
+    private Text axisText; //テスト用軸テキスト
     [SerializeField]
-    private Text changeText;
+    private Text changeText; //テスト用変更する値テキスト
     [SerializeField]
-    private Text shotText;
+    private Text shotText; //テスト用銃テキスト
+    [SerializeField]
+    private Text originText;
+    [SerializeField]
+    private Text targetText;
 
     private GameObject originObject;     //数値を取得するオブジェクト
     private GameObject targetObject;     //数値を転置するオブジェクト
     private Vector3 originPositionValue; //取得するオブジェクトの位置の数値
-    private Vector3 targetPositionValue; //転置するオブジェクトの位置の数値
     private Vector3 originScaleValue;    //取得するオブジェクトの大きさの数値
-    private Vector3 targetScaleValue;    //転置するオブジェクトの大きさの数値
-    private Vector3 originRotateValue;   //取得するオブジェクトの回転の数値
-    private Vector3 targetRotateValue;   //転置するオブジェクトの回転の数値
 
-    private bool isOriginMove;      //取得するオブジェクトが動いているか
     private bool isTargetMove;      //転置するオブジェクトが動いているか
-    private bool getRTriggerDown;   //Rトリガーが押されたか
+    private bool isShotBullet;   //Rトリガーが押されたか
     private bool getLTriggerDown;   //Lトリガーが押されたか
+
+    private RaycastHit rayhit;
+    [SerializeField]
+    private float rayDistance = 20.0f;
+    private int layerMask;
+    private GameObject rayOriginObj;
+    private GameObject rayTargetObj;
+    private bool isRayHit;
+    private bool isOriginGet;
+    private bool isTargetGet;
 
     // Use this for initialization
     void Start()
@@ -63,56 +78,111 @@ public class Shooter : MonoBehaviour
         originObject = null;
         targetObject = null;
         originPositionValue = Vector3.zero;
-        targetPositionValue = Vector3.zero;
         originScaleValue = Vector3.zero;
-        targetScaleValue = Vector3.zero;
-        originRotateValue = Vector3.zero;
-        targetRotateValue = Vector3.zero;
 
-        isOriginMove = false;
+        //isOriginMove = false;
         isTargetMove = false;
 
-        getRTriggerDown = false;
+        isShotBullet = false;
         getLTriggerDown = false;
 
         axisText.text = "axis:" + axisType.ToString();
         changeText.text = "change:" + changeType.ToString();
-        shotText.text = "shotType:" + shotType.ToString();
+        shotText.text = "shot:" + shotType.ToString();
+
+        layerMask = ~(1 << 9);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //射撃ボタンが押されたら
-        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("RButton"))
+        if(!playerIndexSet || !prevState.IsConnected)
         {
-            //弾を発射
-            ShotBullet();
+            playerIndex = (PlayerIndex)0;
+            playerIndexSet = true;
+        }
+        prevState = state;
+        state = GamePad.GetState(playerIndex);
+        //軸切り替えボタンが押されたら
+        if (Input.GetKeyDown(KeyCode.E) || (prevState.Buttons.RightShoulder==ButtonState.Released && state.Buttons.RightShoulder==ButtonState.Pressed))
+        {
+            //軸の切り替え
+            SwitchAxisType();
+        }
+        //値切り替えボタンが押されたら
+        if (Input.GetKeyDown(KeyCode.Q) || (prevState.Buttons.LeftShoulder==ButtonState.Released && state.Buttons.LeftShoulder==ButtonState.Pressed))
+        {
+            //値の切り替え
+            SwitchChangeType();
         }
         //弾が発射されていないかつショットタイプ切り替えボタンが押されたら
-        if (bullet == null && (Input.GetMouseButtonDown(1) || Input.GetButtonDown("YButton")))
+        if (bullet == null && (Input.GetKeyDown(KeyCode.R) || (prevState.Buttons.Y==ButtonState.Released&&state.Buttons.Y==ButtonState.Pressed)))
         {
             //ショットタイプの切り替え
             SwitchShotType();
         }
-        //軸切り替えボタンが押されたら(コントローラーだとトリガーがAxisなため押されたどうか判別するためにboolを用いる)
-        if (Input.GetKeyDown(KeyCode.E) || (Input.GetAxisRaw("LRTrigger") <= -0.85f && getRTriggerDown == false))
+        //カメラ切り替え(三人称から一人称へ)
+        if (Input.GetMouseButton(1) || state.Triggers.Left>=0.8f)
         {
-            //Rトリガーが押された
-            getRTriggerDown = true;
-            //軸の切り替え
-            SwitchAxisType();
+            //一人称へ変換処理
+
+
+
+            //射撃ボタンが押されたら
+            if ((Input.GetMouseButtonDown(0) || state.Triggers.Right>=0.8f) && isShotBullet == false)
+            {
+                //弾を発射
+                ShotBullet();
+                //弾を撃った
+                isShotBullet = true;
+            }
         }
-        if (getRTriggerDown == true && Input.GetAxisRaw("LRTrigger") >= -0.1f) getRTriggerDown = false;
-        //値切り替えボタンが押されたら(コントローラーだとトリガーがAxisなため押されたどうか判別するためにboolを用いる)
-        if (Input.GetKeyDown(KeyCode.Q) || (Input.GetAxisRaw("LRTrigger") >= 0.85f && getLTriggerDown == false))
+        if (isShotBullet == true && state.Triggers.Right<=0.3f) isShotBullet = false;
+        //if (Input.GetMouseButtonUp(1) || Input.GetAxisRaw("LRTrigger") < 0.1f) firstParsonMode = false;
+
+        GetObject_Ray();
+        if (isRayHit == true)
         {
-            //Lトリガーが押された
-            getLTriggerDown = true;
-            //値の切り替え
-            SwitchChangeType();
+            switch (shotType)
+            {
+                case ShotType.Getting:
+                    if (isTargetGet == false)
+                        ObjectsValueDraw(rayOriginObj, null);
+                    else if (isTargetGet == true)
+                        ObjectsValueDraw(rayOriginObj, targetObject.transform.parent.gameObject);
+                    break;
+                case ShotType.Shifting:
+                    if (isOriginGet == false)
+                        ObjectsValueDraw(null, rayTargetObj);
+                    else
+                        ObjectsValueDraw(originObject.transform.parent.gameObject, rayTargetObj);
+                    break;
+            }
         }
-        if (getLTriggerDown == true && Input.GetAxisRaw("LRTrigger") < 0.1f) getLTriggerDown = false;
+        else
+        {
+            switch (shotType)
+            {
+                case ShotType.Getting:
+                    if (isOriginGet == false && isTargetGet == false)
+                        ObjectsValueDraw(null, null);
+                    else if (isOriginGet == false && isTargetGet == true)
+                        ObjectsValueDraw(null, targetObject.transform.parent.gameObject);
+                    else if (isOriginGet == true && isTargetGet == false)
+                        ObjectsValueDraw(originObject.transform.parent.gameObject, null);
+                    else if (isOriginGet == true && isTargetGet == true)
+                        ObjectsValueDraw(originObject.transform.parent.gameObject, targetObject.transform.parent.gameObject);
+                    break;
+                case ShotType.Shifting:
+                    if (isOriginGet == false && isTargetGet == false)
+                        ObjectsValueDraw(null, null);
+                    else if (isOriginGet == true && isTargetGet == false)
+                        ObjectsValueDraw(originObject.transform.parent.gameObject, null);
+                    else if (isOriginGet == true && isTargetGet == true)
+                        ObjectsValueDraw(originObject.transform.parent.gameObject, targetObject.transform.parent.gameObject);
+                    break;
+            }
+        }
     }
 
     //弾の発射
@@ -126,6 +196,107 @@ public class Shooter : MonoBehaviour
         {
             Destroy(bullet);
             bullet = Instantiate(bulletPrefabs, bulletShotPos.position, bulletShotPos.rotation);
+        }
+    }
+    //レイで取得、転置オブジェクトを取得
+    private void GetObject_Ray()
+    {
+        if (Physics.SphereCast(bulletShotPos.position, 0.25f, bulletShotPos.forward, out rayhit, rayDistance, layerMask))
+        {
+            if (rayhit.collider.gameObject.tag == "ChangeObject")
+            {
+                isRayHit = true;
+                switch (shotType)
+                {
+                    case ShotType.Getting:
+                        rayOriginObj = rayhit.collider.transform.parent.gameObject;
+                        break;
+                    case ShotType.Shifting:
+                        rayTargetObj = rayhit.collider.transform.parent.gameObject;
+                        break;
+                }
+            }
+            else isRayHit = false;
+        }
+        else isRayHit = false;
+
+        Debug.DrawRay(bulletShotPos.position, bulletShotPos.forward * rayDistance, Color.red);
+    }
+    //取得、転置オブジェクトの数値の表示
+    private void ObjectsValueDraw(GameObject originObj, GameObject targetObj)
+    {
+        switch (changeType)
+        {
+            case ChangeType.Position:
+                switch (axisType)
+                {
+                    case AxisType.X:
+                        if (originObj != null)
+                            originText.text = "origin:" + originObj.transform.parent.localPosition.x.ToString("f2");
+                        else
+                            originText.text = "origin:" + 0;
+                        if (targetObj != null)
+                            targetText.text = "target:" + targetObj.transform.parent.localPosition.x.ToString("f2");
+                        else
+                            targetText.text = "target:" + 0;
+                        break;
+                    case AxisType.Y:
+                        if (originObj != null)
+                            originText.text = "origin:" + originObj.transform.parent.localPosition.y.ToString("f2");
+                        else
+                            originText.text = "origin:" + 0;
+                        if (targetObj != null)
+                            targetText.text = "target:" + targetObj.transform.parent.localPosition.y.ToString("f2");
+                        else
+                            targetText.text = "target:" + 0;
+                        break;
+                    case AxisType.Z:
+                        if (originObj != null)
+                            originText.text = "origin:" + originObj.transform.parent.localPosition.z.ToString("f2");
+                        else
+                            originText.text = "origin:" + 0;
+                        if (targetObj != null)
+                            targetText.text = "target:" + targetObj.transform.parent.localPosition.z.ToString("f2");
+                        else
+                            targetText.text = "target:" + 0;
+                        break;
+                }
+                break;
+            case ChangeType.Scale:
+                switch (axisType)
+                {
+                    case AxisType.X:
+                        if (originObj != null)
+                            originText.text = "origin:" + originObj.transform.localScale.x.ToString("f2");
+                        else
+                            originText.text = "origin:" + 0;
+                        if (targetObj != null)
+                            targetText.text = "target:" + targetObj.transform.localScale.x.ToString("f2");
+                        else
+                            targetText.text = "target:" + 0;
+                        break;
+                    case AxisType.Y:
+                        if (originObj != null)
+                            originText.text = "origin:" + originObj.transform.localScale.y.ToString("f2");
+                        else
+                            originText.text = "origin:" + 0;
+                        if (targetObj != null)
+                            targetText.text = "target:" + targetObj.transform.localScale.y;
+                        else
+                            targetText.text = "target:" + 0;
+                        break;
+                    case AxisType.Z:
+                        if (originObj != null)
+                            originText.text = "origin:" + originObj.transform.localScale.z.ToString("f2");
+                        else
+                            originText.text = "origin:" + 0;
+                        if (targetObj != null)
+                            targetText.text = "target:" + targetObj.transform.localScale.z.ToString("f2");
+                        else
+                            targetText.text = "target:" + 0;
+                        break;
+                }
+                break;
         }
     }
     //銃のタイプ切り替え
@@ -148,16 +319,16 @@ public class Shooter : MonoBehaviour
     {
         switch (axisType)
         {
-            case AxisType.Xaxis:
-                axisType = AxisType.Yaxis;
+            case AxisType.X:
+                axisType = AxisType.Y;
                 axisText.text = "axis:" + axisType.ToString();
                 break;
-            case AxisType.Yaxis:
-                axisType = AxisType.Zaxis;
+            case AxisType.Y:
+                axisType = AxisType.Z;
                 axisText.text = "axis:" + axisType.ToString();
                 break;
-            case AxisType.Zaxis:
-                axisType = AxisType.Xaxis;
+            case AxisType.Z:
+                axisType = AxisType.X;
                 axisText.text = "axis:" + axisType.ToString();
                 break;
         }
@@ -172,10 +343,6 @@ public class Shooter : MonoBehaviour
                 changeText.text = "change:" + changeType.ToString();
                 break;
             case ChangeType.Scale:
-                changeType = ChangeType.Rotate;
-                changeText.text = "change:" + changeType.ToString();
-                break;
-            case ChangeType.Rotate:
                 changeType = ChangeType.Position;
                 changeText.text = "change:" + changeType.ToString();
                 break;
@@ -189,7 +356,7 @@ public class Shooter : MonoBehaviour
     public void HitBullet(GameObject hitObject)
     {
         //取得するオブジェクトと転置するオブジェクトが動いていなければ
-        if (isOriginMove == false && isTargetMove == false)
+        if (/*isOriginMove == false &&*/ isTargetMove == false)
         {
             //当たった時の銃のタイプによりそれぞれ処理
             switch (shotType)
@@ -197,19 +364,20 @@ public class Shooter : MonoBehaviour
                 //取得タイプなら
                 case ShotType.Getting:
                     //取得するオブジェクトに当たったオブジェクトを格納
-                    originObject = hitObject.transform.parent.gameObject;
+                    originObject = hitObject.transform.gameObject;
+                    isOriginGet = true;
+                    //取得するオブジェクトの値を取得
+                    GetOriginAxisLength();
                     break;
                 //転置タイプなら
                 case ShotType.Shifting:
-                    //転置するオブジェクトに当たったオブジェクトを格納
-                    targetObject = hitObject.transform.parent.gameObject;
+
+                    isTargetGet = true;
                     //取得するオブジェクトが空でなければ
                     if (originObject != null)
                     {
-                        //取得するオブジェクトの値を取得
-                        GetOriginAxisLength();
-                        //転置するオブジェクトの値を取得
-                        GetTargetAxisLength();
+                        //転置するオブジェクトに当たったオブジェクトを格納
+                        targetObject = hitObject.transform.gameObject;
                         //指定した変更する値の軸を切り替え
                         ChangeObjectAxis();
                     }
@@ -221,23 +389,14 @@ public class Shooter : MonoBehaviour
     //取得するオブジェクトの値を取得
     private void GetOriginAxisLength()
     {
-        originPositionValue = originObject.transform.parent.localPosition;
-        originScaleValue = originObject.transform.localScale;
-        originRotateValue = originObject.transform.parent.localEulerAngles;
-    }
-
-    //転置するオブジェクトの値を取得
-    private void GetTargetAxisLength()
-    {
-        targetPositionValue = targetObject.transform.parent.localPosition;
-        targetScaleValue = targetObject.transform.localScale;
-        targetRotateValue = targetObject.transform.parent.localEulerAngles;
+        originPositionValue = originObject.transform.parent.transform.parent.localPosition;
+        originScaleValue = originObject.transform.parent.localScale;
     }
 
     //指定した変更する値の軸を切り替え
     private void ChangeObjectAxis()
     {
-        isOriginMove = true;
+        //isOriginMove = true;
         isTargetMove = true;
         //変更する値のタイプによってそれぞれ処理
         switch (changeType)
@@ -246,17 +405,29 @@ public class Shooter : MonoBehaviour
             case ChangeType.Position:
                 switch (axisType)
                 {
-                    case AxisType.Xaxis:
-                        LeanTween.moveX(targetObject.transform.parent.gameObject, originPositionValue.x, 0.5f).setOnComplete(() => { isTargetMove = false; });
-                        LeanTween.moveX(originObject.transform.parent.gameObject, targetPositionValue.x, 0.5f).setOnComplete(() => { isOriginMove = false; });
+                    case AxisType.X:
+                        targetObject.transform.GetComponent<ObjectMove>().PositionShiftStart(
+                            new Vector3(originPositionValue.x,
+                                        targetObject.transform.parent.transform.parent.position.y,
+                                        targetObject.transform.parent.transform.parent.position.z));
+                        isTargetMove = false;
+                        isTargetGet = false;
                         break;
-                    case AxisType.Yaxis:
-                        LeanTween.moveY(targetObject.transform.parent.gameObject, originPositionValue.y, 0.5f).setOnComplete(() => { isTargetMove = false; });
-                        LeanTween.moveY(originObject.transform.parent.gameObject, targetPositionValue.y, 0.5f).setOnComplete(() => { isOriginMove = false; });
+                    case AxisType.Y:
+                        targetObject.transform.GetComponent<ObjectMove>().PositionShiftStart(
+                            new Vector3(targetObject.transform.parent.transform.parent.position.x,
+                                        originPositionValue.y,
+                                        targetObject.transform.parent.transform.parent.position.z));
+                        isTargetMove = false;
+                        isTargetGet = false;
                         break;
-                    case AxisType.Zaxis:
-                        LeanTween.moveZ(targetObject.transform.parent.gameObject, originPositionValue.z, 0.5f).setOnComplete(() => { isTargetMove = false; });
-                        LeanTween.moveZ(originObject.transform.parent.gameObject, targetPositionValue.z, 0.5f).setOnComplete(() => { isOriginMove = false; });
+                    case AxisType.Z:
+                        targetObject.transform.GetComponent<ObjectMove>().PositionShiftStart(
+                            new Vector3(targetObject.transform.parent.transform.parent.position.x,
+                                        targetObject.transform.parent.transform.parent.position.y,
+                                        originPositionValue.z));
+                        isTargetMove = false;
+                        isTargetGet = false;
                         break;
                 }
                 break;
@@ -264,35 +435,29 @@ public class Shooter : MonoBehaviour
             case ChangeType.Scale:
                 switch (axisType)
                 {
-                    case AxisType.Xaxis:
-                        LeanTween.scaleX(targetObject, originScaleValue.x, 0.5f).setOnComplete(() => { isTargetMove = false; });
-                        LeanTween.scaleX(originObject, targetScaleValue.x, 0.5f).setOnComplete(() => { isOriginMove = false; });
+                    case AxisType.X:
+                        targetObject.transform.GetComponent<ObjectMove>().ScaleShiftStart(
+                            new Vector3(originScaleValue.x,
+                                        targetObject.transform.parent.localScale.y,
+                                        targetObject.transform.parent.localScale.z));
+                        isTargetMove = false;
+                        isTargetGet = false;
                         break;
-                    case AxisType.Yaxis:
-                        LeanTween.scaleY(targetObject, originScaleValue.y, 0.5f).setOnComplete(() => { isTargetMove = false; });
-                        LeanTween.scaleY(originObject, targetScaleValue.y, 0.5f).setOnComplete(() => { isOriginMove = false; });
+                    case AxisType.Y:
+                        targetObject.transform.GetComponent<ObjectMove>().ScaleShiftStart(
+                            new Vector3(targetObject.transform.parent.localScale.x,
+                                        originScaleValue.y,
+                                        targetObject.transform.parent.localScale.z));
+                        isTargetMove = false;
+                        isTargetGet = false;
                         break;
-                    case AxisType.Zaxis:
-                        LeanTween.scaleZ(targetObject, originScaleValue.z, 0.5f).setOnComplete(() => { isTargetMove = false; });
-                        LeanTween.scaleZ(originObject, targetScaleValue.z, 0.5f).setOnComplete(() => { isOriginMove = false; });
-                        break;
-                }
-                break;
-            //回転
-            case ChangeType.Rotate:
-                switch (axisType)
-                {
-                    case AxisType.Xaxis:
-                        LeanTween.rotateX(targetObject.transform.parent.gameObject, originRotateValue.x, 0.5f).setOnComplete(() => { isTargetMove = false; });
-                        LeanTween.rotateX(originObject.transform.parent.gameObject, targetRotateValue.x, 0.5f).setOnComplete(() => { isOriginMove = false; });
-                        break;
-                    case AxisType.Yaxis:
-                        LeanTween.rotateY(targetObject.transform.parent.gameObject, originRotateValue.y, 0.5f).setOnComplete(() => { isTargetMove = false; });
-                        LeanTween.rotateY(originObject.transform.parent.gameObject, targetRotateValue.y, 0.5f).setOnComplete(() => { isOriginMove = false; });
-                        break;
-                    case AxisType.Zaxis:
-                        LeanTween.rotateZ(targetObject.transform.parent.gameObject, originRotateValue.z, 0.5f).setOnComplete(() => { isTargetMove = false; });
-                        LeanTween.rotateZ(originObject.transform.parent.gameObject, targetRotateValue.z, 0.5f).setOnComplete(() => { isOriginMove = false; });
+                    case AxisType.Z:
+                        targetObject.transform.GetComponent<ObjectMove>().ScaleShiftStart(
+                            new Vector3(targetObject.transform.parent.localScale.x,
+                                        targetObject.transform.parent.localScale.y,
+                                        originScaleValue.z));
+                        isTargetMove = false;
+                        isTargetGet = false;
                         break;
                 }
                 break;
