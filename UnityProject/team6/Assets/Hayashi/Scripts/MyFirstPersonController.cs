@@ -237,22 +237,5 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
-
-        //private void OnControllerColliderHit(ControllerColliderHit hit)
-        //{
-        //    Rigidbody body = hit.collider.attachedRigidbody;
-        //    //dont move the rigidbody if the character is on top of it
-        //    if (m_CollisionFlags == CollisionFlags.Below)
-        //    {
-        //        return;
-        //    }
-
-        //    if (body == null || body.isKinematic)
-        //    {
-        //        return;
-        //    }
-        //    body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
-        //}
-
     }
 }
