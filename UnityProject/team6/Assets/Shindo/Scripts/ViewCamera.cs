@@ -10,8 +10,6 @@ public class ViewCamera : MonoBehaviour {
     private Transform playerTransform_;
     private Transform cameraTransform_;
 
-    private Vector3 velocity_;
-
 	// Use this for initialization
 	void Start () {
 
@@ -33,23 +31,19 @@ public class ViewCamera : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.W))
         {
-            velocity_.z += 1;
-            //playerTransform_.transform.position += dir1 * speed_ * Time.deltaTime;
+            playerTransform_.transform.position += dir1 * speed_ * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            velocity_.x -= 1;
-            //playerTransform_.transform.position += dir2 * speed_ * Time.deltaTime;
+            playerTransform_.transform.position += dir2 * speed_ * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            velocity_.z -= 1;
-            //playerTransform_.transform.position += -dir2 * speed_ * Time.deltaTime;
+            playerTransform_.transform.position += -dir2 * speed_ * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            velocity_.x -= 1;
-            //playerTransform_.transform.position += -dir1 * speed_ * Time.deltaTime;
+            playerTransform_.transform.position += -dir1 * speed_ * Time.deltaTime;
         }
     }
 }

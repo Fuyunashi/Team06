@@ -7,6 +7,11 @@ public class ObjectMove : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 10f;
 
+    private Material defaultMat;
+
+    private Vector3 basePosition;
+    private Vector3 baseScale;
+
     private Vector3 value;
     private bool isPositionMove;
     private bool isScaleMove;
@@ -15,8 +20,11 @@ public class ObjectMove : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        defaultMat = GetComponent<Renderer>().material;
         isPositionMove = false;
         isHitObj = false;
+        basePosition = transform.parent.transform.parent.position;
+        baseScale = transform.parent.localScale;
     }
 
     // Update is called once per frame
@@ -43,7 +51,12 @@ public class ObjectMove : MonoBehaviour
         if (isHitObj == false)
         {
             transform.parent.transform.parent.position = Vector3.MoveTowards(transform.parent.transform.parent.position, value, moveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.parent.transform.parent.position, value) == 0) isPositionMove = false;
+            if (Vector3.Distance(transform.parent.transform.parent.position, value) == 0)
+            {
+                ResetMaterial();
+                basePosition = transform.parent.transform.parent.position;
+                isPositionMove = false;
+            }
         }
     }
 
@@ -58,17 +71,40 @@ public class ObjectMove : MonoBehaviour
         if (isHitObj == false)
         {
             transform.parent.localScale = Vector3.MoveTowards(transform.parent.localScale, value, moveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.parent.transform.parent.localScale, value) == 0) isPositionMove = false;
+            if (Vector3.Distance(transform.parent.transform.parent.localScale, value) == 0)
+            {
+                ResetMaterial();
+                baseScale = transform.parent.localScale;
+                isPositionMove = false;
+            }
         }
+    }
+
+    public void ChangeMaterial(Material mat)
+    {
+        this.GetComponent<Renderer>().material = mat;
+    }
+
+    public void ResetMaterial()
+    {
+        this.GetComponent<Renderer>().material = defaultMat;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("toota");
         if (collision.gameObject.tag != "moveObject")
         {
             isHitObj = true;
-            Destroy(transform.parent.transform.parent.gameObject);
+            isPositionMove = false;
+            isScaleMove = false;
+            LeanTween.alpha(gameObject, 0.0f, 0.5f).setOnComplete(() =>
+              {
+                  transform.parent.transform.parent.position = basePosition;
+                  transform.parent.localScale = baseScale;
+                  ResetMaterial();
+                  LeanTween.alpha(gameObject, 1.0f, 0.5f).setOnComplete(()=> { isHitObj = false; });
+
+              });
         }
     }
 

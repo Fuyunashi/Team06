@@ -52,6 +52,9 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private Text targetText;
 
+    [SerializeField]
+    private Material outlineMat;
+    private GameObject prevOriginObj;    //前回の取得するオブジェクト
     private GameObject originObject;     //数値を取得するオブジェクト
     private GameObject targetObject;     //数値を転置するオブジェクト
     private Vector3 originPositionValue; //取得するオブジェクトの位置の数値
@@ -75,6 +78,7 @@ public class Shooter : MonoBehaviour
     void Start()
     {
         //各変数の初期化
+        prevOriginObj = null;
         originObject = null;
         targetObject = null;
         originPositionValue = Vector3.zero;
@@ -125,7 +129,6 @@ public class Shooter : MonoBehaviour
         if (Input.GetMouseButton(1) || state.Triggers.Left>=0.8f)
         {
             //一人称へ変換処理
-
 
 
             //射撃ボタンが押されたら
@@ -364,7 +367,10 @@ public class Shooter : MonoBehaviour
                 //取得タイプなら
                 case ShotType.Getting:
                     //取得するオブジェクトに当たったオブジェクトを格納
+                    prevOriginObj = originObject;
+                    if (prevOriginObj != null) prevOriginObj.GetComponent<ObjectMove>().ResetMaterial();
                     originObject = hitObject.transform.gameObject;
+                    originObject.GetComponent<ObjectMove>().ChangeMaterial(outlineMat);
                     isOriginGet = true;
                     //取得するオブジェクトの値を取得
                     GetOriginAxisLength();
@@ -378,6 +384,7 @@ public class Shooter : MonoBehaviour
                     {
                         //転置するオブジェクトに当たったオブジェクトを格納
                         targetObject = hitObject.transform.gameObject;
+                        targetObject.GetComponent<ObjectMove>().ChangeMaterial(outlineMat);
                         //指定した変更する値の軸を切り替え
                         ChangeObjectAxis();
                     }
