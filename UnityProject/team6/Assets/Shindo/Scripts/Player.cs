@@ -39,10 +39,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float stepDistance_ = 0.5f;
     //登れる段差
-    [SerializeField]
+    [SerializeField, Tooltip("登れる段差")]
     private float stepOffset_ = 0.3f;
     //登れる角度
-    [SerializeField]
+    [SerializeField, Tooltip("登れる角度")]
     private float slopeLimit_ = 65f;
     //登れる段差の位置から飛ばすレイの距離
     [SerializeField]
