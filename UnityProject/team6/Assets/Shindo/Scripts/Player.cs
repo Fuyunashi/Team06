@@ -8,6 +8,11 @@ using XInputDotNetPure;
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
+    public enum PlayerState{
+        Arive,
+        Dead,
+    }
+    public PlayerState playerState_;// { get; private set; }
     private Animator animaotor_;
     //移動方向
     [SerializeField]
@@ -36,7 +41,7 @@ public class Player : MonoBehaviour
     TPVCamera tpvCam_ = new TPVCamera();
     //死ぬ秒数（60fps）
     [SerializeField, Tooltip("死ぬ秒数")]
-    private float deathTime_ = 180.0f;
+    private float deathTime_ = 2.0f;
     //空中に浮いている時間
     private float deathTimer_ = 0.0f;
 
@@ -55,7 +60,8 @@ public class Player : MonoBehaviour
         velocity_ = Vector3.zero;
         isGround_ = false;
         rigid_ = GetComponent<Rigidbody>();
-        //cc.ShowThirdPersonView2();
+        cc.ShowThirdPersonView();
+        playerState_ = PlayerState.Arive;
     }
 
     // Update is called once per frame
@@ -127,6 +133,7 @@ public class Player : MonoBehaviour
         //ジャンプ
         if (isGround_ && Input.GetKeyDown(KeyCode.Space) || (prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed))
         {
+            Debug.Log("飛んでます");
             animaotor_.SetBool("Jump", true);
             velocity_.y += jumpPower_;
             rigid_.useGravity = false;
@@ -134,12 +141,14 @@ public class Player : MonoBehaviour
 
         if (!isGroundCollider_ && !isGround_)
         {
+            
             velocity_.y += Physics.gravity.y * Time.deltaTime;
         }
 
         //死亡処理
         if (!isGround_)
         {
+            Debug.Log("あと" + deathTimer_ + "で死にます");
             deathTimer_ += Time.deltaTime;
         }
         else
@@ -150,9 +159,10 @@ public class Player : MonoBehaviour
         {
             //死亡時の処理
             Debug.Log("死にました");
+            playerState_ = PlayerState.Dead;
             Destroy(gameObject);
         }
-        Debug.Log(deathTimer_);
+        //Debug.Log(deathTimer_);
 
         //キー入力
         if (Input.GetMouseButtonDown(1))

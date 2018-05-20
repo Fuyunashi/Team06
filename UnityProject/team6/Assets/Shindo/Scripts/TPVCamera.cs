@@ -27,8 +27,8 @@ public class TPVCamera : MonoBehaviour
     [Tooltip("カメラの回転速度")]
     public float rotationSpeed_ = 100f;
     //視点
-    //private bool isChange = false;
-    //public bool isTrgger_ { get; private set; }
+    private bool isChange = false;
+    public bool isTrgger_ { get; private set; }
 
     // Use this for initialization
     void Start()
@@ -47,30 +47,30 @@ public class TPVCamera : MonoBehaviour
     void Update()
     {
 
-        ////マウスの右ボタンが押されていたら
-        //if (Input.GetMouseButtonDown(1) /*|| (padState_.Triggers.Left >= 0.7f)*/)
-        //{
-        //    isChange = true;
-        //    Debug.Log("一人称");
-        //}
-        //else if (Input.GetMouseButtonUp(1)/* || (padState_.Triggers.Left <= 0.7f)*/)
-        //{
-        //    isChange = false;
-        //    Debug.Log("三人称");
-        //}
+        //マウスの右ボタンが押されていたら
+        if (Input.GetMouseButtonDown(1) /*|| (padState_.Triggers.Left >= 0.7f)*/)
+        {
+            isChange = true;
+            Debug.Log("一人称");
+        }
+        else if (Input.GetMouseButtonUp(1)/* || (padState_.Triggers.Left <= 0.7f)*/)
+        {
+            isChange = false;
+            Debug.Log("三人称");
+        }
 
-        //if (isChange == true)
-        //{
-        //    isTrgger_ = true;
-        //    distance_ = 0.0f;
-        //    cameraHeight_ = 1.6f;
-        //}
-        //else
-        //{
-        //    isTrgger_ = false;
-        //    distance_ = 2.0f;
-        //    cameraHeight_ = 1.2f;
-        //}
+        if (isChange == true)
+        {
+            isTrgger_ = true;
+            distance_ = 0.0f;
+            cameraHeight_ = 1.6f;
+        }
+        else
+        {
+            isTrgger_ = false;
+            distance_ = 2.0f;
+            cameraHeight_ = 1.2f;
+        }
 
     }
 

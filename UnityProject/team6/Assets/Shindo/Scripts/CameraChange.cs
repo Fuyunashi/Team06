@@ -10,6 +10,10 @@ public class CameraChange : MonoBehaviour {
     public Camera FpsCamera_;
     public Camera TpsCamera_;
 
+    
+
+    private Player player_;
+
     public bool isFps_ { get; set; }
     // Use this for initialization
 
