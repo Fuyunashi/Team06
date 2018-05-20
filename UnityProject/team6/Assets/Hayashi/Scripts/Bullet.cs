@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        m_Shooter = GameObject.Find("GameManager").GetComponent<Shooter>();
+        m_Shooter = GameObject.FindGameObjectWithTag("Player").GetComponent<Shooter>();
         Destroy(this.gameObject, 2.0f);
 	}
 	
