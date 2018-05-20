@@ -40,13 +40,14 @@ GameObject:
   - component: {fileID: 143910696732495358}
   - component: {fileID: 54303952889441574}
   - component: {fileID: 114079401361917402}
+  - component: {fileID: 114549095055825894}
   m_Layer: 8
   m_Name: MyFPSController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4896732600377040
 Transform:
   m_ObjectHideFlags: 1
@@ -229,6 +230,28 @@ MonoBehaviour:
     BobDuration: 0.2
     BobAmount: 0.1
   m_StepInterval: 5
+--- !u!114 &114549095055825894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1359504637149678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa79566a0953ea4a83610abb1c5ec8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefabs: {fileID: 1660294980512334, guid: 64263fd09959d35459c4ff20dc7a9646,
+    type: 2}
+  bulletShotPos: {fileID: 4984523373708136}
+  axisText: {fileID: 0}
+  changeText: {fileID: 0}
+  shotText: {fileID: 0}
+  outlineMat: {fileID: 2100000, guid: dd483a83e6a70214f928dc08a4bb17eb, type: 2}
+  objValPref_ray: {fileID: 1684843398455916, guid: 2ca560a342ea3794ca544a3adb70ec38,
+    type: 2}
+  objValPref: {fileID: 1101271737918970, guid: b69917c54d3c48443867554b40707d06, type: 2}
+  rayDistance: 20
 --- !u!124 &124259772382197058
 Behaviour:
   m_ObjectHideFlags: 1
