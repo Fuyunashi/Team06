@@ -63,7 +63,7 @@ public class TPVCamera : MonoBehaviour
         {
             isTrgger_ = true;
             distance_ = 0.0f;
-            cameraHeight_ = 1.6f;
+            cameraHeight_ = 1.8f;
         }
         else
         {
