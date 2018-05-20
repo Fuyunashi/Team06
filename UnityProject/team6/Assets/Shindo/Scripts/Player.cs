@@ -49,6 +49,13 @@ public class Player : MonoBehaviour
     private float slopeDistance_ = 1f;
     //ヒットした情報を入れる場所
     private RaycastHit stepHit_;
+    //
+    TPVCamera tpvCam_ = new TPVCamera();
+    //死ぬ秒数（60fps）
+    [SerializeField, Tooltip("死ぬ秒数")]
+    private float deathTime_ = 180.0f;
+    //空中に浮いている時間
+    private float deathTimer_ = 0.0f;
 
     //Xinput関連
     private bool playerInputSet_ = false;
@@ -138,7 +145,7 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
-                        velocity_ += direction * moveSpeed_;
+                         velocity_ += direction * moveSpeed_;
                     }
 
                     Debug.Log(Vector3.Angle(Vector3.up, stepHit_.normal));
@@ -169,6 +176,21 @@ public class Player : MonoBehaviour
         {
             velocity_.y += Physics.gravity.y * Time.deltaTime;
         }
+
+        if (!isGround_)
+        {
+            deathTimer_ += Time.deltaTime;
+        }
+        else
+        {
+            deathTimer_ = 0.0f;
+        }
+
+        if(deathTimer_ >= deathTime_)
+        {
+            Destroy(gameObject);
+        }
+        Debug.Log(deathTimer_);
     }
 
     void FixedUpdate()
