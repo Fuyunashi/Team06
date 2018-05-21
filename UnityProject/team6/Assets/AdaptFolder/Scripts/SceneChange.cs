@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour {
 
-    Player player_ = new Player();
+    Player player_;
         
 	// Use this for initialization
 	void Start () {

@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
         Arive,
         Dead,
     }
-    public PlayerState playerState_;// { get; private set; }
+    public PlayerState playerState_;//{ get; private set; }
     private Animator animaotor_;
     //移動方向
     [SerializeField]
@@ -39,15 +39,15 @@ public class Player : MonoBehaviour
     private bool isGroundCollider_ = false;
 
     //カメラクラス生成
-    TPVCamera tpvCam_ = new TPVCamera();
+    //TPVCamera tpvCam_ = new TPVCamera();
     //死ぬ秒数（60fps）
     [SerializeField, Tooltip("死ぬ秒数")]
     private float deathTime_ = 2.0f;
     //空中に浮いている時間
     private float deathTimer_ = 0.0f;
 
-    CameraChange cc = new CameraChange();
-
+    CamChange cc;
+    
     //Xinput関連
     private bool playerInputSet_ = false;
     private PlayerIndex playerIndex_;
@@ -61,8 +61,9 @@ public class Player : MonoBehaviour
         velocity_ = Vector3.zero;
         isGround_ = false;
         rigid_ = GetComponent<Rigidbody>();
-        //cc.ShowThirdPersonView();
+        
         playerState_ = PlayerState.Arive;
+        
     }
 
     // Update is called once per frame
@@ -164,18 +165,19 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene("AlphaScene");
             Destroy(gameObject);
         }
-        //Debug.Log(deathTimer_);
+        
 
         //キー入力
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1)/* || (padState_.Triggers.Left >= 0.7f)*/)
         {
             Debug.Log("一人称");
-            //cc.ShowFirstPersonView();
+            cc.isFps_ = true;
+            
         }
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1) /*|| (padState_.Triggers.Left <= 0.7f)*/)
         {
             Debug.Log("三人称");
-            //cc.ShowThirdPersonView();
+            cc.isFps_ = false;
         }
     }
 

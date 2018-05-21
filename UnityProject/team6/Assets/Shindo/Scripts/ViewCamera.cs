@@ -30,32 +30,32 @@ public class ViewCamera : MonoBehaviour {
         playerTransform_.transform.Rotate(0, x_rotation, 0);
         cameraTransform_.transform.Rotate(-y_rotation, 0, 0);
 
-        float angleDir = playerTransform_.transform.eulerAngles.y * (Mathf.PI / 180.0f);
-        Vector3 dir1 = new Vector3(Mathf.Sin(angleDir), 0, Mathf.Cos(angleDir));
-        Vector3 dir2 = new Vector3(-Mathf.Cos(angleDir), 0, Mathf.Sin(angleDir));
+        //float angleDir = playerTransform_.transform.eulerAngles.y * (Mathf.PI / 180.0f);
+        //Vector3 dir1 = new Vector3(Mathf.Sin(angleDir), 0, Mathf.Cos(angleDir));
+        //Vector3 dir2 = new Vector3(-Mathf.Cos(angleDir), 0, Mathf.Sin(angleDir));
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            playerTransform_.transform.position += dir1 * speed_ * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            playerTransform_.transform.position += dir2 * speed_ * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            playerTransform_.transform.position += -dir2 * speed_ * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            playerTransform_.transform.position += -dir1 * speed_ * Time.deltaTime;
-        }
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    playerTransform_.transform.position += dir1 * speed_ * Time.deltaTime;
+        //}
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    playerTransform_.transform.position += dir2 * speed_ * Time.deltaTime;
+        //}
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    playerTransform_.transform.position += -dir2 * speed_ * Time.deltaTime;
+        //}
+        //if (Input.GetKey(KeyCode.S))
+        //{
+        //    playerTransform_.transform.position += -dir1 * speed_ * Time.deltaTime;
+        //}
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            playerTransform_.transform.position += Vector3.up;
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+        //    playerTransform_.transform.position += Vector3.up;
            
-        }
+        //}
         
     }
 }
