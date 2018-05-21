@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -60,7 +61,7 @@ public class Player : MonoBehaviour
         velocity_ = Vector3.zero;
         isGround_ = false;
         rigid_ = GetComponent<Rigidbody>();
-        cc.ShowThirdPersonView();
+        //cc.ShowThirdPersonView();
         playerState_ = PlayerState.Arive;
     }
 
@@ -160,6 +161,7 @@ public class Player : MonoBehaviour
             //死亡時の処理
             Debug.Log("死にました");
             playerState_ = PlayerState.Dead;
+            SceneManager.LoadScene("AlphaScene");
             Destroy(gameObject);
         }
         //Debug.Log(deathTimer_);
@@ -168,12 +170,12 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             Debug.Log("一人称");
-            cc.ShowFirstPersonView();
+            //cc.ShowFirstPersonView();
         }
         if (Input.GetMouseButtonUp(1))
         {
             Debug.Log("三人称");
-            cc.ShowThirdPersonView();
+            //cc.ShowThirdPersonView();
         }
     }
 
