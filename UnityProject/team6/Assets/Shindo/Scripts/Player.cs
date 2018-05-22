@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     [SerializeField, Tooltip("ジャンプの強さ")]
     private float jumpPower_ = 5f;
     //rigidbody
-    private Rigidbody rigid_;
+    private Rigidbody rb_;
     private bool isGroundCollider_ = false;
 
     //カメラクラス生成
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         animaotor_ = GetComponent<Animator>();
         velocity_ = Vector3.zero;
         isGround_ = false;
-        rigid_ = GetComponent<Rigidbody>();
+        rb_ = GetComponent<Rigidbody>();
         
         playerState_ = PlayerState.Arive;
         cc = Camera.main.GetComponent<CamChange>();
@@ -78,33 +78,41 @@ public class Player : MonoBehaviour
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
 
-        //キャラクターが設置していないときはレイを飛ばして確認
-        if (!isGroundCollider_)
+        ////キャラクターが設置していないときはレイを飛ばして確認
+        //if (!isGroundCollider_)
+        //{
+        //    if (Physics.Linecast(charaRay_.position, (charaRay_.position - transform.up * charaRayRange_)))
+        //    {
+        //        isGround_ = true;
+        //        rigid_.useGravity = true;
+        //    }
+        //    else
+        //    {
+        //        isGround_ = false;
+        //        rigid_.useGravity = false;
+        //    }
+        //    Debug.DrawLine(charaRay_.position, (charaRay_.position - transform.up * charaRayRange_), Color.red);
+        //}
+        if (!isGround_)
         {
-            if (Physics.Linecast(charaRay_.position, (charaRay_.position - transform.up * charaRayRange_)))
-            {
-                isGround_ = true;
-                rigid_.useGravity = true;
-            }
-            else
-            {
-                isGround_ = false;
-                rigid_.useGravity = false;
-            }
-            Debug.DrawLine(charaRay_.position, (charaRay_.position - transform.up * charaRayRange_), Color.red);
+            rb_.useGravity = true;
+        }
+        else
+        {
+            rb_.useGravity = false;
         }
 
         //キャラクターコライダが接地、またはレイが地面に到着している場合
-        if (isGroundCollider_ || isGround_)
+        if (isGround_)
         {
             velocity_ = Vector3.zero;
 
             //地面に設置しているときは初期化
-            if (isGroundCollider_)
+            if (isGround_)
             {
                 //着地していたらアニメーションパターンと二段階ジャンプフラグをfalse
-                animaotor_.SetBool("Jump", false);
-                rigid_.useGravity = true;
+                //animaotor_.SetBool("Jump", false);
+                rb_.useGravity = true;
             }
             else
             {
@@ -120,7 +128,7 @@ public class Player : MonoBehaviour
             //方向キーの入力量を計測
             if (direction.magnitude > 0.01f)
             {
-                animaotor_.SetFloat("Speed", direction.magnitude);
+                //animaotor_.SetFloat("Speed", direction.magnitude);
 
                 transform.LookAt(transform.position + direction);
 
@@ -136,14 +144,14 @@ public class Player : MonoBehaviour
         if (isGround_ && Input.GetKeyDown(KeyCode.Space) || (prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed))
         {
             Debug.Log("飛んでます");
-            animaotor_.SetBool("Jump", true);
+            isGround_ = false;
+            //animaotor_.SetBool("Jump", true);
             velocity_.y += jumpPower_;
-            rigid_.useGravity = false;
+            rb_.useGravity = false;
         }
 
-        if (!isGroundCollider_ && !isGround_)
+        if (!isGround_)
         {
-            
             velocity_.y += Physics.gravity.y * Time.deltaTime;
         }
 
@@ -171,7 +179,6 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(1) || (padState_.Triggers.Left >= 0.7f))
         {
             Debug.Log("一人称");
-            Debug.Log(cc);
             cc.isFps_ = true;
             
         }
@@ -185,7 +192,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
          //キャラクターを移動させる処理
-         rigid_.MovePosition(transform.position + velocity_ * Time.deltaTime);
+         rb_.MovePosition(transform.position + velocity_ * Time.deltaTime);
             
     }
 
@@ -193,21 +200,20 @@ public class Player : MonoBehaviour
     {
         Debug.DrawLine(charaRay_.position, charaRay_.position + Vector3.down, Color.blue);
 
-        //ほかのコライダと接触しているときは下向きに例を飛ばし、LayerMaskに当たった時だけ接地とする
-        if (Physics.Linecast(charaRay_.position, charaRay_.position + Vector3.down, LayerMask.GetMask("Field", "Block")))
+        ////ほかのコライダと接触しているときは下向きに例を飛ばし、LayerMaskに当たった時だけ接地とする
+        //if (Physics.Linecast(charaRay_.position, charaRay_.position + Vector3.down, LayerMask.GetMask("Field", "Block")))
+        //{
+        //    isGroundCollider_ = true;
+        //}
+        //else
+        //{
+        //    isGroundCollider_ = false;
+        //}
+        if(collision.gameObject.tag == ("stage") && !isGround_)
         {
-            isGroundCollider_ = true;
-        }
-        else
-        {
-            isGroundCollider_ = false;
-        }
-    }
+            isGround_ = true;
 
-    //接触していなければ中に浮いている状態
-    void OnCollisionExit(Collision collision)
-    {
-        isGroundCollider_ = false;
+        }
     }
 
 }
