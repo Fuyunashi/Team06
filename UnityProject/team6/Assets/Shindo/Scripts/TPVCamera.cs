@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 [RequireComponent(typeof(Camera))]
 public class TPVCamera : MonoBehaviour
@@ -21,22 +22,30 @@ public class TPVCamera : MonoBehaviour
     //カメラの高さ
     public float cameraHeight_ = 1.2f;
     //カメラを横にスライドさせる
-    public float slideDistance_ = 10f;
+    //public float slideDistance_ = 10f;
     //回転の感度
     [Tooltip("カメラの回転速度")]
     public float rotationSpeed_ = 100f;
     //視点
     private bool isChange = false;
-    
+    public bool isTrgger_ { get; private set; }
+
+    //Xinput関連
+    private bool playerInputSet_ = false;
+    private PlayerIndex playerIndex_;
+    private GamePadState padState_;
+    private GamePadState prevState_;
+
     // Use this for initialization
     void Start()
     {
-        if (target_ == null)
-        {
-            Debug.LogError("ターゲットを設定してください");
-            Application.Quit();
-            return;
-        }
+        //if (target_ == null)
+        //{
+        //    Debug.LogError("ターゲットを設定してください");
+        //    Application.Quit();
+        //    return;
+        //}
+        
         //初期位置を設定
         cameraPrePos_ = transform.localPosition;
         
@@ -44,13 +53,23 @@ public class TPVCamera : MonoBehaviour
 
     void Update()
     {
+
+        //Xinput関連
+        if (!playerInputSet_ || !prevState_.IsConnected)
+        {
+            playerIndex_ = (PlayerIndex)0;
+            playerInputSet_ = true;
+        }
+        prevState_ = padState_;
+        padState_ = GamePad.GetState(playerIndex_);
+
         //マウスの右ボタンが押されていたら
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || (padState_.Triggers.Left >= 0.7f))
         {
             isChange = true;
             Debug.Log("一人称");
         }
-        else if (Input.GetMouseButtonUp(1))
+        else if (Input.GetMouseButtonUp(1) || (padState_.Triggers.Left <= 0.7f))
         {
             isChange = false;
             Debug.Log("三人称");
@@ -58,14 +77,17 @@ public class TPVCamera : MonoBehaviour
 
         if (isChange == true)
         {
+            isTrgger_ = true;
             distance_ = 0.0f;
-            cameraHeight_ = 1.6f;
+            cameraHeight_ = 1.8f;
         }
-        else{
+        else
+        {
+            isTrgger_ = false;
             distance_ = 2.0f;
             cameraHeight_ = 1.2f;
         }
-        
+
     }
 
     void FixedUpdate()
@@ -113,8 +135,9 @@ public class TPVCamera : MonoBehaviour
         transform.LookAt(lookAt);
 
         //カメラを横にずらして中央を開ける
-        transform.position = transform.position + transform.right * slideDistance_;
-
+        //transform.position = transform.position + transform.right * slideDistance_;
+        
     }
 
+    
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectMove : MonoBehaviour
+public class ObjectController : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 10f;
@@ -17,6 +17,8 @@ public class ObjectMove : MonoBehaviour
     private bool isScaleMove;
     private bool isHitObj;
 
+    private Shooter shoter;
+
     // Use this for initialization
     void Start()
     {
@@ -25,6 +27,8 @@ public class ObjectMove : MonoBehaviour
         isHitObj = false;
         basePosition = transform.parent.transform.parent.position;
         baseScale = transform.parent.localScale;
+
+        shoter = GameObject.FindGameObjectWithTag("Player").GetComponent<Shooter>();
     }
 
     // Update is called once per frame
@@ -55,6 +59,7 @@ public class ObjectMove : MonoBehaviour
             {
                 ResetMaterial();
                 basePosition = transform.parent.transform.parent.position;
+                shoter.MovingEnd();
                 isPositionMove = false;
             }
         }
@@ -75,6 +80,7 @@ public class ObjectMove : MonoBehaviour
             {
                 ResetMaterial();
                 baseScale = transform.parent.localScale;
+                shoter.MovingEnd();
                 isPositionMove = false;
             }
         }
@@ -102,6 +108,7 @@ public class ObjectMove : MonoBehaviour
                   transform.parent.transform.parent.position = basePosition;
                   transform.parent.localScale = baseScale;
                   ResetMaterial();
+                  shoter.MovingEnd();
                   LeanTween.alpha(gameObject, 1.0f, 0.5f).setOnComplete(()=> { isHitObj = false; });
 
               });
