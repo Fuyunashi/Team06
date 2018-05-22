@@ -76,12 +76,12 @@ public class ObjectController : MonoBehaviour
         if (isHitObj == false)
         {
             transform.parent.localScale = Vector3.MoveTowards(transform.parent.localScale, value, moveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.parent.transform.parent.localScale, value) == 0)
+            if (Vector3.Distance(transform.parent.localScale, value) == 0)
             {
                 ResetMaterial();
                 baseScale = transform.parent.localScale;
                 shoter.MovingEnd();
-                isPositionMove = false;
+                isScaleMove = false;
             }
         }
     }

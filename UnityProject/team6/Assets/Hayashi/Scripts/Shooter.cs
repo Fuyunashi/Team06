@@ -469,7 +469,6 @@ public class Shooter : MonoBehaviour
                                                     );
                         objVal_target.GetComponent<ValueDrawerController>().GetDrawBaseObj(targetObject.transform.parent.parent.gameObject);
                         isTargetGet = true;
-                        Debug.Log(isTargetGet);
                         //指定した変更する値の軸を切り替え
                         ChangeObjectAxis();
                     }
