@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         
-        if((collision.gameObject.tag == ("stage") || collision.gameObject.tag == ("ChangeObject")) && !isGround_)
+        if((collision.gameObject.tag == ("stage") || (collision.gameObject.tag == ("GravityObj")|| collision.gameObject.tag == ("ChangeObject")) && !isGround_))
         {
             isGround_ = true;
 

@@ -11,6 +11,8 @@ TagManager:
   - stage
   - GameManager
   - W_Enemy
+  - GravityObject
+  - GravityObj
   layers:
   - Default
   - TransparentFX
