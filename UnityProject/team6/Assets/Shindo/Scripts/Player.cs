@@ -34,6 +34,10 @@ public class Player : MonoBehaviour
     private float deathTime_ = 2.0f;
     //空中に浮いている時間
     private float deathTimer_ = 0.0f;
+
+    private Vector3 currentPos_;
+    private Vector3 previewPos_;
+    
     //カメラ取得
     CamChange cc;
     
@@ -85,6 +89,7 @@ public class Player : MonoBehaviour
             {
                 //animaotor_.SetBool("Jump", false);
                 rb_.useGravity = true;
+                previewPos_ = this.transform.position;
             }
             else
             {
@@ -132,6 +137,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("あと" + deathTimer_ + "で死にます");
             deathTimer_ += Time.deltaTime;
+
+            //currentPos_ = this.transform.position;
         }
         else
         {
@@ -176,6 +183,11 @@ public class Player : MonoBehaviour
         {
             isGround_ = true;
 
+        }
+
+        if(collision.gameObject.tag == ("DeathArea"))
+        {
+            SceneManager.LoadScene("AlphaScene");
         }
     }
 
