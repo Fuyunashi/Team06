@@ -9,6 +9,8 @@ TagManager:
   - swich
   - rotateObj
   - stage
+  - GameManager
+  - W_Enemy
   layers:
   - Default
   - TransparentFX

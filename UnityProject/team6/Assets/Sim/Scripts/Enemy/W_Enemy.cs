@@ -13,7 +13,7 @@ public class W_Enemy : MonoBehaviour
     //private bool movePointHit;
 
     //public GameObject[] movePoint;
-    public float velocity = 5.0f;
+    public float velocity = 2.0f;
     public float accel;
     public float detectionRange;
 
@@ -50,7 +50,7 @@ public class W_Enemy : MonoBehaviour
     //}
     void MoveToPlayer()
     {
-        target = GameObject.Find("DummyPlayer").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         targetPoint = target.position - transform.position;
 
         velocity += accel * Time.deltaTime;
