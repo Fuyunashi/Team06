@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
     {
         animaotor_ = GetComponent<Animator>();
         velocity_ = Vector3.zero;
-        isGround_ = false;
+        isGround_ = true;
         rb_ = GetComponent<Rigidbody>();
         
         playerState_ = PlayerState.Arive;
@@ -67,21 +67,6 @@ public class Player : MonoBehaviour
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
 
-        ////キャラクターが設置していないときはレイを飛ばして確認
-        //if (!isGroundCollider_)
-        //{
-        //    if (Physics.Linecast(charaRay_.position, (charaRay_.position - transform.up * charaRayRange_)))
-        //    {
-        //        isGround_ = true;
-        //        rigid_.useGravity = true;
-        //    }
-        //    else
-        //    {
-        //        isGround_ = false;
-        //        rigid_.useGravity = false;
-        //    }
-        //    Debug.DrawLine(charaRay_.position, (charaRay_.position - transform.up * charaRayRange_), Color.red);
-        //}
         if (!isGround_)
         {
             rb_.useGravity = true;
@@ -91,7 +76,6 @@ public class Player : MonoBehaviour
             rb_.useGravity = false;
         }
 
-        //キャラクターコライダが接地、またはレイが地面に到着している場合
         if (isGround_)
         {
             velocity_ = Vector3.zero;
@@ -99,13 +83,11 @@ public class Player : MonoBehaviour
             //地面に設置しているときは初期化
             if (isGround_)
             {
-                //着地していたらアニメーションパターンと二段階ジャンプフラグをfalse
                 //animaotor_.SetBool("Jump", false);
                 rb_.useGravity = true;
             }
             else
             {
-                //レイを飛ばして接地確認の場合は重力だけは動かしておく、前後左右は初期化
                 velocity_ = new Vector3(0f, velocity_.y, 0f);
             }
 
@@ -130,13 +112,14 @@ public class Player : MonoBehaviour
         }
 
         //ジャンプ
-        if (isGround_ && Input.GetKeyDown(KeyCode.Space) || (prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed))
+        if (isGround_ && (Input.GetKeyDown(KeyCode.Space) || (prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed)))
         {
             Debug.Log("飛んでます");
             isGround_ = false;
             //animaotor_.SetBool("Jump", true);
             velocity_.y += jumpPower_;
             rb_.useGravity = false;
+            
         }
 
         if (!isGround_)
@@ -176,6 +159,7 @@ public class Player : MonoBehaviour
             Debug.Log("三人称");
             cc.isFps_ = false;
         }
+        
     }
 
     void FixedUpdate()
@@ -187,18 +171,8 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        //Debug.DrawLine(charaRay_.position, charaRay_.position + Vector3.down, Color.blue);
-
-        ////ほかのコライダと接触しているときは下向きに例を飛ばし、LayerMaskに当たった時だけ接地とする
-        //if (Physics.Linecast(charaRay_.position, charaRay_.position + Vector3.down, LayerMask.GetMask("Field", "Block")))
-        //{
-        //    isGroundCollider_ = true;
-        //}
-        //else
-        //{
-        //    isGroundCollider_ = false;
-        //}
-        if(collision.gameObject.tag == ("stage") || collision.gameObject.tag == ("ChangeObject") && !isGround_)
+        
+        if((collision.gameObject.tag == ("stage") || collision.gameObject.tag == ("ChangeObject")) && !isGround_)
         {
             isGround_ = true;
 
