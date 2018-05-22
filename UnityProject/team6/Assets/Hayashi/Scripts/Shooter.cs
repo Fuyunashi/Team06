@@ -23,7 +23,7 @@ public class Shooter : MonoBehaviour
     enum ShotType
     {
         Getting,    //取得
-        Shifting    //転置
+        Setting    //転置
     }
 
     private AxisType axisType = AxisType.X;
@@ -161,7 +161,7 @@ public class Shooter : MonoBehaviour
                     if (isTargetGet == false)
                         ObjectsValueDraw_Ray(rayOriginObj, null);
                     break;
-                case ShotType.Shifting:
+                case ShotType.Setting:
                     if (isOriginGet == false)
                         ObjectsValueDraw_Ray(null, rayTargetObj);
                     else
@@ -212,7 +212,7 @@ public class Shooter : MonoBehaviour
                             objVal_origin_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayOriginObj.transform.parent.gameObject);
                         }
                         break;
-                    case ShotType.Shifting:
+                    case ShotType.Setting:
                         rayTargetObj = rayhit.collider.transform.parent.gameObject;
                         if (objVal_origin_ray != null) Destroy(objVal_origin_ray.gameObject);
                         if (objVal_target_ray == null)
@@ -372,10 +372,10 @@ public class Shooter : MonoBehaviour
         switch (shotType)
         {
             case ShotType.Getting:
-                shotType = ShotType.Shifting;
+                shotType = ShotType.Setting;
                 shotText.text = "shot:" + shotType.ToString();
                 break;
-            case ShotType.Shifting:
+            case ShotType.Setting:
                 shotType = ShotType.Getting;
                 shotText.text = "shot:" + shotType.ToString();
                 break;
@@ -452,7 +452,7 @@ public class Shooter : MonoBehaviour
                     GetOriginAxisLength();
                     break;
                 //転置タイプなら
-                case ShotType.Shifting:
+                case ShotType.Setting:
                     //取得するオブジェクトが空でなければ
                     if (originObject != null)
                     {
