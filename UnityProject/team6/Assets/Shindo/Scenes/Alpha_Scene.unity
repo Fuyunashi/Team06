@@ -210,7 +210,6 @@ MonoBehaviour:
   cameraMoveSpeed_: 3
   distance_: 2
   cameraHeight_: 1.2
-  slideDistance_: 10
   rotationSpeed_: 100
 --- !u!1 &384057656
 GameObject:

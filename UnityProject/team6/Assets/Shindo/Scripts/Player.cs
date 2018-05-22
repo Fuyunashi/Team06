@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         rigid_ = GetComponent<Rigidbody>();
         
         playerState_ = PlayerState.Arive;
-        
+        cc = Camera.main.GetComponent<CamChange>();
     }
 
     // Update is called once per frame
@@ -168,13 +168,14 @@ public class Player : MonoBehaviour
         
 
         //キー入力
-        if (Input.GetMouseButtonDown(1)/* || (padState_.Triggers.Left >= 0.7f)*/)
+        if (Input.GetMouseButtonDown(1) || (padState_.Triggers.Left >= 0.7f))
         {
             Debug.Log("一人称");
+            Debug.Log(cc);
             cc.isFps_ = true;
             
         }
-        if (Input.GetMouseButtonUp(1) /*|| (padState_.Triggers.Left <= 0.7f)*/)
+        if (Input.GetMouseButtonUp(1) || (padState_.Triggers.Left <= 0.7f))
         {
             Debug.Log("三人称");
             cc.isFps_ = false;

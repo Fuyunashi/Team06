@@ -9,7 +9,7 @@ public class CamChange : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        isFps_ = true;
+        isFps_ = false;
 	}
 	
 	// Update is called once per frame
