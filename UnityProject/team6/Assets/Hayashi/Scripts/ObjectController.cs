@@ -98,7 +98,7 @@ public class ObjectController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "moveObject" && collision.gameObject.tag!="Player")
+        if (collision.gameObject.tag!="Player" && collision.gameObject.tag!="GravityObj")
         {
             isHitObj = true;
             isPositionMove = false;

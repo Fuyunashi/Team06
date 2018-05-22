@@ -162,6 +162,7 @@ Shader "TwoSidesRendShader"
 
             CGPROGRAM
             #pragma target 3.0
+			#pragma exclude_renderers gles
 
             // -------------------------------------
 
@@ -178,8 +179,8 @@ Shader "TwoSidesRendShader"
             // Uncomment the following line to enable dithering LOD crossfade. Note: there are more in the file to uncomment for other passes.
             //#pragma multi_compile _ LOD_FADE_CROSSFADE
 
-            #pragma vertex vertBase
-            #pragma fragment fragBase
+            #pragma vertex vertForwardBase
+            #pragma fragment fragForwardBase
 
             #include "UnityStandardCoreForward.cginc"
 
@@ -198,6 +199,7 @@ Shader "TwoSidesRendShader"
 
             CGPROGRAM
             #pragma target 3.0
+			#pragma exclude_renderers gles
 
             // -------------------------------------
 
@@ -213,8 +215,8 @@ Shader "TwoSidesRendShader"
             // Uncomment the following line to enable dithering LOD crossfade. Note: there are more in the file to uncomment for other passes.
             //#pragma multi_compile _ LOD_FADE_CROSSFADE
 
-            #pragma vertex vertAdd
-            #pragma fragment fragAdd
+            #pragma vertex vertForwardAdd
+            #pragma fragment fragForwardAdd
             #include "UnityStandardCoreForward.cginc"
 
             ENDCG
@@ -229,12 +231,13 @@ Shader "TwoSidesRendShader"
 
             CGPROGRAM
             #pragma target 3.0
+			#pragma exclude_renderers gles
 
             // -------------------------------------
 
 
             #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-            #pragma multi_compile_shadowcasterS
+            #pragma multi_compile_shadowcaster
 
             #pragma vertex vertShadowCaster
             #pragma fragment fragShadowCaster
@@ -252,7 +255,7 @@ Shader "TwoSidesRendShader"
 
             CGPROGRAM
             #pragma target 3.0
-            #pragma exclude_renderers nomrt
+            #pragma exclude_renderers nomrt gles
 
 
             // -------------------------------------
@@ -265,8 +268,11 @@ Shader "TwoSidesRendShader"
             #pragma shader_feature ___ _DETAIL_MULX2
             #pragma shader_feature _PARALLAXMAP
 
-            #pragma multi_compile_prepassfinal
-            #pragma multi_compile_instancing
+			#pragma multi_compile ___ UNITY_HDR_ON
+			#pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
+			#pragma multi_compile DIRLIGHTMAP_OFF DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
+			#pragma multi_compile DYNAMICLIGHTMAP_OFF DYNAMICLIGHTMAP_ON            
+
             // Uncomment the following line to enable dithering LOD crossfade. Note: there are more in the file to uncomment for other passes.
             //#pragma multi_compile _ LOD_FADE_CROSSFADE
 
@@ -323,6 +329,7 @@ Shader "TwoSidesRendShader"
             #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
             #pragma shader_feature _EMISSION
             #pragma shader_feature _METALLICGLOSSMAP
+			#pragma shader_feature ___ _DETAIL_MULX2
             // SM2.0: NOT SUPPORTED shader_feature ___ _DETAIL_MULX2
             // SM2.0: NOT SUPPORTED shader_feature _PARALLAXMAP
 
@@ -331,8 +338,8 @@ Shader "TwoSidesRendShader"
             #pragma multi_compile_fwdbase
             #pragma multi_compile_fog
 
-            #pragma vertex vertBase
-            #pragma fragment fragBase
+            #pragma vertex vertForwardBase
+            #pragma fragment fragForwardBase
             #include "UnityStandardCoreForward.cginc"
 
             ENDCG
@@ -412,7 +419,6 @@ Shader "TwoSidesRendShader"
             ENDCG
         }
     }
-
 	
     Fallback "Diffuse"
 }
