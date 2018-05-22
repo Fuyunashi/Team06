@@ -48,8 +48,6 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private Text shotText; //テスト用銃テキスト
 
-    [SerializeField]
-    private Material outlineMat;
     private GameObject prevOriginObj;    //前回の取得するオブジェクト
     private GameObject originObject;     //数値を取得するオブジェクト
     private GameObject targetObject;     //数値を転置するオブジェクト
@@ -434,10 +432,10 @@ public class Shooter : MonoBehaviour
                     prevOriginObj = originObject;
                     if (prevOriginObj != null)
                     {
-                        prevOriginObj.GetComponent<ObjectController>().ResetMaterial();
+                        prevOriginObj.GetComponent<ObjectController>().DeleteOutline();
                     }
                     originObject = hitObject.transform.gameObject;
-                    originObject.GetComponent<ObjectController>().ChangeMaterial(outlineMat);
+                    originObject.GetComponent<ObjectController>().SetOutline();
                     Destroy(objVal_origin);
                     objVal_origin = Instantiate(objValPref,
                                                     new Vector3(
@@ -458,7 +456,7 @@ public class Shooter : MonoBehaviour
                     {
                         //転置するオブジェクトに当たったオブジェクトを格納                   
                         targetObject = hitObject.transform.gameObject;
-                        targetObject.GetComponent<ObjectController>().ChangeMaterial(outlineMat);
+                        targetObject.GetComponent<ObjectController>().SetOutline();
                         Destroy(objVal_target);
                         objVal_target = Instantiate(objValPref,
                                                      new Vector3(

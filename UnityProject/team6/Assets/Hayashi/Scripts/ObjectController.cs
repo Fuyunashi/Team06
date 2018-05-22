@@ -57,7 +57,7 @@ public class ObjectController : MonoBehaviour
             transform.parent.transform.parent.position = Vector3.MoveTowards(transform.parent.transform.parent.position, value, moveSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.parent.transform.parent.position, value) == 0)
             {
-                ResetMaterial();
+                DeleteOutline();
                 basePosition = transform.parent.transform.parent.position;
                 shoter.MovingEnd();
                 isPositionMove = false;
@@ -78,7 +78,7 @@ public class ObjectController : MonoBehaviour
             transform.parent.localScale = Vector3.MoveTowards(transform.parent.localScale, value, moveSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.parent.localScale, value) == 0)
             {
-                ResetMaterial();
+                DeleteOutline();
                 baseScale = transform.parent.localScale;
                 shoter.MovingEnd();
                 isScaleMove = false;
@@ -86,14 +86,17 @@ public class ObjectController : MonoBehaviour
         }
     }
 
-    public void ChangeMaterial(Material mat)
+    public void SetOutline()
     {
-        this.GetComponent<Renderer>().material = mat;
+        this.gameObject.AddComponent<Outline>();
+        this.gameObject.GetComponent<Outline>().OutlineColor = new Color(255, 0, 0);
+        this.gameObject.GetComponent<Outline>().OutlineWidth = 10.0f;
     }
 
-    public void ResetMaterial()
+    public void DeleteOutline()
     {
-        this.GetComponent<Renderer>().material = defaultMat;
+        //通った
+        Destroy(this.gameObject.GetComponent<Outline>());
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -103,11 +106,12 @@ public class ObjectController : MonoBehaviour
             isHitObj = true;
             isPositionMove = false;
             isScaleMove = false;
+             DeleteOutline();
             LeanTween.alpha(gameObject, 0.0f, 0.5f).setOnComplete(() =>
-              {
+              {              
                   transform.parent.transform.parent.position = basePosition;
                   transform.parent.localScale = baseScale;
-                  ResetMaterial();
+                 
                   shoter.MovingEnd();
                   LeanTween.alpha(gameObject, 1.0f, 0.5f).setOnComplete(()=> { isHitObj = false; });
 
