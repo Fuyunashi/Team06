@@ -21,31 +21,20 @@ public class Player : MonoBehaviour
     //移動速度
     [SerializeField, Tooltip("移動速度")]
     private float moveSpeed_ = 5.0f;
-    //レイを飛ばす体の位置
-    [SerializeField]
-    private Transform charaRay_;
-    //レイの距離
-    [SerializeField]
-    private float charaRayRange_ = 0.2f;
-    //例が地面に達しているかどうか
+    //地面に達しているかどうか
     private bool isGround_;
-    //入力値
-    private Vector3 input_;
     //ジャンプの強さ
     [SerializeField, Tooltip("ジャンプの強さ")]
     private float jumpPower_ = 5f;
     //rigidbody
     private Rigidbody rb_;
-    private bool isGroundCollider_ = false;
 
-    //カメラクラス生成
-    //TPVCamera tpvCam_ = new TPVCamera();
     //死ぬ秒数（60fps）
     [SerializeField, Tooltip("死ぬ秒数")]
     private float deathTime_ = 2.0f;
     //空中に浮いている時間
     private float deathTimer_ = 0.0f;
-
+    //カメラ取得
     CamChange cc;
     
     //Xinput関連
@@ -198,7 +187,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.DrawLine(charaRay_.position, charaRay_.position + Vector3.down, Color.blue);
+        //Debug.DrawLine(charaRay_.position, charaRay_.position + Vector3.down, Color.blue);
 
         ////ほかのコライダと接触しているときは下向きに例を飛ばし、LayerMaskに当たった時だけ接地とする
         //if (Physics.Linecast(charaRay_.position, charaRay_.position + Vector3.down, LayerMask.GetMask("Field", "Block")))
@@ -209,7 +198,7 @@ public class Player : MonoBehaviour
         //{
         //    isGroundCollider_ = false;
         //}
-        if(collision.gameObject.tag == ("stage") && !isGround_)
+        if(collision.gameObject.tag == ("stage") || collision.gameObject.tag == ("ChangeObject") && !isGround_)
         {
             isGround_ = true;
 
