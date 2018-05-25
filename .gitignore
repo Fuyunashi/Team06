@@ -4,6 +4,7 @@
 [Bb]uild/
 [Bb]uilds/
 /Assets/AssetStoreTools*
+/AssetTools/*
 
 ExportedObj/
 *.csproj
@@ -23,3 +24,4 @@ sysinfo.txt
 
 *.apk
 *.unitypackage
+
