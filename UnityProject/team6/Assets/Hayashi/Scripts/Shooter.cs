@@ -253,21 +253,21 @@ public class Shooter : MonoBehaviour
                 {
                     case AxisType.X:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObj.transform.parent.localPosition.x.ToString("f2");
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localPosition.x);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObj.transform.parent.localPosition.x.ToString("f2");
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localPosition.x);
                         break;
                     case AxisType.Y:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObj.transform.parent.localPosition.y.ToString("f2");
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localPosition.y);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObj.transform.parent.localPosition.y.ToString("f2");
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localPosition.y);
                         break;
                     case AxisType.Z:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObj.transform.parent.localPosition.z.ToString("f2");
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localPosition.z);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObj.transform.parent.localPosition.z.ToString("f2");
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localPosition.z);
                         break;
                 }
                 break;
@@ -276,21 +276,21 @@ public class Shooter : MonoBehaviour
                 {
                     case AxisType.X:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObj.transform.localScale.x.ToString("f2");
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.x);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObj.transform.localScale.x.ToString("f2");
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.localScale.x);
                         break;
                     case AxisType.Y:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObj.transform.localScale.y.ToString("f2");
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.y);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObj.transform.localScale.y.ToString("f2");
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.localScale.y);
                         break;
                     case AxisType.Z:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObj.transform.localScale.z.ToString("f2");
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.z);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObj.transform.localScale.z.ToString("f2");
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.localScale.z);
                         break;
                 }
                 break;
@@ -304,13 +304,13 @@ public class Shooter : MonoBehaviour
                 switch (axisType)
                 {
                     case AxisType.X:
-                        objVal_origin.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObject.transform.parent.parent.localPosition.x.ToString("f2");
+                        objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originObject.transform.parent.parent.localPosition.x);
                         break;
                     case AxisType.Y:
-                        objVal_origin.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObject.transform.parent.parent.localPosition.y.ToString("f2");
+                        objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originObject.transform.parent.parent.localPosition.y);
                         break;
                     case AxisType.Z:
-                        objVal_origin.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObject.transform.parent.parent.localPosition.z.ToString("f2");
+                        objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originObject.transform.parent.parent.localPosition.z);
                         break;
                 }
                 break;
@@ -318,13 +318,13 @@ public class Shooter : MonoBehaviour
                 switch (axisType)
                 {
                     case AxisType.X:
-                        objVal_origin.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObject.transform.parent.localScale.x.ToString("f2");
+                        objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originObject.transform.parent.localScale.x);
                         break;
                     case AxisType.Y:
-                        objVal_origin.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObject.transform.parent.localScale.y.ToString("f2");
+                        objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originObject.transform.parent.localScale.y);
                         break;
                     case AxisType.Z:
-                        objVal_origin.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = originObject.transform.parent.localScale.z.ToString("f2");
+                        objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originObject.transform.parent.localScale.z);
                         break;
                 }
                 break;
@@ -338,13 +338,13 @@ public class Shooter : MonoBehaviour
                 switch (axisType)
                 {
                     case AxisType.X:
-                        objVal_target.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObject.transform.parent.parent.localPosition.x.ToString("f2");
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localPosition.x);
                         break;
                     case AxisType.Y:
-                        objVal_target.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObject.transform.parent.parent.localPosition.y.ToString("f2");
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localPosition.y);
                         break;
                     case AxisType.Z:
-                        objVal_target.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObject.transform.parent.parent.localPosition.z.ToString("f2");
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localPosition.z);
                         break;
                 }
                 break;
@@ -352,13 +352,13 @@ public class Shooter : MonoBehaviour
                 switch (axisType)
                 {
                     case AxisType.X:
-                        objVal_target.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObject.transform.parent.localScale.x.ToString("f2");
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.localScale.x);
                         break;
                     case AxisType.Y:
-                        objVal_target.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObject.transform.parent.localScale.y.ToString("f2");
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.localScale.y);
                         break;
                     case AxisType.Z:
-                        objVal_target.transform.Find("Canvas").Find("ValueText").GetComponent<Text>().text = targetObject.transform.parent.localScale.z.ToString("f2");
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.localScale.z);
                         break;
                 }
                 break;
@@ -470,6 +470,7 @@ public class Shooter : MonoBehaviour
                         //指定した変更する値の軸を切り替え
                         ChangeObjectAxis();
                     }
+                    
                     break;
             }
         }
