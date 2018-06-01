@@ -6,14 +6,9 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
-[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
-    public enum PlayerState{
-        Arive,
-        Dead,
-    }
-    public PlayerState playerState_;//{ get; private set; }
+    
     private Animator animaotor_;
     //移動方向
     [SerializeField]
@@ -44,29 +39,21 @@ public class Player : MonoBehaviour
     [SerializeField, Tooltip("死ぬ高さ")]
     private float deadDistance_ = 5f;
 
-    
-    //カメラ取得
-    CamChange cc;
-
-    //playerの方向を渡す
-    public Vector3 direction_ { get; private set; }
-    
     //Xinput関連
     private bool playerInputSet_ = false;
     private PlayerIndex playerIndex_;
     private GamePadState padState_;
     private GamePadState prevState_;
-
+    
     // Use this for initialization
     void Start()
     {
-        animaotor_ = GetComponent<Animator>();
+        //animaotor_ = GetComponent<Animator>();
         velocity_ = Vector3.zero;
         isGround_ = true;
         rb_ = GetComponent<Rigidbody>();
+
         
-        playerState_ = PlayerState.Arive;
-        //cc = Camera.main.GetComponent<CamChange>();
     }
 
     // Update is called once per frame
@@ -109,9 +96,7 @@ public class Player : MonoBehaviour
             //地面に設置しているときは初期化
             if (isGround_)
             {
-                //animaotor_.SetBool("Jump", false);
                 rb_.useGravity = true;
-                
             }
             else
             {
@@ -121,20 +106,16 @@ public class Player : MonoBehaviour
             //進行方向を向く
             var cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
             Vector3 direction = cameraForward * Input.GetAxis("Vertical") + Camera.main.transform.right * Input.GetAxis("Horizontal");
-            
 
             //方向キーの入力量を計測
             if (direction.magnitude > 0.01f)
             {
-                //animaotor_.SetFloat("Speed", direction.magnitude);
-
                 transform.LookAt(transform.position + direction);
 
                 Debug.Log("移動してます");
 
                 velocity_ += direction * moveSpeed_;
-                
-                
+
             }
         }
 
@@ -143,10 +124,9 @@ public class Player : MonoBehaviour
         {
             Debug.Log("飛んでます");
             isGround_ = false;
-            //animaotor_.SetBool("Jump", true);
             velocity_.y += jumpPower_;
             rb_.useGravity = false;
-            
+
         }
 
         if (!isGround_)
@@ -162,29 +142,29 @@ public class Player : MonoBehaviour
             //高さで死ぬ処理
             fallPosition_ = Mathf.Max(fallPosition_, transform.position.y);
 
-            if(Physics.Linecast(charaRay.position + new Vector3(0f,0.4f,0f), Vector3.down * deadDistance_, LayerMask.GetMask("Wall")))
+            //落下したら死ぬ
+            if (Physics.Linecast(charaRay.position + new Vector3(0f, 0.4f, 0f), Vector3.down * deadDistance_, LayerMask.GetMask("Wall")))
             {
                 distance_ = fallPosition_ - transform.position.y;
                 Debug.Log(distance_);
-                if(distance_ >= deadDistance_)
+                if (distance_ >= deadDistance_)
                 {
+                    Debug.Log("死にました");
                     Destroy(gameObject);
-
                 }
+            }
+            //時間がたったら死ぬ
+            if (deathTimer_ >= deathTime_)
+            {
+                //死亡時の処理
+                Debug.Log("死にました");
+                Destroy(gameObject);
             }
         }
         else
         {
             deathTimer_ = 0.0f;
         }
-        if (deathTimer_ >= deathTime_)
-        {
-            //死亡時の処理
-            Debug.Log("死にました");
-            playerState_ = PlayerState.Dead;
-            Destroy(gameObject);
-        }
-
 
         //キー入力
         if (Input.GetMouseButtonDown(1) || (padState_.Triggers.Left >= 0.7f))
@@ -192,15 +172,14 @@ public class Player : MonoBehaviour
             Debug.Log("オン");
             //cc.isFps_ = true;
             GameObject.Find("Reticle").GetComponent<Image>().enabled = true;
-            
+
         }
         if (Input.GetMouseButtonUp(1) || (padState_.Triggers.Left <= 0.7f))
         {
             Debug.Log("オフ");
-            //cc.isFps_ = false;
             GameObject.Find("Reticle").GetComponent<Image>().enabled = false;
         }
-        
+        SoundManager.GetInstance.PlayBGM("A");
     }
 
     void FixedUpdate()
@@ -216,7 +195,7 @@ public class Player : MonoBehaviour
         
         var radius = transform.lossyScale.x * 0.2f;
 
-        var isHit = Physics.SphereCast(transform.position, radius, -transform.up * 10, out hit, 0.4f);
+        var isHit = Physics.SphereCast(charaRay.position, radius, -transform.up * 10, out hit, 0.4f);
         if (isHit)
         {
             Gizmos.DrawRay(transform.position, -transform.up * hit.distance);

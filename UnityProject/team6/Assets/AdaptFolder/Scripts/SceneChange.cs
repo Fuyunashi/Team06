@@ -16,10 +16,10 @@ public class SceneChange : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(player_.playerState_ == Player.PlayerState.Dead)
-        {
-            SceneManager.LoadScene("AlphaScene");
-        }
+		//if(player_.playerState_ == Player.PlayerState.Dead)
+  //      {
+  //          SceneManager.LoadScene("AlphaScene");
+  //      }
     }
 
     void OnCollisionEnter(Collision collision)
