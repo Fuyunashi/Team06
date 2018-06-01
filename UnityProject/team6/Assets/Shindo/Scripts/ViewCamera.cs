@@ -6,12 +6,12 @@ public class ViewCamera : MonoBehaviour {
 
     public GameObject player_;
     public GameObject camera_;
-    public float speed_;
+    //public float speed_;
     private Transform playerTransform_;
     private Transform cameraTransform_;
 
     //private Rigidbody rb_;
-    Vector3 velocity_;
+    //Vector3 velocity_;
 
 	// Use this for initialization
 	void Start () {

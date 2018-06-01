@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
-[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
-    public enum PlayerState{
-        Arive,
-        Dead,
-    }
-    public PlayerState playerState_;//{ get; private set; }
+    
     private Animator animaotor_;
     //移動方向
     [SerializeField]
@@ -23,6 +18,8 @@ public class Player : MonoBehaviour
     private float moveSpeed_ = 5.0f;
     //地面に達しているかどうか
     private bool isGround_;
+    [SerializeField, Tooltip("Rayを出す高さ")]
+    private Transform charaRay;
     //ジャンプの強さ
     [SerializeField, Tooltip("ジャンプの強さ")]
     private float jumpPower_ = 5f;
@@ -34,29 +31,29 @@ public class Player : MonoBehaviour
     private float deathTime_ = 2.0f;
     //空中に浮いている時間
     private float deathTimer_ = 0.0f;
+    //落ちた距離
+    private float distance_;
+    //落ちた地点
+    private float fallPosition_;
+    //死ぬ高さ
+    [SerializeField, Tooltip("死ぬ高さ")]
+    private float deadDistance_ = 5f;
 
-    private Vector3 currentPos_;
-    private Vector3 previewPos_;
-    
-    //カメラ取得
-    CamChange cc;
-    
     //Xinput関連
     private bool playerInputSet_ = false;
     private PlayerIndex playerIndex_;
     private GamePadState padState_;
     private GamePadState prevState_;
-
+    
     // Use this for initialization
     void Start()
     {
-        animaotor_ = GetComponent<Animator>();
+        //animaotor_ = GetComponent<Animator>();
         velocity_ = Vector3.zero;
         isGround_ = true;
         rb_ = GetComponent<Rigidbody>();
+
         
-        playerState_ = PlayerState.Arive;
-        cc = Camera.main.GetComponent<CamChange>();
     }
 
     // Update is called once per frame
@@ -70,6 +67,18 @@ public class Player : MonoBehaviour
         }
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
+
+        RaycastHit hit;
+        if (Physics.SphereCast(charaRay.transform.position, 0.2f, -transform.up, out hit, 0.2f, LayerMask.GetMask("Wall")))
+        {
+            Debug.Log("当たってます");
+            isGround_ = true;
+        }
+        else
+        {
+            Debug.Log("落ちてます");
+            isGround_ = false;
+        }
 
         if (!isGround_)
         {
@@ -87,32 +96,26 @@ public class Player : MonoBehaviour
             //地面に設置しているときは初期化
             if (isGround_)
             {
-                //animaotor_.SetBool("Jump", false);
                 rb_.useGravity = true;
-                previewPos_ = this.transform.position;
             }
             else
             {
                 velocity_ = new Vector3(0f, velocity_.y, 0f);
             }
 
-            //三人称
+            //進行方向を向く
             var cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
             Vector3 direction = cameraForward * Input.GetAxis("Vertical") + Camera.main.transform.right * Input.GetAxis("Horizontal");
-            
 
             //方向キーの入力量を計測
             if (direction.magnitude > 0.01f)
             {
-                //animaotor_.SetFloat("Speed", direction.magnitude);
-
                 transform.LookAt(transform.position + direction);
 
                 Debug.Log("移動してます");
 
-                
                 velocity_ += direction * moveSpeed_;
-                
+
             }
         }
 
@@ -121,10 +124,9 @@ public class Player : MonoBehaviour
         {
             Debug.Log("飛んでます");
             isGround_ = false;
-            //animaotor_.SetBool("Jump", true);
             velocity_.y += jumpPower_;
             rb_.useGravity = false;
-            
+
         }
 
         if (!isGround_)
@@ -137,58 +139,73 @@ public class Player : MonoBehaviour
         {
             Debug.Log("あと" + deathTimer_ + "で死にます");
             deathTimer_ += Time.deltaTime;
+            //高さで死ぬ処理
+            fallPosition_ = Mathf.Max(fallPosition_, transform.position.y);
 
-            //currentPos_ = this.transform.position;
+            //落下したら死ぬ
+            if (Physics.Linecast(charaRay.position + new Vector3(0f, 0.4f, 0f), Vector3.down * deadDistance_, LayerMask.GetMask("Wall")))
+            {
+                distance_ = fallPosition_ - transform.position.y;
+                Debug.Log(distance_);
+                if (distance_ >= deadDistance_)
+                {
+                    Debug.Log("死にました");
+                    Destroy(gameObject);
+                }
+            }
+            //時間がたったら死ぬ
+            if (deathTimer_ >= deathTime_)
+            {
+                //死亡時の処理
+                Debug.Log("死にました");
+                Destroy(gameObject);
+            }
         }
         else
         {
             deathTimer_ = 0.0f;
         }
-        if (deathTimer_ >= deathTime_)
-        {
-            //死亡時の処理
-            Debug.Log("死にました");
-            playerState_ = PlayerState.Dead;
-            SceneManager.LoadScene("AlphaScene");
-            Destroy(gameObject);
-        }
-        
 
         //キー入力
         if (Input.GetMouseButtonDown(1) || (padState_.Triggers.Left >= 0.7f))
         {
-            Debug.Log("一人称");
-            cc.isFps_ = true;
-            
+            Debug.Log("オン");
+            //cc.isFps_ = true;
+            GameObject.Find("Reticle").GetComponent<Image>().enabled = true;
+
         }
         if (Input.GetMouseButtonUp(1) || (padState_.Triggers.Left <= 0.7f))
         {
-            Debug.Log("三人称");
-            cc.isFps_ = false;
+            Debug.Log("オフ");
+            GameObject.Find("Reticle").GetComponent<Image>().enabled = false;
         }
-        
+        SoundManager.GetInstance.PlayBGM("A");
     }
 
     void FixedUpdate()
     {
          //キャラクターを移動させる処理
          rb_.MovePosition(transform.position + velocity_ * Time.deltaTime);
-            
+         
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnDrawGizmos()
     {
+        RaycastHit hit;
         
-        if((collision.gameObject.tag == ("stage") || (collision.gameObject.tag == ("GravityObj")|| collision.gameObject.tag == ("ChangeObject")) && !isGround_))
-        {
-            isGround_ = true;
+        var radius = transform.lossyScale.x * 0.2f;
 
+        var isHit = Physics.SphereCast(charaRay.position, radius, -transform.up * 10, out hit, 0.4f);
+        if (isHit)
+        {
+            Gizmos.DrawRay(transform.position, -transform.up * hit.distance);
+            Gizmos.DrawWireSphere(transform.position + -transform.up * (hit.distance), radius);
         }
-
-        if(collision.gameObject.tag == ("DeathArea"))
+        else
         {
-            SceneManager.LoadScene("AlphaScene");
+            Gizmos.DrawRay(transform.position, -transform.up * 100);
         }
     }
 
+    
 }

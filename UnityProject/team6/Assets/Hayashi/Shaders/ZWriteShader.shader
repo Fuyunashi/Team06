@@ -1,6 +1,6 @@
 // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
-Shader "TwoSidesRendShader"
+Shader "ZwriteShader"
 {
     Properties
     {
@@ -31,122 +31,33 @@ Shader "TwoSidesRendShader"
         _EmissionColor("Color", Color) = (0,0,0)
         _EmissionMap("Emission", 2D) = "white" {}
 
+        _DetailMask("Detail Mask", 2D) = "white" {}
+
+        _DetailAlbedoMap("Detail Albedo x2", 2D) = "grey" {}
+        _DetailNormalMapScale("Scale", Float) = 1.0
+        _DetailNormalMap("Normal Map", 2D) = "bump" {}
+
+        [Enum(UV0,0,UV1,1)] _UVSec ("UV Set for secondary textures", Float) = 0
+
+
         // Blending state
         [HideInInspector] _Mode ("__mode", Float) = 0.0
         [HideInInspector] _SrcBlend ("__src", Float) = 1.0
         [HideInInspector] _DstBlend ("__dst", Float) = 0.0
         [HideInInspector] _ZWrite ("__zw", Float) = 1.0
-
-		_OutlineColor("Outline Color", Color) = (0,0,0,1)
-		_Outline("Outline width", Range(0, 1)) = 0.1
+		
     }
 
     CGINCLUDE
         #define UNITY_SETUP_BRDF_INPUT MetallicSetup
-
-	#include "UnityCG.cginc"
-
-	struct appdata {
-		float4 vertex : POSITION;
-		float3 normal : NORMAL;
-	};
-
-	struct v2f {
-		float4 pos : POSITION;
-		float4 color : COLOR;
-	};
-
-	uniform float _Outline;
-	uniform float4 _OutlineColor;
-
-	v2f vert(appdata v) {
-		// just make a copy of incoming vertex data but scaled according to normal direction
-		v2f o;
-
-		v.vertex *= (1 + _Outline);
-
-		o.pos = UnityObjectToClipPos(v.vertex);
-
-		o.color = _OutlineColor;
-		return o;
-	}
     ENDCG
-
-	//Outlineèàóùïîï™
-	SubShader{
-		//Tags {"Queue" = "Geometry+100" }
-		CGPROGRAM
-		#pragma surface surf Lambert
-
-		sampler2D _MainTex;
-		fixed4 _Color;
-
-		struct Input {
-			float2 uv_MainTex;
-		};
-
-		void surf(Input IN, inout SurfaceOutput o) {
-			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-			o.Albedo = c.rgb;
-			o.Alpha = c.a;
-		}
-		ENDCG
-
-		// note that a vertex shader is specified here but its using the one above
-		Pass {
-			Name "OUTLINE"
-			Tags { "LightMode" = "Always" }
-			Cull Front
-			ZWrite On
-			ColorMask RGB
-			Blend SrcAlpha OneMinusSrcAlpha
-			//Offset 50,50
-
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			half4 frag(v2f i) :COLOR { return i.color; }
-			ENDCG
-		}
-	}
-
-	SubShader{
-		CGPROGRAM
-		#pragma surface surf Lambert
-
-		sampler2D _MainTex;
-		fixed4 _Color;
-
-		struct Input {
-			float2 uv_MainTex;
-		};
-
-		void surf(Input IN, inout SurfaceOutput o) {
-			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-			o.Albedo = c.rgb;
-			o.Alpha = c.a;
-		}
-		ENDCG
-
-		Pass {
-			Name "OUTLINE"
-			Tags { "LightMode" = "Always" }
-			Cull Front
-			ZWrite On
-			ColorMask RGB
-			Blend SrcAlpha OneMinusSrcAlpha
-
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma exclude_renderers gles xbox360 ps3
-			ENDCG
-			SetTexture[_MainTex] { combine primary }
-		}
-	}
 
     SubShader
     {
         Tags { "RenderType"="Opaque" "PerformanceChecks"="False" }
+		Cull Back
+		ZTest Always
+		Zwrite Off
         LOD 300
 
 
@@ -162,26 +73,27 @@ Shader "TwoSidesRendShader"
 
             CGPROGRAM
             #pragma target 3.0
-			#pragma exclude_renderers gles
 
             // -------------------------------------
 
             #pragma shader_feature _NORMALMAP
             #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
             #pragma shader_feature _EMISSION
-
             #pragma shader_feature _METALLICGLOSSMAP
             #pragma shader_feature ___ _DETAIL_MULX2
+            #pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+            #pragma shader_feature _ _SPECULARHIGHLIGHTS_OFF
+            #pragma shader_feature _ _GLOSSYREFLECTIONS_OFF
             #pragma shader_feature _PARALLAXMAP
 
             #pragma multi_compile_fwdbase
             #pragma multi_compile_fog
+            #pragma multi_compile_instancing
             // Uncomment the following line to enable dithering LOD crossfade. Note: there are more in the file to uncomment for other passes.
             //#pragma multi_compile _ LOD_FADE_CROSSFADE
 
-            #pragma vertex vertForwardBase
-            #pragma fragment fragForwardBase
-
+            #pragma vertex vertBase
+            #pragma fragment fragBase
             #include "UnityStandardCoreForward.cginc"
 
             ENDCG
@@ -195,11 +107,9 @@ Shader "TwoSidesRendShader"
             Blend [_SrcBlend] One
             Fog { Color (0,0,0,0) } // in additive pass fog should be black
             ZWrite Off
-            ZTest LEqual
 
             CGPROGRAM
             #pragma target 3.0
-			#pragma exclude_renderers gles
 
             // -------------------------------------
 
@@ -207,6 +117,8 @@ Shader "TwoSidesRendShader"
             #pragma shader_feature _NORMALMAP
             #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
             #pragma shader_feature _METALLICGLOSSMAP
+            #pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+            #pragma shader_feature _ _SPECULARHIGHLIGHTS_OFF
             #pragma shader_feature ___ _DETAIL_MULX2
             #pragma shader_feature _PARALLAXMAP
 
@@ -215,8 +127,8 @@ Shader "TwoSidesRendShader"
             // Uncomment the following line to enable dithering LOD crossfade. Note: there are more in the file to uncomment for other passes.
             //#pragma multi_compile _ LOD_FADE_CROSSFADE
 
-            #pragma vertex vertForwardAdd
-            #pragma fragment fragForwardAdd
+            #pragma vertex vertAdd
+            #pragma fragment fragAdd
             #include "UnityStandardCoreForward.cginc"
 
             ENDCG
@@ -227,17 +139,21 @@ Shader "TwoSidesRendShader"
             Name "ShadowCaster"
             Tags { "LightMode" = "ShadowCaster" }
 
-            ZWrite On ZTest LEqual
+            ZWrite On
 
             CGPROGRAM
             #pragma target 3.0
-			#pragma exclude_renderers gles
 
             // -------------------------------------
 
 
             #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+            #pragma shader_feature _METALLICGLOSSMAP
+            #pragma shader_feature _PARALLAXMAP
             #pragma multi_compile_shadowcaster
+            #pragma multi_compile_instancing
+            // Uncomment the following line to enable dithering LOD crossfade. Note: there are more in the file to uncomment for other passes.
+            //#pragma multi_compile _ LOD_FADE_CROSSFADE
 
             #pragma vertex vertShadowCaster
             #pragma fragment fragShadowCaster
@@ -255,7 +171,7 @@ Shader "TwoSidesRendShader"
 
             CGPROGRAM
             #pragma target 3.0
-            #pragma exclude_renderers nomrt gles
+            #pragma exclude_renderers nomrt
 
 
             // -------------------------------------
@@ -263,16 +179,14 @@ Shader "TwoSidesRendShader"
             #pragma shader_feature _NORMALMAP
             #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
             #pragma shader_feature _EMISSION
-
             #pragma shader_feature _METALLICGLOSSMAP
+            #pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+            #pragma shader_feature _ _SPECULARHIGHLIGHTS_OFF
             #pragma shader_feature ___ _DETAIL_MULX2
             #pragma shader_feature _PARALLAXMAP
 
-			#pragma multi_compile ___ UNITY_HDR_ON
-			#pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
-			#pragma multi_compile DIRLIGHTMAP_OFF DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
-			#pragma multi_compile DYNAMICLIGHTMAP_OFF DYNAMICLIGHTMAP_ON            
-
+            #pragma multi_compile_prepassfinal
+            #pragma multi_compile_instancing
             // Uncomment the following line to enable dithering LOD crossfade. Note: there are more in the file to uncomment for other passes.
             //#pragma multi_compile _ LOD_FADE_CROSSFADE
 
@@ -300,7 +214,9 @@ Shader "TwoSidesRendShader"
 
             #pragma shader_feature _EMISSION
             #pragma shader_feature _METALLICGLOSSMAP
+            #pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
             #pragma shader_feature ___ _DETAIL_MULX2
+            #pragma shader_feature EDITOR_VISUALIZATION
 
             #include "UnityStandardMeta.cginc"
             ENDCG
@@ -310,6 +226,9 @@ Shader "TwoSidesRendShader"
     SubShader
     {
         Tags { "RenderType"="Opaque" "PerformanceChecks"="False" }
+		Cull Back
+		ZTest Always
+		Zwrite Off
         LOD 150
 
         // ------------------------------------------------------------------
@@ -329,7 +248,9 @@ Shader "TwoSidesRendShader"
             #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
             #pragma shader_feature _EMISSION
             #pragma shader_feature _METALLICGLOSSMAP
-			#pragma shader_feature ___ _DETAIL_MULX2
+            #pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+            #pragma shader_feature _ _SPECULARHIGHLIGHTS_OFF
+            #pragma shader_feature _ _GLOSSYREFLECTIONS_OFF
             // SM2.0: NOT SUPPORTED shader_feature ___ _DETAIL_MULX2
             // SM2.0: NOT SUPPORTED shader_feature _PARALLAXMAP
 
@@ -338,8 +259,8 @@ Shader "TwoSidesRendShader"
             #pragma multi_compile_fwdbase
             #pragma multi_compile_fog
 
-            #pragma vertex vertForwardBase
-            #pragma fragment fragForwardBase
+            #pragma vertex vertBase
+            #pragma fragment fragBase
             #include "UnityStandardCoreForward.cginc"
 
             ENDCG
@@ -353,7 +274,6 @@ Shader "TwoSidesRendShader"
             Blend [_SrcBlend] One
             Fog { Color (0,0,0,0) } // in additive pass fog should be black
             ZWrite Off
-            ZTest LEqual
 
             CGPROGRAM
             #pragma target 2.0
@@ -361,6 +281,8 @@ Shader "TwoSidesRendShader"
             #pragma shader_feature _NORMALMAP
             #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
             #pragma shader_feature _METALLICGLOSSMAP
+            #pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+            #pragma shader_feature _ _SPECULARHIGHLIGHTS_OFF
             #pragma shader_feature ___ _DETAIL_MULX2
             // SM2.0: NOT SUPPORTED shader_feature _PARALLAXMAP
             #pragma skip_variants SHADOWS_SOFT
@@ -380,12 +302,13 @@ Shader "TwoSidesRendShader"
             Name "ShadowCaster"
             Tags { "LightMode" = "ShadowCaster" }
 
-            ZWrite On ZTest LEqual
+            ZWrite On
 
             CGPROGRAM
             #pragma target 2.0
 
             #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+            #pragma shader_feature _METALLICGLOSSMAP
             #pragma skip_variants SHADOWS_SOFT
             #pragma multi_compile_shadowcaster
 
@@ -413,12 +336,16 @@ Shader "TwoSidesRendShader"
 
             #pragma shader_feature _EMISSION
             #pragma shader_feature _METALLICGLOSSMAP
+            #pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
             #pragma shader_feature ___ _DETAIL_MULX2
+            #pragma shader_feature EDITOR_VISUALIZATION
 
             #include "UnityStandardMeta.cginc"
             ENDCG
         }
     }
-	
-    Fallback "Diffuse"
+
+
+    FallBack "VertexLit"
+    //CustomEditor "StandardShaderGUI"
 }
