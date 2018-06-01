@@ -21,8 +21,6 @@ public class TPVCamera : MonoBehaviour
     public float distance_ = 2f;
     //カメラの高さ
     public float cameraHeight_ = 1.2f;
-    //カメラを横にスライドさせる
-    //public float slideDistance_ = 10f;
     //回転の感度
     [Tooltip("カメラの回転速度")]
     public float rotationSpeed_ = 100f;
@@ -47,33 +45,7 @@ public class TPVCamera : MonoBehaviour
     }
 
     void Update()
-    {
-
-        
-        ////マウスの右ボタンが押されていたら
-        //if (Input.GetMouseButtonDown(1) || (padState_.Triggers.Left >= 0.7f))
-        //{
-        //    isChange = true;
-        //    Debug.Log("一人称");
-        //}
-        //else if (Input.GetMouseButtonUp(1) || (padState_.Triggers.Left <= 0.7f))
-        //{
-        //    isChange = false;
-        //    Debug.Log("三人称");
-        //}
-
-        //if (isChange == true)
-        //{
-        //    isTrgger_ = true;
-        //    distance_ = 0.0f;
-        //    cameraHeight_ = 1.8f;
-        //}
-        //else
-        //{
-        //    isTrgger_ = false;
-        //    distance_ = 2.0f;
-        //    cameraHeight_ = 1.2f;
-        //}
+    { 
 
     }
 
@@ -120,9 +92,6 @@ public class TPVCamera : MonoBehaviour
         
         //注視点の設定
         transform.LookAt(lookAt);
-
-        //カメラを横にずらして中央を開ける
-        //transform.position = transform.position + transform.right * slideDistance_;
         
     }
 
