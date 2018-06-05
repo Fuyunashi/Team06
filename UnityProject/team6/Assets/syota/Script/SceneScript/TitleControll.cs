@@ -45,10 +45,7 @@ public class TitleControll : MonoBehaviour
     void Update()
     {
         sceneChangeIcon = GameObject.Find("SceneChangeIcon");
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-           
-        }
+      
                 
         //ノイズが行われてたらシーン移行フラグを入れる
         if (crtNoise.CRTFlag)

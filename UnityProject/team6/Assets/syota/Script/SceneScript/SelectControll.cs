@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XInputDotNetPure;
 
 public class SelectControll : MonoBehaviour
 {
+    //Xinput関連
+    private bool playerInputSet_ = false;
+    private PlayerIndex playerIndex_;
+    private GamePadState padState_;
+    private GamePadState prevState_;
+
+
+
     /* シーン遷移の際に絶対に必要変数 */
     GameObject MainCam;
     GameObject SubCam;
@@ -34,12 +43,22 @@ public class SelectControll : MonoBehaviour
 
     void Update()
     {
+        //Xinput関連
+        if (!playerInputSet_ || !prevState_.IsConnected)
+        {
+            playerIndex_ = (PlayerIndex)0;
+            playerInputSet_ = true;
+        }
+        prevState_ = padState_;
+        padState_ = GamePad.GetState(playerIndex_);
+
         if (Input.GetKeyDown(KeyCode.K))
         {
             Debug.Log("次のシーンは：" + stageInstructs.CurrentStage);
         }
-        if (Input.GetKeyDown(KeyCode.O))
+        if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
         {
+            Debug.Log("ステージ移動する！！");
             NextSceneToDecide();
         }
     }

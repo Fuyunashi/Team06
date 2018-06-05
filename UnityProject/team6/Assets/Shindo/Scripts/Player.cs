@@ -80,15 +80,6 @@ public class Player : MonoBehaviour
             isGround_ = false;
         }
 
-        if (!isGround_)
-        {
-            rb_.useGravity = true;
-        }
-        else
-        {
-            rb_.useGravity = false;
-        }
-
         if (isGround_)
         {
             velocity_ = Vector3.zero;
@@ -177,9 +168,9 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonUp(1) || (padState_.Triggers.Left <= 0.7f))
         {
             Debug.Log("オフ");
-            GameObject.Find("Reticle").GetComponent<Image>().enabled = false;
+            //GameObject.Find("Reticle").GetComponent<Image>().enabled = false;
         }
-        SoundManager.GetInstance.PlayBGM("A");
+        //SoundManager.GetInstance.PlayBGM("A");
     }
 
     void FixedUpdate()

@@ -1,19 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 
 public class StageInstructs : MonoBehaviour
 {
-    //private struct ObjectANDAxis
-    //{
-    //    [SerializeField, Header("回転軸")]
-    //    public AxisOfRotation m_axis;
-    //    [SerializeField, Header("回転方向")]
-    //    public RotateDire m_rote_dir;
-    //    [SerializeField]
-    //    public GameObject m_rotate_obj;
-    //}
+    //Xinput関連
+    private bool playerInputSet_ = false;
+    private PlayerIndex playerIndex_;
+    private GamePadState padState_;
+    private GamePadState prevState_;
+
     [System.Serializable]
     public struct MovingStage
     {
@@ -37,15 +35,28 @@ public class StageInstructs : MonoBehaviour
 
     public NextStage CurrentStage;
 
+  
     void Start()
     {
-       // CurrentStage = NextStage.Tutrial1;
+        
+        // CurrentStage = NextStage.Tutrial1;
     }
 
     void Update()
     {
+        //Xinput関連
+        if (!playerInputSet_ || !prevState_.IsConnected)
+        {
+            playerIndex_ = (PlayerIndex)0;
+            playerInputSet_ = true;
+        }
+        prevState_ = padState_;
+        padState_ = GamePad.GetState(playerIndex_);
+
+
+
         //Debug.Log("次のシーン：" + CurrentStage);
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (prevState_.DPad.Up == ButtonState.Released && padState_.DPad.Up == ButtonState.Pressed)
         {
             foreach (var stage in movingStage)
             {
@@ -54,7 +65,7 @@ public class StageInstructs : MonoBehaviour
                 return;
             }
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (prevState_.DPad.Right == ButtonState.Released && padState_.DPad.Right == ButtonState.Pressed)
         {
             foreach (var stage in movingStage)
             {
@@ -64,7 +75,7 @@ public class StageInstructs : MonoBehaviour
                 return;
             }
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (prevState_.DPad.Left == ButtonState.Released && padState_.DPad.Left == ButtonState.Pressed)
         {
             foreach (var stage in movingStage)
             {
@@ -73,7 +84,7 @@ public class StageInstructs : MonoBehaviour
                 return;
             }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (prevState_.DPad.Down == ButtonState.Released && padState_.DPad.Down == ButtonState.Pressed)
         {
             foreach (var stage in movingStage)
             {
