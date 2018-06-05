@@ -28,6 +28,10 @@ public class SceneControll : MonoBehaviour
 
     public SceneName CurrentScene { get; set; }
 
+    public NextStage CurrentStage { get; set; }
+
+    public bool PuseFrag { get; set; }
+
     public List<string> AddToScene = new List<string>();
 
     private Dictionary<SceneName, string> MainScene = new Dictionary<SceneName, string>();
@@ -49,6 +53,8 @@ public class SceneControll : MonoBehaviour
         //すべての設定が終わったらタイトルへ移動
         NextScene = SceneName.TitleScene;
         //SceneChange(NextScene);
+
+        PuseFrag = false;
     }
 
     void Update()
@@ -104,5 +110,19 @@ public class SceneControll : MonoBehaviour
         SceneManager.SetActiveScene(scene);
     }
 
+    /// <summary>
+    /// ポーズ処理
+    /// </summary>
+    private void PuseDisposal()
+    {
+        if (CurrentScene == SceneName.PlayScene)
+        {
+            if (Input.GetKeyDown(KeyCode.P) && !PuseFrag)
+            {
+                Time.timeScale = 0;
+                PuseFrag = true;
+            }
+        }
+    }
 }
 

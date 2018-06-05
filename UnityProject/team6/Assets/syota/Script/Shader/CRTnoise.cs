@@ -171,7 +171,7 @@ public class CRTnoise : MonoBehaviour
         //nextStageがNoneの場合演出用のカメラなので下の処理は行わなくて良い
         if (nextStage == NextStage.None) return;
 
-        Debug.Log("次のシーンはこれだ！" + stageInstructs.CurrentStage);
+        //Debug.Log("次のシーンはこれだ！" + stageInstructs.CurrentStage);
         //自身の列挙型の型が選んでいるステージと同じであるならフラグを消す
         if (nextStage == stageInstructs.CurrentStage)
         {
