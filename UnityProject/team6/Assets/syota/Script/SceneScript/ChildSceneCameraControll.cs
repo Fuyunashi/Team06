@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class ChildSceneCameraControll : MonoBehaviour
 {
-
+    [SerializeField]
     GameObject MainCam;
-    GameObject SubCam;
+
     GameObject obj;
     SceneControll sceneControll;
     void Start()
     {
-        
+        MainCam.SetActive(false);
     }
 
     void Update()

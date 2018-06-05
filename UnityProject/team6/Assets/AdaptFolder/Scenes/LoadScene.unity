@@ -219,7 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4ebd82742c413479e7385ee6bea141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AddToScene: []
 --- !u!1 &787454314
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +373,7 @@ MonoBehaviour:
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
   scanLineTail: 2
-  scanLineSpeed: 0
+  scanLineSpeed: 1.8
   surveillanceCameraOn: 0
   selectCamera: 0
 --- !u!1 &1981886252

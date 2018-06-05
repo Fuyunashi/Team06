@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XInputDotNetPure;
 public enum SceneName
 {
     LoadScene,
@@ -23,6 +24,12 @@ public enum AddToScene
 }
 public class SceneControll : MonoBehaviour
 {
+    //Xinput関連
+    private bool playerInputSet_ = false;
+    private PlayerIndex playerIndex_;
+    private GamePadState padState_;
+    private GamePadState prevState_;
+
     //クラス外から次のシーン名を指定
     public SceneName NextScene { get; set; }
 
@@ -59,8 +66,19 @@ public class SceneControll : MonoBehaviour
 
     void Update()
     {
+        //Xinput関連
+        if (!playerInputSet_ || !prevState_.IsConnected)
+        {
+            playerIndex_ = (PlayerIndex)0;
+            playerInputSet_ = true;
+        }
+        prevState_ = padState_;
+        padState_ = GamePad.GetState(playerIndex_);
+
         //常にシーン遷移を行うか判断
         SceneChange(NextScene);
+
+        PuseDisposal();
     }
     //シーンを遷移する際に行う処理
     void SceneChange(SceneName scene)
@@ -110,17 +128,25 @@ public class SceneControll : MonoBehaviour
         SceneManager.SetActiveScene(scene);
     }
 
+
     /// <summary>
     /// ポーズ処理
     /// </summary>
     private void PuseDisposal()
     {
-        if (CurrentScene == SceneName.PlayScene)
+        if (CurrentScene == SceneName.PlayScene || CurrentScene == SceneName.TutorialScene)
         {
-            if (Input.GetKeyDown(KeyCode.P) && !PuseFrag)
+            if (prevState_.Buttons.Start == ButtonState.Released && padState_.Buttons.Start == ButtonState.Pressed && !PuseFrag)
             {
+                Debug.Log("ポウズ");
                 Time.timeScale = 0;
                 PuseFrag = true;
+                return;
+            }
+            if (prevState_.Buttons.Start == ButtonState.Released && padState_.Buttons.Start == ButtonState.Pressed && PuseFrag)
+            {
+                Time.timeScale = 1;
+                PuseFrag = false;
             }
         }
     }

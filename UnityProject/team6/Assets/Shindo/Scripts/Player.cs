@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonUp(1) || (padState_.Triggers.Left <= 0.7f))
         {
             Debug.Log("オフ");
-            GameObject.Find("Reticle").GetComponent<Image>().enabled = false;
+            //GameObject.Find("Reticle").GetComponent<Image>().enabled = false;
         }
         //SoundManager.GetInstance.PlayBGM("A");
     }
