@@ -12,11 +12,12 @@ public class ChangeCamera : MonoBehaviour
 
     GameObject obj_stageInstructs;
     StageInstructs stageInstructs;
+ 
     void Start()
     {
         obj_stageInstructs = GameObject.Find("StageConfiguration");
         stageInstructs = obj_stageInstructs.GetComponent<StageInstructs>();
-
+   
         v_camrea[0].Priority = 10;
         for (int i = 0; i < v_camrea.Length; i++)
         {
@@ -42,8 +43,7 @@ public class ChangeCamera : MonoBehaviour
         if ((int)stageInstructs.CurrentStage >= 14 && (int)stageInstructs.CurrentStage <= 19)
         {
             v_camrea[4].Priority = 11;
-        }
-     
+        }         
        
     }
 }

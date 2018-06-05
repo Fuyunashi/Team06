@@ -18,6 +18,7 @@ public class SelectControll : MonoBehaviour
     GameObject obj;
     StageInstructs stageInstructs;
     //SceneName name;
+    public bool ChangeSceneFrag;
     void Start()
     {
         //シーン情報を取得
@@ -27,6 +28,8 @@ public class SelectControll : MonoBehaviour
         stageInstructs = obj.GetComponent<StageInstructs>();
 
         AddChildScene();
+
+        ChangeSceneFrag = false;
     }
 
     void Update()
@@ -49,11 +52,13 @@ public class SelectControll : MonoBehaviour
         {
             sceneControll.NextScene = SceneName.PlayScene;
             sceneControll.AddToScene.Add(stageInstructs.CurrentStage.ToString() + AddToScene.ChildScene);
+            sceneControll.CurrentStage = stageInstructs.CurrentStage;
         }
         else if (stageInstructs.CurrentStage.ToString().Substring(0, 7) == "Tutrial")
         {
             sceneControll.NextScene = SceneName.TutorialScene;
             sceneControll.AddToScene.Add(stageInstructs.CurrentStage.ToString() + AddToScene.ChildScene);
+            sceneControll.CurrentStage = stageInstructs.CurrentStage;
         }
         //stageInstructs.CurrentStage;
     }
