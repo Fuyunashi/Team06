@@ -4,7 +4,7 @@ using UnityEngine;
 using Cinemachine;
 public class StageCangeCamera : MonoBehaviour
 {
-
+    [SerializeField]
     CinemachineVirtualCamera v_camera;
     [SerializeField]
     public NextStage nextStage;
@@ -21,7 +21,8 @@ public class StageCangeCamera : MonoBehaviour
         obj_stageInstructs = GameObject.Find("StageConfiguration");
         stageInstructs = obj_stageInstructs.GetComponent<StageInstructs>();
         obj_selectControll = GameObject.Find("SelectControll");
-        selectControll = GetComponent<SelectControll>();
+        selectControll = GetComponent<SelectControll>();        
+        v_camera.Priority = 5;
     }
 
     // Update is called once per frame
