@@ -80,15 +80,6 @@ public class Player : MonoBehaviour
             isGround_ = false;
         }
 
-        if (!isGround_)
-        {
-            rb_.useGravity = true;
-        }
-        else
-        {
-            rb_.useGravity = false;
-        }
-
         if (isGround_)
         {
             velocity_ = Vector3.zero;
@@ -179,7 +170,7 @@ public class Player : MonoBehaviour
             Debug.Log("オフ");
             GameObject.Find("Reticle").GetComponent<Image>().enabled = false;
         }
-        SoundManager.GetInstance.PlayBGM("A");
+        //SoundManager.GetInstance.PlayBGM("A");
     }
 
     void FixedUpdate()
