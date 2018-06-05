@@ -9,7 +9,7 @@ public class SoundVolume
     [SerializeField, Tooltip("bgmの音量")]
     public float bgm_ = 1.0f;
     [SerializeField, Tooltip("seの音量")]
-    public float se_ = 0.8f;
+    public float se_ = 1.0f;
     [SerializeField, Tooltip("")]
     public bool isMute_;
 
@@ -37,7 +37,7 @@ public class SoundManager : Singleton<SoundManager> {
     private Dictionary<string, int> seIndex_ = new Dictionary<string, int>();
     private Dictionary<string, int> bgmIndex_ = new Dictionary<string, int>();
 
-    //プレイヤー
+    //プレーヤー
     const int numChannel_ = 16;
     private AudioSource bgmSource_;
     private AudioSource[] seSource_ = new AudioSource[numChannel_];
@@ -61,18 +61,23 @@ public class SoundManager : Singleton<SoundManager> {
         for(int i = 0; i < seClip_.Length; i++)
         {
             seIndex_[seClip_[i].name] = i;
+            Debug.Log(seIndex_);
         }
         //リソースに番号を振る
         for (int i = 0; i < bgmClip_.Length; i++)
         {
             bgmIndex_[bgmClip_[i].name] = i;
+            Debug.Log(bgmIndex_);
         }
 
         foreach(var source in seSource_)
         {
             source.volume = volume_.se_;
         }
+
         
+        
+
     }
 
     void Update()
@@ -89,7 +94,7 @@ public class SoundManager : Singleton<SoundManager> {
         if(count != 0)
         {
             int sound_index = seRequestQueue.Dequeue();
-
+            playSeImpl(sound_index);
         }
 
     }
