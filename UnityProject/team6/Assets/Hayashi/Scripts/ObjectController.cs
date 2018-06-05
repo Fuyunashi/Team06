@@ -7,8 +7,6 @@ public class ObjectController : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 10f;
 
-    private Material defaultMat;
-
     private Vector3 basePosition;
     private Vector3 baseScale;
 
@@ -22,7 +20,6 @@ public class ObjectController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        defaultMat = GetComponent<Renderer>().material;
         isPositionMove = false;
         isHitObj = false;
         basePosition = transform.parent.transform.parent.position;
@@ -95,25 +92,24 @@ public class ObjectController : MonoBehaviour
 
     public void DeleteOutline()
     {
-        //通った
         Destroy(this.gameObject.GetComponent<Outline>());
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag!="Player" && collision.gameObject.tag!="GravityObj")
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet")
         {
             isHitObj = true;
             isPositionMove = false;
             isScaleMove = false;
-             DeleteOutline();
+            DeleteOutline();
             LeanTween.alpha(gameObject, 0.0f, 0.5f).setOnComplete(() =>
-              {              
+              {
+                  shoter.MovingEnd();
                   transform.parent.transform.parent.position = basePosition;
                   transform.parent.localScale = baseScale;
-                 
-                  shoter.MovingEnd();
-                  LeanTween.alpha(gameObject, 1.0f, 0.5f).setOnComplete(()=> { isHitObj = false; });
+
+                  LeanTween.alpha(gameObject, 1.0f, 0.5f).setOnComplete(() => { isHitObj = false; });
 
               });
         }

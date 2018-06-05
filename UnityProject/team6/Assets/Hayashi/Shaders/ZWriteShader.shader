@@ -54,7 +54,8 @@ Shader "ZwriteShader"
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" "PerformanceChecks"="False" }
+		Tags{ "RenderType" = "Transparent" "Queue" = "Transparent+10" }
+		Blend SrcAlpha OneMinusSrcAlpha
 		Cull Back
 		ZTest Always
 		Zwrite Off
@@ -225,7 +226,8 @@ Shader "ZwriteShader"
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" "PerformanceChecks"="False" }
+		Tags{ "RenderType" = "Transparent" "Queue" = "Transparent+10" }
+		Blend SrcAlpha OneMinusSrcAlpha
 		Cull Back
 		ZTest Always
 		Zwrite Off
@@ -347,5 +349,4 @@ Shader "ZwriteShader"
 
 
     FallBack "VertexLit"
-    //CustomEditor "StandardShaderGUI"
 }
