@@ -28,6 +28,8 @@ public class SceneControll : MonoBehaviour
 
     public SceneName CurrentScene { get; set; }
 
+    public NextStage CurrentStage { get; set; }
+
     public List<string> AddToScene = new List<string>();
 
     private Dictionary<SceneName, string> MainScene = new Dictionary<SceneName, string>();
