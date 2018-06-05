@@ -28,6 +28,7 @@ public class ValueDrawerController : MonoBehaviour
     private float m_value;
     private float prevValue = 0.0f;
     private float currentValue = 0.0f;
+    private bool isTween;
 
     private void Awake()
     {
@@ -55,17 +56,18 @@ public class ValueDrawerController : MonoBehaviour
     {
         //m_Text = transform.Find("Canvas").Find("ValueText").GetComponent<Text>();
         target = GameObject.FindGameObjectWithTag("Player");
+        isTween = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         if (currentValue != prevValue)
         {
             if (m_numDrawStartPos != null)
                 Destroy(m_numDrawStartPos);
-            m_numDrawStartPos = Instantiate(numDrawStartPos, transform.position+new Vector3(0.5f,0.0f,0.0f), Quaternion.identity);
+            m_numDrawStartPos = Instantiate(numDrawStartPos, transform.position + new Vector3(0.5f, 0.0f, 0.0f), Quaternion.identity);
             if (numberObjects != null)
             {
                 for (int i = 0; i < numberObjects.Length; i++)
@@ -97,7 +99,9 @@ public class ValueDrawerController : MonoBehaviour
             transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotate, 1);
         }
 
-        transform.position = new Vector3(drawObj.transform.localPosition.x, drawObj.transform.localPosition.y + 1.0f, drawObj.transform.localPosition.z);
+        if (isTween == false)
+            transform.position = new Vector3(drawObj.transform.parent.localPosition.x, drawObj.transform.parent.localPosition.y, drawObj.transform.parent.localPosition.z)+
+                                 new Vector3(0,drawObj.transform.localScale.y/2+0.5f,0);
 
     }
 
@@ -112,5 +116,10 @@ public class ValueDrawerController : MonoBehaviour
         m_value = value;
         currentValue = value;
         //m_Text.text = value.ToString("f2");
+    }
+
+    public void IsTween(bool tween)
+    {
+        isTween = tween;
     }
 }
