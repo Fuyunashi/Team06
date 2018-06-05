@@ -50,13 +50,16 @@ public class W_Enemy : MonoBehaviour
     //}
     void MoveToPlayer()
     {
+        gameObject.GetComponent<EnemyNavi>().enabled = true;
+
         target = GameObject.FindGameObjectWithTag("Player").transform;
         targetPoint = target.position - transform.position;
-
         velocity += accel * Time.deltaTime;
 
         if (targetPoint.sqrMagnitude <= detectionRange * detectionRange)
         {
+            gameObject.GetComponent<EnemyNavi>().enabled = false;
+
             transform.LookAt(target);
             transform.Translate(Vector3.forward * velocity);
             Debug.Log("In");
@@ -64,7 +67,7 @@ public class W_Enemy : MonoBehaviour
         else
         {
             velocity = 0.0f;
-            Debug.Log("Out");
+            Debug.Log("Out");            
         }
     }
     private void OnCollisionEnter(Collision collision)
