@@ -349,4 +349,5 @@ Shader "ZwriteShader"
 
 
     FallBack "VertexLit"
+	//CustomEditor "StandardShaderGUI"
 }
