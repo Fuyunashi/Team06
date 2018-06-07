@@ -32,7 +32,7 @@ public class Shooter : MonoBehaviour
 
     private bool playerIndexSet = false;
     private PlayerIndex playerIndex;
-    private GamePadState state;
+    private GamePadState padState;
     private GamePadState prevState;
 
     [SerializeField]
@@ -79,6 +79,10 @@ public class Shooter : MonoBehaviour
     private bool isOriginGet;
     private bool isTargetGet;
 
+    [SerializeField]
+    private GameObject estimateObjPrefab;
+    private GameObject m_estimateObj = null;
+
     // Use this for initialization
     void Start()
     {
@@ -112,27 +116,41 @@ public class Shooter : MonoBehaviour
             playerIndex = (PlayerIndex)0;
             playerIndexSet = true;
         }
-        prevState = state;
-        state = GamePad.GetState(playerIndex);
+        prevState = padState;
+        padState = GamePad.GetState(playerIndex);
         //軸切り替えボタンが押されたら
-        if (Input.GetKeyDown(KeyCode.E) || (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed))
+        if (Input.GetKeyDown(KeyCode.E) || (prevState.Buttons.RightShoulder == ButtonState.Released && padState.Buttons.RightShoulder == ButtonState.Pressed))
         {
+            SoundManager.GetInstance.PlaySE("Change_SE");
             //軸の切り替え
             SwitchAxisType();
+            if (isRayHit == true && shotType == ShotType.Setting)
+            {
+                if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
+                InstantEstimateObject(rayTargetObj.transform.parent.parent.gameObject);
+            }
         }
         //値切り替えボタンが押されたら
-        if (Input.GetKeyDown(KeyCode.Q) || (prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed))
+        if (Input.GetKeyDown(KeyCode.Q) || (prevState.Buttons.LeftShoulder == ButtonState.Released && padState.Buttons.LeftShoulder == ButtonState.Pressed))
         {
+            SoundManager.GetInstance.PlaySE("Change_SE");
             //値の切り替え
             SwitchChangeType();
+            if (isRayHit == true && shotType == ShotType.Setting)
+            {
+                if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
+                InstantEstimateObject(rayTargetObj.transform.parent.parent.gameObject);
+            }
         }
         //弾が発射されていないかつショットタイプ切り替えボタンが押されたら
-        if ((Input.GetKeyDown(KeyCode.R) || (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed)))
+        if ((Input.GetKeyDown(KeyCode.R) || (prevState.Buttons.Y == ButtonState.Released && padState.Buttons.Y == ButtonState.Pressed)))
         {
+            SoundManager.GetInstance.PlaySE("Change_SE");
             //ショットタイプの切り替え
             SwitchShotType();
+            if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
         }
-        if (isShot == true && (state.Triggers.Right <= 0.3f || Input.GetMouseButtonUp(0))) isShot = false;
+        if (isShot == true && (padState.Triggers.Right <= 0.3f || Input.GetMouseButtonUp(0))) isShot = false;
 
         laserPointer.SetPosition(0, laserPointer.transform.position);
         GetObject_Ray();
@@ -186,8 +204,9 @@ public class Shooter : MonoBehaviour
                             objVal_origin_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayOriginObj.transform.parent.gameObject);
                         }
                         //射撃ボタンが押されたら
-                        if ((Input.GetMouseButtonDown(0) || state.Triggers.Right >= 0.8f) && isShot == false)
+                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && isShot == false)
                         {
+                            SoundManager.GetInstance.PlaySE("Gun_SE");
                             //発射
                             Shot(rayOriginObj);
                             //弾を撃った
@@ -209,9 +228,11 @@ public class Shooter : MonoBehaviour
                                                     );
                             objVal_target_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayTargetObj.transform.parent.gameObject);
                         }
+                        InstantEstimateObject(rayTargetObj.transform.parent.parent.gameObject);
                         //射撃ボタンが押されたら
-                        if ((Input.GetMouseButtonDown(0) || state.Triggers.Right >= 0.8f) && isShot == false)
+                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && isShot == false)
                         {
+                            SoundManager.GetInstance.PlaySE("Gun_SE");
                             //発射
                             Shot(rayTargetObj);
                             //弾を撃った
@@ -224,6 +245,7 @@ public class Shooter : MonoBehaviour
             {
                 if (objVal_origin_ray != null) Destroy(objVal_origin_ray.gameObject);
                 if (objVal_target_ray != null) Destroy(objVal_target_ray.gameObject);
+                if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
                 isRayHit = false;
             }
             laserPointer.SetPosition(1, rayhit.point);
@@ -232,11 +254,11 @@ public class Shooter : MonoBehaviour
         {
             if (objVal_origin_ray != null) Destroy(objVal_origin_ray.gameObject);
             if (objVal_target_ray != null) Destroy(objVal_target_ray.gameObject);
+            if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
             isRayHit = false;
             laserPointer.SetPosition(1, ray.origin + ray.direction * rayDistance);
         }
-
-        Debug.DrawRay(shotPos.position, shotPos.forward * rayDistance, Color.red);
+        //Debug.DrawRay(shotPos.position, shotPos.forward * rayDistance, Color.red);
     }
     //取得、転置オブジェクトの数値の表示
     private void ObjectsValueDraw_Ray(GameObject originObj, GameObject targetObj)
@@ -291,6 +313,7 @@ public class Shooter : MonoBehaviour
                 break;
         }
     }
+    //取得オブジェクトの数値表示処理
     private void ObjectsValueDraw_Origin()
     {
         switch (changeType)
@@ -331,6 +354,7 @@ public class Shooter : MonoBehaviour
                 break;
         }
     }
+    //転置オブジェクトの数値表示処理
     private void ObjectsValueDraw_Target()
     {
         switch (changeType)
@@ -363,6 +387,74 @@ public class Shooter : MonoBehaviour
                         break;
                 }
                 break;
+        }
+    }
+    //コピー後の予測の生成
+    private void InstantEstimateObject(GameObject obj)
+    {
+        if (m_estimateObj == null && isOriginGet == true)
+        {
+            switch (changeType)
+            {
+                case ChangeType.Position:
+                    switch (axisType)
+                    {
+                        case AxisType.X:
+                            m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
+                                                originPositionValue.x,
+                                                obj.transform.position.y,
+                                                obj.transform.position.z
+                                                ), obj.transform.localRotation);
+                            break;
+                        case AxisType.Y:
+                            m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
+                                               obj.transform.position.x,
+                                               originPositionValue.y,
+                                               obj.transform.position.z
+                                               ), obj.transform.localRotation);
+                            break;
+                        case AxisType.Z:
+                            m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
+                                               obj.transform.position.x,
+                                               obj.transform.position.y,
+                                               originPositionValue.z
+                                               ), obj.transform.localRotation);
+                            break;
+                    }
+                    m_estimateObj.transform.GetChild(0).localScale = new Vector3(
+                              obj.transform.GetChild(0).localScale.x,
+                              obj.transform.GetChild(0).localScale.y,
+                              obj.transform.GetChild(0).localScale.z);
+                    m_estimateObj.transform.GetChild(0).localPosition = obj.transform.GetChild(0).localPosition;
+                    break;
+                case ChangeType.Scale:
+                    m_estimateObj = Instantiate(estimateObjPrefab,
+                              obj.transform.localPosition,
+                              obj.transform.localRotation);
+                       m_estimateObj.transform.GetChild(0).localPosition = obj.transform.GetChild(0).localPosition;
+                    switch (axisType)
+                    {
+                        case AxisType.X:
+                            m_estimateObj.transform.GetChild(0).localScale = new Vector3(
+                                originScaleValue.x,
+                                obj.transform.GetChild(0).localScale.y,
+                                obj.transform.GetChild(0).localScale.z);
+                            break;
+                        case AxisType.Y:
+                            m_estimateObj.transform.GetChild(0).localScale = new Vector3(
+                               obj.transform.GetChild(0).localScale.x,
+                               originScaleValue.y,
+                               obj.transform.GetChild(0).localScale.z);
+                            break;
+                        case AxisType.Z:
+                            m_estimateObj.transform.GetChild(0).localScale = new Vector3(
+                                obj.transform.GetChild(0).localScale.x,
+                                obj.transform.GetChild(0).localScale.y,
+                                originScaleValue.z);
+                            break;
+                    }
+                    break;
+            }
         }
     }
     //銃のタイプ切り替え
@@ -439,6 +531,7 @@ public class Shooter : MonoBehaviour
                     if (prevOriginObj != originObject)
                     {
                         originObject.GetComponent<ObjectController>().SetOutline();
+                        originObject.GetComponent<ObjectController>().GetSetEffect();
                         Destroy(objVal_origin);
                         objVal_origin = Instantiate(objValPref,
                                                         new Vector3(
@@ -462,6 +555,7 @@ public class Shooter : MonoBehaviour
                         //転置するオブジェクトに当たったオブジェクトを格納                   
                         targetObject = hitObject.transform.gameObject;
                         targetObject.GetComponent<ObjectController>().SetOutline();
+                        targetObject.GetComponent<ObjectController>().GetSetEffect();
                         Destroy(objVal_target);
                         objVal_target = Instantiate(objValPref,
                                                      new Vector3(
@@ -544,7 +638,7 @@ public class Shooter : MonoBehaviour
                 break;
         }
     }
-
+    //オブジェクトの動作終了時処理
     public void MovingEnd()
     {
         if (targetObject != null)
@@ -559,7 +653,7 @@ public class Shooter : MonoBehaviour
             });
         }
     }
-
+    //コピー時の演出アニメーション処理
     private void SettingAnimation(GameObject target)
     {
         m_drawerCamera = Instantiate(drawerCameraPref, this.transform.position + new Vector3(0, 1f, 0), this.transform.rotation);
@@ -574,6 +668,7 @@ public class Shooter : MonoBehaviour
                 {
                     Destroy(objVal_origin);
                     m_drawerCamera.GetComponent<DrawerCamera>().TrackingEnd();
+                    SoundManager.GetInstance.PlaySE("Move_SE");
                     //指定した変更する値の軸を切り替え
                     ChangeObjectAxis();
 
@@ -583,10 +678,5 @@ public class Shooter : MonoBehaviour
             });
         });
 
-    }
-
-    private IEnumerator SettingAnimation()
-    {
-        yield return new WaitForSeconds(0.1f);
     }
 }

@@ -814,7 +814,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -2173,7 +2173,6 @@ GameObject:
   - component: {fileID: 1443013648}
   - component: {fileID: 1443013647}
   - component: {fileID: 1443013646}
-  - component: {fileID: 1443013645}
   m_Layer: 0
   m_Name: TitleSubCamera
   m_TagString: Untagged
@@ -2181,13 +2180,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1443013645
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1443013644}
-  m_Enabled: 1
 --- !u!124 &1443013646
 Behaviour:
   m_ObjectHideFlags: 0

@@ -380,7 +380,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 63817425}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.19, y: 1.83, z: 0.05213183}
+  m_LocalPosition: {x: -0.19, y: 2.98, z: 0.05213183}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 476297295}
@@ -455,9 +455,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.22117254
+  noiseX: 0.41294098
   rgbNoise: 0
-  sinNoiseScale: 0.14228871
+  sinNoiseScale: 0.39239252
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -619,9 +619,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.026486635
+  noiseX: 0.040491223
   rgbNoise: 0
-  sinNoiseScale: 0.2696083
+  sinNoiseScale: 0.33017582
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -1027,9 +1027,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.21418229
+  noiseX: 0.41814488
   rgbNoise: 0
-  sinNoiseScale: 0.23919407
+  sinNoiseScale: 0.2177724
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -2017,7 +2017,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 348257209}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4.7, y: 4.46, z: -0.61}
+  m_LocalPosition: {x: 4.72, y: 4.46, z: -0.61}
   m_LocalScale: {x: 2, y: 1.2, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1617264009}
@@ -2371,9 +2371,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.23783502
+  noiseX: 0.27936748
   rgbNoise: 0
-  sinNoiseScale: 0.4645267
+  sinNoiseScale: 0.042330682
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -2555,7 +2555,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 23e5f126029186c47a301cb4c506b280, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 23e5f126029186c47a301cb4c506b280, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2588,6 +2588,10 @@ Prefab:
     - target: {fileID: 400000, guid: 23e5f126029186c47a301cb4c506b280, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.8870001
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 23e5f126029186c47a301cb4c506b280, type: 3}
+      propertyPath: m_Name
+      value: beforObject
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: 23e5f126029186c47a301cb4c506b280, type: 3}
@@ -2640,7 +2644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0.12999976, y: 0, z: -10}
+  m_FollowOffset: {x: 0.12999976, y: 0.97000015, z: -10}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3011,9 +3015,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.37928796
+  noiseX: 0.05732584
   rgbNoise: 0
-  sinNoiseScale: 0.11847693
+  sinNoiseScale: 0.21380231
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -3248,9 +3252,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.12138069
+  noiseX: 0.19854608
   rgbNoise: 0
-  sinNoiseScale: 0.4241606
+  sinNoiseScale: 0.18488851
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -3357,9 +3361,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.13557824
+  noiseX: 0.4385937
   rgbNoise: 0
-  sinNoiseScale: 0.09875387
+  sinNoiseScale: 0.11523396
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -3548,7 +3552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &647899609
 Light:
   m_ObjectHideFlags: 0
@@ -4139,9 +4143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.18835494
+  noiseX: 0.4521783
   rgbNoise: 0
-  sinNoiseScale: 0.07115662
+  sinNoiseScale: 0.45026708
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -5601,9 +5605,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.4240558
+  noiseX: 0.47325146
   rgbNoise: 0
-  sinNoiseScale: 0.38509667
+  sinNoiseScale: 0.20073745
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -5836,9 +5840,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.3181485
+  noiseX: 0.32023358
   rgbNoise: 0
-  sinNoiseScale: 0.29080424
+  sinNoiseScale: 0.08190352
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -6094,9 +6098,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.38169235
+  noiseX: 0.32270688
   rgbNoise: 0
-  sinNoiseScale: 0.27727708
+  sinNoiseScale: 0.003870666
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -6368,9 +6372,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.19804439
+  noiseX: 0.43948638
   rgbNoise: 0
-  sinNoiseScale: 0.2115235
+  sinNoiseScale: 0.08497107
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -7017,7 +7021,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 244912996}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -7609,7 +7613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1463775643
 Transform:
   m_ObjectHideFlags: 0
@@ -7678,9 +7682,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.3221745
+  noiseX: 0.34431136
   rgbNoise: 0
-  sinNoiseScale: 0.16643581
+  sinNoiseScale: 0.14035961
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -8001,9 +8005,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.45824873
+  noiseX: 0.12850663
   rgbNoise: 0
-  sinNoiseScale: 0.49535716
+  sinNoiseScale: 0.20497361
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -8272,7 +8276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1617264009
 Transform:
   m_ObjectHideFlags: 0
@@ -8822,9 +8826,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.38130462
+  noiseX: 0.35119265
   rgbNoise: 0
-  sinNoiseScale: 0.18019179
+  sinNoiseScale: 0.33215833
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -9431,9 +9435,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.09038544
+  noiseX: 0.47678167
   rgbNoise: 0
-  sinNoiseScale: 0.45604205
+  sinNoiseScale: 0.026052177
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -9744,7 +9748,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1917378366
 GameObject:
@@ -10166,9 +10170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.48155087
+  noiseX: 0.12369114
   rgbNoise: 0
-  sinNoiseScale: 0.11775774
+  sinNoiseScale: 0.29180136
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -10564,7 +10568,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 732312043}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -10616,9 +10620,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.1740947
+  noiseX: 0.3489229
   rgbNoise: 0
-  sinNoiseScale: 0.39233536
+  sinNoiseScale: 0.4801268
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}

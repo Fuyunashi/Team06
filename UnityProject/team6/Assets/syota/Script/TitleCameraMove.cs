@@ -42,8 +42,12 @@ public class TitleCameraMove : MonoBehaviour
     float time = 0;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetButtonDown("Bbutton"))
+        {
+            Debug.Log("aaaa");
             sceneChangeFlag = true;
+        }
+
         if (sceneChangeFlag)
         {
             CameraPos = transform.position;
@@ -55,7 +59,7 @@ public class TitleCameraMove : MonoBehaviour
                     //transform.rotation = Quaternion.LookRotation(look);
 
                     transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(aim), time);
-                    time += Time.deltaTime * 0.5f;
+                    time += Time.deltaTime;
                     if (time >= 1)
                     {
                         cameraMoveType = CameraMoveType.Move;
@@ -67,7 +71,9 @@ public class TitleCameraMove : MonoBehaviour
                     var target = Player.transform.position - CameraPos;
                     var look_ = Quaternion.LookRotation(target);
                     transform.localRotation = look_;
-                    if (Input.GetKeyDown(KeyCode.V))
+                    time += Time.deltaTime * 0.5f;
+
+                    if (time >= 1.5)
                     {
                         cameraMoveType = CameraMoveType.Up;
                     }

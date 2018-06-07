@@ -6,6 +6,15 @@ public class ObjectController : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 10f;
+    [SerializeField]
+    private GameObject crashEffectPref;
+    private GameObject m_crashEffect;
+    [SerializeField]
+    private GameObject destroyEffectPref;
+    private GameObject m_destroyEffect;
+    [SerializeField]
+    private GameObject getSetEffectPref;
+    private GameObject m_getSetEffect;
 
     private Vector3 basePosition;
     private Vector3 baseScale;
@@ -97,23 +106,42 @@ public class ObjectController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Vector3 hitPos=Vector3.zero;
+        foreach(ContactPoint point in collision.contacts)
+        {
+            hitPos = point.point;
+        }
         if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet")
         {
+            m_destroyEffect = Instantiate(destroyEffectPref, hitPos,Quaternion.identity);
+            Destroy(m_destroyEffect, 1.0f);
+            SoundManager.GetInstance.PlaySE("Break_SE");
             isHitObj = true;
             isPositionMove = false;
             isScaleMove = false;
             DeleteOutline();
-            LeanTween.alpha(gameObject, 0.0f, 0.5f).setOnComplete(() =>
+            LeanTween.alpha(gameObject, 0.0f, 1.0f).setOnComplete(() =>
               {
                   shoter.MovingEnd();
                   transform.parent.transform.parent.position = basePosition;
                   transform.parent.localScale = baseScale;
 
-                  LeanTween.alpha(gameObject, 1.0f, 0.5f).setOnComplete(() => { isHitObj = false; });
-
+                  LeanTween.alpha(gameObject, 1.0f, 2.0f).setOnComplete(() => { isHitObj = false; });
+                  SoundManager.GetInstance.PlaySE("Born_SE");
               });
+        }
+        else if(collision.gameObject.tag!="Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "ChangeObject")
+        {
+            m_crashEffect = Instantiate(crashEffectPref, hitPos, Quaternion.identity);
+            Destroy(m_crashEffect, 1.0f);
+            SoundManager.GetInstance.PlaySE("Crash_SE");
         }
     }
 
+    public void GetSetEffect()
+    {
+        m_getSetEffect = Instantiate(getSetEffectPref, this.transform.position, Quaternion.identity);
+        Destroy(m_getSetEffect, 1.0f);
+    }
 
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XInputDotNetPure;
 public enum SceneName
 {
     LoadScene,
@@ -9,6 +10,8 @@ public enum SceneName
     TitleScene,
     PlayScene,
     TutorialScene,
+    PlayCurrentScene,
+    TutorialCurrentScene,
     TitleRoom,
     Tutrial1,
     Tutrial2,
@@ -23,6 +26,12 @@ public enum AddToScene
 }
 public class SceneControll : MonoBehaviour
 {
+    //Xinput関連
+    private bool playerInputSet_ = false;
+    private PlayerIndex playerIndex_;
+    private GamePadState padState_;
+    private GamePadState prevState_;
+
     //クラス外から次のシーン名を指定
     public SceneName NextScene { get; set; }
 
@@ -59,24 +68,49 @@ public class SceneControll : MonoBehaviour
 
     void Update()
     {
+        //Xinput関連
+        if (!playerInputSet_ || !prevState_.IsConnected)
+        {
+            playerIndex_ = (PlayerIndex)0;
+            playerInputSet_ = true;
+        }
+        prevState_ = padState_;
+        padState_ = GamePad.GetState(playerIndex_);
+
+        //エスケープキーでゲーム修了基本設定
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         //常にシーン遷移を行うか判断
         SceneChange(NextScene);
+
+        PuseDisposal();
     }
     //シーンを遷移する際に行う処理
     void SceneChange(SceneName scene)
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (scene == SceneName.PlayCurrentScene) { 
+        SceneManager.LoadScene(MainScene[SceneName.PlayScene], LoadSceneMode.Single);
+        NextScene = SceneName.PlayScene;
+    }
+        if (scene == SceneName.TutorialCurrentScene)
         {
-            //Application.Quit();
+            SceneManager.LoadScene(MainScene[SceneName.TutorialScene], LoadSceneMode.Single);
+            NextScene = SceneName.TutorialScene;
         }
-        //今のシーンと次のシーンが同じでなければ次のシーンをロードする
-        if ((SceneManager.GetActiveScene().name != MainScene[scene]))
-        {
-            SceneManager.LoadScene(MainScene[scene], LoadSceneMode.Single);
-            //シーンが切り替わったら現在のシーンを更新
-            CurrentScene = scene;
 
-            Debug.Log("シーン切替時：次のシーンだお：" + scene);
+        if (scene != SceneName.PlayCurrentScene && scene != SceneName.TutorialCurrentScene)
+        {
+            //今のシーンと次のシーンが同じでなければ次のシーンをロードする
+            if ((SceneManager.GetActiveScene().name != MainScene[scene]))
+            {
+                SceneManager.LoadScene(MainScene[scene], LoadSceneMode.Single);
+                //シーンが切り替わったら現在のシーンを更新
+                CurrentScene = scene;
+
+                Debug.Log("シーン切替時：次のシーンだお：" + scene);
+            }
         }
         if (AddToScene.Count != 0)
         {
@@ -102,25 +136,33 @@ public class SceneControll : MonoBehaviour
         //シーン名を指定する(現在のシーンをアクティブにしたい)
         Scene scene = SceneManager.GetSceneByName(CurrentScene.ToString());
         //読み込んでる際には行わないように少し待つ
-        //while (!scene.isLoaded)
-        //{
-        yield return null;
-        //}
+        while (!scene.isLoaded)
+        {
+            yield return null;
+        }
         //指定したシーン名をアクティブにする
         SceneManager.SetActiveScene(scene);
     }
+
 
     /// <summary>
     /// ポーズ処理
     /// </summary>
     private void PuseDisposal()
     {
-        if (CurrentScene == SceneName.PlayScene)
+        if (CurrentScene == SceneName.PlayScene || CurrentScene == SceneName.TutorialScene)
         {
-            if (Input.GetKeyDown(KeyCode.P) && !PuseFrag)
+            if (prevState_.Buttons.Start == ButtonState.Released && padState_.Buttons.Start == ButtonState.Pressed && !PuseFrag)
             {
+                Debug.Log("ポウズ");
                 Time.timeScale = 0;
                 PuseFrag = true;
+                return;
+            }
+            if (prevState_.Buttons.Start == ButtonState.Released && padState_.Buttons.Start == ButtonState.Pressed && PuseFrag)
+            {
+                Time.timeScale = 1;
+                PuseFrag = false;
             }
         }
     }
