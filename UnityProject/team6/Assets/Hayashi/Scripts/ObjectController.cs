@@ -99,19 +99,24 @@ public class ObjectController : MonoBehaviour
     {
         if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet")
         {
+            SoundManager.GetInstance.PlaySE("Break_SE");
             isHitObj = true;
             isPositionMove = false;
             isScaleMove = false;
             DeleteOutline();
-            LeanTween.alpha(gameObject, 0.0f, 0.5f).setOnComplete(() =>
+            LeanTween.alpha(gameObject, 0.0f, 1.0f).setOnComplete(() =>
               {
                   shoter.MovingEnd();
                   transform.parent.transform.parent.position = basePosition;
                   transform.parent.localScale = baseScale;
 
-                  LeanTween.alpha(gameObject, 1.0f, 0.5f).setOnComplete(() => { isHitObj = false; });
-
+                  LeanTween.alpha(gameObject, 1.0f, 2.0f).setOnComplete(() => { isHitObj = false; });
+                  SoundManager.GetInstance.PlaySE("Born_SE");
               });
+        }
+        else if(collision.gameObject.tag!="Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "ChangeObject")
+        {
+            SoundManager.GetInstance.PlaySE("Crash_SE");
         }
     }
 

@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4006526733633108}
   - component: {fileID: 33081662529341164}
-  - component: {fileID: 135957563555132610}
   - component: {fileID: 23741340175600312}
   m_Layer: 0
   m_Name: Dot
@@ -83,15 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1142462115710066}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &135957563555132610
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1142462115710066}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
