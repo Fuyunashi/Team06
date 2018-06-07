@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 using UnityEngine.UI;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -38,6 +39,15 @@ public class Player : MonoBehaviour
     //死ぬ高さ
     [SerializeField, Tooltip("死ぬ高さ")]
     private float deadDistance_ = 5f;
+
+    //足音を鳴らす間隔
+    [SerializeField, Tooltip("足音を鳴らす間隔")]
+    private const float interval_sec_ = 0.4f;
+    //最後になった時間
+    private DateTime lastStepTime_;
+    //
+    [SerializeField]
+    private int randomRange_ = 3;
 
     //Xinput関連
     private bool playerInputSet_ = false;
@@ -107,6 +117,32 @@ public class Player : MonoBehaviour
 
                 velocity_ += direction * moveSpeed_;
 
+
+                int num_ = UnityEngine.Random.Range(0, randomRange_);
+                //足音
+                if ((DateTime.Now - lastStepTime_).TotalSeconds < interval_sec_)
+                {
+                    return;
+                }
+                else
+                {
+                    switch (num_)
+                    {
+                        case 0:
+                            Debug.Log("1");
+                            SoundManager.GetInstance.PlaySE("Walk_SE_1");
+                            break;
+                        case 1:
+                            Debug.Log("2");
+                            SoundManager.GetInstance.PlaySE("Walk_SE_2");
+                            break;
+                        case 2:
+                            Debug.Log("3");
+                            SoundManager.GetInstance.PlaySE("Walk_SE_3");
+                            break;
+                    }
+                    lastStepTime_ = DateTime.Now;
+                }
             }
         }
 
@@ -117,7 +153,7 @@ public class Player : MonoBehaviour
             isGround_ = false;
             velocity_.y += jumpPower_;
             rb_.useGravity = false;
-
+            SoundManager.GetInstance.PlaySE("Janp_SE");
         }
 
         if (!isGround_)
@@ -141,6 +177,7 @@ public class Player : MonoBehaviour
                 if (distance_ >= deadDistance_)
                 {
                     Debug.Log("死にました");
+                    SoundManager.GetInstance.PlaySE("FallDead_SE");
                     Destroy(gameObject);
                 }
             }
@@ -149,6 +186,7 @@ public class Player : MonoBehaviour
             {
                 //死亡時の処理
                 Debug.Log("死にました");
+                SoundManager.GetInstance.PlaySE("FallDead_SE");
                 Destroy(gameObject);
             }
         }
@@ -161,16 +199,13 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(1) || (padState_.Triggers.Left >= 0.7f))
         {
             Debug.Log("オン");
-            //cc.isFps_ = true;
             GameObject.Find("Reticle").GetComponent<Image>().enabled = true;
 
         }
         if (Input.GetMouseButtonUp(1) || (padState_.Triggers.Left <= 0.7f))
         {
             Debug.Log("オフ");
-            //GameObject.Find("Reticle").GetComponent<Image>().enabled = false;
         }
-        //SoundManager.GetInstance.PlayBGM("A");
     }
 
     void FixedUpdate()

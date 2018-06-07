@@ -16,6 +16,6 @@ public class BGMManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        SoundManager.GetInstance.PlayBGM("A");
+        //SoundManager.GetInstance.PlayBGM("A");
 	}
 }
