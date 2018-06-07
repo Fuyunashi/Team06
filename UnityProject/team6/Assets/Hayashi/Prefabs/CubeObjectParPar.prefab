@@ -182,3 +182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}

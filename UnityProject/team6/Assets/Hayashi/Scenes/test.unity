@@ -750,6 +750,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
 --- !u!1001 &761062812
 Prefab:
   m_ObjectHideFlags: 0
@@ -1163,6 +1169,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
 --- !u!1 &1057706965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,6 +1864,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
 --- !u!1 &1540884603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2386,6 +2404,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
 --- !u!4 &1878993053 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: fccd8e251d698f7449ed9aca4bacc50e, type: 3}
@@ -2650,3 +2674,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
+  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+    type: 2}
