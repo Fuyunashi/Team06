@@ -188,7 +188,6 @@ GameObject:
   - component: {fileID: 1356220500}
   - component: {fileID: 1356220499}
   - component: {fileID: 1356220498}
-  - component: {fileID: 1356220497}
   m_Layer: 0
   m_Name: SubCamera
   m_TagString: Untagged
@@ -196,13 +195,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1356220497
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1356220496}
-  m_Enabled: 1
 --- !u!124 &1356220498
 Behaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +226,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: e3c368ba6b89f3640b9a9ca4f5a667bf, type: 2}
   m_TargetDisplay: 0
@@ -253,7 +245,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1356220496}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.085415, y: 22.217808, z: -1.5084661}
+  m_LocalPosition: {x: 0, y: 5.7, z: -15.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

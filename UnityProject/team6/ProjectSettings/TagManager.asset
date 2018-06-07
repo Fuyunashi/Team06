@@ -13,6 +13,27 @@ TagManager:
   - W_Enemy
   - GravityObject
   - GravityObj
+  - Stage8
+  - Stage11
+  - Stage9
+  - Tutrial1
+  - Stage4
+  - Stage18
+  - Stage7
+  - Satge13
+  - Stage2
+  - Stage1
+  - Stage6
+  - Stage12
+  - Tutrial2
+  - Stage5
+  - Stage15
+  - Stage14
+  - Stage3
+  - Stage17
+  - Stage10
+  - TitleRoomCamera
+  - Stage16
   layers:
   - Default
   - TransparentFX
@@ -25,7 +46,7 @@ TagManager:
   - Player
   - Bullet
   - Wall
-  - 
+  - Production
   - 
   - 
   - 

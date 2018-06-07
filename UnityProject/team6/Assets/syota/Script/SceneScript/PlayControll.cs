@@ -26,7 +26,6 @@ public class PlayControll : MonoBehaviour
     GameObject obj_portal;
     DistortPortal distortPortal;
 
-
     PouseSelect pouseSelect;
     int pouseCount = 3;
     int pouseSelectIndex = 0;
@@ -52,28 +51,37 @@ public class PlayControll : MonoBehaviour
         }
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
+        //インプット関連
+
+
 
         if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
         {
-            Debug.Log("ポータル時間" + distortPortal.portalTime);
+            
+            sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
             distortPortal.PortalFlag = true;
+            changeSceneFrag = true;
+
         }
         //ポウズ中の処理
         if (sceneControll.PuseFrag)
-        {
-            Debug.Log("次のステージは：" + (PouseSelect)pouseSelectIndex);
-            Debug.Log("ポータル時間" + distortPortal.portalTime);
+        {           
             PouseOperation();
         }
-        if (distortPortal.portalTime <= 0)
+        if (distortPortal.portalTime <= 0 && changeSceneFrag)
         {
+            sceneControll.NextScene = SceneName.PlayCurrentScene;
+            sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
+            sceneControll.CurrentStage = sceneControll.CurrentStage + 1;
+            changeSceneFrag = false;
         }
 
     }
-
+    /// <summary>
+    /// ポウズ中に行うシーン選択
+    /// </summary>
     private void PouseOperation()
     {
-
         if (prevState_.DPad.Up == ButtonState.Released && padState_.DPad.Up == ButtonState.Pressed)
         {
             pouseSelectIndex--;
