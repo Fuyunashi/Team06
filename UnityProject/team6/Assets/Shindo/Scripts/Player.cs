@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
 
             //進行方向を向く
             var cameraForward = Vector3.Scale(camera_.transform.forward, new Vector3(1, 0, 1)).normalized;
-            Vector3 direction = cameraForward * Input.GetAxis("Vertical") + Camera.main.transform.right * Input.GetAxis("Horizontal");
+            Vector3 direction = cameraForward * Input.GetAxis("Vertical") + camera_.transform.right * Input.GetAxis("Horizontal");
 
             //方向キーの入力量を計測
             if (direction.magnitude > 0.01f)
