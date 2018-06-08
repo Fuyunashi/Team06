@@ -239,15 +239,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4435036070339272, guid: 324db6f5ab3ba694e902b61f6fb3fb9b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.0141914
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4435036070339272, guid: 324db6f5ab3ba694e902b61f6fb3fb9b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4435036070339272, guid: 324db6f5ab3ba694e902b61f6fb3fb9b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -15.55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4435036070339272, guid: 324db6f5ab3ba694e902b61f6fb3fb9b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -661,7 +661,7 @@ MonoBehaviour:
   scanLineTail: 2
   scanLineSpeed: 0
   surveillanceCameraOn: 0
-  selectCamera: 1
+  selectCamera: 0
 --- !u!1001 &1681898155
 Prefab:
   m_ObjectHideFlags: 0

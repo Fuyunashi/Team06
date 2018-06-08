@@ -114,24 +114,21 @@ public class PlayControll : MonoBehaviour
                     //セレクトシーンへ戻る
                     case 2:
                         //ノイズが行われてたらシーン移行フラグを入れる
-                        if (crtNoise.CRTFlag)
-                            changeSceneFrag = true;
+                        crtNoise.CRTFlag = true;
                         changeSceneFrag = true;
                         Time.timeScale = 1;
                         sceneControll.PuseFrag = false;
-                       
                         break;
                 }
             }
 
             //シーンのフラグが入り、ノイズが終わった報告があったらしーんを移行する
-            if (!crtNoise.CRTFlag && changeSceneFrag)
-            {
-                sceneControll.NextScene = SceneName.SelectScene;
-                sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
-                changeSceneFrag = false;
-
-            }
+        }
+        if (!crtNoise.CRTFlag && changeSceneFrag)
+        {
+            sceneControll.NextScene = SceneName.SelectScene;
+            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+            changeSceneFrag = false;
         }
         if (distortPortal.portalTime <= 0 && changeSceneFrag)
         {
