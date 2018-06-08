@@ -33,13 +33,22 @@ public class ObjectController : MonoBehaviour
         isHitObj = false;
         basePosition = transform.parent.transform.parent.position;
         baseScale = transform.parent.localScale;
+        shoter = null;
 
-        shoter = GameObject.FindGameObjectWithTag("Player").GetComponent<Shooter>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            if (shoter == null)
+            {
+                shoter = GameObject.FindGameObjectWithTag("Player").GetComponent<Shooter>();
+            }
+        }
+        else shoter = null;
+
         if (isPositionMove == true)
         {
             PositionMove();
@@ -106,14 +115,14 @@ public class ObjectController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Vector3 hitPos=Vector3.zero;
-        foreach(ContactPoint point in collision.contacts)
+        Vector3 hitPos = Vector3.zero;
+        foreach (ContactPoint point in collision.contacts)
         {
             hitPos = point.point;
         }
         if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet")
         {
-            m_destroyEffect = Instantiate(destroyEffectPref, hitPos,Quaternion.identity);
+            m_destroyEffect = Instantiate(destroyEffectPref, hitPos, Quaternion.identity);
             Destroy(m_destroyEffect, 1.0f);
             SoundManager.GetInstance.PlaySE("Break_SE");
             isHitObj = true;
@@ -130,7 +139,7 @@ public class ObjectController : MonoBehaviour
                   SoundManager.GetInstance.PlaySE("Born_SE");
               });
         }
-        else if(collision.gameObject.tag!="Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "ChangeObject")
+        else if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "ChangeObject")
         {
             m_crashEffect = Instantiate(crashEffectPref, hitPos, Quaternion.identity);
             Destroy(m_crashEffect, 1.0f);

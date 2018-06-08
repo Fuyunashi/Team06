@@ -36,6 +36,10 @@ public class Shooter : MonoBehaviour
     private GamePadState prevState;
 
     [SerializeField]
+    private Material gunMat;
+    [SerializeField]
+    private Material laserPointMat;
+    [SerializeField]
     private Transform shotPos;    //発射位置
 
     [SerializeField]
@@ -87,6 +91,7 @@ public class Shooter : MonoBehaviour
     void Start()
     {
         //各変数の初期化
+
         prevOriginObj = null;
         originObject = null;
         targetObject = null;
@@ -152,6 +157,7 @@ public class Shooter : MonoBehaviour
         }
         if (isShot == true && (padState.Triggers.Right <= 0.3f || Input.GetMouseButtonUp(0))) isShot = false;
 
+        GunMaterialSet();
         laserPointer.SetPosition(0, laserPointer.transform.position);
         GetObject_Ray();
         if (isRayHit == true)
@@ -504,6 +510,40 @@ public class Shooter : MonoBehaviour
                 changeType = ChangeType.Position;
                 changeText.text = "change:" + changeType.ToString();
                 break;
+        }
+    }
+    //銃の各タイプごとの色の設定処理
+    private void GunMaterialSet()
+    {
+        switch (shotType)
+        {
+            case ShotType.Getting:
+                gunMat.SetColor("_EmissionColor", Color.white);
+                break;
+            case ShotType.Setting:
+                switch (axisType)
+                {
+                    case AxisType.X:
+                        gunMat.SetColor("_EmissionColor", Color.red);
+                        break;
+                    case AxisType.Y:
+                        gunMat.SetColor("_EmissionColor", Color.blue);
+                        break;
+                    case AxisType.Z:
+                        gunMat.SetColor("_EmissionColor", Color.green);
+                        break;
+                }
+                break;
+        }
+        switch (changeType)
+        {
+            case ChangeType.Position:
+                laserPointMat.SetColor("_EmissionColor", Color.yellow);
+                break;
+            case ChangeType.Scale:
+                laserPointMat.SetColor("_EmissionColor", new Color(1.78f,0.16f,2f));
+                break;
+
         }
     }
 
