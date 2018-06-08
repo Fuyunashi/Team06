@@ -23,6 +23,8 @@ public class TitleControll : MonoBehaviour
     CRTnoise crtNoise;
     bool sceneChangeFrag;
 
+    public bool playerDeadFrag { get; set; }
+
     //string name;
     void Start()
     {
