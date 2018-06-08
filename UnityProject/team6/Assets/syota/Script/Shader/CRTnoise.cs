@@ -133,6 +133,8 @@ public class CRTnoise : MonoBehaviour
                 if (transform.tag == camera_name.ToString())
                 {
                     cameraName = (CameraName)camera_name;
+                    if (transform.tag == CameraName.TitleRoomCamera.ToString())
+                        CRTFlag = true;
                 }
             }
         }
@@ -198,6 +200,7 @@ public class CRTnoise : MonoBehaviour
         material.SetFloat("_ScanLineTail", scanLineTail);
         material.SetVector("_Offset", offset);
         material.SetFloat("_FragFloat", surveillanceCameraOn);
+
         //フラグがONになっている型のみノイズをかける
         if (CRTFlag)
         {
@@ -213,9 +216,9 @@ public class CRTnoise : MonoBehaviour
     /// </summary>
     private void TitleCameraNoise()
     {
-        if (NoiseTime % 20 == 0)
+        if (NoiseTime % 10 == 0)
         {
-            if (NoiseTime > 50)
+            if (NoiseTime > 70)
             {
                 ScanLineTail = 0f;
                 CRTFlag = false;
@@ -235,7 +238,7 @@ public class CRTnoise : MonoBehaviour
     /// </summary>
     private void NonSelectCamera()
     {
-        //Debug.Log("シーンはこれ：" + cameraName);
+        Debug.Log("シーンはこれ：" + cameraName);
         surveillanceCameraOn = 1;
         if (NoiseTime % 30 == 0)
         {

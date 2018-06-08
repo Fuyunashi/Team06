@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ChildSceneCameraControll : MonoBehaviour
 {
+
     [SerializeField]
     GameObject MainCam;
     [SerializeField]
@@ -12,17 +13,25 @@ public class ChildSceneCameraControll : MonoBehaviour
 
     GameObject scene;
     SceneControll sceneControll;
+
     void Start()
     {
-        //アクティブ出ないシーンはカメラを着る
+        //アクティブでないシーンはカメラを着る
         MainCam.SetActive(false);
         scene = GameObject.Find("SceneController");
         sceneControll = scene.GetComponent<SceneControll>();
-        
+
+
         //現在のステージと自身が存在するシーンが異なればレイヤー設定
-        if (GetSceneContainObject(gameObject) == sceneControll.CurrentStage.ToString() + "ChildScene")
+        if (GetSceneContainObject(gameObject) != sceneControll.CurrentStage.ToString() + "ChildScene")
         {
-            stageObj.gameObject.layer = LayerMask.NameToLayer("Production");
+            List<GameObject> list = ChildLayer.GetAll(stageObj);
+            foreach (var childTransform in list)
+                childTransform.gameObject.layer = LayerMask.NameToLayer("Production");
+            //foreach (Transform childTransform in stageObj.transform)
+            //{
+            //    childTransform.gameObject.layer = LayerMask.NameToLayer("Production");
+            //}
         }
         Debug.Log("今俺がいるシーンは：" + GetSceneContainObject(gameObject));
     }
@@ -46,4 +55,7 @@ public class ChildSceneCameraControll : MonoBehaviour
         }
         return null;
     }
+
+
+
 }

@@ -11,7 +11,8 @@ public class ChangeCamera : MonoBehaviour
 
     GameObject obj_stageInstructs;
     StageInstructs stageInstructs;
-
+    //最初のTVから移動するカウントダウン
+    float f_move_time;
     void Start()
     {
         obj_stageInstructs = GameObject.Find("StageConfiguration");
@@ -22,11 +23,17 @@ public class ChangeCamera : MonoBehaviour
             v_camrea[i].Priority = 9;
         }
         v_camrea[0].Priority = 11;
+        stageInstructs.CurrentStage = NextStage.Tutrial1;
+        f_move_time = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        f_move_time -= Time.deltaTime;
+        if (f_move_time >= 0) return;
+
+
         if ((int)stageInstructs.CurrentStage >= 0 && (int)stageInstructs.CurrentStage <= 1)
         {
             v_camrea[1].Priority = 12;

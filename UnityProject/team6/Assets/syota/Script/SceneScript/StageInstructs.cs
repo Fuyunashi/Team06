@@ -37,9 +37,7 @@ public class StageInstructs : MonoBehaviour
 
   
     void Start()
-    {
-        
-        // CurrentStage = NextStage.Tutrial1;
+    {       
     }
 
     void Update()
@@ -52,7 +50,7 @@ public class StageInstructs : MonoBehaviour
         }
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
-
+        //Xinput関連
 
 
         //Debug.Log("次のシーン：" + CurrentStage);
