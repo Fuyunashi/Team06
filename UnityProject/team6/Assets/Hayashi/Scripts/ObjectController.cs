@@ -117,6 +117,7 @@ public class ObjectController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (SceneManager.GetActiveScene().name == SceneName.SelectScene.ToString()) return;
         Vector3 hitPos = Vector3.zero;
         foreach (ContactPoint point in collision.contacts)
         {
