@@ -10,6 +10,8 @@ public class ChildSceneCameraControll : MonoBehaviour
     GameObject MainCam;
     [SerializeField]
     GameObject stageObj;
+    [SerializeField]
+    GameObject[] light;
 
     GameObject scene;
     SceneControll sceneControll;
@@ -32,6 +34,11 @@ public class ChildSceneCameraControll : MonoBehaviour
             //{
             //    childTransform.gameObject.layer = LayerMask.NameToLayer("Production");
             //}
+        }
+        if (SceneManager.GetActiveScene().name == SceneName.SelectScene.ToString())
+        {
+            foreach (var light_ in light)
+                light_.SetActive(false);
         }
         //Debug.Log("今俺がいるシーンは：" + GetSceneContainObject(gameObject));
     }
