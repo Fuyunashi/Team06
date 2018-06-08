@@ -44,7 +44,7 @@ public class TitleCameraMove : MonoBehaviour
     {
         if (Input.GetButtonDown("Bbutton"))
         {
-            Debug.Log("aaaa");
+            //Debug.Log("aaaa");
             sceneChangeFlag = true;
         }
 

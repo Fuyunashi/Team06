@@ -50,10 +50,7 @@ public class Player : MonoBehaviour
     private int randomRange_ = 3;
 
     private bool isJumping_ = false;
-
-    SceneControll sceneControll_;
-    GameObject obj_sceneControll_;
-
+    
     //Xinput関連
     private bool playerInputSet_ = false;
     private PlayerIndex playerIndex_;
@@ -67,8 +64,7 @@ public class Player : MonoBehaviour
         velocity_ = Vector3.zero;
         isGround_ = true;
         rb_ = GetComponent<Rigidbody>();
-        sceneControll_ = obj_sceneControll_.GetComponent<SceneControll>();
-
+        
     }
 
     // Update is called once per frame
@@ -185,6 +181,7 @@ public class Player : MonoBehaviour
                 {
                     Debug.Log("死にました");
                     SoundManager.GetInstance.PlaySE("FallDead_SE");
+                    
                     Destroy(gameObject);
                 }
                 
@@ -201,6 +198,7 @@ public class Player : MonoBehaviour
         else
         {
             deathTimer_ = 0.0f;
+            
         }
 
         if (isJumping_ && isGround_)

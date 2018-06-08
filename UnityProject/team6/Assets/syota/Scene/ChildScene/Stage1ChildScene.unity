@@ -221,6 +221,150 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114659858774580038, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: crashEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114542772007155254, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: crashEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114909299225981296, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: crashEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114998038546318636, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: crashEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114573981714962124, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: crashEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114204569011951162, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: crashEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114241133484928446, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: crashEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114756304021956420, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: crashEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114659858774580038, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: destroyEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114542772007155254, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: destroyEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114909299225981296, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: destroyEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114998038546318636, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: destroyEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114573981714962124, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: destroyEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114204569011951162, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: destroyEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114241133484928446, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: destroyEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114756304021956420, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: destroyEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114659858774580038, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: getSetEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114542772007155254, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: getSetEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114909299225981296, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: getSetEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114998038546318636, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: getSetEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114573981714962124, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: getSetEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114204569011951162, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: getSetEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114241133484928446, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: getSetEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
+    - target: {fileID: 114756304021956420, guid: 125479ccd28a62342ad559819e81ce43,
+        type: 2}
+      propertyPath: getSetEffectPref
+      value: 
+      objectReference: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 125479ccd28a62342ad559819e81ce43, type: 2}
   m_IsPrefabParent: 0
