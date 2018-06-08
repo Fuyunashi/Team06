@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
     private int randomRange_ = 3;
 
     private bool isJumping_ = false;
+
+    public Camera camera_;
     
     //Xinput関連
     private bool playerInputSet_ = false;
@@ -106,7 +108,7 @@ public class Player : MonoBehaviour
             }
 
             //進行方向を向く
-            var cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+            var cameraForward = Vector3.Scale(camera_.transform.forward, new Vector3(1, 0, 1)).normalized;
             Vector3 direction = cameraForward * Input.GetAxis("Vertical") + Camera.main.transform.right * Input.GetAxis("Horizontal");
 
             //方向キーの入力量を計測
