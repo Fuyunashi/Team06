@@ -119,8 +119,7 @@ public class PlayControll : MonoBehaviour
                         changeSceneFrag = true;
                         Time.timeScale = 1;
                         sceneControll.PuseFrag = false;
-                        sceneControll.NextScene = SceneName.SelectScene;
-                        sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+                       
                         break;
                 }
             }
