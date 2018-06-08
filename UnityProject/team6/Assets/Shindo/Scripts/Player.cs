@@ -49,6 +49,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int randomRange_ = 3;
 
+    private bool isJumping_ = false;
+
+    SceneControll sceneControll_;
+    GameObject obj_sceneControll_;
+
     //Xinput関連
     private bool playerInputSet_ = false;
     private PlayerIndex playerIndex_;
@@ -62,8 +67,8 @@ public class Player : MonoBehaviour
         velocity_ = Vector3.zero;
         isGround_ = true;
         rb_ = GetComponent<Rigidbody>();
+        sceneControll_ = obj_sceneControll_.GetComponent<SceneControll>();
 
-        
     }
 
     // Update is called once per frame
@@ -79,7 +84,7 @@ public class Player : MonoBehaviour
         padState_ = GamePad.GetState(playerIndex_);
 
         RaycastHit hit;
-        if (Physics.SphereCast(charaRay.transform.position, 0.2f, -transform.up, out hit, 0.2f, LayerMask.GetMask("Wall")))
+        if (Physics.SphereCast(charaRay.transform.position, 0.2f, -transform.up, out hit, 0.2f, LayerMask.GetMask("Wall","Production")))
         {
             Debug.Log("当たってます");
             isGround_ = true;
@@ -164,22 +169,25 @@ public class Player : MonoBehaviour
         //死亡処理
         if (!isGround_)
         {
-            Debug.Log("あと" + deathTimer_ + "で死にます");
+            //Debug.Log("あと" + deathTimer_ + "で死にます");
             deathTimer_ += Time.deltaTime;
             //高さで死ぬ処理
             fallPosition_ = Mathf.Max(fallPosition_, transform.position.y);
+            isJumping_ = true;
 
             //落下したら死ぬ
             if (Physics.Linecast(charaRay.position + new Vector3(0f, 0.4f, 0f), Vector3.down * deadDistance_, LayerMask.GetMask("Wall")))
             {
                 distance_ = fallPosition_ - transform.position.y;
-                Debug.Log(distance_);
+                
+                //Debug.Log(distance_);
                 if (distance_ >= deadDistance_)
                 {
                     Debug.Log("死にました");
                     SoundManager.GetInstance.PlaySE("FallDead_SE");
                     Destroy(gameObject);
                 }
+                
             }
             //時間がたったら死ぬ
             if (deathTimer_ >= deathTime_)
@@ -193,6 +201,16 @@ public class Player : MonoBehaviour
         else
         {
             deathTimer_ = 0.0f;
+        }
+
+        if (isJumping_ && isGround_)
+        {
+            Debug.Log("来てます");
+            SoundManager.GetInstance.PlaySE("Landing_SE");
+        }
+        else
+        {
+            isJumping_ = false;
         }
 
         //キー入力
@@ -214,7 +232,7 @@ public class Player : MonoBehaviour
          rb_.MovePosition(transform.position + velocity_ * Time.deltaTime);
          
     }
-
+    
     void OnDrawGizmos()
     {
         RaycastHit hit;
@@ -232,6 +250,7 @@ public class Player : MonoBehaviour
             Gizmos.DrawRay(transform.position, -transform.up * 100);
         }
     }
+
 
     
 }
