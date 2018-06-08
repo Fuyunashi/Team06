@@ -531,6 +531,7 @@ public class Shooter : MonoBehaviour
                     if (prevOriginObj != originObject)
                     {
                         originObject.GetComponent<ObjectController>().SetOutline();
+                        originObject.GetComponent<ObjectController>().GetSetEffect();
                         Destroy(objVal_origin);
                         objVal_origin = Instantiate(objValPref,
                                                         new Vector3(
@@ -554,6 +555,7 @@ public class Shooter : MonoBehaviour
                         //転置するオブジェクトに当たったオブジェクトを格納                   
                         targetObject = hitObject.transform.gameObject;
                         targetObject.GetComponent<ObjectController>().SetOutline();
+                        targetObject.GetComponent<ObjectController>().GetSetEffect();
                         Destroy(objVal_target);
                         objVal_target = Instantiate(objValPref,
                                                      new Vector3(

@@ -52,6 +52,7 @@ public class SwichTest : MonoBehaviour
                 m_rote_angle += 0.8f;
             //フラグをONにする
             m_rote_flag = true;
+            SoundManager.GetInstance.PlaySE("Switch_SE");
 
             Debug.Log("hit");
         }
@@ -66,7 +67,16 @@ public class SwichTest : MonoBehaviour
         if (other.gameObject.CompareTag("SwichOn") || other.gameObject.CompareTag("Player"))
         {
             m_rote_flag = false;
+            SoundManager.GetInstance.PlaySE("S.Stop_SE");
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        //if (other.collider.)
+        //{
+
+        //}
     }
 
     void ObjectRotato()
@@ -79,12 +89,15 @@ public class SwichTest : MonoBehaviour
             {
                 case AxisOfRotation.x:
                     obj.m_rotate_obj.transform.rotation = Quaternion.Euler(m_rote_angle, .0f, .0f);
+                    SoundManager.GetInstance.PlaySE("S.Move");
                     break;
                 case AxisOfRotation.y:
                     obj.m_rotate_obj.transform.rotation = Quaternion.Euler(.0f, m_rote_angle, .0f);
+                    SoundManager.GetInstance.PlaySE("S.Move");
                     break;
                 case AxisOfRotation.z:
                     obj.m_rotate_obj.transform.rotation = Quaternion.Euler(.0f, .0f, m_rote_angle);
+                    SoundManager.GetInstance.PlaySE("S.Move");
                     break;
                 default:
                     return;
