@@ -238,7 +238,7 @@ public class CRTnoise : MonoBehaviour
     /// </summary>
     private void NonSelectCamera()
     {
-        Debug.Log("シーンはこれ：" + cameraName);
+        //Debug.Log("シーンはこれ：" + cameraName);
         surveillanceCameraOn = 1;
         if (NoiseTime % 30 == 0)
         {
