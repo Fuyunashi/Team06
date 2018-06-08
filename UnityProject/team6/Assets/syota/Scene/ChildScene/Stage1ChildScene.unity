@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &339826885
 Light:
   m_ObjectHideFlags: 0
@@ -503,6 +503,11 @@ Prefab:
       propertyPath: stageObj
       value: 
       objectReference: {fileID: 568036610}
+    - target: {fileID: 114562743830435870, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.data[0]
+      value: 
+      objectReference: {fileID: 339826884}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
   m_IsPrefabParent: 0

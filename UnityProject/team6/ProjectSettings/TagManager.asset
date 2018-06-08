@@ -34,6 +34,8 @@ TagManager:
   - Stage10
   - TitleRoomCamera
   - Stage16
+  - TitleCamera
+  - PlayCamera
   layers:
   - Default
   - TransparentFX

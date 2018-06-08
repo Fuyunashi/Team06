@@ -29,6 +29,9 @@ public class PlayControll : MonoBehaviour
     GameObject obj_portal;
     DistortPortal distortPortal;
 
+    GameObject obj_crtNoise;
+    CRTnoise crtNoise;
+
     PouseSelect pouseSelect;
     int pouseCount = 3;
     int pouseSelectIndex = 0;
@@ -40,8 +43,10 @@ public class PlayControll : MonoBehaviour
     {
         obj_sceneControll = GameObject.Find("SceneController");
         sceneControll = obj_sceneControll.GetComponent<SceneControll>();
-        obj_portal = GameObject.Find("MainCamera");
+        obj_portal = GameObject.Find("PlayCamera");
         distortPortal = obj_portal.GetComponent<DistortPortal>();
+        obj_crtNoise = GameObject.Find("PlayCamera");
+        crtNoise = obj_crtNoise.GetComponent<CRTnoise>();
 
         changeSceneFrag = false;
         playerDeadFrag = false;
@@ -108,6 +113,17 @@ public class PlayControll : MonoBehaviour
                         break;
                     //セレクトシーンへ戻る
                     case 2:
+                        //ノイズが行われてたらシーン移行フラグを入れる
+                        if (crtNoise.CRTFlag)
+                            changeSceneFrag = true;
+                        //シーンのフラグが入り、ノイズが終わった報告があったらしーんを移行する
+                        if (!crtNoise.CRTFlag && changeSceneFrag)
+                        {
+                            sceneControll.NextScene = SceneName.SelectScene;
+                            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+                            changeSceneFrag = false;
+
+                        }
                         Time.timeScale = 1;
                         sceneControll.PuseFrag = false;
                         sceneControll.NextScene = SceneName.SelectScene;
