@@ -1,0 +1,16 @@
+１，syota?Prefab?「TV」のオブジェクトをセレクトシーンに配置
+  (チュートリアル２つとステージ１８個ぶん)
+
+2,syota?RenderTexture?SelectRenderTexの中にあるstage1からstage18,Tutorial1,2をTVの子オブジェクトである、stageObj
+にそれぞれ付ける(テレビに映るマテリアルになるため、位置を間違えないように注意！)
+
+3,すでに配置されているSelectCanvasesの子オブジェクトのキャンバスにそれぞれのステージに合わせて移したい画像を貼り付ける
+
+4,すでに配置されているCinemaVirtualの子オブジェクトとして存在する１から５の「CM vcam1」を「TV」の配置に合わせてカメラを移す。
+＊カメラを確認する際はInsoectorの Cinemachine Virtual Camera(Script）の「Solo」というのを押すとそのカメラに切り替わるのでそれを使い確認ください
+
+１ステージまたはタイトルからセレクトに移動する際のひとつ前のシーンを移すbeforObject（すでに配置されている）
+２Tutorial1、Tutoroal2を写すカメラ
+３、ステージ１から６までを写すカメラ
+４，ステージ７から１２まで写すカメラ
+５ステージ１３から１８まで写すカメラ
