@@ -21,6 +21,9 @@ public class PlayControll : MonoBehaviour
     GameObject MianCam;
     GameObject SubCam;
 
+    [SerializeField]
+    GameObject portalPosObj;
+
     GameObject obj_sceneControll;
     SceneControll sceneControll;
     GameObject obj_portal;
@@ -57,6 +60,7 @@ public class PlayControll : MonoBehaviour
         //インプット関連
 
 
+
         if (!sceneControll.PuseFrag)
             PuseDisposal();
 
@@ -65,7 +69,7 @@ public class PlayControll : MonoBehaviour
         {
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
             {
-
+                distortPortal.portalPos = portalPosObj.transform.position;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
                 distortPortal.PortalFlag = true;
                 changeSceneFrag = true;
@@ -90,6 +94,9 @@ public class PlayControll : MonoBehaviour
                 {
                     //最初からやり直す
                     case 0:
+                        Debug.Log("リスタート白や：" + (PouseSelect)pouseSelectIndex);
+                        sceneControll.PuseFrag = false;
+                        Time.timeScale = 1;
                         sceneControll.NextScene = SceneName.PlayCurrentScene;
                         sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
                         break;
