@@ -565,9 +565,10 @@ GameObject:
   - component: {fileID: 1422600849}
   - component: {fileID: 1422600853}
   - component: {fileID: 1422600854}
+  - component: {fileID: 1422600855}
   m_Layer: 0
-  m_Name: MainCamera
-  m_TagString: MainCamera
+  m_Name: PlayCamera
+  m_TagString: PlayCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -666,6 +667,28 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 620910a689729564d9ea1f0bb58ab764, type: 2}
   text: {fileID: 8400000, guid: e3c368ba6b89f3640b9a9ca4f5a667bf, type: 2}
   radius: 1
+--- !u!114 &1422600855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422600848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1befa23244d376942892821fe94f71ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
+  noiseX: 0
+  rgbNoise: 0
+  sinNoiseScale: 0
+  sinNoiseWidth: 0
+  sinNoiseOffset: 0
+  offset: {x: 0, y: 0}
+  scanLineTail: 2
+  scanLineSpeed: 0
+  surveillanceCameraOn: 0
+  selectCamera: 1
 --- !u!1001 &1681898155
 Prefab:
   m_ObjectHideFlags: 0

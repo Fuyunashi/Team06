@@ -39,6 +39,7 @@ public class CRTnoise : MonoBehaviour
     {
         TitleCamera,
         TitleRoomCamera,
+        PlayCamera,
         None,
     }
     //ノイズをかけるマテリル（今回はカメラをRenderTextureを使う）
@@ -113,7 +114,7 @@ public class CRTnoise : MonoBehaviour
         //次のステージが何を選ばれているかを取得
         //ただ、タイトル画面ではステージ選択を行うスクリプトは必要ないので振り分け
         string name = SceneManager.GetActiveScene().name;
-        if (selectCamera)
+        if (selectCamera && transform.tag != CameraName.PlayCamera.ToString())
         {
             //Debug.Log("はいるなよ：" + selectCamera);
             obj = GameObject.Find("StageConfiguration");
