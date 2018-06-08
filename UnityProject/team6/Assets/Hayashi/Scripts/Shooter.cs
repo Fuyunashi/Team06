@@ -542,6 +542,7 @@ public class Shooter : MonoBehaviour
                                                         Quaternion.identity
                                                        );
                         objVal_origin.GetComponent<ValueDrawerController>().GetDrawBaseObj(originObject.transform.parent.gameObject);
+                        
                         //取得するオブジェクトの値を取得
                         GetOriginAxisLength();
                         isOriginGet = true;
