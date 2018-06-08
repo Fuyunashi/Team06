@@ -5,7 +5,22 @@ licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gunMat: {fileID: 2100000, guid: 3273360bbb61cb14f9e044f7f7a8ee84, type: 2}
+  - laserPointMat: {fileID: 2100000, guid: 27971dbe6c1efa249ab0ec1f6c73a148, type: 2}
+  - shotPos: {instanceID: 0}
+  - axisText: {instanceID: 0}
+  - changeText: {instanceID: 0}
+  - shotText: {instanceID: 0}
+  - objValPref_ray: {fileID: 1684843398455916, guid: 2ca560a342ea3794ca544a3adb70ec38,
+      type: 2}
+  - objValPref: {fileID: 1101271737918970, guid: b69917c54d3c48443867554b40707d06,
+      type: 2}
+  - drawerCameraPref: {fileID: 1659298710910002, guid: 32708adcf4d9099469ad9a66e6c98015,
+      type: 2}
+  - laserPointer: {instanceID: 0}
+  - estimateObjPrefab: {fileID: 1238123710310864, guid: c522dd1512073f542812f79160595af6,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

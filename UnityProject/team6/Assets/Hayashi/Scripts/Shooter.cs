@@ -704,6 +704,7 @@ public class Shooter : MonoBehaviour
             objVal_origin.GetComponent<ValueDrawerController>().IsTween(true);
             LeanTween.move(objVal_origin, target.transform.parent.position + new Vector3(0, target.transform.localScale.y / 2 + 1.0f, 0), 1.0f).setOnComplete(() =>
             {
+                LeanTween.scale(objVal_origin, new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
                 LeanTween.moveY(objVal_origin, objVal_origin.transform.position.y - 1.0f, 0.5f).setOnComplete(() =>
                 {
                     Destroy(objVal_origin);
