@@ -37,7 +37,7 @@ public class PlayControll : MonoBehaviour
     int pouseSelectIndex = 0;
     bool changeSceneFrag;
 
-    public bool playerDeadFrag;
+    public bool playerDeadFrag { get; set; }
 
     void Start()
     {
