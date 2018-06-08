@@ -85,7 +85,7 @@ public class SceneControll : MonoBehaviour
         //常にシーン遷移を行うか判断
         SceneChange(NextScene);
 
-        PuseDisposal();
+        //PuseDisposal();
     }
     //シーンを遷移する際に行う処理
     void SceneChange(SceneName scene)
@@ -145,26 +145,6 @@ public class SceneControll : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// ポーズ処理
-    /// </summary>
-    private void PuseDisposal()
-    {
-        if (CurrentScene == SceneName.PlayScene || CurrentScene == SceneName.TutorialScene)
-        {
-            if (prevState_.Buttons.Start == ButtonState.Released && padState_.Buttons.Start == ButtonState.Pressed && !PuseFrag)
-            {
-                Debug.Log("ポウズ");
-                Time.timeScale = 0;
-                PuseFrag = true;
-                return;
-            }
-            if (prevState_.Buttons.Start == ButtonState.Released && padState_.Buttons.Start == ButtonState.Pressed && PuseFrag)
-            {
-                Time.timeScale = 1;
-                PuseFrag = false;
-            }
-        }
-    }
+    
 }
 

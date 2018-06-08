@@ -45,14 +45,19 @@ public class TitleControll : MonoBehaviour
     void Update()
     {
         sceneChangeIcon = GameObject.Find("SceneChangeIcon");
-      
-                
+
+
         //ノイズが行われてたらシーン移行フラグを入れる
         if (crtNoise.CRTFlag)
             sceneChangeFrag = true;
         //シーンのフラグが入り、ノイズが終わった報告があったらしーんを移行する
         if (!crtNoise.CRTFlag && sceneChangeFrag)
+        {
             sceneControll.NextScene = SceneName.SelectScene;
+            sceneControll.AddToScene.Add(SceneName.TitleRoom.ToString());
+            sceneChangeFrag = false;
+
+        }
     }
     private void AddChildScene()
     {
