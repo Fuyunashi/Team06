@@ -148,7 +148,7 @@ public class CRTnoise : MonoBehaviour
                 //ステージを選ぶ際と同じ型の列挙型を指定している
                 if (transform.tag == next_stage.ToString())
                 {
-                    Debug.Log("これが俺がタグの名前だ：" + nextStage);
+                    //Debug.Log("これが俺がタグの名前だ：" + nextStage);
                     nextStage = (NextStage)next_stage;
 
                 }
@@ -163,12 +163,15 @@ public class CRTnoise : MonoBehaviour
         //演出用のカメラはフラグを用意して指示をもらう
         if (CRTFlag)
         {
+            Debug.Log("ノイズを起こすぞ：" + NoiseTime);
             switch (cameraName)
             {
                 //タイトルシーンで使う
                 case CameraName.TitleCamera: TitleCameraNoise(); break;
                 //セレクトシーンのタイトル画面を写すTV
                 case CameraName.TitleRoomCamera: NonSelectCamera(); break;
+                //タイトルシーンで使う
+                case CameraName.PlayCamera: TitleCameraNoise(); break;
             }
         }
         //nextStageがNoneの場合演出用のカメラなので下の処理は行わなくて良い

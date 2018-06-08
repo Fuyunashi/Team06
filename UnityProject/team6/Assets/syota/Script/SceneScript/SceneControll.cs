@@ -109,7 +109,7 @@ public class SceneControll : MonoBehaviour
                 //シーンが切り替わったら現在のシーンを更新
                 CurrentScene = scene;
 
-                Debug.Log("シーン切替時：次のシーンだお：" + scene);
+                //Debug.Log("シーン切替時：次のシーンだお：" + scene);
             }
         }
         if (AddToScene.Count != 0)
