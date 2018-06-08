@@ -33,7 +33,7 @@ public class ChildSceneCameraControll : MonoBehaviour
             //    childTransform.gameObject.layer = LayerMask.NameToLayer("Production");
             //}
         }
-        Debug.Log("今俺がいるシーンは：" + GetSceneContainObject(gameObject));
+        //Debug.Log("今俺がいるシーンは：" + GetSceneContainObject(gameObject));
     }
 
     void Update()

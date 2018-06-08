@@ -31,6 +31,8 @@ public class PlayControll : MonoBehaviour
     int pouseSelectIndex = 0;
     bool changeSceneFrag;
 
+    bool playerDeadFrag;
+
     void Start()
     {
         obj_sceneControll = GameObject.Find("SceneController");
@@ -39,6 +41,7 @@ public class PlayControll : MonoBehaviour
         distortPortal = obj_portal.GetComponent<DistortPortal>();
 
         changeSceneFrag = false;
+        playerDeadFrag = false;
     }
 
     void Update()
@@ -62,11 +65,17 @@ public class PlayControll : MonoBehaviour
         {
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
             {
-               
+
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
                 distortPortal.PortalFlag = true;
                 changeSceneFrag = true;
             }
+        }
+        //プレイアーが死んだらリスタート
+        if (playerDeadFrag)
+        {
+            sceneControll.NextScene = SceneName.PlayCurrentScene;
+            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
         }
 
         //ポウズ中の処理
