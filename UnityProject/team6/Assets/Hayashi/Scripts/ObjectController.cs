@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement
 
 public class ObjectController : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class ObjectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == SceneName.SelectScene.ToString()) return;
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
             if (shoter == null)
