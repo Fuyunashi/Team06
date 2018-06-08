@@ -28,6 +28,7 @@ public class SelectControll : MonoBehaviour
     StageInstructs stageInstructs;
     //SceneName name;
     public bool ChangeSceneFrag;
+   
     void Start()
     {
         //シーン情報を取得
@@ -36,9 +37,8 @@ public class SelectControll : MonoBehaviour
         obj = GameObject.Find("StageConfiguration");
         stageInstructs = obj.GetComponent<StageInstructs>();
 
-        AddChildScene();
-
-        ChangeSceneFrag = false;
+        //AddChildScene();
+        
     }
 
     void Update()
@@ -82,9 +82,9 @@ public class SelectControll : MonoBehaviour
         //stageInstructs.CurrentStage;
     }
     //タイトルの部屋をテレビに映すために部屋のオブジェクトだけ持っているSceneをよぶ
-    private void AddChildScene()
-    {
-        sceneControll.AddToScene.Add(AddToScene.TitleRoom.ToString());
-    }
+    //private void AddChildScene()
+    //{
+    //    sceneControll.AddToScene.Add(AddToScene.TitleRoom.ToString());
+    //}
 }
 

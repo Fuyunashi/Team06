@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
-public class PlayControll : MonoBehaviour
-{
+public class TutorialControll : MonoBehaviour {
+
     enum PouseSelect
     {
         ToContinue,
@@ -81,7 +81,7 @@ public class PlayControll : MonoBehaviour
                 {
                     //最初からやり直す
                     case 0:
-                        sceneControll.NextScene = SceneName.PlayCurrentScene;
+                        sceneControll.NextScene = SceneName.TutorialCurrentScene;
                         sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
                         break;
                     //続きから始める
@@ -103,7 +103,7 @@ public class PlayControll : MonoBehaviour
         }
         if (distortPortal.portalTime <= 0 && changeSceneFrag)
         {
-            sceneControll.NextScene = SceneName.PlayCurrentScene;
+            sceneControll.NextScene = SceneName.TutorialCurrentScene;
             sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
             sceneControll.CurrentStage = sceneControll.CurrentStage + 1;
             changeSceneFrag = false;
