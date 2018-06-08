@@ -53,3 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCam: {fileID: 0}
   stageObj: {fileID: 0}
+  light:
+  - {fileID: 0}
