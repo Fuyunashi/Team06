@@ -21,6 +21,9 @@ public class TutorialControll : MonoBehaviour {
     GameObject MianCam;
     GameObject SubCam;
 
+    [SerializeField]
+    GameObject portalPosObj;
+
     GameObject obj_sceneControll;
     SceneControll sceneControll;
     GameObject obj_portal;
@@ -62,7 +65,7 @@ public class TutorialControll : MonoBehaviour {
         {
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
             {
-               
+                distortPortal.portalPos = portalPosObj.transform.position;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
                 distortPortal.PortalFlag = true;
                 changeSceneFrag = true;
