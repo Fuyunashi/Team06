@@ -73,10 +73,10 @@ public class SwichTest : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        //if (other.collider.)
-        //{
-
-        //}
+        if ((other.collider.CompareTag("rotateObj")) || (other.collider.CompareTag("ChangeObject")))
+        {
+            SoundManager.GetInstance.PlaySE("S.Hit_SE");
+        }
     }
 
     void ObjectRotato()
