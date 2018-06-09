@@ -4,6 +4,7 @@ using UnityEngine;
 using XInputDotNetPure;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -52,6 +53,11 @@ public class Player : MonoBehaviour
     private bool isJumping_ = false;
 
     public Camera camera_;
+
+    PlayControll playControll;
+    GameObject obj_playerContoroll_;
+    TutorialControll tutorialControll;
+    GameObject obj_tutorialControll_;
     
     //Xinput関連
     private bool playerInputSet_ = false;
@@ -62,6 +68,18 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //
+        if(SceneManager.GetActiveScene().name==SceneName.PlayScene.ToString())
+        {
+            obj_playerContoroll_ = GameObject.Find("PlayControll");
+            playControll = obj_playerContoroll_.GetComponent<PlayControll>();
+        }
+        else if(SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
+        {
+            obj_tutorialControll_ = GameObject.Find("TutorialControll");
+            tutorialControll = obj_tutorialControll_.GetComponent<TutorialControll>();
+        }
+
         //animaotor_ = GetComponent<Animator>();
         velocity_ = Vector3.zero;
         isGround_ = true;
@@ -81,17 +99,17 @@ public class Player : MonoBehaviour
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
 
-        RaycastHit hit;
-        if (Physics.SphereCast(charaRay.transform.position, 0.2f, -transform.up, out hit, 0.2f, LayerMask.GetMask("Wall","Production")))
-        {
-            Debug.Log("当たってます");
-            isGround_ = true;
-        }
-        else
-        {
-            Debug.Log("落ちてます");
-            isGround_ = false;
-        }
+        //RaycastHit hit;
+        //if (Physics.SphereCast(charaRay.transform.position, 0.2f, -transform.up, out hit, 0.2f, LayerMask.GetMask("Wall","Production")))
+        //{
+        //    Debug.Log("当たってます");
+        //    isGround_ = true;
+        //}
+        //else
+        //{
+        //    Debug.Log("落ちてます");
+        //    isGround_ = false;
+        //}
 
         if (isGround_)
         {
@@ -120,6 +138,17 @@ public class Player : MonoBehaviour
 
                 velocity_ += direction * moveSpeed_;
 
+                //ジャンプ
+                if (isGround_ && (Input.GetKeyDown(KeyCode.Space) || (prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed)))
+                {
+                    Debug.Log("飛んでます");
+                    isGround_ = false;
+                    isJumping_ = true;
+                    velocity_.y += jumpPower_;
+                    rb_.useGravity = false;
+                    velocity_ += direction * moveSpeed_ / 2;
+                    SoundManager.GetInstance.PlaySE("Janp_SE");
+                }
 
                 int num_ = UnityEngine.Random.Range(0, randomRange_);
                 //足音
@@ -149,15 +178,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        //ジャンプ
-        if (isGround_ && (Input.GetKeyDown(KeyCode.Space) || (prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed)))
-        {
-            Debug.Log("飛んでます");
-            isGround_ = false;
-            velocity_.y += jumpPower_;
-            rb_.useGravity = false;
-            SoundManager.GetInstance.PlaySE("Janp_SE");
-        }
+        
 
         if (!isGround_)
         {
@@ -171,10 +192,10 @@ public class Player : MonoBehaviour
             deathTimer_ += Time.deltaTime;
             //高さで死ぬ処理
             fallPosition_ = Mathf.Max(fallPosition_, transform.position.y);
-            isJumping_ = true;
+            
 
             //落下したら死ぬ
-            if (Physics.Linecast(charaRay.position + new Vector3(0f, 0.4f, 0f), Vector3.down * deadDistance_, LayerMask.GetMask("Wall")))
+            if (Physics.Linecast(charaRay.position, Vector3.down * 0.4f, LayerMask.GetMask("Wall","Product")))
             {
                 distance_ = fallPosition_ - transform.position.y;
                 
@@ -183,7 +204,15 @@ public class Player : MonoBehaviour
                 {
                     Debug.Log("死にました");
                     SoundManager.GetInstance.PlaySE("FallDead_SE");
-                    
+
+                    if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
+                    {
+                        playControll.playerDeadFrag = true;
+                    }
+                    else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
+                    {
+                        //tutorialControll.playerDeadFrag = true;
+                    }
                     Destroy(gameObject);
                 }
                 
@@ -194,6 +223,14 @@ public class Player : MonoBehaviour
                 //死亡時の処理
                 Debug.Log("死にました");
                 SoundManager.GetInstance.PlaySE("FallDead_SE");
+                if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
+                {
+                    playControll.playerDeadFrag = true;
+                }
+                else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
+                {
+                    //tutorialControll.playerDeadFrag = true;
+                }
                 Destroy(gameObject);
             }
         }
@@ -207,23 +244,9 @@ public class Player : MonoBehaviour
         {
             Debug.Log("来てます");
             SoundManager.GetInstance.PlaySE("Landing_SE");
-        }
-        else
-        {
             isJumping_ = false;
         }
-
-        //キー入力
-        if (Input.GetMouseButtonDown(1) || (padState_.Triggers.Left >= 0.7f))
-        {
-            Debug.Log("オン");
-            GameObject.Find("Reticle").GetComponent<Image>().enabled = true;
-
-        }
-        if (Input.GetMouseButtonUp(1) || (padState_.Triggers.Left <= 0.7f))
-        {
-            Debug.Log("オフ");
-        }
+        
     }
 
     void FixedUpdate()
@@ -232,7 +255,19 @@ public class Player : MonoBehaviour
          rb_.MovePosition(transform.position + velocity_ * Time.deltaTime);
          
     }
-    
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if((other.collider.CompareTag("Wall")) || (other.collider.CompareTag("stage")) || (other.collider.CompareTag("ChangeObject")))
+        {
+            isGround_ = true;
+        }
+        else
+        {
+            isGround_ = false;
+        }
+    }
+
     void OnDrawGizmos()
     {
         RaycastHit hit;
