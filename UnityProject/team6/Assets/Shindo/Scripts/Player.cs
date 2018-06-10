@@ -144,10 +144,17 @@ public class Player : MonoBehaviour
                     Debug.Log("飛んでます");
                     isGround_ = false;
                     isJumping_ = true;
+                    int moveJump = 1;
+                    //moveSpeed_ = moveJump;
                     velocity_.y += jumpPower_;
                     rb_.useGravity = false;
-                    velocity_ += direction * moveSpeed_ / 2;
+                    
                     SoundManager.GetInstance.PlaySE("Janp_SE");
+                }
+                else
+                {
+                    int moveReaveSpeed = 5;
+                    //moveSpeed_ = moveReaveSpeed;
                 }
 
                 int num_ = UnityEngine.Random.Range(0, randomRange_);
