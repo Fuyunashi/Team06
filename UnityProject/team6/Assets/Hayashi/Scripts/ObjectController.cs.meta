@@ -5,7 +5,10 @@ licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - crashEffectPref: {fileID: 100000, guid: 54d548b1a922d54449e2bd5424597d57, type: 2}
+  - destroyEffectPref: {fileID: 100000, guid: 4f4be043c2b5a1a46afe89967b785ab1, type: 2}
+  - getSetEffectPref: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

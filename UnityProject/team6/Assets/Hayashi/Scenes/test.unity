@@ -765,12 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
-  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
-  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
+  getSetEffectPref: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
 --- !u!1001 &761062812
 Prefab:
   m_ObjectHideFlags: 0
@@ -810,6 +805,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114132894426378684, guid: d952772a28898d94c87219784859990e,
+        type: 2}
+      propertyPath: destroyEffectPref
+      value: 
+      objectReference: {fileID: 100000, guid: 4f4be043c2b5a1a46afe89967b785ab1, type: 2}
+    - target: {fileID: 114132894426378684, guid: d952772a28898d94c87219784859990e,
+        type: 2}
+      propertyPath: crashEffectPref
+      value: 
+      objectReference: {fileID: 100000, guid: 54d548b1a922d54449e2bd5424597d57, type: 2}
+    - target: {fileID: 114132894426378684, guid: d952772a28898d94c87219784859990e,
+        type: 2}
+      propertyPath: getSetEffectPref
+      value: 
+      objectReference: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d952772a28898d94c87219784859990e, type: 2}
   m_IsPrefabParent: 0
@@ -1226,12 +1236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
-  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
-  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
+  getSetEffectPref: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
 --- !u!1 &1057706965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,12 +1871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
-  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
-  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
+  getSetEffectPref: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
 --- !u!1 &1540884603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2352,12 +2352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
-  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
-  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
+  getSetEffectPref: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
 --- !u!1001 &1930105525
 Prefab:
   m_ObjectHideFlags: 0
@@ -2618,9 +2613,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
-  destroyEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
-  getSetEffectPref: {fileID: 1934196361001536, guid: c5dbb03a30d9406409cf7445b1f2ad19,
-    type: 2}
+  getSetEffectPref: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
