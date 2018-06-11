@@ -1089,7 +1089,7 @@ GameObject:
   - component: {fileID: 809874932}
   m_Layer: 10
   m_Name: Goal
-  m_TagString: GoalObject
+  m_TagString: GoleObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
