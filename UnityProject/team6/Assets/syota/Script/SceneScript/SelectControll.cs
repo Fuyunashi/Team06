@@ -72,6 +72,10 @@ public class SelectControll : MonoBehaviour
         }
         if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
         {
+            if (stageInstructs.CurrentStage == NextStage.Exit)
+            {
+                Application.Quit();
+            }
             Debug.Log("ステージ移動する！！");
             ChangeSceneFrag = true;
         }
