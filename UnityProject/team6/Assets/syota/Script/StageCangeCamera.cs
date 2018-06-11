@@ -28,7 +28,7 @@ public class StageCangeCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("セレクトコントロールはあるよ" + selectControll.ChangeSceneFrag);
+        //Debug.Log("セレクトコントロールはあるよ" + selectControll.ChangeSceneFrag);
         if (selectControll.ChangeSceneFrag)
         {
             if (nextStage == stageInstructs.CurrentStage)

@@ -225,7 +225,7 @@ public class CRTnoise : MonoBehaviour
         {
             if (NoiseTime > 70)
             {
-                ScanLineTail = 0f;
+                ScanLineTail = 2f;
                 CRTFlag = false;
                 return;
             }
