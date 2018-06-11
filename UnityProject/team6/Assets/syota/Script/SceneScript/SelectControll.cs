@@ -20,6 +20,8 @@ public class SelectControll : MonoBehaviour
     SceneControll sceneControll;
     GameObject obj_cameraInformation;
     CameraInformation cameraInformation;
+    GameObject obj_crtNoise;
+    CRTnoise crtNoise;
     /* シーン遷移の際に絶対に必要変数 */
 
     //-------//
@@ -40,6 +42,8 @@ public class SelectControll : MonoBehaviour
         stageInstructs = obj_stageInstructs.GetComponent<StageInstructs>();
         obj_cameraInformation = GameObject.Find("CameraInformation");
         cameraInformation = obj_cameraInformation.GetComponent<CameraInformation>();
+        obj_crtNoise = GameObject.Find("SelectMainCamera");
+        crtNoise = obj_crtNoise.GetComponent<CRTnoise>();
 
         //演出用のカメラの情報を一つ前のシーンの状態と同じにする
         obj_PerformanceCamera.transform.position = cameraInformation.CameraPos;
@@ -73,16 +77,18 @@ public class SelectControll : MonoBehaviour
         }
         if (ChangeSceneFrag)
         {
-            ChangeSceneCount -= Time.deltaTime;
-            if (ChangeSceneCount < 0) { NextSceneToDecide(); ChangeSceneFrag = false; }
-
+            if (ChangeSceneCount < 0 && !crtNoise.CRTFlag) { crtNoise.CRTFlag = true; ChangeSceneFrag = false; }
+            else ChangeSceneCount -= Time.deltaTime; return;
         }
+        if (!crtNoise.CRTFlag && ChangeSceneCount < 0 && !ChangeSceneFrag) { NextSceneToDecide(); ChangeSceneFrag = false; ChangeSceneCount = 2; }
     }
     /// <summary>
     /// 次に行くシーンを判断する
     /// </summary>
     private void NextSceneToDecide()
     {
+
+        Debug.Log("ノイズ動くよ" + crtNoise.CRTFlag);
         if (stageInstructs.CurrentStage.ToString().Substring(0, 5) == "Stage")
         {
             sceneControll.NextScene = SceneName.PlayScene;
