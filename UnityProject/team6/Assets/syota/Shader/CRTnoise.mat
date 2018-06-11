@@ -59,20 +59,20 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FragFloat: 1
+    - _FragFloat: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _NoiseX: 0.37652576
+    - _NoiseX: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RGBNoise: 0
-    - _ScanLineSpeed: 10
+    - _ScanLineSpeed: 0
     - _ScanLineTail: 2
     - _SinNoiseOffset: 0
-    - _SinNoiseScale: 0.19687197
+    - _SinNoiseScale: 0
     - _SinNoiseWidth: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

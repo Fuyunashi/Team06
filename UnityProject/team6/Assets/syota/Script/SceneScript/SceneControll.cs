@@ -90,10 +90,11 @@ public class SceneControll : MonoBehaviour
     //シーンを遷移する際に行う処理
     void SceneChange(SceneName scene)
     {
-        if (scene == SceneName.PlayCurrentScene) { 
-        SceneManager.LoadScene(MainScene[SceneName.PlayScene], LoadSceneMode.Single);
-        NextScene = SceneName.PlayScene;
-    }
+        if (scene == SceneName.PlayCurrentScene)
+        {
+            SceneManager.LoadScene(MainScene[SceneName.PlayScene], LoadSceneMode.Single);
+            NextScene = SceneName.PlayScene;
+        }
         if (scene == SceneName.TutorialCurrentScene)
         {
             SceneManager.LoadScene(MainScene[SceneName.TutorialScene], LoadSceneMode.Single);
@@ -121,10 +122,7 @@ public class SceneControll : MonoBehaviour
         }
     }
     //指定したシーンの開放
-    public void RemoveScene(SceneName scene)
-    {
-
-    }
+    public void RemoveScene(SceneName scene) { }
 
     IEnumerator AddScene()
     {
@@ -145,6 +143,6 @@ public class SceneControll : MonoBehaviour
     }
 
 
-    
+
 }
 

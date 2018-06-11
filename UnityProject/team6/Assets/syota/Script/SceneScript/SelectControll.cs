@@ -13,18 +13,19 @@ public class SelectControll : MonoBehaviour
     private GamePadState prevState_;
 
 
-
     /* シーン遷移の際に絶対に必要変数 */
     GameObject MainCam;
-    GameObject SubCam;
-    GameObject scene;
+    GameObject obj_PerformanceCamera;
+    GameObject obj_scene;
     SceneControll sceneControll;
+    GameObject obj_cameraInformation;
+    CameraInformation cameraInformation;
     /* シーン遷移の際に絶対に必要変数 */
 
     //-------//
     GameObject sceneChangeIcon;
 
-    GameObject obj;
+    GameObject obj_stageInstructs;
     StageInstructs stageInstructs;
     //SceneName name;
     public bool ChangeSceneFrag;
@@ -32,13 +33,19 @@ public class SelectControll : MonoBehaviour
     void Start()
     {
         //シーン情報を取得
-        scene = GameObject.Find("SceneController");
-        sceneControll = scene.GetComponent<SceneControll>();
-        obj = GameObject.Find("StageConfiguration");
-        stageInstructs = obj.GetComponent<StageInstructs>();
+        obj_PerformanceCamera = GameObject.Find("PerformanceCamera");
+        obj_scene = GameObject.Find("SceneController");
+        sceneControll = obj_scene.GetComponent<SceneControll>();
+        obj_stageInstructs = GameObject.Find("StageConfiguration");
+        stageInstructs = obj_stageInstructs.GetComponent<StageInstructs>();
+        obj_cameraInformation = GameObject.Find("CameraInformation");
+        cameraInformation = obj_cameraInformation.GetComponent<CameraInformation>();
 
-        //AddChildScene();
-        
+        //演出用のカメラの情報を一つ前のシーンの状態と同じにする
+        obj_PerformanceCamera.transform.position = cameraInformation.CameraPos;
+        obj_PerformanceCamera.transform.rotation = cameraInformation.CameraRota;
+
+
     }
 
     void Update()
@@ -79,12 +86,6 @@ public class SelectControll : MonoBehaviour
             sceneControll.AddToScene.Add(stageInstructs.CurrentStage.ToString() + AddToScene.ChildScene);
             sceneControll.CurrentStage = stageInstructs.CurrentStage;
         }
-        //stageInstructs.CurrentStage;
-    }
-    //タイトルの部屋をテレビに映すために部屋のオブジェクトだけ持っているSceneをよぶ
-    //private void AddChildScene()
-    //{
-    //    sceneControll.AddToScene.Add(AddToScene.TitleRoom.ToString());
-    //}
+    } 
 }
 
