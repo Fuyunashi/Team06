@@ -7,10 +7,10 @@ public class ObjectController : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 10f;
-    [SerializeField]
+
     private GameObject crashEffectPref;
     private GameObject m_crashEffect;
-    [SerializeField]
+
     private GameObject destroyEffectPref;
     private GameObject m_destroyEffect;
     [SerializeField]
@@ -30,6 +30,8 @@ public class ObjectController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        crashEffectPref = Resources.Load("Particles/Particles Systems/BlockCollEff") as GameObject;
+        destroyEffectPref = Resources.Load("Particles/Particles Systems/BleakEff") as GameObject;
         isPositionMove = false;
         isHitObj = false;
         basePosition = transform.parent.transform.parent.position;
@@ -125,7 +127,7 @@ public class ObjectController : MonoBehaviour
         }
         if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet")
         {
-            m_destroyEffect = Instantiate(destroyEffectPref, hitPos, Quaternion.identity);
+            m_destroyEffect = Instantiate(destroyEffectPref, transform.position, Quaternion.identity);
             Destroy(m_destroyEffect, 1.0f);
             SoundManager.GetInstance.PlaySE("Break_SE");
             isHitObj = true;
