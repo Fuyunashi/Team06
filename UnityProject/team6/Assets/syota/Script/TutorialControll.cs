@@ -89,7 +89,7 @@ public class TutorialControll : MonoBehaviour
         if (!sceneControll.PuseFrag)
         {
             //次ステージに行く際の条件
-            if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
+            if (stageClearFrag)
             {
                 distortPortal.portalPos = portalPosObj.transform.position;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
