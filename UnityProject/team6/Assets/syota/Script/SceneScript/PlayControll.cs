@@ -20,8 +20,7 @@ public class PlayControll : MonoBehaviour
 
     GameObject MianCam;
     GameObject SubCam;
-
-    [SerializeField]
+   
     GameObject portalPosObj;
 
     //必要なスクリプトを保持
@@ -62,6 +61,8 @@ public class PlayControll : MonoBehaviour
         crtNoise = obj_crtNoise.GetComponent<CRTnoise>();
         obj_cameraInformation = GameObject.Find("CameraInformation");
         cameraInformation = obj_cameraInformation.GetComponent<CameraInformation>();
+        //ゴールorPortalのメアスオブジェ
+        portalPosObj = GameObject.FindGameObjectWithTag("GoleObject");
 
         //フラグ関係の初期化
         changeSceneFrag = false;
@@ -89,7 +90,7 @@ public class PlayControll : MonoBehaviour
         //次ステージにはポウズ中には行けない
         if (!sceneControll.PuseFrag)
         {
-            if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
+            if (stageClearFrag)
             {
                 distortPortal.portalPos = portalPosObj.transform.position;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
