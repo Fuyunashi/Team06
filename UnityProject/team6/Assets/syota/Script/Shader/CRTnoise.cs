@@ -233,8 +233,6 @@ public class CRTnoise : MonoBehaviour
             if (NoiseTime > 40)
                 ScanLineTail = UnityEngine.Random.Range(.0f, 1.0f);
         }
-        else
-            NoiseX = 0;
         NoiseTime++;
     }
     /// <summary>

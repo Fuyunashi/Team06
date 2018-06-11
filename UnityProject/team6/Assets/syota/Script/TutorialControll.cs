@@ -25,12 +25,15 @@ public class TutorialControll : MonoBehaviour
     [SerializeField]
     GameObject portalPosObj;
 
+    //必要なスクリプトを保持
     GameObject obj_sceneControll;
     SceneControll sceneControll;
     GameObject obj_portal;
     DistortPortal distortPortal;
     GameObject obj_crtNoise;
     CRTnoise crtNoise;
+    GameObject obj_cameraInformation;
+    CameraInformation cameraInformation;
 
     PouseSelect pouseSelect;
     int pouseCount = 3;
@@ -57,6 +60,8 @@ public class TutorialControll : MonoBehaviour
         distortPortal = obj_portal.GetComponent<DistortPortal>();
         obj_crtNoise = GameObject.Find("PlayCamera");
         crtNoise = obj_crtNoise.GetComponent<CRTnoise>();
+        obj_cameraInformation = GameObject.Find("CameraInformation");
+        cameraInformation = obj_cameraInformation.GetComponent<CameraInformation>();
 
         //フラグ関係の初期化
         changeSceneFrag = false;
@@ -122,10 +127,15 @@ public class TutorialControll : MonoBehaviour
                         break;
                     //セレクトシーンへ戻る
                     case 2:
+                        //カメラ情報の譲渡
+                        cameraInformation.CameraPos = obj_portal.transform.position;
+                        cameraInformation.CameraRota = obj_portal.transform.rotation;
+                        //ポウズ関係の初期化
                         Time.timeScale = 1;
                         sceneControll.PuseFrag = false;
-                        sceneControll.NextScene = SceneName.SelectScene;
-                        sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+                        //ノイズが行われてたらシーン移行フラグを入れる
+                        crtNoise.CRTFlag = true;
+                        changeSceneFrag = true;
                         break;
                 }
             }
