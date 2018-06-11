@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 23010854616445676}
   - component: {fileID: 114975188911712792}
   m_Layer: 0
-  m_Name: Tutrial1
+  m_Name: stageObj
   m_TagString: Tutrial1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -6,8 +6,10 @@
 
 3,すでに配置されているSelectCanvasesの子オブジェクトのキャンバスにそれぞれのステージに合わせて移したい画像を貼り付ける
 
-4,すでに配置されているCinemaVirtualの子オブジェクトとして存在する１から５の「CM vcam1」を「TV」の配置に合わせてカメラを移す。
-＊カメラを確認する際はInsoectorの Cinemachine Virtual Camera(Script）の「Solo」というのを押すとそのカメラに切り替わるのでそれを使い確認ください
+4,すでに配置されているCinemaVirtualの子オブジェクトとして存在する１から５の「CM vcam1」を
+「TV」の配置に合わせてカメラを移す。
+＊カメラを確認する際はInsoectorの Cinemachine Virtual Camera(Script）の「Solo」
+というのを押すとそのカメラに切り替わるのでそれを使い確認ください
 
 １ステージまたはタイトルからセレクトに移動する際のひとつ前のシーンを移すbeforObject（すでに配置されている）
 ２Tutorial1、Tutoroal2を写すカメラ
