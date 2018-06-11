@@ -99,17 +99,17 @@ public class Player : MonoBehaviour
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
 
-        //RaycastHit hit;
-        //if (Physics.SphereCast(charaRay.transform.position, 0.2f, -transform.up, out hit, 0.2f, LayerMask.GetMask("Wall","Production")))
-        //{
-        //    Debug.Log("当たってます");
-        //    isGround_ = true;
-        //}
-        //else
-        //{
-        //    Debug.Log("落ちてます");
-        //    isGround_ = false;
-        //}
+        RaycastHit hit;
+        if (Physics.SphereCast(charaRay.transform.position, 0.2f, -transform.up, out hit, 0.2f, LayerMask.GetMask("Wall", "Production")))
+        {
+            //Debug.Log("当たってます");
+            isGround_ = true;
+        }
+        else
+        {
+            Debug.Log("落ちてます");
+            isGround_ = false;
+        }
 
         if (isGround_)
         {
@@ -196,7 +196,7 @@ public class Player : MonoBehaviour
             
 
             //落下したら死ぬ
-            if (Physics.Linecast(charaRay.position, charaRay.position * -0.4f, LayerMask.GetMask("Wall","Product")))
+            if (Physics.Linecast(charaRay.position, charaRay.position + new Vector3(0.0f,-0.4f,0.0f), LayerMask.GetMask("Wall","Product")))
             {
                 distance_ = fallPosition_ - transform.position.y;
                 
@@ -248,22 +248,24 @@ public class Player : MonoBehaviour
             isJumping_ = false;
         }
 
-        RaycastHit hit;
-        if (Physics.Raycast(this.transform.position  + new Vector3(0.0f,1.5f,0.0f), Vector3.forward, out hit, 0.5f))
-        {
-            if (hit.collider.tag == "GoleObject")
-            {
-                if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
-                {
-                    playControll.stageClearFrag = true;
-                }
-                else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
-                {
-                    tutorialControll.stageClearFrag = true;
-                }
-            }
+      
+        //if (Physics.Raycast(this.transform.position  + new Vector3(0.0f,1.5f,0.0f), Vector3.forward, out hit, 0.5f))
+        //{
+        //    Debug.Log("当たってます");
+        //    if (hit.collider.tag == "GoleObject")
+        //    {
+        //        Debug.Log("当たってます");
+        //        if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
+        //        {
+        //            playControll.stageClearFrag = true;
+        //        }
+        //        else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
+        //        {
+        //            tutorialControll.stageClearFrag = true;
+        //        }
+        //    }
             
-        }
+        //}
         
     }
 
@@ -276,14 +278,21 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if((other.collider.CompareTag("stage")) || (other.collider.CompareTag("ChangeObject")))
+        if ((other.collider.CompareTag("GoleObject")))
         {
-            isGround_ = true;
+            Debug.Log("当たってます");
+            if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
+            {
+                playControll.stageClearFrag = true;
+                //Debug.Log(playControll.stageClearFrag);
+            }
+            else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
+            {
+                tutorialControll.stageClearFrag = true;
+            }
+            
         }
-        else
-        {
-            isGround_ = false;
-        }
+        
     }
 
     void OnDrawGizmos()
