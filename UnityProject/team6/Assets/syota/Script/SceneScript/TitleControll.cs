@@ -46,6 +46,8 @@ public class TitleControll : MonoBehaviour
 
         //演出の関係上必要になったフラグ
         sceneChangeFrag = false;
+
+        //SoundManager.GetInstance.PlayBGM("再生したいファイル名（完全一致）");
     }
     void Update()
     {

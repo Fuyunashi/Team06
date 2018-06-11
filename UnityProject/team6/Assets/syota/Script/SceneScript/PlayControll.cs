@@ -20,7 +20,7 @@ public class PlayControll : MonoBehaviour
 
     GameObject MianCam;
     GameObject SubCam;
-   
+
     GameObject portalPosObj;
 
     //必要なスクリプトを保持
@@ -86,6 +86,8 @@ public class PlayControll : MonoBehaviour
 
         if (!sceneControll.PuseFrag)
             PuseDisposal();
+        if (Input.GetKeyDown(KeyCode.L)) stageClearFrag = true;
+
 
         //次ステージにはポウズ中には行けない
         if (!sceneControll.PuseFrag)
@@ -94,8 +96,11 @@ public class PlayControll : MonoBehaviour
             {
                 distortPortal.portalPos = portalPosObj.transform.position;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
+                distortPortal.portalPos = portalPosObj.transform.position;
                 distortPortal.PortalFlag = true;
                 changeSceneFrag = true;
+                stageClearFrag = false;
+                //Debug.Log("クリアしたよ" + sceneControll.CurrentStage);
             }
         }
         //プレイアーが死んだらリスタート
@@ -136,7 +141,6 @@ public class PlayControll : MonoBehaviour
                         cameraInformation.CameraRota = obj_portal.transform.rotation;
                         //ポウズ関係の初期化
                         Time.timeScale = 1;
-                        sceneControll.PuseFrag = false;
                         //ノイズが行われてたらシーン移行フラグを入れる
                         crtNoise.CRTFlag = true;
                         changeSceneFrag = true;
@@ -147,8 +151,9 @@ public class PlayControll : MonoBehaviour
             //シーンのフラグが入り、ノイズが終わった報告があったらしーんを移行する
         }
         //セレクトシーンに移行の際の演出処理
-        if (!crtNoise.CRTFlag && changeSceneFrag)
+        if (!crtNoise.CRTFlag && changeSceneFrag && sceneControll.PuseFrag)
         {
+            sceneControll.PuseFrag = false;
             sceneControll.NextScene = SceneName.SelectScene;
             sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
             changeSceneFrag = false;

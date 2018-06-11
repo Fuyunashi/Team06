@@ -23,7 +23,6 @@ public class ChildSceneCameraControll : MonoBehaviour
         scene = GameObject.Find("SceneController");
         sceneControll = scene.GetComponent<SceneControll>();
 
-
         //現在のステージと自身が存在するシーンが異なればレイヤー設定
         if (GetSceneContainObject(gameObject) != sceneControll.CurrentStage.ToString() + "ChildScene")
         {
@@ -34,13 +33,15 @@ public class ChildSceneCameraControll : MonoBehaviour
             //{
             //    childTransform.gameObject.layer = LayerMask.NameToLayer("Production");
             //}
+            Debug.Log("クリアしたよ" + sceneControll.CurrentStage);
+
         }
         if (SceneManager.GetActiveScene().name == SceneName.SelectScene.ToString())
         {
             foreach (var light_ in light)
                 light_.SetActive(false);
         }
-        //Debug.Log("今俺がいるシーンは：" + GetSceneContainObject(gameObject));
+        Debug.Log("今俺がいるシーンは：" + GetSceneContainObject(gameObject));
     }
 
     void Update()

@@ -19,9 +19,9 @@ public class NoiseParticle : MonoBehaviour
     [SerializeField]
     GameObject title;
     [SerializeField]
-    GameObject gun_model;
+    GameObject[] gun_model;
     [SerializeField]
-    GameObject ligth;
+    GameObject[] ligth;
 
     float light_time;
     float Title_time;
@@ -42,12 +42,13 @@ public class NoiseParticle : MonoBehaviour
     }
     private void Update()
     {
-        if (light_time <= 1.0f)
+        if (light_time <= 1.0f && Title_time > 50)
         {
             light_time += Time.deltaTime;
         }
-        ligth.GetComponent<Light>().intensity = light_time;
-        if (Title_time < 150) { Title_time++; return; }
+        ligth[0].GetComponent<Light>().intensity = light_time;
+        ligth[1].GetComponent<Light>().intensity = light_time;
+        if (Title_time < 200) { Title_time++; return; }
 
 
         switch (performanceMode)
@@ -58,13 +59,16 @@ public class NoiseParticle : MonoBehaviour
                 Count++;
                 break;
             case PerformanceMode.Gun:
-                if (gun_frag) LeanTween.alpha(gun_model, 1.0f, 1); gun_frag = false;
+                if (gun_frag) {
+                    LeanTween.alpha(gun_model[0], 1.0f, 1);
+                    LeanTween.alpha(gun_model[1], 1.0f, 1); gun_frag = false;
+                }
                 horizonValue = Mathf.Lerp(0.6f, 0.0f, Count / 120);
                 Count++;
                 if (Count >= 120)
                     horizonValue = 0;
                 if (Count >= 130)
-                    gun_model.transform.Rotate(0, 0, 20f * Time.deltaTime);
+                    gun_model[0].transform.Rotate(0, 0, 20f * Time.deltaTime);
 
                 break;
         }
