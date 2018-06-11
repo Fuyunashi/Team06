@@ -8,19 +8,20 @@ using DG.Tweening;
 
 public class TitleControll : MonoBehaviour
 {
-    /* シーン遷移の際に絶対に必要変数*/
+    /* */
     GameObject MainCam;
     GameObject SubCam;
-    GameObject scene;
-    SceneControll sceneControll;
-    GameObject portal;
-    DistortPortal distortPortal;
-    /* シーン遷移の際に絶対に必要変数*/
 
-    //-------//
+    //ほしいスクリプトを保持
+    GameObject obj_scene;
+    SceneControll sceneControll;
+    GameObject obj_portal;
+    DistortPortal distortPortal;
     GameObject sceneChangeIcon;
-    GameObject obj;
+    GameObject obj_crtNoise;
     CRTnoise crtNoise;
+    GameObject obj_cameraInformation;
+    CameraInformation cameraInformation;
     bool sceneChangeFrag;
 
     public bool playerDeadFrag { get; set; }
@@ -31,16 +32,18 @@ public class TitleControll : MonoBehaviour
         //持っているカメラ情報を取得
         MainCam = GameObject.Find("TitleMainCamera");
         SubCam = GameObject.Find("TitleSubCamera");
-        //シーン情報を取得
-        scene = GameObject.Find("SceneController");
-        sceneControll = scene.GetComponent<SceneControll>();
 
+        //使用するスクリプトを保持
+        //シーン情報を取得
+        obj_scene = GameObject.Find("SceneController");
+        sceneControll = obj_scene.GetComponent<SceneControll>();
         //ポータルに支持を出すための変数      
         distortPortal = MainCam.GetComponent<DistortPortal>();
-        //現在のアクティブなシーンを取得
+        obj_crtNoise = GameObject.Find("TitleMainCamera");
+        crtNoise = obj_crtNoise.GetComponent<CRTnoise>();
+        obj_cameraInformation = GameObject.Find("CameraInformation");
+        cameraInformation = obj_cameraInformation.GetComponent<CameraInformation>();
 
-        obj = GameObject.Find("TitleMainCamera");
-        crtNoise = obj.GetComponent<CRTnoise>();
         //演出の関係上必要になったフラグ
         sceneChangeFrag = false;
     }
@@ -55,6 +58,9 @@ public class TitleControll : MonoBehaviour
         //シーンのフラグが入り、ノイズが終わった報告があったらしーんを移行する
         if (!crtNoise.CRTFlag && sceneChangeFrag)
         {
+            //カメラ情報の譲渡
+            cameraInformation.CameraPos = MainCam.transform.position;
+            cameraInformation.CameraRota = MainCam.transform.rotation;
             sceneControll.NextScene = SceneName.SelectScene;
             sceneControll.AddToScene.Add(SceneName.TitleRoom.ToString());
             sceneChangeFrag = false;

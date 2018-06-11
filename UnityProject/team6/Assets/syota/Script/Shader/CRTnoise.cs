@@ -163,7 +163,7 @@ public class CRTnoise : MonoBehaviour
         //演出用のカメラはフラグを用意して指示をもらう
         if (CRTFlag)
         {
-            Debug.Log("ノイズを起こすぞ：" + NoiseTime);
+            //Debug.Log("ノイズを起こすぞ：" + NoiseTime);
             switch (cameraName)
             {
                 //タイトルシーンで使う
