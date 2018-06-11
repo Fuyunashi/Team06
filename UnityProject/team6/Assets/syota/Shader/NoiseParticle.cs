@@ -25,6 +25,7 @@ public class NoiseParticle : MonoBehaviour
 
     float light_time;
     float Title_time;
+    float Count;
     bool title_frag;
     bool gun_frag;
 
@@ -35,8 +36,9 @@ public class NoiseParticle : MonoBehaviour
         Title_time = 0;
         light_time = 0;
         horizonValue = 0;
-        LeanTween.alpha(title, 0.0f, 2);
-        LeanTween.alpha(gun_model, 1.0f, 2);
+        Count = 0;
+        performanceMode = PerformanceMode.Title;
+
     }
     private void Update()
     {
@@ -45,30 +47,27 @@ public class NoiseParticle : MonoBehaviour
             light_time += Time.deltaTime;
         }
         ligth.GetComponent<Light>().intensity = light_time;
-        if (Title_time < 120) { Title_time++; return; }
+        if (Title_time < 150) { Title_time++; return; }
 
 
         switch (performanceMode)
         {
             case PerformanceMode.Title:
-                if (title_frag) LeanTween.alpha(title, 0.0f, 2); title_frag = false;
-                horizonValue += Time.deltaTime * 2;
-                if (horizonValue >= 0.5f)
-                {
-                    performanceMode = PerformanceMode.Gun;
-                }
+                if (title_frag) LeanTween.alpha(title, 0.0f, 2).setOnComplete(() => { performanceMode = PerformanceMode.Gun; Count = 0; }); title_frag = false;
+                horizonValue = Mathf.Lerp(0, 0.6f, Count / 120);
+                Count++;
                 break;
             case PerformanceMode.Gun:
-                if (gun_frag) LeanTween.alpha(gun_model, 0.0f, 1); gun_frag = false;
-                if (horizonValue >= 0)
-                    horizonValue -= 0.1f;
-                else horizonValue = 0;
+                if (gun_frag) LeanTween.alpha(gun_model, 1.0f, 1); gun_frag = false;
+                horizonValue = Mathf.Lerp(0.6f, 0.0f, Count / 120);
+                Count++;
+                if (Count >= 120)
+                    horizonValue = 0;
+                if (Count >= 130)
+                    gun_model.transform.Rotate(0, 0, 20f * Time.deltaTime);
+
                 break;
         }
-
-
-
-
     }
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {

@@ -1022,15 +1022,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fccd8e251d698f7449ed9aca4bacc50e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fccd8e251d698f7449ed9aca4bacc50e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fccd8e251d698f7449ed9aca4bacc50e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fccd8e251d698f7449ed9aca4bacc50e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1047,6 +1047,17 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: fccd8e251d698f7449ed9aca4bacc50e, type: 3}
   m_PrefabInternal: {fileID: 764645183}
+--- !u!114 &764645185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 764645184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8f6d95f56dd044690bdece37111596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &922639504
 Prefab:
   m_ObjectHideFlags: 0
