@@ -114,8 +114,8 @@ public class TutorialControll : MonoBehaviour
         //ポウズ中の処理
         if (sceneControll.PuseFrag)
         {
-            Debug.Log("ポウズ");
-            Debug.Log("ポウズ中の処理は：" + (PouseSelect)pouseSelectIndex);
+            //Debug.Log("ポウズ");
+            //Debug.Log("ポウズ中の処理は：" + (PouseSelect)pouseSelectIndex);
             PouseOperation();
             PoseIconColor();
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
