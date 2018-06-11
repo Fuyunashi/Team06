@@ -35,12 +35,22 @@ public class PlayControll : MonoBehaviour
     PouseSelect pouseSelect;
     int pouseCount = 3;
     int pouseSelectIndex = 0;
-    bool changeSceneFrag;
-
+    /// <summary>
+    /// シーンを移行する際に状態管理のフラグ
+    /// </summary>
+    bool changeSceneFrag { get; set; }
+    /// <summary>
+    /// プレイヤーが死亡したかの判断を煽るフラグ
+    /// </summary>
     public bool playerDeadFrag { get; set; }
+    /// <summary>
+    /// ステージがクリアしたかどうかのフラグ
+    /// </summary>
+    public bool stageClearFrag { get; set; }
 
     void Start()
     {
+        //必要なスクリプトを所持
         obj_sceneControll = GameObject.Find("SceneController");
         sceneControll = obj_sceneControll.GetComponent<SceneControll>();
         obj_portal = GameObject.Find("PlayCamera");
@@ -48,7 +58,9 @@ public class PlayControll : MonoBehaviour
         obj_crtNoise = GameObject.Find("PlayCamera");
         crtNoise = obj_crtNoise.GetComponent<CRTnoise>();
 
+        //フラグ関係の初期化
         changeSceneFrag = false;
+        stageClearFrag = false;
         playerDeadFrag = false;
     }
 
@@ -124,12 +136,14 @@ public class PlayControll : MonoBehaviour
 
             //シーンのフラグが入り、ノイズが終わった報告があったらしーんを移行する
         }
+        //セレクトシーンに移行の際の演出処理
         if (!crtNoise.CRTFlag && changeSceneFrag)
         {
             sceneControll.NextScene = SceneName.SelectScene;
             sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
             changeSceneFrag = false;
         }
+        //次ステージへ移動する際の演出処理
         if (distortPortal.portalTime <= 0 && changeSceneFrag)
         {
             sceneControll.NextScene = SceneName.PlayCurrentScene;

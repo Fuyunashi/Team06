@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
-public class TutorialControll : MonoBehaviour {
+public class TutorialControll : MonoBehaviour
+{
 
     enum PouseSelect
     {
@@ -28,20 +29,39 @@ public class TutorialControll : MonoBehaviour {
     SceneControll sceneControll;
     GameObject obj_portal;
     DistortPortal distortPortal;
+    GameObject obj_crtNoise;
+    CRTnoise crtNoise;
 
     PouseSelect pouseSelect;
     int pouseCount = 3;
     int pouseSelectIndex = 0;
-    bool changeSceneFrag;
+    /// <summary>
+    /// シーンを移行する際に状態管理のフラグ
+    /// </summary>
+    bool changeSceneFrag { get; set; }
+    /// <summary>
+    /// プレイヤーが死亡したかの判断を煽るフラグ
+    /// </summary>
+    public bool playerDeadFrag { get; set; }
+    /// <summary>
+    /// ステージがクリアしたかどうかのフラグ
+    /// </summary>
+    public bool stageClearFrag { get; set; }
 
     void Start()
     {
+        //必要なスクリプトを所持
         obj_sceneControll = GameObject.Find("SceneController");
         sceneControll = obj_sceneControll.GetComponent<SceneControll>();
         obj_portal = GameObject.Find("MainCamera");
         distortPortal = obj_portal.GetComponent<DistortPortal>();
+        obj_crtNoise = GameObject.Find("PlayCamera");
+        crtNoise = obj_crtNoise.GetComponent<CRTnoise>();
 
+        //フラグ関係の初期化
         changeSceneFrag = false;
+        stageClearFrag = false;
+        playerDeadFrag = false;
     }
 
     void Update()
@@ -63,6 +83,7 @@ public class TutorialControll : MonoBehaviour {
         //次ステージにはポウズ中には行けない
         if (!sceneControll.PuseFrag)
         {
+            //次ステージに行く際の条件
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
             {
                 distortPortal.portalPos = portalPosObj.transform.position;
@@ -70,6 +91,12 @@ public class TutorialControll : MonoBehaviour {
                 distortPortal.PortalFlag = true;
                 changeSceneFrag = true;
             }
+        }
+        //プレイアーが死んだらリスタート
+        if (playerDeadFrag)
+        {
+            sceneControll.NextScene = SceneName.PlayCurrentScene;
+            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
         }
 
         //ポウズ中の処理
@@ -104,8 +131,24 @@ public class TutorialControll : MonoBehaviour {
             }
 
         }
+        //セレクトシーンに移行の際の演出処理
+        if (!crtNoise.CRTFlag && changeSceneFrag)
+        {
+            sceneControll.NextScene = SceneName.SelectScene;
+            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+            changeSceneFrag = false;
+        }
+        //次ステージへ移行する際の演出処理
         if (distortPortal.portalTime <= 0 && changeSceneFrag)
         {
+            if (sceneControll.CurrentStage == NextStage.Tutrial2)
+            {
+                sceneControll.NextScene = SceneName.PlayScene;
+                sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
+                sceneControll.CurrentStage = sceneControll.CurrentStage + 1;
+                changeSceneFrag = false;
+                return;
+            }
             sceneControll.NextScene = SceneName.TutorialCurrentScene;
             sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
             sceneControll.CurrentStage = sceneControll.CurrentStage + 1;
