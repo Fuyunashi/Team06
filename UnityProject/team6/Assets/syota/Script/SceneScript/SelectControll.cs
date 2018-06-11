@@ -28,8 +28,8 @@ public class SelectControll : MonoBehaviour
     GameObject obj_stageInstructs;
     StageInstructs stageInstructs;
     //SceneName name;
-    public bool ChangeSceneFrag;
-   
+    public bool ChangeSceneFrag { get; set; }
+    float ChangeSceneCount;
     void Start()
     {
         //シーン情報を取得
@@ -44,8 +44,11 @@ public class SelectControll : MonoBehaviour
         //演出用のカメラの情報を一つ前のシーンの状態と同じにする
         obj_PerformanceCamera.transform.position = cameraInformation.CameraPos;
         obj_PerformanceCamera.transform.rotation = cameraInformation.CameraRota;
+        //セレクトシーンに入った瞬間はNoneとして初期化
+        sceneControll.CurrentStage = NextStage.None;
 
-
+        ChangeSceneFrag = false;
+        ChangeSceneCount = 2;
     }
 
     void Update()
@@ -65,8 +68,14 @@ public class SelectControll : MonoBehaviour
         }
         if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
         {
-            //Debug.Log("ステージ移動する！！");
-            NextSceneToDecide();
+            Debug.Log("ステージ移動する！！");
+            ChangeSceneFrag = true;
+        }
+        if (ChangeSceneFrag)
+        {
+            ChangeSceneCount -= Time.deltaTime;
+            if (ChangeSceneCount < 0) { NextSceneToDecide(); ChangeSceneFrag = false; }
+
         }
     }
     /// <summary>
@@ -86,6 +95,6 @@ public class SelectControll : MonoBehaviour
             sceneControll.AddToScene.Add(stageInstructs.CurrentStage.ToString() + AddToScene.ChildScene);
             sceneControll.CurrentStage = stageInstructs.CurrentStage;
         }
-    } 
+    }
 }
 

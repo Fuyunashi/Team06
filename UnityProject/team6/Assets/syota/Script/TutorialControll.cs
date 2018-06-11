@@ -56,9 +56,9 @@ public class TutorialControll : MonoBehaviour
         //必要なスクリプトを所持
         obj_sceneControll = GameObject.Find("SceneController");
         sceneControll = obj_sceneControll.GetComponent<SceneControll>();
-        obj_portal = GameObject.Find("MainCamera");
+        obj_portal = GameObject.Find("TutrialCamera");
         distortPortal = obj_portal.GetComponent<DistortPortal>();
-        obj_crtNoise = GameObject.Find("PlayCamera");
+        obj_crtNoise = GameObject.Find("TutrialCamera");
         crtNoise = obj_crtNoise.GetComponent<CRTnoise>();
         obj_cameraInformation = GameObject.Find("CameraInformation");
         cameraInformation = obj_cameraInformation.GetComponent<CameraInformation>();
@@ -93,8 +93,10 @@ public class TutorialControll : MonoBehaviour
             {
                 distortPortal.portalPos = portalPosObj.transform.position;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
+                distortPortal.portalPos = portalPosObj.transform.position;
                 distortPortal.PortalFlag = true;
                 changeSceneFrag = true;
+                stageClearFrag = false;
             }
         }
         //プレイアーが死んだらリスタート
@@ -116,6 +118,8 @@ public class TutorialControll : MonoBehaviour
                 {
                     //最初からやり直す
                     case 0:
+                        sceneControll.PuseFrag = false;
+                        Time.timeScale = 1;
                         sceneControll.NextScene = SceneName.TutorialCurrentScene;
                         sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
                         break;
@@ -132,7 +136,6 @@ public class TutorialControll : MonoBehaviour
                         cameraInformation.CameraRota = obj_portal.transform.rotation;
                         //ポウズ関係の初期化
                         Time.timeScale = 1;
-                        sceneControll.PuseFrag = false;
                         //ノイズが行われてたらシーン移行フラグを入れる
                         crtNoise.CRTFlag = true;
                         changeSceneFrag = true;
@@ -142,8 +145,9 @@ public class TutorialControll : MonoBehaviour
 
         }
         //セレクトシーンに移行の際の演出処理
-        if (!crtNoise.CRTFlag && changeSceneFrag)
+        if (!crtNoise.CRTFlag && changeSceneFrag && sceneControll.PuseFrag)
         {
+            sceneControll.PuseFrag = false;
             sceneControll.NextScene = SceneName.SelectScene;
             sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
             changeSceneFrag = false;

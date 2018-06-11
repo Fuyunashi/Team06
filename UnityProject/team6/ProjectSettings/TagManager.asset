@@ -37,6 +37,8 @@ TagManager:
   - TitleCamera
   - PlayCamera
   - GoalObject
+  - GoleObject
+  - Stage13
   layers:
   - Default
   - TransparentFX
