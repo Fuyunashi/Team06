@@ -13,9 +13,6 @@ public class ObjectController : MonoBehaviour
 
     private GameObject destroyEffectPref;
     private GameObject m_destroyEffect;
-    [SerializeField]
-    private GameObject getSetEffectPref;
-    private GameObject m_getSetEffect;
 
     private Vector3 basePosition;
     private Vector3 baseScale;
@@ -151,11 +148,4 @@ public class ObjectController : MonoBehaviour
             SoundManager.GetInstance.PlaySE("Crash_SE");
         }
     }
-
-    public void GetSetEffect()
-    {
-        m_getSetEffect = Instantiate(getSetEffectPref, this.transform.position, Quaternion.identity);
-        Destroy(m_getSetEffect, 1.0f);
-    }
-
 }

@@ -765,7 +765,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  getSetEffectPref: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
 --- !u!1001 &761062812
 Prefab:
   m_ObjectHideFlags: 0
@@ -1236,7 +1235,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  getSetEffectPref: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
 --- !u!1 &1057706965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,7 +1869,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  getSetEffectPref: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
 --- !u!1 &1540884603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2352,7 +2349,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  getSetEffectPref: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
 --- !u!1001 &1930105525
 Prefab:
   m_ObjectHideFlags: 0
@@ -2613,4 +2609,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  getSetEffectPref: {fileID: 100000, guid: c2204c8be58cfc341a8cc5f6d3d0897e, type: 2}
