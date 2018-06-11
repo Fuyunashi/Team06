@@ -491,7 +491,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  getSetEffectPref: {fileID: 0}
 --- !u!54 &431022806
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1090,7 +1089,7 @@ GameObject:
   - component: {fileID: 809874932}
   m_Layer: 10
   m_Name: Goal
-  m_TagString: stage
+  m_TagString: GoalObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1348,7 +1347,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  getSetEffectPref: {fileID: 0}
 --- !u!54 &858658185
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1606,7 +1604,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  getSetEffectPref: {fileID: 0}
 --- !u!54 &1020600336
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2038,7 +2035,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  getSetEffectPref: {fileID: 0}
 --- !u!54 &1818209662
 Rigidbody:
   m_ObjectHideFlags: 0

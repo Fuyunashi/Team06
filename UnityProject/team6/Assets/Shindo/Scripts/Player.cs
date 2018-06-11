@@ -218,7 +218,7 @@ public class Player : MonoBehaviour
                     }
                     else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
                     {
-                        //tutorialControll.playerDeadFrag = true;
+                        tutorialControll.playerDeadFrag = true;
                     }
                     Destroy(gameObject);
                 }
@@ -236,7 +236,7 @@ public class Player : MonoBehaviour
                 }
                 else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
                 {
-                    //tutorialControll.playerDeadFrag = true;
+                    tutorialControll.playerDeadFrag = true;
                 }
                 Destroy(gameObject);
             }
@@ -253,6 +253,23 @@ public class Player : MonoBehaviour
             SoundManager.GetInstance.PlaySE("Landing_SE");
             isJumping_ = false;
         }
+
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position  + new Vector3(0.0f,1.5f,0.0f), Vector3.forward, out hit, 0.5f))
+        {
+            if (hit.collider.tag == "GoalObject")
+            {
+                if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
+                {
+                    playControll.stageClearFrag = true;
+                }
+                else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
+                {
+                    tutorialControll.stageClearFrag = true;
+                }
+            }
+            
+        }
         
     }
 
@@ -265,7 +282,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if((other.collider.CompareTag("Wall")) || (other.collider.CompareTag("stage")) || (other.collider.CompareTag("ChangeObject")))
+        if((other.collider.CompareTag("stage")) || (other.collider.CompareTag("ChangeObject")))
         {
             isGround_ = true;
         }

@@ -3043,9 +3043,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114208029204560048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3058,9 +3055,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114423971270285714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3073,9 +3067,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114621921184763692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3088,9 +3079,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114809752474857668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3103,9 +3091,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114891749717675468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3118,6 +3103,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}

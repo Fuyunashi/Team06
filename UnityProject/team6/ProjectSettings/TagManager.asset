@@ -36,6 +36,7 @@ TagManager:
   - Stage16
   - TitleCamera
   - PlayCamera
+  - GoalObject
   layers:
   - Default
   - TransparentFX
