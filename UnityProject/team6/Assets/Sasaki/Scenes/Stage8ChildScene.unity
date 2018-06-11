@@ -295,7 +295,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1571678587455200, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
       propertyPath: m_TagString
-      value: GoalObject
+      value: GoleObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}

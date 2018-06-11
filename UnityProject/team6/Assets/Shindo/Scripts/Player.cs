@@ -144,18 +144,12 @@ public class Player : MonoBehaviour
                     Debug.Log("飛んでます");
                     isGround_ = false;
                     isJumping_ = true;
-                    int moveJump = 1;
-                    //moveSpeed_ = moveJump;
                     velocity_.y += jumpPower_;
                     rb_.useGravity = false;
                     
                     SoundManager.GetInstance.PlaySE("Janp_SE");
                 }
-                else
-                {
-                    int moveReaveSpeed = 5;
-                    //moveSpeed_ = moveReaveSpeed;
-                }
+                
 
                 int num_ = UnityEngine.Random.Range(0, randomRange_);
                 //足音
@@ -202,7 +196,7 @@ public class Player : MonoBehaviour
             
 
             //落下したら死ぬ
-            if (Physics.Linecast(charaRay.position, Vector3.down * 0.4f, LayerMask.GetMask("Wall","Product")))
+            if (Physics.Linecast(charaRay.position, charaRay.position * -0.4f, LayerMask.GetMask("Wall","Product")))
             {
                 distance_ = fallPosition_ - transform.position.y;
                 
@@ -257,7 +251,7 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(this.transform.position  + new Vector3(0.0f,1.5f,0.0f), Vector3.forward, out hit, 0.5f))
         {
-            if (hit.collider.tag == "GoalObject")
+            if (hit.collider.tag == "GoleObject")
             {
                 if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
                 {
