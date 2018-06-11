@@ -30,6 +30,7 @@ public enum NextStage
     Stage17,
     Stage18,
     None,
+    Exit,
 }
 [ExecuteInEditMode()]
 public class CRTnoise : MonoBehaviour
@@ -40,6 +41,7 @@ public class CRTnoise : MonoBehaviour
         TitleCamera,
         TitleRoomCamera,
         PlayCamera,
+        TutrialCamera,
         None,
     }
     //ノイズをかけるマテリル（今回はカメラをRenderTextureを使う）
@@ -224,7 +226,7 @@ public class CRTnoise : MonoBehaviour
         {
             if (NoiseTime > 70)
             {
-                ScanLineTail = 0f;
+                ScanLineTail = 2f;
                 CRTFlag = false;
                 return;
             }

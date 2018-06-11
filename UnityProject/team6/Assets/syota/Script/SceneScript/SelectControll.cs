@@ -20,6 +20,8 @@ public class SelectControll : MonoBehaviour
     SceneControll sceneControll;
     GameObject obj_cameraInformation;
     CameraInformation cameraInformation;
+    GameObject obj_crtNoise;
+    CRTnoise crtNoise;
     /* シーン遷移の際に絶対に必要変数 */
 
     //-------//
@@ -28,8 +30,8 @@ public class SelectControll : MonoBehaviour
     GameObject obj_stageInstructs;
     StageInstructs stageInstructs;
     //SceneName name;
-    public bool ChangeSceneFrag;
-   
+    public bool ChangeSceneFrag { get; set; }
+    float ChangeSceneCount;
     void Start()
     {
         //シーン情報を取得
@@ -40,12 +42,17 @@ public class SelectControll : MonoBehaviour
         stageInstructs = obj_stageInstructs.GetComponent<StageInstructs>();
         obj_cameraInformation = GameObject.Find("CameraInformation");
         cameraInformation = obj_cameraInformation.GetComponent<CameraInformation>();
+        obj_crtNoise = GameObject.Find("SelectMainCamera");
+        crtNoise = obj_crtNoise.GetComponent<CRTnoise>();
 
         //演出用のカメラの情報を一つ前のシーンの状態と同じにする
         obj_PerformanceCamera.transform.position = cameraInformation.CameraPos;
         obj_PerformanceCamera.transform.rotation = cameraInformation.CameraRota;
+        //セレクトシーンに入った瞬間はNoneとして初期化
+        sceneControll.CurrentStage = NextStage.None;
 
-
+        ChangeSceneFrag = false;
+        ChangeSceneCount = 2;
     }
 
     void Update()
@@ -65,15 +72,27 @@ public class SelectControll : MonoBehaviour
         }
         if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
         {
-            //Debug.Log("ステージ移動する！！");
-            NextSceneToDecide();
+            if (stageInstructs.CurrentStage == NextStage.Exit)
+            {
+                Application.Quit();
+            }
+            Debug.Log("ステージ移動する！！");
+            ChangeSceneFrag = true;
         }
+        if (ChangeSceneFrag)
+        {
+            if (ChangeSceneCount < 0 && !crtNoise.CRTFlag) { crtNoise.CRTFlag = true; ChangeSceneFrag = false; }
+            else ChangeSceneCount -= Time.deltaTime; return;
+        }
+        if (!crtNoise.CRTFlag && ChangeSceneCount < 0 && !ChangeSceneFrag) { NextSceneToDecide(); ChangeSceneFrag = false; ChangeSceneCount = 2; }
     }
     /// <summary>
     /// 次に行くシーンを判断する
     /// </summary>
     private void NextSceneToDecide()
     {
+
+        Debug.Log("ノイズ動くよ" + crtNoise.CRTFlag);
         if (stageInstructs.CurrentStage.ToString().Substring(0, 5) == "Stage")
         {
             sceneControll.NextScene = SceneName.PlayScene;
@@ -86,6 +105,6 @@ public class SelectControll : MonoBehaviour
             sceneControll.AddToScene.Add(stageInstructs.CurrentStage.ToString() + AddToScene.ChildScene);
             sceneControll.CurrentStage = stageInstructs.CurrentStage;
         }
-    } 
+    }
 }
 

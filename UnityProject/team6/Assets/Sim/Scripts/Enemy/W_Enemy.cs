@@ -10,6 +10,7 @@ public class W_Enemy : MonoBehaviour
     //private Vector3 moveTargetPoint;
     //private int arrCount;
     private float accelaration;
+    private bool detect;
     //private bool movePointHit;
 
     //public GameObject[] movePoint;
@@ -59,7 +60,8 @@ public class W_Enemy : MonoBehaviour
         if (targetPoint.sqrMagnitude <= detectionRange * detectionRange)
         {
             gameObject.GetComponent<EnemyNavi>().enabled = false;
-
+            //soundManager.instance.EnemyToPlayer();
+             
             transform.LookAt(target);
             transform.Translate(Vector3.forward * velocity);
             Debug.Log("In");
@@ -74,6 +76,7 @@ public class W_Enemy : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            soundManager.instance.EnemyDead();
             Destroy(gameObject);
         }
     }
