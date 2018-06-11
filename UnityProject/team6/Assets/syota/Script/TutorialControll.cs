@@ -23,6 +23,8 @@ public class TutorialControll : MonoBehaviour
     GameObject SubCam;
 
     [SerializeField]
+    GameObject[] PouseRogo;
+
     GameObject portalPosObj;
 
     //必要なスクリプトを保持
@@ -62,6 +64,9 @@ public class TutorialControll : MonoBehaviour
         crtNoise = obj_crtNoise.GetComponent<CRTnoise>();
         obj_cameraInformation = GameObject.Find("CameraInformation");
         cameraInformation = obj_cameraInformation.GetComponent<CameraInformation>();
+
+        //ゴールorPortalのメアスオブジェ
+        portalPosObj = GameObject.FindGameObjectWithTag("GoleObject");
 
         //フラグ関係の初期化
         changeSceneFrag = false;
@@ -112,22 +117,24 @@ public class TutorialControll : MonoBehaviour
             Debug.Log("ポウズ");
             Debug.Log("ポウズ中の処理は：" + (PouseSelect)pouseSelectIndex);
             PouseOperation();
+            PoseIconColor();
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
             {
+                PouseRogo[0].transform.position = new Vector3(-1000, 0, 0);
                 switch (pouseSelectIndex)
                 {
                     //最初からやり直す
                     case 0:
+                        //ポウズを戻す
+                        Time.timeScale = 1;
+                        sceneControll.PuseFrag = false;
+                        break;
+                    //続きから始める
+                    case 1:
                         sceneControll.PuseFrag = false;
                         Time.timeScale = 1;
                         sceneControll.NextScene = SceneName.TutorialCurrentScene;
                         sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
-                        break;
-                    //続きから始める
-                    case 1:
-                        //ポウズを戻す
-                        Time.timeScale = 1;
-                        sceneControll.PuseFrag = false;
                         break;
                     //セレクトシーンへ戻る
                     case 2:
@@ -195,10 +202,38 @@ public class TutorialControll : MonoBehaviour
     {
         if (prevState_.Buttons.Start == ButtonState.Released && padState_.Buttons.Start == ButtonState.Pressed && !sceneControll.PuseFrag)
         {
+            PouseRogo[0].transform.position = obj_portal.transform.position + new Vector3(0, 0, 0.46f);
+            for (int i = 0; i < PouseRogo.Length; i++)
+                LeanTween.alpha(PouseRogo[i], 1.0f, 1f);
             Debug.Log("ポウズ");
             Time.timeScale = 0;
             sceneControll.PuseFrag = true;
             return;
+        }
+    }
+    private void PoseIconColor()
+    {
+        switch (pouseSelectIndex)
+        {
+            //最初からやり直す
+            case 0:
+                PouseRogo[1].GetComponent<Renderer>().material.color = Color.red;
+                PouseRogo[2].GetComponent<Renderer>().material.color = Color.white;
+                PouseRogo[3].GetComponent<Renderer>().material.color = Color.white;
+
+                break;
+            //続きから始める
+            case 1:
+                PouseRogo[2].GetComponent<Renderer>().material.color = Color.red;
+                PouseRogo[1].GetComponent<Renderer>().material.color = Color.white;
+                PouseRogo[3].GetComponent<Renderer>().material.color = Color.white;
+                break;
+            //セレクトシーンへ戻る
+            case 2:
+                PouseRogo[3].GetComponent<Renderer>().material.color = Color.red;
+                PouseRogo[2].GetComponent<Renderer>().material.color = Color.white;
+                PouseRogo[1].GetComponent<Renderer>().material.color = Color.white;
+                break;
         }
     }
 }

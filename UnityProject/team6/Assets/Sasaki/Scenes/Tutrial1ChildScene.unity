@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -389,6 +389,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4764463117283666, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0.73925304
@@ -432,6 +437,21 @@ Prefab:
       value: 
       objectReference: {fileID: 367294867}
     - target: {fileID: 114562743830435870, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.data[0]
+      value: 
+      objectReference: {fileID: 184875664}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: MainCam
+      value: 
+      objectReference: {fileID: 367294867}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: stageObj
+      value: 
+      objectReference: {fileID: 184875665}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
         type: 2}
       propertyPath: light.Array.data[0]
       value: 
