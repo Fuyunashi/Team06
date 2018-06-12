@@ -23,6 +23,9 @@ public class NoiseParticle : MonoBehaviour
     [SerializeField]
     GameObject[] ligth;
 
+    //タイトルコントロールのスクリプト
+    TitleControll titleControll;
+
     float light_time;
     float Title_time;
     float Count;
@@ -31,6 +34,7 @@ public class NoiseParticle : MonoBehaviour
 
     private void Start()
     {
+        titleControll = GameObject.Find("TitleControll").GetComponent<TitleControll>();
         title_frag = true;
         gun_frag = true;
         Title_time = 0;
@@ -50,7 +54,14 @@ public class NoiseParticle : MonoBehaviour
         ligth[1].GetComponent<Light>().intensity = light_time;
         if (Title_time < 200) { Title_time++; return; }
 
-
+        if (titleControll.sceneChangeFrag)
+        {
+            performanceMode = PerformanceMode.Gun;
+            horizonValue = 0;
+            LeanTween.alpha(gun_model[0], 1.0f, 0);
+            LeanTween.alpha(gun_model[1], 1.0f, 0);
+            return;
+        }
         switch (performanceMode)
         {
             case PerformanceMode.Title:
@@ -59,7 +70,8 @@ public class NoiseParticle : MonoBehaviour
                 Count++;
                 break;
             case PerformanceMode.Gun:
-                if (gun_frag) {
+                if (gun_frag)
+                {
                     LeanTween.alpha(gun_model[0], 1.0f, 1);
                     LeanTween.alpha(gun_model[1], 1.0f, 1); gun_frag = false;
                 }

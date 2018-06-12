@@ -19,20 +19,23 @@ public class Floating : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (gameObject.name == " EXITBoard(1)")
+        if (transform.name == "EXITBoard (1)")
         {
-            Debug.Log("haadfaldjfla");
+            Debug.Log("haadfaldjfla" + stageInstructs.CurrentStage);
             if (stageInstructs.CurrentStage != NextStage.Exit) return;
+
+            transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time, 1) + 4, transform.position.z);
+            return;
         }
         frameCnt += 1;
-        if (15000 <= frameCnt)
+        if (1000 <= frameCnt)
         {
             frameCnt = 0;
         }
         if (0 == frameCnt % 2)
         {
             // 上下に振動させる（ふわふわを表現）
-            float posYSin = Mathf.Sin(2f * Mathf.PI * (float)(frameCnt % 300) / (300.0f - 1.0f));
+            float posYSin = Mathf.Sin(2f * Mathf.PI * (float)(frameCnt % 200) / (200.0f - 1.0f));
             iTween.MoveAdd(gameObject, new Vector3(0, amplitude * posYSin, 0), 0.0f);
         }
     }
