@@ -76,7 +76,6 @@ public class SelectControll : MonoBehaviour
             {
                 Application.Quit();
             }
-            Debug.Log("ステージ移動する！！");
             ChangeSceneFrag = true;
         }
         if (ChangeSceneFrag)
@@ -91,8 +90,6 @@ public class SelectControll : MonoBehaviour
     /// </summary>
     private void NextSceneToDecide()
     {
-
-        Debug.Log("ノイズ動くよ" + crtNoise.CRTFlag);
         if (stageInstructs.CurrentStage.ToString().Substring(0, 5) == "Stage")
         {
             sceneControll.NextScene = SceneName.PlayScene;
