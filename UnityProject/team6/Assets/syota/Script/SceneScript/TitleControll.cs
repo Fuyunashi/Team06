@@ -22,7 +22,7 @@ public class TitleControll : MonoBehaviour
     CRTnoise crtNoise;
     GameObject obj_cameraInformation;
     CameraInformation cameraInformation;
-    bool sceneChangeFrag;
+    public bool sceneChangeFrag;
 
     public bool playerDeadFrag { get; set; }
 
@@ -47,19 +47,19 @@ public class TitleControll : MonoBehaviour
         //演出の関係上必要になったフラグ
         sceneChangeFrag = false;
 
-        //SoundManager.GetInstance.PlayBGM("再生したいファイル名（完全一致）");
+        //SoundManager.GetInstance.PlayBGM("6815");
     }
     void Update()
     {
         sceneChangeIcon = GameObject.Find("SceneChangeIcon");
-
-
+        
         //ノイズが行われてたらシーン移行フラグを入れる
         if (crtNoise.CRTFlag)
             sceneChangeFrag = true;
         //シーンのフラグが入り、ノイズが終わった報告があったらしーんを移行する
         if (!crtNoise.CRTFlag && sceneChangeFrag)
         {
+            //SoundManager.GetInstance.StopBGM();
             //カメラ情報の譲渡
             cameraInformation.CameraPos = MainCam.transform.position;
             cameraInformation.CameraRota = MainCam.transform.rotation;
