@@ -68,7 +68,8 @@ public class Shooter : MonoBehaviour
     private GameObject m_drawerCamera;
 
     private bool isTargetMove;      //転置するオブジェクトが動いているか
-    private bool isShot;   //Rトリガーが押されたか
+    private bool pushRTrigger;   //Rトリガーが押されたか
+    private bool pushLTrigger;  //Lトリガーが押されたか
 
     private Ray ray;
     private RaycastHit rayhit;
@@ -104,7 +105,8 @@ public class Shooter : MonoBehaviour
         objVal_target = null;
         isTargetMove = false;
 
-        isShot = false;
+        pushRTrigger = false;
+        pushLTrigger = false;
 
         //axisText.text = "axis:" + axisType.ToString();
         //changeText.text = "change:" + changeType.ToString();
@@ -148,14 +150,17 @@ public class Shooter : MonoBehaviour
             }
         }
         //弾が発射されていないかつショットタイプ切り替えボタンが押されたら
-        if ((Input.GetKeyDown(KeyCode.R) || (prevState.Buttons.Y == ButtonState.Released && padState.Buttons.Y == ButtonState.Pressed)))
+        if ((Input.GetKeyDown(KeyCode.R) || padState.Triggers.Left >=0.8f) && pushLTrigger==false)
         {
             SoundManager.GetInstance.PlaySE("Change_SE");
             //ショットタイプの切り替え
             SwitchShotType();
             if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
+            pushLTrigger = true;
         }
-        if (isShot == true && (padState.Triggers.Right <= 0.3f || Input.GetMouseButtonUp(0))) isShot = false;
+        if (pushLTrigger == true && (Input.GetKeyUp(KeyCode.R) || padState.Triggers.Left <= 0.3f)) pushLTrigger = false;
+
+        if (pushRTrigger == true && (padState.Triggers.Right <= 0.3f || Input.GetMouseButtonUp(0))) pushRTrigger = false;
 
         GunMaterialSet();
         laserPointer.SetPosition(0, laserPointer.transform.position);
@@ -210,13 +215,13 @@ public class Shooter : MonoBehaviour
                             objVal_origin_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayOriginObj.transform.parent.gameObject);
                         }
                         //射撃ボタンが押されたら
-                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && isShot == false)
+                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && pushRTrigger == false)
                         {
                             SoundManager.GetInstance.PlaySE("Gun_SE");
                             //発射
                             Shot(rayOriginObj);
                             //弾を撃った
-                            isShot = true;
+                            pushRTrigger = true;
                         }
                         break;
                     case ShotType.Setting:
@@ -236,13 +241,13 @@ public class Shooter : MonoBehaviour
                         }
                         InstantEstimateObject(rayTargetObj.transform.parent.parent.gameObject);
                         //射撃ボタンが押されたら
-                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && isShot == false)
+                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && pushRTrigger == false)
                         {
                             SoundManager.GetInstance.PlaySE("Gun_SE");
                             //発射
                             Shot(rayTargetObj);
                             //弾を撃った
-                            isShot = true;
+                            pushRTrigger = true;
                         }
                         break;
                 }
