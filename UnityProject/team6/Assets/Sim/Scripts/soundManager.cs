@@ -33,7 +33,6 @@ public class soundManager : MonoBehaviour {
     {
         simAudio.PlayOneShot(laserHit);
     }
-
     // Update is called once per frame
     void Update()
     {
