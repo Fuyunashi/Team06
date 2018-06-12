@@ -42,12 +42,12 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private Transform shotPos;    //発射位置
 
-    [SerializeField]
-    private Text axisText; //テスト用軸テキスト
-    [SerializeField]
-    private Text changeText; //テスト用変更する値テキスト
-    [SerializeField]
-    private Text shotText; //テスト用銃テキスト
+    //[SerializeField]
+    //private Text axisText; //テスト用軸テキスト
+    //[SerializeField]
+    //private Text changeText; //テスト用変更する値テキスト
+    //[SerializeField]
+    //private Text shotText; //テスト用銃テキスト
 
     private GameObject prevOriginObj;    //前回の取得するオブジェクト
     private GameObject originObject;     //数値を取得するオブジェクト
@@ -106,9 +106,9 @@ public class Shooter : MonoBehaviour
 
         isShot = false;
 
-        axisText.text = "axis:" + axisType.ToString();
-        changeText.text = "change:" + changeType.ToString();
-        shotText.text = "shot:" + shotType.ToString();
+        //axisText.text = "axis:" + axisType.ToString();
+        //changeText.text = "change:" + changeType.ToString();
+        //shotText.text = "shot:" + shotType.ToString();
 
         layerMask = ~(1 << 9 | 1 << 8);
     }
@@ -470,11 +470,11 @@ public class Shooter : MonoBehaviour
         {
             case ShotType.Getting:
                 shotType = ShotType.Setting;
-                shotText.text = "shot:" + shotType.ToString();
+                //shotText.text = "shot:" + shotType.ToString();
                 break;
             case ShotType.Setting:
                 shotType = ShotType.Getting;
-                shotText.text = "shot:" + shotType.ToString();
+                //shotText.text = "shot:" + shotType.ToString();
                 break;
         }
     }
@@ -485,15 +485,15 @@ public class Shooter : MonoBehaviour
         {
             case AxisType.X:
                 axisType = AxisType.Y;
-                axisText.text = "axis:" + axisType.ToString();
+                //axisText.text = "axis:" + axisType.ToString();
                 break;
             case AxisType.Y:
                 axisType = AxisType.Z;
-                axisText.text = "axis:" + axisType.ToString();
+                //axisText.text = "axis:" + axisType.ToString();
                 break;
             case AxisType.Z:
                 axisType = AxisType.X;
-                axisText.text = "axis:" + axisType.ToString();
+                //axisText.text = "axis:" + axisType.ToString();
                 break;
         }
     }
@@ -504,11 +504,11 @@ public class Shooter : MonoBehaviour
         {
             case ChangeType.Position:
                 changeType = ChangeType.Scale;
-                changeText.text = "change:" + changeType.ToString();
+                //changeText.text = "change:" + changeType.ToString();
                 break;
             case ChangeType.Scale:
                 changeType = ChangeType.Position;
-                changeText.text = "change:" + changeType.ToString();
+                //changeText.text = "change:" + changeType.ToString();
                 break;
         }
     }
