@@ -90,7 +90,6 @@ public class NoiseParticle : MonoBehaviour
         if (m_mat == null)
         {
             m_shader = Shader.Find("Unlit/NoiseParticle");
-            Debug.Log("動いてる" + m_shader);
             m_mat = new Material(m_shader);
             m_mat.hideFlags = HideFlags.DontSave;
         }
