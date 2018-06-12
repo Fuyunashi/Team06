@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 23582985446435768}
   m_Layer: 10
   m_Name: Goal
-  m_TagString: stage
+  m_TagString: GoleObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2750,9 +2750,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114100597683119538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2765,9 +2762,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114291002817387602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2780,9 +2774,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114464594424103130
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2795,9 +2786,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114624157193831384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2810,9 +2798,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114818644433676760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2825,9 +2810,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
 --- !u!114 &114899942208424568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2840,6 +2822,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crashEffectPref: {fileID: 0}
-  destroyEffectPref: {fileID: 0}
-  getSetEffectPref: {fileID: 0}
