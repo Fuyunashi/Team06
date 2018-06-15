@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -387,6 +387,46 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a338ab56bd3f4d2489193f9726f1b400, type: 2}
+    - target: {fileID: 1469074388202286, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1513800945999332, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026853462138722, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1411901374310118, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113615267363964, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740714026396238, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291877864936010, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126100439923292, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658679984673238, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466130327450494, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d7e0a6b6b876614296194c41ab4a931, type: 2}
   m_IsPrefabParent: 0

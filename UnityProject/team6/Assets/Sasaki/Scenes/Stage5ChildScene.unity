@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3918,7 +3918,7 @@ GameObject:
   - component: {fileID: 79120585}
   - component: {fileID: 79120584}
   - component: {fileID: 79120583}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (8)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -4190,7 +4190,7 @@ GameObject:
   - component: {fileID: 104693073}
   - component: {fileID: 104693072}
   - component: {fileID: 104693071}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (9)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -11658,7 +11658,7 @@ GameObject:
   - component: {fileID: 424463209}
   - component: {fileID: 424463208}
   - component: {fileID: 424463207}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (4)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -11765,7 +11765,7 @@ GameObject:
   - component: {fileID: 428765397}
   - component: {fileID: 428765396}
   - component: {fileID: 428765395}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (3)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -11872,7 +11872,7 @@ GameObject:
   - component: {fileID: 437732190}
   - component: {fileID: 437732189}
   - component: {fileID: 437732188}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (1)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -11979,7 +11979,7 @@ GameObject:
   - component: {fileID: 448898796}
   - component: {fileID: 448898795}
   - component: {fileID: 448898794}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -15600,7 +15600,7 @@ GameObject:
   - component: {fileID: 509032928}
   - component: {fileID: 509032927}
   - component: {fileID: 509032926}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (20)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -15827,7 +15827,7 @@ GameObject:
   - component: {fileID: 580350306}
   - component: {fileID: 580350305}
   - component: {fileID: 580350304}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (14)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -16115,7 +16115,7 @@ GameObject:
   - component: {fileID: 649804850}
   - component: {fileID: 649804849}
   - component: {fileID: 649804848}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (22)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -19706,7 +19706,7 @@ GameObject:
   - component: {fileID: 702896356}
   - component: {fileID: 702896355}
   - component: {fileID: 702896354}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (13)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -23317,7 +23317,7 @@ GameObject:
   - component: {fileID: 750367203}
   - component: {fileID: 750367202}
   - component: {fileID: 750367201}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (2)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -23626,7 +23626,7 @@ GameObject:
   - component: {fileID: 802003596}
   - component: {fileID: 802003595}
   - component: {fileID: 802003594}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (18)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -23733,7 +23733,7 @@ GameObject:
   - component: {fileID: 820538165}
   - component: {fileID: 820538164}
   - component: {fileID: 820538163}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (6)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -27406,7 +27406,7 @@ GameObject:
   - component: {fileID: 921361729}
   - component: {fileID: 921361728}
   - component: {fileID: 921361727}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (25)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -27682,7 +27682,7 @@ GameObject:
   - component: {fileID: 1016694458}
   - component: {fileID: 1016694457}
   - component: {fileID: 1016694456}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (21)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -35523,7 +35523,7 @@ GameObject:
   - component: {fileID: 1259154497}
   - component: {fileID: 1259154496}
   - component: {fileID: 1259154495}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (24)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -35820,7 +35820,7 @@ GameObject:
   - component: {fileID: 1339589676}
   - component: {fileID: 1339589675}
   - component: {fileID: 1339589674}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (17)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -43668,7 +43668,7 @@ GameObject:
   - component: {fileID: 1574092664}
   - component: {fileID: 1574092663}
   - component: {fileID: 1574092662}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (5)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -47273,7 +47273,7 @@ GameObject:
   - component: {fileID: 1620464228}
   - component: {fileID: 1620464227}
   - component: {fileID: 1620464226}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (11)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -47469,7 +47469,7 @@ GameObject:
   - component: {fileID: 1640869433}
   - component: {fileID: 1640869432}
   - component: {fileID: 1640869431}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (15)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -51293,7 +51293,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1785884693}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stagebase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54802,7 +54802,7 @@ GameObject:
   - component: {fileID: 1802700061}
   - component: {fileID: 1802700060}
   - component: {fileID: 1802700059}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (23)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -55022,7 +55022,7 @@ GameObject:
   - component: {fileID: 1822881227}
   - component: {fileID: 1822881226}
   - component: {fileID: 1822881225}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (12)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -62405,7 +62405,7 @@ GameObject:
   - component: {fileID: 1913478647}
   - component: {fileID: 1913478646}
   - component: {fileID: 1913478645}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (19)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -62744,7 +62744,7 @@ GameObject:
   - component: {fileID: 2039661233}
   - component: {fileID: 2039661232}
   - component: {fileID: 2039661231}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (10)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -62851,7 +62851,7 @@ GameObject:
   - component: {fileID: 2042070585}
   - component: {fileID: 2042070584}
   - component: {fileID: 2042070583}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (16)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -62958,7 +62958,7 @@ GameObject:
   - component: {fileID: 2050181206}
   - component: {fileID: 2050181205}
   - component: {fileID: 2050181204}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor_A_04 (7)
   m_TagString: stage
   m_Icon: {fileID: 0}
