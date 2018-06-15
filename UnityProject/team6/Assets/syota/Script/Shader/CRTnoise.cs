@@ -150,9 +150,7 @@ public class CRTnoise : MonoBehaviour
                 //ステージを選ぶ際と同じ型の列挙型を指定している
                 if (transform.tag == next_stage.ToString())
                 {
-                    //Debug.Log("これが俺がタグの名前だ：" + nextStage);
                     nextStage = (NextStage)next_stage;
-
                 }
             }
         }
@@ -179,6 +177,10 @@ public class CRTnoise : MonoBehaviour
         //nextStageがNoneの場合演出用のカメラなので下の処理は行わなくて良い
         if (nextStage == NextStage.None) return;
 
+        if (transform.tag == NextStage.Tutrial2.ToString())
+        {
+            Debug.Log("ノイズをかけるか" + CRTFlag);
+        }
         //Debug.Log("次のシーンはこれだ！" + stageInstructs.CurrentStage);
         //自身の列挙型の型が選んでいるステージと同じであるならフラグを消す
         if (nextStage == stageInstructs.CurrentStage)

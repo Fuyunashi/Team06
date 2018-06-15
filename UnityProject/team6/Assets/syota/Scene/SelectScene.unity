@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 8369209}
   - component: {fileID: 8369208}
   - component: {fileID: 8369207}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 30009078}
   - component: {fileID: 30009077}
   - component: {fileID: 30009076}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,9 +570,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.48797745
+  noiseX: 0.43686002
   rgbNoise: 0
-  sinNoiseScale: 0.37579733
+  sinNoiseScale: 0.11918181
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -611,7 +611,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 262144
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 7b8291785ca2de448ae5ce0019c38952, type: 2}
   m_TargetDisplay: 0
@@ -722,7 +722,7 @@ GameObject:
   - component: {fileID: 82347564}
   - component: {fileID: 82347566}
   - component: {fileID: 82347565}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -823,9 +823,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.27824822
+  noiseX: 0.4682384
   rgbNoise: 0
-  sinNoiseScale: 0.35961568
+  sinNoiseScale: 0.23859903
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -864,7 +864,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2097152
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: e07c0b3cdab3d2f4b85f7229245f8831, type: 2}
   m_TargetDisplay: 0
@@ -1046,7 +1046,7 @@ GameObject:
   - component: {fileID: 153419150}
   - component: {fileID: 153419152}
   - component: {fileID: 153419151}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1115,7 +1115,7 @@ GameObject:
   - component: {fileID: 164207152}
   - component: {fileID: 164207151}
   - component: {fileID: 164207150}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1241,9 +1241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.1494734
+  noiseX: 0.14813492
   rgbNoise: 0
-  sinNoiseScale: 0.061113596
+  sinNoiseScale: 0.0034809709
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -1282,7 +1282,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 524288
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: e2523d3651a32e942849f8b252f28aef, type: 2}
   m_TargetDisplay: 0
@@ -1305,7 +1305,7 @@ GameObject:
   - component: {fileID: 206594874}
   - component: {fileID: 206594873}
   - component: {fileID: 206594872}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1503,7 +1503,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: b82794649e50a2a49be429b01c9c7730, type: 2}
   m_TargetDisplay: 0
@@ -1622,7 +1622,7 @@ GameObject:
   - component: {fileID: 257972640}
   - component: {fileID: 257972642}
   - component: {fileID: 257972641}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1690,7 +1690,7 @@ GameObject:
   - component: {fileID: 265462735}
   - component: {fileID: 265462737}
   - component: {fileID: 265462736}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1931,7 +1931,7 @@ GameObject:
   - component: {fileID: 295197981}
   - component: {fileID: 295197983}
   - component: {fileID: 295197982}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2000,7 +2000,7 @@ GameObject:
   - component: {fileID: 297792119}
   - component: {fileID: 297792118}
   - component: {fileID: 297792117}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2147,6 +2147,11 @@ Prefab:
       propertyPath: m_Name
       value: TV (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 114291599799158586, guid: edc7de0c1b1123543bf541225423cec7,
+        type: 2}
+      propertyPath: nextStage
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: edc7de0c1b1123543bf541225423cec7, type: 2}
   m_IsPrefabParent: 0
@@ -2245,7 +2250,7 @@ GameObject:
   - component: {fileID: 335194302}
   - component: {fileID: 335194304}
   - component: {fileID: 335194303}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2929,9 +2934,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.36985302
+  noiseX: 0.48025805
   rgbNoise: 0
-  sinNoiseScale: 0.24900827
+  sinNoiseScale: 0.263288
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -2970,7 +2975,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 1fa5d06e29f827d4db54db76d424d257, type: 2}
   m_TargetDisplay: 0
@@ -2993,7 +2998,7 @@ GameObject:
   - component: {fileID: 463272867}
   - component: {fileID: 463272866}
   - component: {fileID: 463272865}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3884,9 +3889,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.44240725
+  noiseX: 0.14675471
   rgbNoise: 0
-  sinNoiseScale: 0.01930052
+  sinNoiseScale: 0.12841472
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -3925,7 +3930,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: deb194e114141df4b84bf2df0a3b5f69, type: 2}
   m_TargetDisplay: 0
@@ -4144,9 +4149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.21907327
+  noiseX: 0.25710633
   rgbNoise: 0
-  sinNoiseScale: 0.13842544
+  sinNoiseScale: 0.3161134
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -4347,9 +4352,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.007965684
+  noiseX: 0.038691342
   rgbNoise: 0
-  sinNoiseScale: 0.14055374
+  sinNoiseScale: 0.1571382
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -4388,7 +4393,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 268435456
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 680aff888a080b3459c3868684b3f2e7, type: 2}
   m_TargetDisplay: 0
@@ -4410,7 +4415,7 @@ GameObject:
   - component: {fileID: 621068451}
   - component: {fileID: 621068453}
   - component: {fileID: 621068452}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4731,7 +4736,7 @@ GameObject:
   - component: {fileID: 659266083}
   - component: {fileID: 659266082}
   - component: {fileID: 659266081}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4825,7 +4830,7 @@ GameObject:
   - component: {fileID: 715650531}
   - component: {fileID: 715650530}
   - component: {fileID: 715650529}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5079,7 +5084,7 @@ GameObject:
   - component: {fileID: 729445075}
   - component: {fileID: 729445074}
   - component: {fileID: 729445073}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5205,9 +5210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.37513864
+  noiseX: 0.099559665
   rgbNoise: 0
-  sinNoiseScale: 0.41002184
+  sinNoiseScale: 0.24710706
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -5246,7 +5251,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: e15a8ba119d04864496b9e5836373cfb, type: 2}
   m_TargetDisplay: 0
@@ -5862,7 +5867,7 @@ GameObject:
   - component: {fileID: 893721819}
   - component: {fileID: 893721821}
   - component: {fileID: 893721820}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6137,6 +6142,16 @@ Prefab:
       propertyPath: m_Name
       value: TV (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 114291599799158586, guid: edc7de0c1b1123543bf541225423cec7,
+        type: 2}
+      propertyPath: nextStage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23010854616445676, guid: edc7de0c1b1123543bf541225423cec7,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e827ae7581ffd4f44b99dcc5034b2017, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: edc7de0c1b1123543bf541225423cec7, type: 2}
   m_IsPrefabParent: 0
@@ -6233,7 +6248,7 @@ GameObject:
   - component: {fileID: 972132312}
   - component: {fileID: 972132314}
   - component: {fileID: 972132313}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6302,7 +6317,7 @@ GameObject:
   - component: {fileID: 975332605}
   - component: {fileID: 975332604}
   - component: {fileID: 975332603}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6494,7 +6509,7 @@ GameObject:
   - component: {fileID: 1018524240}
   - component: {fileID: 1018524242}
   - component: {fileID: 1018524241}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6701,7 +6716,7 @@ GameObject:
   - component: {fileID: 1033358799}
   - component: {fileID: 1033358801}
   - component: {fileID: 1033358800}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6854,7 +6869,7 @@ GameObject:
   - component: {fileID: 1077155929}
   - component: {fileID: 1077155928}
   - component: {fileID: 1077155927}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6985,9 +7000,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.22243658
+  noiseX: 0.13647237
   rgbNoise: 0
-  sinNoiseScale: 0.43086565
+  sinNoiseScale: 0.014035106
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -7026,7 +7041,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 16777216
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: d64aa8651b299a64891925154641eaba, type: 2}
   m_TargetDisplay: 0
@@ -7119,7 +7134,7 @@ GameObject:
   - component: {fileID: 1106295917}
   - component: {fileID: 1106295919}
   - component: {fileID: 1106295918}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7220,9 +7235,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.14184257
+  noiseX: 0.31639647
   rgbNoise: 0
-  sinNoiseScale: 0.02146238
+  sinNoiseScale: 0.44672376
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -7261,7 +7276,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 33554432
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: aea16bface45adb46b87e87a7c97de1c, type: 2}
   m_TargetDisplay: 0
@@ -7560,9 +7575,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.26516935
+  noiseX: 0.3931132
   rgbNoise: 0
-  sinNoiseScale: 0.17223623
+  sinNoiseScale: 0.25361457
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -7601,7 +7616,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 347c175356a58894db5ddffea5e3a1c2, type: 2}
   m_TargetDisplay: 0
@@ -7876,7 +7891,7 @@ GameObject:
   - component: {fileID: 1209430058}
   - component: {fileID: 1209430057}
   - component: {fileID: 1209430056}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8091,9 +8106,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.17309871
+  noiseX: 0.2791663
   rgbNoise: 0
-  sinNoiseScale: 0.49277842
+  sinNoiseScale: 0.37612814
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -8132,7 +8147,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 134217728
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: e49ebe239e9932342952bc233f79f654, type: 2}
   m_TargetDisplay: 0
@@ -8238,7 +8253,7 @@ GameObject:
   - component: {fileID: 1273773400}
   - component: {fileID: 1273773402}
   - component: {fileID: 1273773401}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8597,7 +8612,7 @@ GameObject:
   - component: {fileID: 1320562363}
   - component: {fileID: 1320562362}
   - component: {fileID: 1320562361}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8691,7 +8706,7 @@ GameObject:
   - component: {fileID: 1322306408}
   - component: {fileID: 1322306407}
   - component: {fileID: 1322306406}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: CanvasTutrial1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8979,9 +8994,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.2855697
+  noiseX: 0.34209102
   rgbNoise: 0
-  sinNoiseScale: 0.16754231
+  sinNoiseScale: 0.0010483861
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -9020,7 +9035,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8388608
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 9ac3ca40b036c6646b4a6a81c2d9ec62, type: 2}
   m_TargetDisplay: 0
@@ -9186,7 +9201,7 @@ GameObject:
   - component: {fileID: 1374609153}
   - component: {fileID: 1374609152}
   - component: {fileID: 1374609151}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9423,7 +9438,7 @@ GameObject:
   - component: {fileID: 1413422448}
   - component: {fileID: 1413422450}
   - component: {fileID: 1413422449}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: TutrialImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9491,7 +9506,7 @@ GameObject:
   - component: {fileID: 1423980669}
   - component: {fileID: 1423980671}
   - component: {fileID: 1423980670}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9805,9 +9820,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.17795548
+  noiseX: 0.116300344
   rgbNoise: 0
-  sinNoiseScale: 0.48721176
+  sinNoiseScale: 0.36080647
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -9846,7 +9861,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1048576
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 21f19c8cab7415348a18c6728aa70cf6, type: 2}
   m_TargetDisplay: 0
@@ -10085,7 +10100,7 @@ GameObject:
   - component: {fileID: 1569353542}
   - component: {fileID: 1569353544}
   - component: {fileID: 1569353543}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10186,9 +10201,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.17167112
+  noiseX: 0.039553046
   rgbNoise: 0
-  sinNoiseScale: 0.040976524
+  sinNoiseScale: 0.48036253
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -10227,7 +10242,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4194304
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 126ca7d35f5a33f43bcda3eed61ed448, type: 2}
   m_TargetDisplay: 0
@@ -10334,7 +10349,7 @@ GameObject:
   - component: {fileID: 1583874920}
   - component: {fileID: 1583874919}
   - component: {fileID: 1583874918}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11113,9 +11128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.43105018
+  noiseX: 0.06990385
   rgbNoise: 0
-  sinNoiseScale: 0.45325035
+  sinNoiseScale: 0.09941238
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -11331,9 +11346,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.12405622
+  noiseX: 0.0038855672
   rgbNoise: 0
-  sinNoiseScale: 0.050206125
+  sinNoiseScale: 0.45278615
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -11372,7 +11387,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 67108864
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: cf901483ca6a0374592d6438c89ed980, type: 2}
   m_TargetDisplay: 0
@@ -11399,7 +11414,7 @@ GameObject:
   - component: {fileID: 1701825011}
   - component: {fileID: 1701825013}
   - component: {fileID: 1701825012}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: TutrialImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12379,9 +12394,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.25496706
+  noiseX: 0.042606235
   rgbNoise: 0
-  sinNoiseScale: 0.39965087
+  sinNoiseScale: 0.20590428
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -12420,7 +12435,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 65536
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 316b173238747cb4d951c2ea91e5d471, type: 2}
   m_TargetDisplay: 0
@@ -12473,7 +12488,7 @@ MonoBehaviour:
   - currentStage: 2
     up_tv: 20
     right_tv: 3
-    left_tv: 1
+    left_tv: 0
     dwon_tv: 5
   - currentStage: 3
     up_tv: 20
@@ -12488,7 +12503,7 @@ MonoBehaviour:
   - currentStage: 5
     up_tv: 2
     right_tv: 6
-    left_tv: 0
+    left_tv: 1
     dwon_tv: 20
   - currentStage: 6
     up_tv: 3
@@ -12952,7 +12967,7 @@ GameObject:
   - component: {fileID: 1950649212}
   - component: {fileID: 1950649214}
   - component: {fileID: 1950649213}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13053,9 +13068,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.4439485
+  noiseX: 0.12534276
   rgbNoise: 0
-  sinNoiseScale: 0.3605442
+  sinNoiseScale: 0.14692727
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -13094,7 +13109,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 32768
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: f5d533d37115f1a49aa3f85e5f560d18, type: 2}
   m_TargetDisplay: 0
@@ -13594,7 +13609,7 @@ GameObject:
   - component: {fileID: 2083285571}
   - component: {fileID: 2083285570}
   - component: {fileID: 2083285569}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13688,7 +13703,7 @@ GameObject:
   - component: {fileID: 2098441921}
   - component: {fileID: 2098441920}
   - component: {fileID: 2098441919}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: CanvasTutrial2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13814,9 +13829,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.27839538
+  noiseX: 0.37436223
   rgbNoise: 0
-  sinNoiseScale: 0.0045060515
+  sinNoiseScale: 0.15179047
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -13855,7 +13870,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 7e91d7d596cbcef49bd0b2427f552dba, type: 2}
   m_TargetDisplay: 0
@@ -14108,7 +14123,7 @@ GameObject:
   - component: {fileID: 2130029582}
   - component: {fileID: 2130029584}
   - component: {fileID: 2130029583}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Stage2Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14177,7 +14192,7 @@ GameObject:
   - component: {fileID: 2131263439}
   - component: {fileID: 2131263438}
   - component: {fileID: 2131263437}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasSatge15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14260,31 +14275,3 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &2140069488
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 955094556}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2140069489}
-  m_Layer: 0
-  m_Name: Missing Prefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2140069489
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 955094556}
-  m_GameObject: {fileID: 2140069488}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 31
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

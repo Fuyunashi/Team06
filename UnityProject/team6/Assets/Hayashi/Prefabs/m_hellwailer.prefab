@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4270147124824886}
   - component: {fileID: 33382133199465222}
   - component: {fileID: 23193537820103872}
+  - component: {fileID: 114599261969370774}
   m_Layer: 0
   m_Name: m_hellwailer
   m_TagString: Untagged
@@ -85,8 +86,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 812b14b156207c14c9609451642f667a, type: 2}
-  - {fileID: 2100000, guid: 3273360bbb61cb14f9e044f7f7a8ee84, type: 2}
+  - {fileID: 2100000, guid: f86830a9bc5930a47989f3322f2d7ec7, type: 2}
+  - {fileID: 2100000, guid: 03ea79b8407d7f54e89970e689e67314, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,6 +114,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1335948942405802}
   m_Mesh: {fileID: 4300000, guid: fccd8e251d698f7449ed9aca4bacc50e, type: 3}
+--- !u!114 &114599261969370774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1335948942405802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e297f830e4eecbf449e9866f8ec33b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPointer: {fileID: 120668000242430658}
 --- !u!120 &120668000242430658
 LineRenderer:
   m_ObjectHideFlags: 1
