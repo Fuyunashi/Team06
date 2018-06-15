@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -166,22 +166,22 @@ Prefab:
         type: 2}
       propertyPath: PouseRogo.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 717131971}
     - target: {fileID: 114355314439569430, guid: 4caf9e7bed6227347999a01534239534,
         type: 2}
       propertyPath: PouseRogo.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 717131970}
     - target: {fileID: 114355314439569430, guid: 4caf9e7bed6227347999a01534239534,
         type: 2}
       propertyPath: PouseRogo.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 717131969}
     - target: {fileID: 114355314439569430, guid: 4caf9e7bed6227347999a01534239534,
         type: 2}
       propertyPath: PouseRogo.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 717131968}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4caf9e7bed6227347999a01534239534, type: 2}
   m_IsPrefabParent: 0
@@ -641,11 +641,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1137788788700840, guid: c4e54673cf1515045b52813c90369b43, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4e54673cf1515045b52813c90369b43, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &717131968 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114638328266698350, guid: c4e54673cf1515045b52813c90369b43,
+    type: 2}
+  m_PrefabInternal: {fileID: 717131967}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &717131969 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114924018912745096, guid: c4e54673cf1515045b52813c90369b43,
+    type: 2}
+  m_PrefabInternal: {fileID: 717131967}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &717131970 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114361867330637846, guid: c4e54673cf1515045b52813c90369b43,
+    type: 2}
+  m_PrefabInternal: {fileID: 717131967}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &717131971 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114537290802750962, guid: c4e54673cf1515045b52813c90369b43,
+    type: 2}
+  m_PrefabInternal: {fileID: 717131967}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1668545606
 GameObject:
   m_ObjectHideFlags: 0
