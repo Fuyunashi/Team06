@@ -43,8 +43,7 @@ public class Player : MonoBehaviour
     private const float interval_sec_ = 0.4f;
     //最後になった時間
     private DateTime lastStepTime_;
-    //
-    [SerializeField]
+    [SerializeField, Tooltip("足音の数")]
     private int randomRange_ = 3;
 
     private bool isJumping_ = false;
@@ -81,6 +80,9 @@ public class Player : MonoBehaviour
         velocity_ = Vector3.zero;
         isGround_ = true;
         rb_ = GetComponent<Rigidbody>();
+        isStop_ = false;
+
+        fallPosition_ = transform.position.y;
     }
 
     // Update is called once per frame
@@ -103,11 +105,9 @@ public class Player : MonoBehaviour
         Vector3 direction = cameraForward * Input.GetAxis("Vertical") + camera_.transform.right * Input.GetAxis("Horizontal");
 
         RaycastHit hit;
-        if (Physics.SphereCast(charaRay.transform.position, 0.2f, -transform.up, out hit, 0.4f, LayerMask.GetMask("Wall", "Production")))
+        if (Physics.SphereCast(charaRay.transform.position, 0.2f, -transform.up, out hit, 0.6f, LayerMask.GetMask("Wall", "Production")))
         {
-            
             isGround_ = true;
-
         }
         else
         {
@@ -116,20 +116,19 @@ public class Player : MonoBehaviour
         
         if (isGround_)
         {
-            //velocity_ = Vector3.zero;
-
-            //移動パターン１
+            
             //方向キーの入力量を計測
             if (direction.magnitude > 0.01f)
             {
+                //初期化
                 velocity_ = Vector3.zero;
 
                 transform.LookAt(transform.position + direction);
-                
+                //移動量
                 velocity_ += direction * moveSpeed_;
                 
-                int num_ = UnityEngine.Random.Range(0, randomRange_);
                 //足音
+                int num_ = UnityEngine.Random.Range(0, randomRange_);
                 if ((DateTime.Now - lastStepTime_).TotalSeconds < interval_sec_)
                 {
                     return;
@@ -153,30 +152,30 @@ public class Player : MonoBehaviour
                     }
                     lastStepTime_ = DateTime.Now;
                 }
-
                 
             }
             else
             {
                 velocity_ = Vector3.zero;
-                
             }
 
             //ジャンプ
-            if (((Input.GetKeyDown(KeyCode.Space) || (prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed))))
+            if ((prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed))
             {
-                Debug.Log("飛んでます");
+                //Debug.Log("飛んでます");
                 isJumping_ = true;
                 velocity_.y += jumpPower_;
                 SoundManager.GetInstance.PlaySE("Janp_SE");
             }
 
         }
-
+        
         //重力
         if (!isGround_)
         {
             velocity_.y += Physics.gravity.y * Time.deltaTime;
+
+            //fallPosition_ = transform.position.y;
         }
 
         //死亡処理
@@ -185,13 +184,13 @@ public class Player : MonoBehaviour
             deathTimer_ += Time.deltaTime;
             //高さで死ぬ処理
             fallPosition_ = Mathf.Max(fallPosition_, transform.position.y);
-            
+
             //落下したら死ぬ
-            if (Physics.Linecast(charaRay.position, charaRay.position + new Vector3(0.0f, -0.4f, 0.0f), LayerMask.GetMask("Wall", "Product")))
+            if (Physics.Linecast(charaRay.position, charaRay.position + Vector3.down * 1f, LayerMask.GetMask("Wall", "Product")))
             {
+                Debug.Log("落下しました");
                 distance_ = fallPosition_ - transform.position.y;
 
-                //Debug.Log(distance_);
                 if (distance_ >= deadDistance_)
                 {
                     SoundManager.GetInstance.PlaySE("FallDead_SE");
@@ -204,6 +203,7 @@ public class Player : MonoBehaviour
                     {
                         tutorialControll.playerDeadFrag = true;
                     }
+                    Debug.Log("死にました");
                     Destroy(gameObject);
                 }
 
@@ -271,7 +271,7 @@ public class Player : MonoBehaviour
 
         var radius = transform.lossyScale.x * 0.2f;
 
-        var isHit = Physics.SphereCast(charaRay.position, radius, -transform.up * 10, out hit, 0.4f);
+        var isHit = Physics.SphereCast(charaRay.position, radius, -transform.up, out hit, 0.4f);
         if (isHit)
         {
             Gizmos.DrawRay(transform.position, -transform.up * hit.distance);
