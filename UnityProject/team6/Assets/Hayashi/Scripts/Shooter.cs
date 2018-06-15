@@ -206,9 +206,9 @@ public class Shooter : MonoBehaviour
                         {
                             objVal_origin_ray = Instantiate(objValPref_ray,
                                                      new Vector3(
-                                                         rayOriginObj.transform.parent.parent.localPosition.x,
-                                                         rayOriginObj.transform.parent.parent.localPosition.y,
-                                                         rayOriginObj.transform.parent.parent.localPosition.z) +
+                                                         rayOriginObj.transform.parent.parent.position.x,
+                                                         rayOriginObj.transform.parent.parent.position.y,
+                                                         rayOriginObj.transform.parent.parent.position.z) +
                                                          new Vector3(0, rayOriginObj.transform.parent.localScale.y / 2 + 0.5f, 0),
                                                      Quaternion.identity
                                                     );
@@ -231,9 +231,9 @@ public class Shooter : MonoBehaviour
                         {
                             objVal_target_ray = Instantiate(objValPref_ray,
                                                      new Vector3(
-                                                         rayTargetObj.transform.parent.parent.localPosition.x,
-                                                         rayTargetObj.transform.parent.parent.localPosition.y,
-                                                         rayTargetObj.transform.parent.parent.localPosition.z) +
+                                                         rayTargetObj.transform.parent.parent.position.x,
+                                                         rayTargetObj.transform.parent.parent.position.y,
+                                                         rayTargetObj.transform.parent.parent.position.z) +
                                                          new Vector3(0, rayTargetObj.transform.parent.localScale.y / 2 + 0.5f, 0),
                                                      Quaternion.identity
                                                     );
@@ -281,21 +281,21 @@ public class Shooter : MonoBehaviour
                 {
                     case AxisType.X:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localPosition.x);
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.position.x);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localPosition.x);
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.position.x);
                         break;
                     case AxisType.Y:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localPosition.y);
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.position.y);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localPosition.y);
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.position.y);
                         break;
                     case AxisType.Z:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localPosition.z);
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.position.z);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localPosition.z);
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.position.z);
                         break;
                 }
                 break;
@@ -374,13 +374,13 @@ public class Shooter : MonoBehaviour
                 switch (axisType)
                 {
                     case AxisType.X:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localPosition.x);
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.position.x);
                         break;
                     case AxisType.Y:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localPosition.y);
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.position.y);
                         break;
                     case AxisType.Z:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localPosition.z);
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.position.z);
                         break;
                 }
                 break;
@@ -413,21 +413,21 @@ public class Shooter : MonoBehaviour
                         case AxisType.X:
                             m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
                                                 originPositionValue.x,
-                                                obj.transform.position.y,
-                                                obj.transform.position.z
+                                                obj.transform.localPosition.y,
+                                                obj.transform.localPosition.z
                                                 ), obj.transform.localRotation);
                             break;
                         case AxisType.Y:
                             m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
-                                               obj.transform.position.x,
+                                               obj.transform.localPosition.x,
                                                originPositionValue.y,
-                                               obj.transform.position.z
+                                               obj.transform.localPosition.z
                                                ), obj.transform.localRotation);
                             break;
                         case AxisType.Z:
                             m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
-                                               obj.transform.position.x,
-                                               obj.transform.position.y,
+                                               obj.transform.localPosition.x,
+                                               obj.transform.localPosition.y,
                                                originPositionValue.z
                                                ), obj.transform.localRotation);
                             break;
@@ -579,9 +579,9 @@ public class Shooter : MonoBehaviour
                         Destroy(objVal_origin);
                         objVal_origin = Instantiate(objValPref,
                                                         new Vector3(
-                                                            originObject.transform.parent.parent.localPosition.x,
-                                                            originObject.transform.parent.parent.localPosition.y,
-                                                            originObject.transform.parent.parent.localPosition.z) +
+                                                            originObject.transform.parent.parent.position.x,
+                                                            originObject.transform.parent.parent.position.y,
+                                                            originObject.transform.parent.parent.position.z) +
                                                             new Vector3(0, originObject.transform.parent.localScale.y + 0.5f, 0),
                                                         Quaternion.identity
                                                        );
@@ -602,9 +602,9 @@ public class Shooter : MonoBehaviour
                         Destroy(objVal_target);
                         objVal_target = Instantiate(objValPref,
                                                      new Vector3(
-                                                         targetObject.transform.parent.parent.localPosition.x,
-                                                         targetObject.transform.parent.parent.localPosition.y,
-                                                         targetObject.transform.parent.parent.localPosition.z) +
+                                                         targetObject.transform.parent.parent.position.x,
+                                                         targetObject.transform.parent.parent.position.y,
+                                                         targetObject.transform.parent.parent.position.z) +
                                                          new Vector3(0, targetObject.transform.parent.localScale.y + 0.5f, 0),
                                                      Quaternion.identity
                                                     );
@@ -620,7 +620,7 @@ public class Shooter : MonoBehaviour
     //取得するオブジェクトの値を取得
     private void GetOriginAxisLength()
     {
-        originPositionValue = originObject.transform.parent.parent.localPosition;
+        originPositionValue = originObject.transform.parent.parent.position;
         originScaleValue = originObject.transform.parent.localScale;
     }
 
