@@ -570,9 +570,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.27021274
+  noiseX: 0.07857412
   rgbNoise: 0
-  sinNoiseScale: 0.4781534
+  sinNoiseScale: 0.0085814595
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -823,9 +823,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.24234119
+  noiseX: 0.3308388
   rgbNoise: 0
-  sinNoiseScale: 0.14316633
+  sinNoiseScale: 0.43049818
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -1241,9 +1241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.3847372
+  noiseX: 0.32667738
   rgbNoise: 0
-  sinNoiseScale: 0.34836793
+  sinNoiseScale: 0.02996838
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -2934,9 +2934,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.081465185
+  noiseX: 0.35158288
   rgbNoise: 0
-  sinNoiseScale: 0.007935047
+  sinNoiseScale: 0.36299688
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -3889,9 +3889,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.2790701
+  noiseX: 0.412367
   rgbNoise: 0
-  sinNoiseScale: 0.3921677
+  sinNoiseScale: 0.018563569
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -4149,9 +4149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.39177465
+  noiseX: 0.2056264
   rgbNoise: 0
-  sinNoiseScale: 0.33310205
+  sinNoiseScale: 0.07858646
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -4352,9 +4352,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.08581799
+  noiseX: 0.15789905
   rgbNoise: 0
-  sinNoiseScale: 0.25026098
+  sinNoiseScale: 0.10197431
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -5304,9 +5304,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.14561471
+  noiseX: 0.37882358
   rgbNoise: 0
-  sinNoiseScale: 0.37899548
+  sinNoiseScale: 0.27885816
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -7094,9 +7094,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.1187377
+  noiseX: 0.48556417
   rgbNoise: 0
-  sinNoiseScale: 0.29684398
+  sinNoiseScale: 0.3902384
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -7329,9 +7329,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.22750327
+  noiseX: 0.013770819
   rgbNoise: 0
-  sinNoiseScale: 0.10827887
+  sinNoiseScale: 0.46788502
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -7669,9 +7669,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.092487514
+  noiseX: 0.39417017
   rgbNoise: 0
-  sinNoiseScale: 0.23769215
+  sinNoiseScale: 0.1152578
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -7959,7 +7959,7 @@ Prefab:
     - target: {fileID: 114291599799158586, guid: edc7de0c1b1123543bf541225423cec7,
         type: 2}
       propertyPath: nextStage
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: edc7de0c1b1123543bf541225423cec7, type: 2}
@@ -8200,9 +8200,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.025874496
+  noiseX: 0.33330774
   rgbNoise: 0
-  sinNoiseScale: 0.32502198
+  sinNoiseScale: 0.4090945
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -9088,9 +9088,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.4976259
+  noiseX: 0.15346178
   rgbNoise: 0
-  sinNoiseScale: 0.054335415
+  sinNoiseScale: 0.23060647
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -9983,9 +9983,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.29954258
+  noiseX: 0.2507855
   rgbNoise: 0
-  sinNoiseScale: 0.13625643
+  sinNoiseScale: 0.3434633
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -10364,9 +10364,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.33250505
+  noiseX: 0.003591299
   rgbNoise: 0
-  sinNoiseScale: 0.14781073
+  sinNoiseScale: 0.14911488
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -11291,9 +11291,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.085308254
+  noiseX: 0.2578639
   rgbNoise: 0
-  sinNoiseScale: 0.3516472
+  sinNoiseScale: 0.31824315
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -11509,9 +11509,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.014868915
+  noiseX: 0.14130947
   rgbNoise: 0
-  sinNoiseScale: 0.35152048
+  sinNoiseScale: 0.1775761
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -12557,9 +12557,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.22116372
+  noiseX: 0.15538976
   rgbNoise: 0
-  sinNoiseScale: 0.07244146
+  sinNoiseScale: 0.31699073
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -13231,9 +13231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.016364455
+  noiseX: 0.44578934
   rgbNoise: 0
-  sinNoiseScale: 0.29339996
+  sinNoiseScale: 0.08364123
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}
@@ -13992,9 +13992,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 14c6acb7899262d4f872b0a1e425fbe7, type: 2}
-  noiseX: 0.2038177
+  noiseX: 0.43070453
   rgbNoise: 0
-  sinNoiseScale: 0.25098285
+  sinNoiseScale: 0.2460365
   sinNoiseWidth: 0
   sinNoiseOffset: 0
   offset: {x: 0, y: 0}

@@ -24,11 +24,12 @@ public class ChildSceneCameraControll : MonoBehaviour
         sceneControll = scene.GetComponent<SceneControll>();
 
         //現在のステージと自身が存在するシーンが異なればレイヤー設定
-        if (GetSceneContainObject(gameObject) != sceneControll.CurrentStage.ToString() + "ChildScene")
+        if (GetSceneContainObject(gameObject) != sceneControll.CurrentStage.ToString() + "ChildScene"
+            || sceneControll.CurrentScene == SceneName.SelectScene)
         {
             List<GameObject> list = ChildLayer.GetAll(stageObj);
             foreach (var childTransform in list)
-                childTransform.gameObject.layer = LayerMask.NameToLayer("Production");           
+                childTransform.gameObject.layer = LayerMask.NameToLayer("Production");
         }
         if (SceneManager.GetActiveScene().name == SceneName.SelectScene.ToString())
         {
