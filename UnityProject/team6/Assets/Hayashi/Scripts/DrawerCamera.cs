@@ -20,12 +20,12 @@ public class DrawerCamera : MonoBehaviour
         if (target != null)
         {
             targetRotate = Quaternion.LookRotation(target.transform.position - this.transform.position);
-            transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotate, 0.05f);
-            transform.position = Vector3.Lerp(transform.position, target.transform.position + new Vector3(0, 0, -2f), 0.03f);
+            transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotate, 2.0f*Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, target.transform.position + new Vector3(0, 0, -2f), 2.0f*Time.deltaTime);
         }
         if (isDrawEnd == true)
         {
-            transform.position = Vector3.Lerp(transform.position, player.transform.position + new Vector3(0, 1f, 0), 0.2f);
+            transform.position = Vector3.Lerp(transform.position, player.transform.position + new Vector3(0, 1f, 0), 5.0f*Time.deltaTime);
             if (Vector3.Distance(transform.position, player.transform.position + new Vector3(0, 1f, 0)) <= 0.3f)
             {
                 player.GetComponent<Player>().isStop_ = false;

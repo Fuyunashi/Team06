@@ -201,7 +201,7 @@ public class Shooter : MonoBehaviour
                                                          rayOriginObj.transform.parent.parent.position.x,
                                                          rayOriginObj.transform.parent.parent.position.y,
                                                          rayOriginObj.transform.parent.parent.position.z) +
-                                                         new Vector3(0, rayOriginObj.transform.parent.localScale.y / 2 + 0.5f, 0),
+                                                         new Vector3(0, rayOriginObj.transform.parent.parent.localScale.y / 2 + 0.5f, 0),
                                                      Quaternion.identity
                                                     );
                             objVal_origin_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayOriginObj.transform.parent.gameObject);
@@ -226,7 +226,7 @@ public class Shooter : MonoBehaviour
                                                          rayTargetObj.transform.parent.parent.position.x,
                                                          rayTargetObj.transform.parent.parent.position.y,
                                                          rayTargetObj.transform.parent.parent.position.z) +
-                                                         new Vector3(0, rayTargetObj.transform.parent.localScale.y / 2 + 0.5f, 0),
+                                                         new Vector3(0, rayTargetObj.transform.parent.parent.localScale.y / 2 + 0.5f, 0),
                                                      Quaternion.identity
                                                     );
                             objVal_target_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayTargetObj.transform.parent.gameObject);
@@ -295,21 +295,21 @@ public class Shooter : MonoBehaviour
                 {
                     case AxisType.X:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.x);
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localScale.x);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.localScale.x);
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localScale.x);
                         break;
                     case AxisType.Y:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.y);
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localScale.y);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.localScale.y);
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localScale.y);
                         break;
                     case AxisType.Z:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.z);
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localScale.z);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.localScale.z);
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localScale.z);
                         break;
                 }
                 break;
@@ -379,13 +379,13 @@ public class Shooter : MonoBehaviour
                 switch (axisType)
                 {
                     case AxisType.X:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.localScale.x);
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localScale.x);
                         break;
                     case AxisType.Y:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.localScale.y);
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localScale.y);
                         break;
                     case AxisType.Z:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.localScale.z);
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localScale.z);
                         break;
                 }
                 break;
@@ -423,10 +423,10 @@ public class Shooter : MonoBehaviour
                                                ), obj.transform.localRotation);
                             break;
                     }
-                    m_estimateObj.transform.GetChild(0).localScale = new Vector3(
-                              obj.transform.GetChild(0).localScale.x,
-                              obj.transform.GetChild(0).localScale.y,
-                              obj.transform.GetChild(0).localScale.z);
+                    m_estimateObj.transform.localScale = new Vector3(
+                              obj.transform.localScale.x,
+                              obj.transform.localScale.y,
+                              obj.transform.localScale.z);
                     break;
                 case ChangeType.Scale:
                     m_estimateObj = Instantiate(obj,
@@ -435,21 +435,21 @@ public class Shooter : MonoBehaviour
                     switch (axisType)
                     {
                         case AxisType.X:
-                            m_estimateObj.transform.GetChild(0).localScale = new Vector3(
+                            m_estimateObj.transform.localScale = new Vector3(
                                 originScaleValue.x,
-                                obj.transform.GetChild(0).localScale.y,
-                                obj.transform.GetChild(0).localScale.z);
+                                obj.transform.localScale.y,
+                                obj.transform.localScale.z);
                             break;
                         case AxisType.Y:
-                            m_estimateObj.transform.GetChild(0).localScale = new Vector3(
-                               obj.transform.GetChild(0).localScale.x,
+                            m_estimateObj.transform.localScale = new Vector3(
+                               obj.transform.localScale.x,
                                originScaleValue.y,
-                               obj.transform.GetChild(0).localScale.z);
+                               obj.transform.localScale.z);
                             break;
                         case AxisType.Z:
-                            m_estimateObj.transform.GetChild(0).localScale = new Vector3(
-                                obj.transform.GetChild(0).localScale.x,
-                                obj.transform.GetChild(0).localScale.y,
+                            m_estimateObj.transform.localScale = new Vector3(
+                                obj.transform.localScale.x,
+                                obj.transform.localScale.y,
                                 originScaleValue.z);
                             break;
                     }
@@ -572,7 +572,7 @@ public class Shooter : MonoBehaviour
                                                             originObject.transform.parent.parent.position.x,
                                                             originObject.transform.parent.parent.position.y,
                                                             originObject.transform.parent.parent.position.z) +
-                                                            new Vector3(0, originObject.transform.parent.localScale.y + 0.5f, 0),
+                                                            new Vector3(0, originObject.transform.parent.parent.localScale.y + 0.5f, 0),
                                                         Quaternion.identity
                                                        );
                         objVal_origin.GetComponent<ValueDrawerController>().GetDrawBaseObj(originObject.transform.parent.gameObject);
@@ -595,7 +595,7 @@ public class Shooter : MonoBehaviour
                                                          targetObject.transform.parent.parent.position.x,
                                                          targetObject.transform.parent.parent.position.y,
                                                          targetObject.transform.parent.parent.position.z) +
-                                                         new Vector3(0, targetObject.transform.parent.localScale.y + 0.5f, 0),
+                                                         new Vector3(0, targetObject.transform.parent.parent.localScale.y + 0.5f, 0),
                                                      Quaternion.identity
                                                     );
                         objVal_target.GetComponent<ValueDrawerController>().GetDrawBaseObj(targetObject.transform.parent.gameObject);
@@ -611,7 +611,7 @@ public class Shooter : MonoBehaviour
     private void GetOriginAxisLength()
     {
         originPositionValue = originObject.transform.parent.parent.position;
-        originScaleValue = originObject.transform.parent.localScale;
+        originScaleValue = originObject.transform.parent.parent.localScale;
     }
 
     //指定した変更する値の軸を切り替え
@@ -652,19 +652,19 @@ public class Shooter : MonoBehaviour
                     case AxisType.X:
                         targetObject.transform.GetComponent<ObjectController>().ScaleShiftStart(
                             new Vector3(originScaleValue.x,
-                                        targetObject.transform.parent.localScale.y,
-                                        targetObject.transform.parent.localScale.z));
+                                        targetObject.transform.parent.parent.localScale.y,
+                                        targetObject.transform.parent.parent.localScale.z));
                         break;
                     case AxisType.Y:
                         targetObject.transform.GetComponent<ObjectController>().ScaleShiftStart(
-                            new Vector3(targetObject.transform.parent.localScale.x,
+                            new Vector3(targetObject.transform.parent.parent.localScale.x,
                                         originScaleValue.y,
-                                        targetObject.transform.parent.localScale.z));
+                                        targetObject.transform.parent.parent.localScale.z));
                         break;
                     case AxisType.Z:
                         targetObject.transform.GetComponent<ObjectController>().ScaleShiftStart(
-                            new Vector3(targetObject.transform.parent.localScale.x,
-                                        targetObject.transform.parent.localScale.y,
+                            new Vector3(targetObject.transform.parent.parent.localScale.x,
+                                        targetObject.transform.parent.parent.localScale.y,
                                         originScaleValue.z));
                         break;
                 }
@@ -689,7 +689,7 @@ public class Shooter : MonoBehaviour
     //コピー時の演出アニメーション処理
     private void SettingAnimation(GameObject target)
     {
-        m_drawerCamera = Instantiate(drawerCameraPref, this.transform.position + new Vector3(0, 1f, 0), this.transform.rotation);
+        m_drawerCamera = Instantiate(drawerCameraPref, this.transform.position + new Vector3(0, 1f, 0), Camera.main.transform.rotation);
         m_drawerCamera.GetComponent<DrawerCamera>().SetDrawerObj(objVal_origin);
 
         LeanTween.delayedCall(1.0f, () =>
