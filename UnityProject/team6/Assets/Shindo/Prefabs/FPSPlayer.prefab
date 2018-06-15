@@ -119,7 +119,7 @@ MonoBehaviour:
   velocity_: {x: 0, y: 0, z: 0}
   moveSpeed_: 3
   charaRay: {fileID: 4208197556137572}
-  jumpPower_: 5
+  jumpPower_: 7
   deathTime_: 8
   deadDistance_: 5
   randomRange_: 3
