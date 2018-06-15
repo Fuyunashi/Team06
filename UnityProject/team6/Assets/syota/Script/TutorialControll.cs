@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
+using UnityEngine.UI;
 
 public class TutorialControll : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class TutorialControll : MonoBehaviour
     GameObject SubCam;
 
     [SerializeField]
-    GameObject[] PouseRogo;
+    Image[] PouseRogo;
 
     GameObject portalPosObj;
 
@@ -67,6 +68,9 @@ public class TutorialControll : MonoBehaviour
 
         //ゴールorPortalのメアスオブジェ
         portalPosObj = GameObject.FindGameObjectWithTag("GoleObject");
+        //キャンバスを最初は消しておく
+        foreach (var image in PouseRogo)
+            image.enabled = false;
 
         //フラグ関係の初期化
         changeSceneFrag = false;
@@ -114,12 +118,13 @@ public class TutorialControll : MonoBehaviour
         //ポウズ中の処理
         if (sceneControll.PuseFrag)
         {
-            //Debug.Log("ポウズ");
-            //Debug.Log("ポウズ中の処理は：" + (PouseSelect)pouseSelectIndex);
             PouseOperation();
             PoseIconColor();
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
             {
+                //キャンバスを最初は消しておく
+                foreach (var image in PouseRogo)
+                    image.enabled = false;
                 PouseRogo[0].transform.position = new Vector3(-1000, 0, 0);
                 switch (pouseSelectIndex)
                 {
@@ -202,9 +207,9 @@ public class TutorialControll : MonoBehaviour
     {
         if (prevState_.Buttons.Start == ButtonState.Released && padState_.Buttons.Start == ButtonState.Pressed && !sceneControll.PuseFrag)
         {
-            PouseRogo[0].transform.position = obj_portal.transform.position + new Vector3(0, 0, 0.46f);
-            for (int i = 0; i < PouseRogo.Length; i++)
-                LeanTween.alpha(PouseRogo[i], 1.0f, 1f);
+            //キャンバスを最初は消しておく
+            foreach (var image in PouseRogo)
+                image.enabled = true;
             Debug.Log("ポウズ");
             Time.timeScale = 0;
             sceneControll.PuseFrag = true;
@@ -217,22 +222,22 @@ public class TutorialControll : MonoBehaviour
         {
             //最初からやり直す
             case 0:
-                PouseRogo[1].GetComponent<Renderer>().material.color = Color.red;
-                PouseRogo[2].GetComponent<Renderer>().material.color = Color.white;
-                PouseRogo[3].GetComponent<Renderer>().material.color = Color.white;
+                PouseRogo[1].GetComponent<Image>().color = Color.red;
+                PouseRogo[2].GetComponent<Image>().color = Color.white;
+                PouseRogo[3].GetComponent<Image>().color = Color.white;
 
                 break;
             //続きから始める
             case 1:
-                PouseRogo[2].GetComponent<Renderer>().material.color = Color.red;
-                PouseRogo[1].GetComponent<Renderer>().material.color = Color.white;
-                PouseRogo[3].GetComponent<Renderer>().material.color = Color.white;
+                PouseRogo[2].GetComponent<Image>().color = Color.red;
+                PouseRogo[1].GetComponent<Image>().color = Color.white;
+                PouseRogo[3].GetComponent<Image>().color = Color.white;
                 break;
             //セレクトシーンへ戻る
             case 2:
-                PouseRogo[3].GetComponent<Renderer>().material.color = Color.red;
-                PouseRogo[2].GetComponent<Renderer>().material.color = Color.white;
-                PouseRogo[1].GetComponent<Renderer>().material.color = Color.white;
+                PouseRogo[3].GetComponent<Image>().color = Color.red;
+                PouseRogo[2].GetComponent<Image>().color = Color.white;
+                PouseRogo[1].GetComponent<Image>().color = Color.white;
                 break;
         }
     }
