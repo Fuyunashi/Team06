@@ -6,13 +6,16 @@ public class LoadStage : MonoBehaviour
 {
     [SerializeField]
     GameObject[] stage;
-    // Use this for initialization
     void Start()
     {
-
+        if (GameObject.Find("SceneController").GetComponent<SceneControll>().CurrentScene == SceneName.PlayScene ||
+            GameObject.Find("SceneController").GetComponent<SceneControll>().CurrentScene == SceneName.TutorialScene)
+        {
+            gameObject.SetActive(false);
+        }
+        DontDestroyOnLoad(this);
     }
 
-    // Update is called once per frame
     void Update()
     {
 
