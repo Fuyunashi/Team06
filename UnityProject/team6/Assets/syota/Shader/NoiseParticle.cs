@@ -24,7 +24,7 @@ public class NoiseParticle : MonoBehaviour
     GameObject[] ligth;
 
     //タイトルコントロールのスクリプト
-    TitleControll titleControll;
+    TitleCameraMove titleControll;
 
     float light_time;
     float Title_time;
@@ -32,9 +32,11 @@ public class NoiseParticle : MonoBehaviour
     bool title_frag;
     bool gun_frag;
 
+    public bool skipFrag;
+
     private void Start()
     {
-        titleControll = GameObject.Find("TitleControll").GetComponent<TitleControll>();
+        titleControll = GameObject.Find("TitleMainCamera").GetComponent<TitleCameraMove>();
         title_frag = true;
         gun_frag = true;
         Title_time = 0;
@@ -46,6 +48,16 @@ public class NoiseParticle : MonoBehaviour
     }
     private void Update()
     {
+
+        if (skipFrag)
+        {
+            performanceMode = PerformanceMode.Gun;
+            horizonValue = 0;
+            LeanTween.alpha(gun_model[0], 1.0f, 0);
+            LeanTween.alpha(gun_model[1], 1.0f, 0);
+            LeanTween.alpha(title, 1.0f, 0);
+            return;
+        }
         if (light_time <= 1.0f && Title_time > 50)
         {
             light_time += Time.deltaTime;
@@ -54,14 +66,6 @@ public class NoiseParticle : MonoBehaviour
         ligth[1].GetComponent<Light>().intensity = light_time;
         if (Title_time < 200) { Title_time++; return; }
 
-        if (titleControll.sceneChangeFrag)
-        {
-            performanceMode = PerformanceMode.Gun;
-            horizonValue = 0;
-            LeanTween.alpha(gun_model[0], 1.0f, 0);
-            LeanTween.alpha(gun_model[1], 1.0f, 0);
-            return;
-        }
         switch (performanceMode)
         {
             case PerformanceMode.Title:
@@ -72,13 +76,17 @@ public class NoiseParticle : MonoBehaviour
             case PerformanceMode.Gun:
                 if (gun_frag)
                 {
+                    LeanTween.alpha(title, 1.0f, 1);
                     LeanTween.alpha(gun_model[0], 1.0f, 1);
                     LeanTween.alpha(gun_model[1], 1.0f, 1); gun_frag = false;
                 }
                 horizonValue = Mathf.Lerp(0.6f, 0.0f, Count / 120);
                 Count++;
                 if (Count >= 120)
+                {
+                    skipFrag = true;
                     horizonValue = 0;
+                }
                 if (Count >= 130)
                     gun_model[0].transform.Rotate(0, 0, 20f * Time.deltaTime);
 

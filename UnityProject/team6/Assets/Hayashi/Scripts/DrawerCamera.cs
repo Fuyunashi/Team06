@@ -8,8 +8,7 @@ public class DrawerCamera : MonoBehaviour
     private Quaternion targetRotate;
     private GameObject player;
     private bool isDrawEnd;
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         isDrawEnd = false;
@@ -26,9 +25,10 @@ public class DrawerCamera : MonoBehaviour
         }
         if (isDrawEnd == true)
         {
-            transform.position = Vector3.Lerp(transform.position, player.transform.position + new Vector3(0, 1f,0), 0.2f);
+            transform.position = Vector3.Lerp(transform.position, player.transform.position + new Vector3(0, 1f, 0), 0.2f);
             if (Vector3.Distance(transform.position, player.transform.position + new Vector3(0, 1f, 0)) <= 0.3f)
             {
+                player.GetComponent<Player>().isStop_ = false;
                 Destroy(this.gameObject);
             }
         }
@@ -37,6 +37,7 @@ public class DrawerCamera : MonoBehaviour
     public void SetDrawerObj(GameObject drawer)
     {
         target = drawer;
+        player.GetComponent<Player>().isStop_ = true;
     }
 
     public void TrackingEnd()

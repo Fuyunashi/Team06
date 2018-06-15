@@ -243,7 +243,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 22831682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2, y: 5.3, z: 10.3}
+  m_LocalPosition: {x: 0.65, y: 6.56, z: -2.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -993,6 +993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17932b92d318c804b9f56941b2ab9d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneChangeFlag: 0
   SurveillanceCamera: {fileID: 1149708930}
   Player: {fileID: 476019990}
 --- !u!114 &579446567
@@ -2514,8 +2515,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1479487800}
   m_LocalRotation: {x: 0.00037448813, y: -0.70772153, z: 0.7064911, w: 0.0006435926}
-  m_LocalPosition: {x: 0, y: 5.11, z: 11.2}
-  m_LocalScale: {x: 2, y: 0.2, z: 1}
+  m_LocalPosition: {x: -0, y: 6.37, z: 7.18}
+  m_LocalScale: {x: 1.102582, y: 0.11025818, z: 0.55129087}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -2825,7 +2826,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1647308804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 4.7, z: 5.15}
+  m_LocalPosition: {x: 0.11, y: 4.35, z: 5.15}
   m_LocalScale: {x: 6.343816, y: 1.1790789, z: 6.3438187}
   m_Children: []
   m_Father: {fileID: 0}

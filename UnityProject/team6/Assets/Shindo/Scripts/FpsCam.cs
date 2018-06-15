@@ -15,6 +15,8 @@ public class FpsCam : MonoBehaviour {
     public float distance_;
     public float cameraHeight_;
 
+    Player player_;
+
     //Xinput関連
     private bool playerInputSet_ = false;
     private PlayerIndex playerIndex_;
@@ -25,10 +27,18 @@ public class FpsCam : MonoBehaviour {
     void Start () {
         mouse.x = -0.5f;
         mouse.y = 0.5f;
+
+        player_ = GameObject.Find("FPSPlayer").GetComponent<Player>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        //カメラ停止
+        if(player_.isStop_ == true)
+        {
+            return;
+        }
 
         //Xinput関連
         if (!playerInputSet_ || !prevState_.IsConnected)

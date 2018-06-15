@@ -42,12 +42,7 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private Transform shotPos;    //発射位置
 
-    //[SerializeField]
-    //private Text axisText; //テスト用軸テキスト
-    //[SerializeField]
-    //private Text changeText; //テスト用変更する値テキスト
-    //[SerializeField]
-    //private Text shotText; //テスト用銃テキスト
+    private Player player;
 
     private GameObject prevOriginObj;    //前回の取得するオブジェクト
     private GameObject originObject;     //数値を取得するオブジェクト
@@ -83,9 +78,9 @@ public class Shooter : MonoBehaviour
     private bool isRayHit;
     private bool isOriginGet;
     private bool isTargetGet;
-
+    
     [SerializeField]
-    private GameObject estimateObjPrefab;
+    private Material estimateMat;
     private GameObject m_estimateObj = null;
 
     // Use this for initialization
@@ -99,6 +94,8 @@ public class Shooter : MonoBehaviour
         originPositionValue = Vector3.zero;
         originScaleValue = Vector3.zero;
 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
         objVal_origin_ray = null;
         objVal_origin = null;
         objVal_target_ray = null;
@@ -107,10 +104,6 @@ public class Shooter : MonoBehaviour
 
         pushRTrigger = false;
         pushLTrigger = false;
-
-        //axisText.text = "axis:" + axisType.ToString();
-        //changeText.text = "change:" + changeType.ToString();
-        //shotText.text = "shot:" + shotType.ToString();
 
         layerMask = ~(1 << 9 | 1 << 8);
     }
@@ -150,7 +143,7 @@ public class Shooter : MonoBehaviour
             }
         }
         //弾が発射されていないかつショットタイプ切り替えボタンが押されたら
-        if ((Input.GetKeyDown(KeyCode.R) || padState.Triggers.Left >=0.8f) && pushLTrigger==false)
+        if ((Input.GetKeyDown(KeyCode.R) || padState.Triggers.Left >= 0.8f) && pushLTrigger == false)
         {
             SoundManager.GetInstance.PlaySE("Change_SE");
             //ショットタイプの切り替え
@@ -163,7 +156,6 @@ public class Shooter : MonoBehaviour
         if (pushRTrigger == true && (padState.Triggers.Right <= 0.3f || Input.GetMouseButtonUp(0))) pushRTrigger = false;
 
         GunMaterialSet();
-        //laserPointer.SetPosition(0, laserPointer.transform.position);
         GetObject_Ray();
         if (isRayHit == true)
         {
@@ -269,7 +261,6 @@ public class Shooter : MonoBehaviour
             isRayHit = false;
             laserPointer.SetPosition(1, ray.origin + ray.direction * rayDistance);
         }
-        //Debug.DrawRay(shotPos.position, shotPos.forward * rayDistance, Color.red);
     }
     //取得、転置オブジェクトの数値の表示
     private void ObjectsValueDraw_Ray(GameObject originObj, GameObject targetObj)
@@ -411,23 +402,23 @@ public class Shooter : MonoBehaviour
                     switch (axisType)
                     {
                         case AxisType.X:
-                            m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
+                            m_estimateObj = Instantiate(obj, new Vector3(
                                                 originPositionValue.x,
-                                                obj.transform.localPosition.y,
-                                                obj.transform.localPosition.z
+                                                obj.transform.position.y,
+                                                obj.transform.position.z
                                                 ), obj.transform.localRotation);
                             break;
                         case AxisType.Y:
-                            m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
-                                               obj.transform.localPosition.x,
+                            m_estimateObj = Instantiate(obj, new Vector3(
+                                               obj.transform.position.x,
                                                originPositionValue.y,
-                                               obj.transform.localPosition.z
+                                               obj.transform.position.z
                                                ), obj.transform.localRotation);
                             break;
                         case AxisType.Z:
-                            m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
-                                               obj.transform.localPosition.x,
-                                               obj.transform.localPosition.y,
+                            m_estimateObj = Instantiate(obj, new Vector3(
+                                               obj.transform.position.x,
+                                               obj.transform.position.y,
                                                originPositionValue.z
                                                ), obj.transform.localRotation);
                             break;
@@ -436,13 +427,11 @@ public class Shooter : MonoBehaviour
                               obj.transform.GetChild(0).localScale.x,
                               obj.transform.GetChild(0).localScale.y,
                               obj.transform.GetChild(0).localScale.z);
-                    m_estimateObj.transform.GetChild(0).localPosition = obj.transform.GetChild(0).localPosition;
                     break;
                 case ChangeType.Scale:
-                    m_estimateObj = Instantiate(estimateObjPrefab,
-                              obj.transform.localPosition,
+                    m_estimateObj = Instantiate(obj,
+                              obj.transform.position,
                               obj.transform.localRotation);
-                       m_estimateObj.transform.GetChild(0).localPosition = obj.transform.GetChild(0).localPosition;
                     switch (axisType)
                     {
                         case AxisType.X:
@@ -466,6 +455,14 @@ public class Shooter : MonoBehaviour
                     }
                     break;
             }
+            m_estimateObj.transform.GetChild(0).localPosition = obj.transform.GetChild(0).localPosition;
+            m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = estimateMat;
+            Destroy(m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<ObjectController>());
+            Destroy(m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>());
+            if (m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<BoxCollider>())
+                Destroy(m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<BoxCollider>());
+            if (m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<MeshCollider>())
+                Destroy(m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<MeshCollider>());
         }
     }
     //銃のタイプ切り替え
@@ -475,11 +472,9 @@ public class Shooter : MonoBehaviour
         {
             case ShotType.Getting:
                 shotType = ShotType.Setting;
-                //shotText.text = "shot:" + shotType.ToString();
                 break;
             case ShotType.Setting:
                 shotType = ShotType.Getting;
-                //shotText.text = "shot:" + shotType.ToString();
                 break;
         }
     }
@@ -490,15 +485,12 @@ public class Shooter : MonoBehaviour
         {
             case AxisType.X:
                 axisType = AxisType.Y;
-                //axisText.text = "axis:" + axisType.ToString();
                 break;
             case AxisType.Y:
                 axisType = AxisType.Z;
-                //axisText.text = "axis:" + axisType.ToString();
                 break;
             case AxisType.Z:
                 axisType = AxisType.X;
-                //axisText.text = "axis:" + axisType.ToString();
                 break;
         }
     }
@@ -509,11 +501,9 @@ public class Shooter : MonoBehaviour
         {
             case ChangeType.Position:
                 changeType = ChangeType.Scale;
-                //changeText.text = "change:" + changeType.ToString();
                 break;
             case ChangeType.Scale:
                 changeType = ChangeType.Position;
-                //changeText.text = "change:" + changeType.ToString();
                 break;
         }
     }
@@ -546,7 +536,7 @@ public class Shooter : MonoBehaviour
                 laserPointMat.SetColor("_EmissionColor", Color.yellow);
                 break;
             case ChangeType.Scale:
-                laserPointMat.SetColor("_EmissionColor", new Color(1.78f,0.16f,2f));
+                laserPointMat.SetColor("_EmissionColor", new Color(1.78f, 0.16f, 2f));
                 break;
 
         }

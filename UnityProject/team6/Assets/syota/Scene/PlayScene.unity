@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -666,12 +666,17 @@ Prefab:
         type: 2}
       propertyPath: laserPointer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 985572130}
     - target: {fileID: 114068953293129980, guid: 324db6f5ab3ba694e902b61f6fb3fb9b,
         type: 2}
       propertyPath: camera_
       value: 
       objectReference: {fileID: 1422600851}
+    - target: {fileID: 114130193912874006, guid: 324db6f5ab3ba694e902b61f6fb3fb9b,
+        type: 2}
+      propertyPath: estimateMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 41a7f52bfe47d6f4fb230bfd1cf0446b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 324db6f5ab3ba694e902b61f6fb3fb9b, type: 2}
   m_IsPrefabParent: 0
@@ -971,7 +976,6 @@ GameObject:
   - component: {fileID: 1422600852}
   - component: {fileID: 1422600851}
   - component: {fileID: 1900364802}
-  - component: {fileID: 1900364801}
   - component: {fileID: 1900364800}
   - component: {fileID: 1900364799}
   - component: {fileID: 1900364798}
@@ -1037,14 +1041,6 @@ MonoBehaviour:
   target_: {fileID: 668508446}
   distance_: 0
   cameraHeight_: 1.5
---- !u!81 &1900364801
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 81541846884578388, guid: a0f82bb0e009bcc4d9d21c630d8cc573,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900364797}
-  m_Enabled: 1
 --- !u!124 &1900364802
 Behaviour:
   m_ObjectHideFlags: 0
