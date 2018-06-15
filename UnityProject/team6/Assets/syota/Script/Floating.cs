@@ -25,7 +25,7 @@ public class Floating : MonoBehaviour
     {
         if (transform.name == "EXITBoard (1)")
         {
-            Debug.Log("haadfaldjfla" + stageInstructs.CurrentStage);
+            //Debug.Log("haadfaldjfla" + stageInstructs.CurrentStage);
             if (stageInstructs.CurrentStage != NextStage.Exit) return;
 
             transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time, 1) + 4, transform.position.z);
