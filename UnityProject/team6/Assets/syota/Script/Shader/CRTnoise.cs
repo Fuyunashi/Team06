@@ -118,7 +118,6 @@ public class CRTnoise : MonoBehaviour
         string name = SceneManager.GetActiveScene().name;
         if (selectCamera && transform.tag != CameraName.PlayCamera.ToString())
         {
-            //Debug.Log("はいるなよ：" + selectCamera);
             obj = GameObject.Find("StageConfiguration");
             stageInstructs = obj.GetComponent<StageInstructs>();
         }
@@ -177,10 +176,7 @@ public class CRTnoise : MonoBehaviour
         //nextStageがNoneの場合演出用のカメラなので下の処理は行わなくて良い
         if (nextStage == NextStage.None) return;
 
-        if (transform.tag == NextStage.Tutrial2.ToString())
-        {
-            Debug.Log("ノイズをかけるか" + CRTFlag);
-        }
+       
         //Debug.Log("次のシーンはこれだ！" + stageInstructs.CurrentStage);
         //自身の列挙型の型が選んでいるステージと同じであるならフラグを消す
         if (nextStage == stageInstructs.CurrentStage)
