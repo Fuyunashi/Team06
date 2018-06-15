@@ -89,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1185321621460038}
   m_LocalRotation: {x: -0, y: 0.99999875, z: -0, w: -0.0015939663}
-  m_LocalPosition: {x: 0.002, y: 0.449, z: 0.822}
+  m_LocalPosition: {x: 0.003, y: 0.449, z: 0.709}
   m_LocalScale: {x: 1, y: 1, z: 0.50000525}
   m_Children:
   - {fileID: 4962238394420304}
@@ -115,15 +115,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1300986517637016}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.46, y: 3.47, z: 1.2}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -6.4092937, y: -0.264611, z: 11.906586}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4742496199071926}
   - {fileID: 4741910407321134}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4962238394420304
 Transform:
   m_ObjectHideFlags: 1
@@ -151,7 +151,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: e827ae7581ffd4f44b99dcc5034b2017, type: 2}
+  - {fileID: 2100000, guid: 6837adf681800d142bc9bb52846424d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   v_camera: {fileID: 114018390300344724}
-  nextStage: 0
+  nextStage: 11
 --- !u!114 &114305480786938482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 1.006, y: 0.44000006, z: -9.264999}
+  m_FollowOffset: {x: 1.2220092, y: 0.44000006, z: -9.264556}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
