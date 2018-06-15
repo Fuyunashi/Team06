@@ -16,8 +16,9 @@ public class modeldirection : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        //カメラに追従
         this.transform.position = target_.transform.position;
+        //カメラの向きをとる
         this.transform.forward = camera_.transform.TransformDirection(Vector3.forward);
 	}
 }
