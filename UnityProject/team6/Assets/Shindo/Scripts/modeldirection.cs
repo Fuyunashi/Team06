@@ -6,6 +6,8 @@ public class modeldirection : MonoBehaviour {
 
     [SerializeField]
     Camera camera_;
+    [SerializeField]
+    GameObject target_;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +17,7 @@ public class modeldirection : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
-        this.transform.forward = camera_.transform.forward;
+        this.transform.position = target_.transform.position;
+        this.transform.forward = camera_.transform.TransformDirection(Vector3.forward);
 	}
 }

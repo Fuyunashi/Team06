@@ -66,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1109964019208686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.519, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4208197556137572}
@@ -138,9 +138,6 @@ MonoBehaviour:
   gunMat: {fileID: 2100000, guid: 3273360bbb61cb14f9e044f7f7a8ee84, type: 2}
   laserPointMat: {fileID: 2100000, guid: 27971dbe6c1efa249ab0ec1f6c73a148, type: 2}
   shotPos: {fileID: 0}
-  axisText: {fileID: 0}
-  changeText: {fileID: 0}
-  shotText: {fileID: 0}
   objValPref_ray: {fileID: 1684843398455916, guid: 2ca560a342ea3794ca544a3adb70ec38,
     type: 2}
   objValPref: {fileID: 1101271737918970, guid: b69917c54d3c48443867554b40707d06, type: 2}
@@ -156,10 +153,10 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1109964019208686}
-  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+  m_Material: {fileID: 13400000, guid: 923341af7584d3f44bfc51197f2a7453, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
