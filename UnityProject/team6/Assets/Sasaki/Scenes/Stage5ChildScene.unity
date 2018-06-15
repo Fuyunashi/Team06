@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3808,10 +3808,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee322750053c04d826e9a610ce8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Raybody: {fileID: 36589880}
-  ScaleDistance: {fileID: 1158474431}
-  RayResult: {fileID: 1901516400}
-  hitObject: {fileID: 0}
+  raybody: {fileID: 0}
+  scaleDistance: {fileID: 0}
+  rayResult: {fileID: 0}
 --- !u!1 &45875382
 GameObject:
   m_ObjectHideFlags: 0
@@ -11641,10 +11640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee322750053c04d826e9a610ce8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Raybody: {fileID: 1966238096}
-  ScaleDistance: {fileID: 76470413}
-  RayResult: {fileID: 103738464}
-  hitObject: {fileID: 0}
+  raybody: {fileID: 0}
+  scaleDistance: {fileID: 0}
+  rayResult: {fileID: 0}
 --- !u!1 &424463205
 GameObject:
   m_ObjectHideFlags: 0
@@ -27545,10 +27543,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee322750053c04d826e9a610ce8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Raybody: {fileID: 1065859047}
-  ScaleDistance: {fileID: 201394194}
-  RayResult: {fileID: 1148124030}
-  hitObject: {fileID: 0}
+  raybody: {fileID: 0}
+  scaleDistance: {fileID: 0}
+  rayResult: {fileID: 0}
 --- !u!1 &952021632
 GameObject:
   m_ObjectHideFlags: 0
@@ -28050,10 +28047,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee322750053c04d826e9a610ce8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Raybody: {fileID: 1065859047}
-  ScaleDistance: {fileID: 201394194}
-  RayResult: {fileID: 1148124030}
-  hitObject: {fileID: 0}
+  raybody: {fileID: 0}
+  scaleDistance: {fileID: 0}
+  rayResult: {fileID: 0}
 --- !u!1 &1097464648
 GameObject:
   m_ObjectHideFlags: 0
@@ -35697,10 +35693,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee322750053c04d826e9a610ce8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Raybody: {fileID: 1881876162}
-  ScaleDistance: {fileID: 1184969224}
-  RayResult: {fileID: 1488834622}
-  hitObject: {fileID: 0}
+  raybody: {fileID: 0}
+  scaleDistance: {fileID: 0}
+  rayResult: {fileID: 0}
 --- !u!1 &1318130602
 GameObject:
   m_ObjectHideFlags: 0
@@ -43363,7 +43358,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f7567dd26fb7e9842a0f41561e607748, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -47256,10 +47251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee322750053c04d826e9a610ce8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Raybody: {fileID: 36589880}
-  ScaleDistance: {fileID: 1158474431}
-  RayResult: {fileID: 1901516400}
-  hitObject: {fileID: 0}
+  raybody: {fileID: 0}
+  scaleDistance: {fileID: 0}
+  rayResult: {fileID: 0}
 --- !u!1 &1620464224
 GameObject:
   m_ObjectHideFlags: 0
@@ -58743,10 +58737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee322750053c04d826e9a610ce8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Raybody: {fileID: 1881876162}
-  ScaleDistance: {fileID: 1184969224}
-  RayResult: {fileID: 1488834622}
-  hitObject: {fileID: 0}
+  raybody: {fileID: 0}
+  scaleDistance: {fileID: 0}
+  rayResult: {fileID: 0}
 --- !u!1 &1882497811
 GameObject:
   m_ObjectHideFlags: 0
@@ -62654,10 +62647,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee322750053c04d826e9a610ce8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Raybody: {fileID: 1966238096}
-  ScaleDistance: {fileID: 76470413}
-  RayResult: {fileID: 103738464}
-  hitObject: {fileID: 0}
+  raybody: {fileID: 0}
+  scaleDistance: {fileID: 0}
+  rayResult: {fileID: 0}
 --- !u!1 &1993686531
 GameObject:
   m_ObjectHideFlags: 0
