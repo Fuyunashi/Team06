@@ -1,15 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
 
 public class TitleCameraMove : MonoBehaviour
 {
-    //Xinput関連
-    private bool playerInputSet_ = false;
-    private PlayerIndex playerIndex_;
-    private GamePadState padState_;
-    private GamePadState prevState_;
     enum CameraMoveType
     {
         Rotate,
@@ -48,23 +42,11 @@ public class TitleCameraMove : MonoBehaviour
     float time = 0;
     void Update()
     {
-        //Xinput関連
-        if (!playerInputSet_ || !prevState_.IsConnected)
-        {
-            playerIndex_ = (PlayerIndex)0;
-            playerInputSet_ = true;
-        }
-        prevState_ = padState_;
-        padState_ = GamePad.GetState(playerIndex_);
-
         if (Input.GetButtonDown("Bbutton"))
+        {
+            //Debug.Log("aaaa");
             sceneChangeFlag = true;
-        else if (prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed)
-            sceneChangeFlag = true;
-        else if (prevState_.Buttons.X == ButtonState.Released && padState_.Buttons.X == ButtonState.Pressed)
-            sceneChangeFlag = true;
-        else if (prevState_.Buttons.Y == ButtonState.Released && padState_.Buttons.Y == ButtonState.Pressed)
-            sceneChangeFlag = true;
+        }
 
         if (sceneChangeFlag)
         {
