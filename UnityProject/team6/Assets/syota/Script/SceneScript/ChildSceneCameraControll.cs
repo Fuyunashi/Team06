@@ -28,20 +28,14 @@ public class ChildSceneCameraControll : MonoBehaviour
         {
             List<GameObject> list = ChildLayer.GetAll(stageObj);
             foreach (var childTransform in list)
-                childTransform.gameObject.layer = LayerMask.NameToLayer("Production");
-            //foreach (Transform childTransform in stageObj.transform)
-            //{
-            //    childTransform.gameObject.layer = LayerMask.NameToLayer("Production");
-            //}
-            Debug.Log("クリアしたよ" + sceneControll.CurrentStage);
-
+                childTransform.gameObject.layer = LayerMask.NameToLayer("Production");           
         }
         if (SceneManager.GetActiveScene().name == SceneName.SelectScene.ToString())
         {
             foreach (var light_ in light)
                 light_.SetActive(false);
         }
-        Debug.Log("今俺がいるシーンは：" + GetSceneContainObject(gameObject));
+
     }
 
     void Update()

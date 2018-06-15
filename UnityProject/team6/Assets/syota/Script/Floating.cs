@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 
 public class Floating : MonoBehaviour
@@ -14,8 +15,11 @@ public class Floating : MonoBehaviour
 
     private void Start()
     {
-        obj_stageInstructs = GameObject.Find("StageConfiguration");
-        stageInstructs = obj_stageInstructs.GetComponent<StageInstructs>();
+        if (SceneManager.GetActiveScene().name != "TitleScene")
+        {
+            obj_stageInstructs = GameObject.Find("StageConfiguration");
+            stageInstructs = obj_stageInstructs.GetComponent<StageInstructs>();
+        }
     }
     void FixedUpdate()
     {

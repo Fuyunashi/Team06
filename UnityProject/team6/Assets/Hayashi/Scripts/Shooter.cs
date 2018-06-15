@@ -42,12 +42,12 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private Transform shotPos;    //発射位置
 
-    [SerializeField]
-    private Text axisText; //テスト用軸テキスト
-    [SerializeField]
-    private Text changeText; //テスト用変更する値テキスト
-    [SerializeField]
-    private Text shotText; //テスト用銃テキスト
+    //[SerializeField]
+    //private Text axisText; //テスト用軸テキスト
+    //[SerializeField]
+    //private Text changeText; //テスト用変更する値テキスト
+    //[SerializeField]
+    //private Text shotText; //テスト用銃テキスト
 
     private GameObject prevOriginObj;    //前回の取得するオブジェクト
     private GameObject originObject;     //数値を取得するオブジェクト
@@ -68,7 +68,8 @@ public class Shooter : MonoBehaviour
     private GameObject m_drawerCamera;
 
     private bool isTargetMove;      //転置するオブジェクトが動いているか
-    private bool isShot;   //Rトリガーが押されたか
+    private bool pushRTrigger;   //Rトリガーが押されたか
+    private bool pushLTrigger;  //Lトリガーが押されたか
 
     private Ray ray;
     private RaycastHit rayhit;
@@ -104,11 +105,12 @@ public class Shooter : MonoBehaviour
         objVal_target = null;
         isTargetMove = false;
 
-        isShot = false;
+        pushRTrigger = false;
+        pushLTrigger = false;
 
-        axisText.text = "axis:" + axisType.ToString();
-        changeText.text = "change:" + changeType.ToString();
-        shotText.text = "shot:" + shotType.ToString();
+        //axisText.text = "axis:" + axisType.ToString();
+        //changeText.text = "change:" + changeType.ToString();
+        //shotText.text = "shot:" + shotType.ToString();
 
         layerMask = ~(1 << 9 | 1 << 8);
     }
@@ -148,14 +150,17 @@ public class Shooter : MonoBehaviour
             }
         }
         //弾が発射されていないかつショットタイプ切り替えボタンが押されたら
-        if ((Input.GetKeyDown(KeyCode.R) || (prevState.Buttons.Y == ButtonState.Released && padState.Buttons.Y == ButtonState.Pressed)))
+        if ((Input.GetKeyDown(KeyCode.R) || padState.Triggers.Left >=0.8f) && pushLTrigger==false)
         {
             SoundManager.GetInstance.PlaySE("Change_SE");
             //ショットタイプの切り替え
             SwitchShotType();
             if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
+            pushLTrigger = true;
         }
-        if (isShot == true && (padState.Triggers.Right <= 0.3f || Input.GetMouseButtonUp(0))) isShot = false;
+        if (pushLTrigger == true && (Input.GetKeyUp(KeyCode.R) || padState.Triggers.Left <= 0.3f)) pushLTrigger = false;
+
+        if (pushRTrigger == true && (padState.Triggers.Right <= 0.3f || Input.GetMouseButtonUp(0))) pushRTrigger = false;
 
         GunMaterialSet();
         laserPointer.SetPosition(0, laserPointer.transform.position);
@@ -201,22 +206,22 @@ public class Shooter : MonoBehaviour
                         {
                             objVal_origin_ray = Instantiate(objValPref_ray,
                                                      new Vector3(
-                                                         rayOriginObj.transform.parent.parent.localPosition.x,
-                                                         rayOriginObj.transform.parent.parent.localPosition.y,
-                                                         rayOriginObj.transform.parent.parent.localPosition.z) +
+                                                         rayOriginObj.transform.parent.parent.position.x,
+                                                         rayOriginObj.transform.parent.parent.position.y,
+                                                         rayOriginObj.transform.parent.parent.position.z) +
                                                          new Vector3(0, rayOriginObj.transform.parent.localScale.y / 2 + 0.5f, 0),
                                                      Quaternion.identity
                                                     );
                             objVal_origin_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayOriginObj.transform.parent.gameObject);
                         }
                         //射撃ボタンが押されたら
-                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && isShot == false)
+                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && pushRTrigger == false)
                         {
                             SoundManager.GetInstance.PlaySE("Gun_SE");
                             //発射
                             Shot(rayOriginObj);
                             //弾を撃った
-                            isShot = true;
+                            pushRTrigger = true;
                         }
                         break;
                     case ShotType.Setting:
@@ -226,9 +231,9 @@ public class Shooter : MonoBehaviour
                         {
                             objVal_target_ray = Instantiate(objValPref_ray,
                                                      new Vector3(
-                                                         rayTargetObj.transform.parent.parent.localPosition.x,
-                                                         rayTargetObj.transform.parent.parent.localPosition.y,
-                                                         rayTargetObj.transform.parent.parent.localPosition.z) +
+                                                         rayTargetObj.transform.parent.parent.position.x,
+                                                         rayTargetObj.transform.parent.parent.position.y,
+                                                         rayTargetObj.transform.parent.parent.position.z) +
                                                          new Vector3(0, rayTargetObj.transform.parent.localScale.y / 2 + 0.5f, 0),
                                                      Quaternion.identity
                                                     );
@@ -236,13 +241,13 @@ public class Shooter : MonoBehaviour
                         }
                         InstantEstimateObject(rayTargetObj.transform.parent.parent.gameObject);
                         //射撃ボタンが押されたら
-                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && isShot == false)
+                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && pushRTrigger == false)
                         {
                             SoundManager.GetInstance.PlaySE("Gun_SE");
                             //発射
                             Shot(rayTargetObj);
                             //弾を撃った
-                            isShot = true;
+                            pushRTrigger = true;
                         }
                         break;
                 }
@@ -276,21 +281,21 @@ public class Shooter : MonoBehaviour
                 {
                     case AxisType.X:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localPosition.x);
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.position.x);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localPosition.x);
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.position.x);
                         break;
                     case AxisType.Y:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localPosition.y);
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.position.y);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localPosition.y);
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.position.y);
                         break;
                     case AxisType.Z:
                         if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localPosition.z);
+                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.position.z);
                         if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localPosition.z);
+                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.position.z);
                         break;
                 }
                 break;
@@ -369,13 +374,13 @@ public class Shooter : MonoBehaviour
                 switch (axisType)
                 {
                     case AxisType.X:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localPosition.x);
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.position.x);
                         break;
                     case AxisType.Y:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localPosition.y);
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.position.y);
                         break;
                     case AxisType.Z:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localPosition.z);
+                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.position.z);
                         break;
                 }
                 break;
@@ -408,21 +413,21 @@ public class Shooter : MonoBehaviour
                         case AxisType.X:
                             m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
                                                 originPositionValue.x,
-                                                obj.transform.position.y,
-                                                obj.transform.position.z
+                                                obj.transform.localPosition.y,
+                                                obj.transform.localPosition.z
                                                 ), obj.transform.localRotation);
                             break;
                         case AxisType.Y:
                             m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
-                                               obj.transform.position.x,
+                                               obj.transform.localPosition.x,
                                                originPositionValue.y,
-                                               obj.transform.position.z
+                                               obj.transform.localPosition.z
                                                ), obj.transform.localRotation);
                             break;
                         case AxisType.Z:
                             m_estimateObj = Instantiate(estimateObjPrefab, new Vector3(
-                                               obj.transform.position.x,
-                                               obj.transform.position.y,
+                                               obj.transform.localPosition.x,
+                                               obj.transform.localPosition.y,
                                                originPositionValue.z
                                                ), obj.transform.localRotation);
                             break;
@@ -470,11 +475,11 @@ public class Shooter : MonoBehaviour
         {
             case ShotType.Getting:
                 shotType = ShotType.Setting;
-                shotText.text = "shot:" + shotType.ToString();
+                //shotText.text = "shot:" + shotType.ToString();
                 break;
             case ShotType.Setting:
                 shotType = ShotType.Getting;
-                shotText.text = "shot:" + shotType.ToString();
+                //shotText.text = "shot:" + shotType.ToString();
                 break;
         }
     }
@@ -485,15 +490,15 @@ public class Shooter : MonoBehaviour
         {
             case AxisType.X:
                 axisType = AxisType.Y;
-                axisText.text = "axis:" + axisType.ToString();
+                //axisText.text = "axis:" + axisType.ToString();
                 break;
             case AxisType.Y:
                 axisType = AxisType.Z;
-                axisText.text = "axis:" + axisType.ToString();
+                //axisText.text = "axis:" + axisType.ToString();
                 break;
             case AxisType.Z:
                 axisType = AxisType.X;
-                axisText.text = "axis:" + axisType.ToString();
+                //axisText.text = "axis:" + axisType.ToString();
                 break;
         }
     }
@@ -504,11 +509,11 @@ public class Shooter : MonoBehaviour
         {
             case ChangeType.Position:
                 changeType = ChangeType.Scale;
-                changeText.text = "change:" + changeType.ToString();
+                //changeText.text = "change:" + changeType.ToString();
                 break;
             case ChangeType.Scale:
                 changeType = ChangeType.Position;
-                changeText.text = "change:" + changeType.ToString();
+                //changeText.text = "change:" + changeType.ToString();
                 break;
         }
     }
@@ -574,9 +579,9 @@ public class Shooter : MonoBehaviour
                         Destroy(objVal_origin);
                         objVal_origin = Instantiate(objValPref,
                                                         new Vector3(
-                                                            originObject.transform.parent.parent.localPosition.x,
-                                                            originObject.transform.parent.parent.localPosition.y,
-                                                            originObject.transform.parent.parent.localPosition.z) +
+                                                            originObject.transform.parent.parent.position.x,
+                                                            originObject.transform.parent.parent.position.y,
+                                                            originObject.transform.parent.parent.position.z) +
                                                             new Vector3(0, originObject.transform.parent.localScale.y + 0.5f, 0),
                                                         Quaternion.identity
                                                        );
@@ -597,9 +602,9 @@ public class Shooter : MonoBehaviour
                         Destroy(objVal_target);
                         objVal_target = Instantiate(objValPref,
                                                      new Vector3(
-                                                         targetObject.transform.parent.parent.localPosition.x,
-                                                         targetObject.transform.parent.parent.localPosition.y,
-                                                         targetObject.transform.parent.parent.localPosition.z) +
+                                                         targetObject.transform.parent.parent.position.x,
+                                                         targetObject.transform.parent.parent.position.y,
+                                                         targetObject.transform.parent.parent.position.z) +
                                                          new Vector3(0, targetObject.transform.parent.localScale.y + 0.5f, 0),
                                                      Quaternion.identity
                                                     );
@@ -615,7 +620,7 @@ public class Shooter : MonoBehaviour
     //取得するオブジェクトの値を取得
     private void GetOriginAxisLength()
     {
-        originPositionValue = originObject.transform.parent.parent.localPosition;
+        originPositionValue = originObject.transform.parent.parent.position;
         originScaleValue = originObject.transform.parent.localScale;
     }
 

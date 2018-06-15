@@ -100,7 +100,7 @@ public class ValueDrawerController : MonoBehaviour
         }
 
         if (isTween == false)
-            transform.position = new Vector3(drawObj.transform.parent.localPosition.x, drawObj.transform.parent.localPosition.y, drawObj.transform.parent.localPosition.z)+
+            transform.position = new Vector3(drawObj.transform.parent.position.x, drawObj.transform.parent.position.y, drawObj.transform.parent.position.z)+
                                  new Vector3(0,drawObj.transform.localScale.y/2+0.5f,0);
 
     }
