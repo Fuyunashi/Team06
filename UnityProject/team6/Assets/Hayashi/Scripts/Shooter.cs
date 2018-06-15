@@ -163,7 +163,7 @@ public class Shooter : MonoBehaviour
         if (pushRTrigger == true && (padState.Triggers.Right <= 0.3f || Input.GetMouseButtonUp(0))) pushRTrigger = false;
 
         GunMaterialSet();
-        laserPointer.SetPosition(0, laserPointer.transform.position);
+        //laserPointer.SetPosition(0, laserPointer.transform.position);
         GetObject_Ray();
         if (isRayHit == true)
         {
