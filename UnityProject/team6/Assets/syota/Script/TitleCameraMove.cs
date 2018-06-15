@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class TitleCameraMove : MonoBehaviour
 {
@@ -11,10 +12,15 @@ public class TitleCameraMove : MonoBehaviour
         Up,
         None,
     }
+    //Xinput関連
+    private bool playerInputSet_ = false;
+    private PlayerIndex playerIndex_;
+    private GamePadState padState_;
+    private GamePadState prevState_;
     //シーン切替時の演出タイプ
     CameraMoveType cameraMoveType;
     //シーンを切り替えるフラグ
-    bool sceneChangeFlag;
+    public bool sceneChangeFlag;
 
     //監視カメラオブジェクト
     public GameObject SurveillanceCamera;
@@ -28,6 +34,8 @@ public class TitleCameraMove : MonoBehaviour
 
     //CRTの指示をだすためにスクリプトをもらう
     CRTnoise crtNoise;
+
+    NoiseParticle noiseParticle;
     void Start()
     {
         /** いろいろ初期化 **/
@@ -36,15 +44,31 @@ public class TitleCameraMove : MonoBehaviour
 
         //CRTスクリプトの確保
         crtNoise = GetComponent<CRTnoise>();
+        noiseParticle = GetComponent<NoiseParticle>();
         //crtNoise.cameraName = CRTnoise.CameraName.TitleMainCamera;
 
     }
     float time = 0;
     void Update()
     {
-        if (Input.GetButtonDown("Bbutton"))
+        //インプット関連
+        if (!playerInputSet_ || !prevState_.IsConnected)
         {
-            //Debug.Log("aaaa");
+            playerIndex_ = (PlayerIndex)0;
+            playerInputSet_ = true;
+        }
+        prevState_ = padState_;
+        padState_ = GamePad.GetState(playerIndex_);
+        //インプット関連
+
+
+        if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed ||
+        prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed ||
+        prevState_.Buttons.X == ButtonState.Released && padState_.Buttons.X == ButtonState.Pressed ||
+            prevState_.Buttons.Y == ButtonState.Released && padState_.Buttons.Y == ButtonState.Pressed)
+        {
+            if (!noiseParticle.skipFrag) { noiseParticle.skipFrag = true; return; }
+
             sceneChangeFlag = true;
         }
 
