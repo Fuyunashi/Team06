@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using XInputDotNetPure;
+using UnityEngine.UI;
 
 public class SelectControll : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class SelectControll : MonoBehaviour
 
     GameObject obj_stageInstructs;
     StageInstructs stageInstructs;
+
+    [SerializeField]
+    Image image;
     //SceneName name;
     public bool ChangeSceneFrag { get; set; }
     float ChangeSceneCount;
@@ -53,6 +57,9 @@ public class SelectControll : MonoBehaviour
 
         ChangeSceneFrag = false;
         ChangeSceneCount = 2;
+
+        //シーン移行の際につかう黒い画像なので最初は表示しない
+        image.enabled = false;
     }
 
     void Update()
@@ -83,7 +90,11 @@ public class SelectControll : MonoBehaviour
             if (ChangeSceneCount < 0 && !crtNoise.CRTFlag) { crtNoise.CRTFlag = true; ChangeSceneFrag = false; }
             else ChangeSceneCount -= Time.deltaTime; return;
         }
-        if (!crtNoise.CRTFlag && ChangeSceneCount < 0 && !ChangeSceneFrag) { NextSceneToDecide(); ChangeSceneFrag = false; ChangeSceneCount = 2; }
+        if (!crtNoise.CRTFlag && ChangeSceneCount < 0 && !ChangeSceneFrag)
+        {
+            image.enabled = true;
+            NextSceneToDecide(); ChangeSceneFrag = false; ChangeSceneCount = 2;
+        }
     }
     /// <summary>
     /// 次に行くシーンを判断する
