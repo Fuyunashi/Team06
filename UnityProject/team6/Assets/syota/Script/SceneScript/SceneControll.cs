@@ -62,7 +62,7 @@ public class SceneControll : MonoBehaviour
         //すべての設定が終わったらタイトルへ移動
         NextScene = SceneName.TitleScene;
         //SceneChange(NextScene);
-
+        CurrentStage = NextStage.None;
         PuseFrag = false;
     }
 

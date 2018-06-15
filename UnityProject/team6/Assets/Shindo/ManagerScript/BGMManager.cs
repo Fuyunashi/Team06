@@ -16,18 +16,18 @@ public class BGMManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log(scene_);
+        
         //タイトル
         if(scene_.CurrentScene == SceneName.TitleScene)
         {
-            Debug.Log(scene_.CurrentScene + "流れてます");
+           // Debug.Log(scene_.CurrentScene + "流れてます");
             SoundManager.GetInstance.PlayBGM("6815");
         }
         
         //ステージ選択
         if(scene_.CurrentScene == SceneName.SelectScene)
         {
-            Debug.Log(scene_.CurrentScene + "流れてます");
+            //Debug.Log(scene_.CurrentScene + "流れてます");
             SoundManager.GetInstance.PlayBGM("6815");
         }
 
@@ -38,7 +38,7 @@ public class BGMManager : MonoBehaviour {
             || (scene_.CurrentStage == NextStage.Stage2)
             || (scene_.CurrentStage == NextStage.Stage3))
         {
-            Debug.Log(scene_.CurrentStage + "流れてます");
+            //Debug.Log(scene_.CurrentStage + "流れてます");
             SoundManager.GetInstance.PlayBGM("8811");
         }
 
@@ -49,7 +49,7 @@ public class BGMManager : MonoBehaviour {
             || (scene_.CurrentStage == NextStage.Stage7)
             || (scene_.CurrentStage == NextStage.Stage8))
         {
-            Debug.Log(scene_.CurrentStage + "流れてます");
+            //Debug.Log(scene_.CurrentStage + "流れてます");
             SoundManager.GetInstance.PlayBGM("8671");
         }
 
@@ -60,7 +60,7 @@ public class BGMManager : MonoBehaviour {
             || (scene_.CurrentStage == NextStage.Stage12)
             || (scene_.CurrentStage == NextStage.Stage13))
         {
-            Debug.Log(scene_.CurrentStage + "流れてます");
+            //Debug.Log(scene_.CurrentStage + "流れてます");
             SoundManager.GetInstance.PlayBGM("8659");
         }
 
@@ -71,7 +71,7 @@ public class BGMManager : MonoBehaviour {
             || (scene_.CurrentStage == NextStage.Stage17)
             || (scene_.CurrentStage == NextStage.Stage18))
         {
-            Debug.Log(scene_.CurrentStage + "流れてます");
+            //Debug.Log(scene_.CurrentStage + "流れてます");
             SoundManager.GetInstance.PlayBGM("8497");
         }
         
