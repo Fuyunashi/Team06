@@ -24,11 +24,7 @@ public class Player : MonoBehaviour
     private float jumpPower_ = 5f;
     //rigidbody
     private Rigidbody rb_;
-    private CharacterController cc_;
-    private Vector3 moveDirection = Vector3.zero;
-    private float gravity = 9.8f;
-    private float mass = 1.0f;
-
+    
     //死ぬ秒数（60fps）
     [SerializeField, Tooltip("死ぬ秒数")]
     private float deathTime_ = 2.0f;
@@ -54,6 +50,7 @@ public class Player : MonoBehaviour
     private bool isJumping_ = false;
 
     public Camera camera_;
+    public bool isStop_ { get; set; }
     
     PlayControll playControll;
     GameObject obj_playerContoroll_;
@@ -84,12 +81,14 @@ public class Player : MonoBehaviour
         velocity_ = Vector3.zero;
         isGround_ = true;
         rb_ = GetComponent<Rigidbody>();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Player停止
+        if(isStop_ == true) { return; }
+
         //Xinput関連
         if (!playerInputSet_ || !prevState_.IsConnected)
         {
@@ -117,12 +116,14 @@ public class Player : MonoBehaviour
         
         if (isGround_)
         {
-            velocity_ = Vector3.zero;
+            //velocity_ = Vector3.zero;
 
             //移動パターン１
             //方向キーの入力量を計測
             if (direction.magnitude > 0.01f)
             {
+                velocity_ = Vector3.zero;
+
                 transform.LookAt(transform.position + direction);
                 
                 velocity_ += direction * moveSpeed_;
@@ -169,8 +170,9 @@ public class Player : MonoBehaviour
                 velocity_.y += jumpPower_;
                 SoundManager.GetInstance.PlaySE("Janp_SE");
             }
+
         }
-        
+
         //重力
         if (!isGround_)
         {
@@ -260,24 +262,6 @@ public class Player : MonoBehaviour
     {
         //キャラクターを移動させる処理
         rb_.MovePosition(transform.position + velocity_ * Time.deltaTime);
-        
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if ((other.collider.CompareTag("GoleObject")))
-        {
-            
-            if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
-            {
-                playControll.stageClearFrag = true;
-            }
-            else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
-            {
-                tutorialControll.stageClearFrag = true;
-            }
-
-        }
         
     }
 
