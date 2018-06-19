@@ -56,6 +56,8 @@ public class NoiseParticle : MonoBehaviour
             LeanTween.alpha(gun_model[0], 1.0f, 0);
             LeanTween.alpha(gun_model[1], 1.0f, 0);
             LeanTween.alpha(title, 1.0f, 0);
+            gun_model[0].transform.Rotate(0, 0, 20f * Time.deltaTime);
+
             return;
         }
         if (light_time <= 1.0f && Title_time > 50)
