@@ -13,9 +13,9 @@ public class Player : MonoBehaviour
     
     //移動速度
     [SerializeField, Tooltip("移動速度")]
-    private float moveSpeed_ = 5.0f;
+    private float moveSpeed_;
     [SerializeField, Tooltip("移動速度")]
-    private float sideSpeed_ = 4.0f;
+    private float sideSpeed_;
     //地面に達しているかどうか
     private bool isGround_;
     [SerializeField]
@@ -24,13 +24,13 @@ public class Player : MonoBehaviour
     private float rayRange_;
     //ジャンプの強さ
     [SerializeField, Tooltip("ジャンプの強さ")]
-    private float jumpPower_ = 5f;
+    private float jumpPower_;
     //rigidbody
     private Rigidbody rb_;
     
     //死ぬ秒数（60fps）
     [SerializeField, Tooltip("死ぬ秒数")]
-    private float deathTime_ = 2.0f;
+    private float deathTime_;
     //空中に浮いている時間
     private float deathTimer_ = 0.0f;
     //落ちた距離
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     [SerializeField, Tooltip("死ぬ高さ")]
     private float deadDistance_ = 5f;
     [SerializeField]
-    private float Gravity = 9.8f;
+    private float Gravity;
 
     //足音を鳴らす間隔
     [SerializeField, Tooltip("足音を鳴らす間隔")]
@@ -100,34 +100,10 @@ public class Player : MonoBehaviour
     {
         //Player停止
         if(isStop_ == true) { return; }
-
         
         isGround();
         isGoalFlag();
-
-        //足音
-        int num_ = UnityEngine.Random.Range(0, randomRange_);
-        if ((DateTime.Now - lastStepTime_).TotalSeconds < interval_sec_)
-        {
-            return;
-        }
-        else
-        {
-            switch (num_)
-            {
-                case 0:
-                    SoundManager.GetInstance.PlaySE("Walk_SE_1");
-                    break;
-                case 1:
-                    SoundManager.GetInstance.PlaySE("Walk_SE_2");
-                    break;
-                case 2:
-                    SoundManager.GetInstance.PlaySE("Walk_SE_3");
-                    break;
-            }
-            lastStepTime_ = DateTime.Now;
-        }
-
+        
         //高さで死ぬ処理
         fallPosition_ = Mathf.Max(fallPosition_, transform.position.y);
 
@@ -136,6 +112,11 @@ public class Player : MonoBehaviour
         {
             deathTimer_ += Time.deltaTime;
         }
+        else
+        {
+            deathTimer_ = 0.0f;
+        }
+        //Log("あと"+ deathTimer_ +"で死にます");
 
         if (!isGround_) {
 
@@ -174,18 +155,14 @@ public class Player : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else
-        {
-            deathTimer_ = 0.0f;
-
-        }
-
+        
         if (isJumping_ && isGround_)
         {
             SoundManager.GetInstance.PlaySE("Landing_SE");
             isJumping_ = false;
         }
-        
+
+        GetComponent<Rigidbody>().AddForce(new Vector3(0, -Gravity * GetComponent<Rigidbody>().mass, 0));
     }
 
     void FixedUpdate()
@@ -201,32 +178,56 @@ public class Player : MonoBehaviour
         padState_ = GamePad.GetState(playerIndex_);
 
         //進行方向を向く
-        //Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal") * sideSpeed_, 0, Input.GetAxis("Vertical") * moveSpeed_);
-        Vector3 cameraForward = Vector3.Scale(camera_.transform.forward, new Vector3(1, 0, 1)).normalized;
-        Vector3 targetVelocity = cameraForward * Input.GetAxis("Vertical") + camera_.transform.right * Input.GetAxis("Horizontal");
-        targetVelocity = transform.TransformDirection(targetVelocity);
+        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal") * sideSpeed_, 0, Input.GetAxis("Vertical") * moveSpeed_);
+        targetVelocity = camera_.transform.TransformDirection(targetVelocity);
+
+        if(targetVelocity.magnitude > 0.01)
+        {
+            int num_ = UnityEngine.Random.Range(0, randomRange_);
+            //足音
+            if ((DateTime.Now - lastStepTime_).TotalSeconds < interval_sec_)
+            {
+                return;
+            }
+            else
+            {
+                switch (num_)
+                {
+                    case 0:
+                        SoundManager.GetInstance.PlaySE("Walk_SE_1");
+                        break;
+                    case 1:
+                        SoundManager.GetInstance.PlaySE("Walk_SE_2");
+                        break;
+                    case 2:
+                        SoundManager.GetInstance.PlaySE("Walk_SE_3");
+                        break;
+                }
+                lastStepTime_ = DateTime.Now;
+            }
+
+        }
 
         Vector3 velocity = GetComponent<Rigidbody>().velocity;
         Vector3 velocityChange = (targetVelocity - velocity);
         velocityChange.y = 0;
         GetComponent<Rigidbody>().AddForce(velocityChange, ForceMode.VelocityChange);
-
+        
         if (!isJumping_ && isGround_ && Input.GetButton("Jump") /*(prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed)*/)
         {
-            GetComponent<Rigidbody>().velocity = new Vector3(velocity.x, Mathf.Sqrt(2 * jumpPower_ * Gravity), velocity.z);
+            GetComponent<Rigidbody>().velocity = new Vector3(0, Mathf.Sqrt(2 * jumpPower_ * Gravity), 0);
+            //GetComponent<Rigidbody>().AddForce(transform.up * jumpPower_);
             isGround_ = false;
             isJumping_ = true;
+            SoundManager.GetInstance.PlaySE("Janp_SE");
         }
-
-        GetComponent<Rigidbody>().AddForce(new Vector3(0, -Gravity * GetComponent<Rigidbody>().mass, 0));
 
     }
 
     void isGround()
     {
         RaycastHit hit;
-        //if (Physics.Raycast(transform.position, -Vector3.up, rayRange_, LayerMask.GetMask("Wall", "Production")))
-        if (Physics.SphereCast(charaRay.transform.position, 0.5f, -Vector3.up, out hit, rayRange_, LayerMask.GetMask("Wall", "Production")))
+        if (Physics.SphereCast(charaRay.transform.position, 0.2f, -Vector3.up, out hit, rayRange_, LayerMask.GetMask("Wall", "Production")))
         {
             if(hit.collider.CompareTag("stage") || hit.collider.CompareTag("ChangeObject") || hit.collider.CompareTag("GravityObj"))
             {
@@ -238,13 +239,13 @@ public class Player : MonoBehaviour
             }
         }
         Debug.Log("接地判定" + isGround_);
-        //Debug.Log("レイの中身" + hit.collider.tag);
+        
     }
 
     void isGoalFlag()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.forward, out hit, rayRange_))
+        if (Physics.Raycast(transform.position + new Vector3(0.0f,1.0f,0.0f), Vector3.forward, out hit, rayRange_))
         {
 
             if (hit.collider.CompareTag("GoleObject") || hit.collider.CompareTag("GoalObject"))
@@ -253,11 +254,13 @@ public class Player : MonoBehaviour
                 if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
                 {
                     playControll.stageClearFrag = true;
+                    SoundManager.GetInstance.PlaySE("Goal_SE");
                 }
                 else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
 
                 {
                     tutorialControll.stageClearFrag = true;
+                    SoundManager.GetInstance.PlaySE("Goal_SE");
                 }
 
             }
