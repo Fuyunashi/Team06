@@ -29,6 +29,12 @@ public class Shooter : MonoBehaviour
     private AxisType axisType = AxisType.X;
     private ChangeType changeType = ChangeType.Position;
     private ShotType shotType = ShotType.Getting;
+    [SerializeField]
+    private Text changeTex;
+    [SerializeField]
+    private Text shotTex;
+    [SerializeField]
+    private Text axisTex;
 
     private bool playerIndexSet = false;
     private PlayerIndex playerIndex;
@@ -85,8 +91,11 @@ public class Shooter : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        changeTex.text = "Position";
+        shotTex.text = "Get";
+        axisTex.text = "X";
+        
         //各変数の初期化
-
         prevOriginObj = null;
         originObject = null;
         targetObject = null;
@@ -469,9 +478,11 @@ public class Shooter : MonoBehaviour
         {
             case ShotType.Getting:
                 shotType = ShotType.Setting;
+                shotTex.text = "Set";
                 break;
             case ShotType.Setting:
                 shotType = ShotType.Getting;
+                shotTex.text = "Get";
                 break;
         }
     }
@@ -482,12 +493,15 @@ public class Shooter : MonoBehaviour
         {
             case AxisType.X:
                 axisType = AxisType.Y;
+                axisTex.text = "Y";
                 break;
             case AxisType.Y:
                 axisType = AxisType.Z;
+                axisTex.text = "Z";
                 break;
             case AxisType.Z:
                 axisType = AxisType.X;
+                axisTex.text = "X";
                 break;
         }
     }
@@ -498,9 +512,11 @@ public class Shooter : MonoBehaviour
         {
             case ChangeType.Position:
                 changeType = ChangeType.Scale;
+                changeTex.text = "Scale";
                 break;
             case ChangeType.Scale:
                 changeType = ChangeType.Position;
+                changeTex.text = "Position";
                 break;
         }
     }
