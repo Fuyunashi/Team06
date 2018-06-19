@@ -111,7 +111,7 @@ public class TutorialControll : MonoBehaviour
         //プレイアーが死んだらリスタート
         if (playerDeadFrag)
         {
-            sceneControll.NextScene = SceneName.PlayCurrentScene;
+            sceneControll.NextScene = SceneName.TutorialCurrentScene;
             sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
         }
 
