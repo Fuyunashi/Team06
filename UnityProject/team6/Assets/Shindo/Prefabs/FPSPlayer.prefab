@@ -100,7 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed_: 10
   sideSpeed_: 9
-  rayRange_: 0.7
+  charaRay: {fileID: 4797010635188466}
+  rayRange_: 1
   jumpPower_: 5
   deathTime_: 8
   deadDistance_: 5
