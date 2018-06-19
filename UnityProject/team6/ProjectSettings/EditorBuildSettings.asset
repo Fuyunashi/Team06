@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/syota/Scene/SelectScene.unity
     guid: 48948234937036c4eb4e2d4b9eaa9a1f
   - enabled: 1
+    path: Assets/syota/Scene/TutorialScene.unity
+    guid: 7591bcfe9c68aba499f5aa3bd73d639d
+  - enabled: 1
     path: Assets/syota/Scene/PlayScene.unity
     guid: 84420b387d97d3541bd219f2010d9aa4
   - enabled: 1
