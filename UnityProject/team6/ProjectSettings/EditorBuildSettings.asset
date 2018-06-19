@@ -8,27 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/syota/Scene/LoadScene.unity
     guid: eadbe79db4c977245a1a66e62bca6180
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/AdaptFolder/Scenes/AlphaScene.unity
-    guid: e1cce8dee6f0cc84a84493461a2fdda5
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/syota/Scene/TitleScene.unity
     guid: 323467e712d29bc4889d49865d96757c
   - enabled: 1
     path: Assets/syota/Scene/SelectScene.unity
-    guid: 19e40abf0026d38408464732e9104533
+    guid: 48948234937036c4eb4e2d4b9eaa9a1f
   - enabled: 1
     path: Assets/syota/Scene/PlayScene.unity
     guid: 84420b387d97d3541bd219f2010d9aa4
-  - enabled: 1
-    path: Assets/syota/Scene/TutorialScene.unity
-    guid: 7591bcfe9c68aba499f5aa3bd73d639d
   - enabled: 1
     path: Assets/syota/Scene/ChildScene/TitleRoom.unity
     guid: ae0d0a7f00c2a4e4192d91d5b81ff95d
