@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using XInputDotNetPure;
-
+//銃の処理
 public class Shooter : MonoBehaviour
 {
     //軸のタイプ
@@ -42,8 +42,6 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private Transform shotPos;    //発射位置
 
-    private Player player;
-
     private GameObject prevOriginObj;    //前回の取得するオブジェクト
     private GameObject originObject;     //数値を取得するオブジェクト
     private GameObject targetObject;     //数値を転置するオブジェクト
@@ -62,10 +60,11 @@ public class Shooter : MonoBehaviour
     private GameObject drawerCameraPref;
     private GameObject m_drawerCamera;
 
-    private bool isTargetMove;      //転置するオブジェクトが動いているか
+    private bool isTargetMove;   //転置するオブジェクトが動いているか
     private bool pushRTrigger;   //Rトリガーが押されたか
-    private bool pushLTrigger;  //Lトリガーが押されたか
+    private bool pushLTrigger;   //Lトリガーが押されたか
 
+    //レイ・レーザーポインタ用変数
     private Ray ray;
     private RaycastHit rayhit;
     [SerializeField]
@@ -93,8 +92,6 @@ public class Shooter : MonoBehaviour
         targetObject = null;
         originPositionValue = Vector3.zero;
         originScaleValue = Vector3.zero;
-
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         objVal_origin_ray = null;
         objVal_origin = null;
