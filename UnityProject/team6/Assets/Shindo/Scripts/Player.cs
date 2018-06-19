@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     //地面に達しているかどうか
     private bool isGround_;
     [SerializeField]
+    private Transform charaRay;
+    [SerializeField]
     private float rayRange_;
     //ジャンプの強さ
     [SerializeField, Tooltip("ジャンプの強さ")]
@@ -75,7 +77,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //
+        
         if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
         {
             obj_playerContoroll_ = GameObject.Find("PlayControll");
@@ -101,7 +103,8 @@ public class Player : MonoBehaviour
 
         
         isGround();
-        
+        isGoalFlag();
+
         //足音
         int num_ = UnityEngine.Random.Range(0, randomRange_);
         if ((DateTime.Now - lastStepTime_).TotalSeconds < interval_sec_)
@@ -113,15 +116,12 @@ public class Player : MonoBehaviour
             switch (num_)
             {
                 case 0:
-                    //Debug.Log("1");
                     SoundManager.GetInstance.PlaySE("Walk_SE_1");
                     break;
                 case 1:
-                    //Debug.Log("2");
                     SoundManager.GetInstance.PlaySE("Walk_SE_2");
                     break;
                 case 2:
-                    //Debug.Log("3");
                     SoundManager.GetInstance.PlaySE("Walk_SE_3");
                     break;
             }
@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
 
         if (!isGround_) {
 
-            Debug.Log("落下しました");
+            //Debug.Log("落下しました");
             distance_ = fallPosition_ - transform.position.y;
 
             if (distance_ >= deadDistance_)
@@ -201,7 +201,9 @@ public class Player : MonoBehaviour
         padState_ = GamePad.GetState(playerIndex_);
 
         //進行方向を向く
-        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal") * sideSpeed_, 0, Input.GetAxis("Vertical") * moveSpeed_);
+        //Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal") * sideSpeed_, 0, Input.GetAxis("Vertical") * moveSpeed_);
+        Vector3 cameraForward = Vector3.Scale(camera_.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 targetVelocity = cameraForward * Input.GetAxis("Vertical") + camera_.transform.right * Input.GetAxis("Horizontal");
         targetVelocity = transform.TransformDirection(targetVelocity);
 
         Vector3 velocity = GetComponent<Rigidbody>().velocity;
@@ -223,15 +225,20 @@ public class Player : MonoBehaviour
     void isGround()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -Vector3.up, out hit, rayRange_, LayerMask.GetMask("Wall", "Production")))
+        //if (Physics.Raycast(transform.position, -Vector3.up, rayRange_, LayerMask.GetMask("Wall", "Production")))
+        if (Physics.SphereCast(charaRay.transform.position, 0.5f, -Vector3.up, out hit, rayRange_, LayerMask.GetMask("Wall", "Production")))
         {
-
-            isGround_ = true;
+            if(hit.collider.CompareTag("stage") || hit.collider.CompareTag("ChangeObject"))
+            {
+                isGround_ = true;
+            }
+            else
+            {
+                isGround_ = false;
+            }
         }
-        else
-        {
-            isGround_ = false;
-        }
+        Debug.Log("接地判定" + isGround_);
+        Debug.Log("レイの中身" + hit.collider.tag);
     }
 
     void isGoalFlag()
@@ -258,25 +265,5 @@ public class Player : MonoBehaviour
         }
         
     }
-
-    //void OnDrawGizmos()
-    //{
-    //    RaycastHit hit;
-
-    //    var radius = transform.lossyScale.x * 0.2f;
-
-    //    var isHit = Physics.SphereCast(charaRay.position, radius, -transform.up, out hit, 0.4f);
-    //    if (isHit)
-    //    {
-    //        Gizmos.DrawRay(transform.position, -transform.up * hit.distance);
-    //        Gizmos.DrawWireSphere(transform.position + -transform.up * (hit.distance), radius);
-    //    }
-    //    else
-    //    {
-    //        Gizmos.DrawRay(transform.position, -transform.up * 100);
-    //    }
-    //}
-
-
-
+    
 }
