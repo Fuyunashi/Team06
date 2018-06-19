@@ -686,7 +686,7 @@ public class Shooter : MonoBehaviour
     //コピー時の演出アニメーション処理
     private void SettingAnimation(GameObject target)
     {
-        m_drawerCamera = Instantiate(drawerCameraPref, this.transform.position + new Vector3(0, 1f, 0), Camera.main.transform.rotation);
+        m_drawerCamera = Instantiate(drawerCameraPref, this.transform.position + new Vector3(0, 1f, 0), GameObject.FindGameObjectWithTag("PlayCamera").transform.rotation);
         m_drawerCamera.GetComponent<DrawerCamera>().SetDrawerObj(objVal_origin);
 
         LeanTween.delayedCall(1.0f, () =>
