@@ -100,6 +100,7 @@ public class TutorialControll : MonoBehaviour
             //次ステージに行く際の条件
             if (stageClearFrag)
             {
+                GameObject.Find("FPSPlayer").GetComponent<Player>().isStop_ = true;
                 distortPortal.portalPos = portalPosObj.transform.position;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
                 distortPortal.portalPos = portalPosObj.transform.position;
