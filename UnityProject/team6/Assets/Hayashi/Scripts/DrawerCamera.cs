@@ -7,10 +7,12 @@ public class DrawerCamera : MonoBehaviour
     private GameObject target;
     private Quaternion targetRotate;
     private GameObject player;
+    private GameObject playCamera;
     private bool isDrawEnd;
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playCamera = GameObject.FindGameObjectWithTag("PlayCamera");
         isDrawEnd = false;
     }
 
@@ -29,6 +31,7 @@ public class DrawerCamera : MonoBehaviour
             if (Vector3.Distance(transform.position, player.transform.position + new Vector3(0, 1f, 0)) <= 0.3f)
             {
                 player.GetComponent<Player>().isStop_ = false;
+                playCamera.SetActive(true);
                 Destroy(this.gameObject);
             }
         }
@@ -38,6 +41,7 @@ public class DrawerCamera : MonoBehaviour
     {
         target = drawer;
         player.GetComponent<Player>().isStop_ = true;
+        playCamera.SetActive(false);
     }
 
     public void TrackingEnd()
