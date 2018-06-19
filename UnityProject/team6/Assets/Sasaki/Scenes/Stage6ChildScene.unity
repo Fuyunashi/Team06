@@ -366,6 +366,30 @@ Prefab:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1482847254604350, guid: 0b7908644e405f74fa521bcdf442cffd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700925551384386, guid: 0b7908644e405f74fa521bcdf442cffd, type: 2}
+      propertyPath: m_TagString
+      value: stage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825957426772276, guid: 0b7908644e405f74fa521bcdf442cffd, type: 2}
+      propertyPath: m_TagString
+      value: stage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1937736601417178, guid: 0b7908644e405f74fa521bcdf442cffd, type: 2}
+      propertyPath: m_TagString
+      value: stage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1824850441515614, guid: 0b7908644e405f74fa521bcdf442cffd, type: 2}
+      propertyPath: m_TagString
+      value: stage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089039910904900, guid: 0b7908644e405f74fa521bcdf442cffd, type: 2}
+      propertyPath: m_TagString
+      value: stage
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b7908644e405f74fa521bcdf442cffd, type: 2}
   m_IsPrefabParent: 0
