@@ -12300,7 +12300,7 @@ GameObject:
   - component: {fileID: 1108393644}
   m_Layer: 10
   m_Name: Block
-  m_TagString: stage
+  m_TagString: GravityObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13954,7 +13954,7 @@ GameObject:
   - component: {fileID: 1292699942}
   m_Layer: 10
   m_Name: Block (1)
-  m_TagString: stage
+  m_TagString: GravityObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
