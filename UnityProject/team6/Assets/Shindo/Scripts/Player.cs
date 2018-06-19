@@ -238,7 +238,7 @@ public class Player : MonoBehaviour
             }
         }
         Debug.Log("接地判定" + isGround_);
-        Debug.Log("レイの中身" + hit.collider.tag);
+        //Debug.Log("レイの中身" + hit.collider.tag);
     }
 
     void isGoalFlag()
@@ -247,7 +247,7 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.forward, out hit, rayRange_))
         {
 
-            if (hit.collider.CompareTag("GoleObject"))
+            if (hit.collider.CompareTag("GoleObject") || hit.collider.CompareTag("GoalObject"))
             {
 
                 if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())

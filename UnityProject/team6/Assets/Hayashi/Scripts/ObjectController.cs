@@ -70,11 +70,11 @@ public class ObjectController : MonoBehaviour
     {
         if (isHitObj == false)
         {
-            transform.parent.transform.parent.position = Vector3.MoveTowards(transform.parent.transform.parent.position, value, moveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.parent.transform.parent.position, value) == 0)
+            transform.parent.parent.position = Vector3.MoveTowards(transform.parent.parent.position, value, moveSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.parent.parent.position, value) == 0)
             {
                 DeleteOutline();
-                basePosition = transform.parent.transform.parent.position;
+                basePosition = transform.parent.parent.position;
                 shoter.MovingEnd();
                 isPositionMove = false;
             }
@@ -91,11 +91,11 @@ public class ObjectController : MonoBehaviour
     {
         if (isHitObj == false)
         {
-            transform.parent.localScale = Vector3.MoveTowards(transform.parent.localScale, value, moveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.parent.localScale, value) == 0)
+            transform.parent.parent.localScale = Vector3.MoveTowards(transform.parent.parent.localScale, value, moveSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.parent.parent.localScale, value) == 0)
             {
                 DeleteOutline();
-                baseScale = transform.parent.localScale;
+                baseScale = transform.parent.parent.localScale;
                 shoter.MovingEnd();
                 isScaleMove = false;
             }
@@ -134,8 +134,8 @@ public class ObjectController : MonoBehaviour
             LeanTween.alpha(gameObject, 0.0f, 1.0f).setOnComplete(() =>
               {
                   shoter.MovingEnd();
-                  transform.parent.transform.parent.position = basePosition;
-                  transform.parent.localScale = baseScale;
+                  transform.parent.parent.position = basePosition;
+                  transform.parent.parent.localScale = baseScale;
 
                   LeanTween.alpha(gameObject, 1.0f, 2.0f).setOnComplete(() => { isHitObj = false; });
                   SoundManager.GetInstance.PlaySE("Born_SE");
