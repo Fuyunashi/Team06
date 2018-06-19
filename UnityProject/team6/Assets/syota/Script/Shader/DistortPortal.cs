@@ -41,7 +41,7 @@ public class DistortPortal : MonoBehaviour
 
 
     PortalState portalState;
-    Camera camera;
+    GameObject camera;
     int first_time;
     int shrink_time;
     int second_time;
@@ -50,7 +50,7 @@ public class DistortPortal : MonoBehaviour
     void Start()
     {
         //カメラを使うので用意する
-        camera = Camera.main;
+        camera = GameObject.FindGameObjectWithTag("PlayCamera");
         //Debug.Log("カメラだぜ" + camera);
         //Shader用のテクスチャを入れる
         material.SetTexture("_SubTex", text);
@@ -80,7 +80,8 @@ public class DistortPortal : MonoBehaviour
         if (PortalFlag)
         {
             material.SetTexture("_SubTex", text);
-            var uv = camera.WorldToViewportPoint(portalPos);
+
+            var uv = camera.GetComponent<Camera>().WorldToViewportPoint(portalPos);
             //Debug.Log("半径" +  + "半径");
             material.SetVector("_Position", uv);
             material.SetFloat("_Aspect", Screen.height / (float)Screen.width);
