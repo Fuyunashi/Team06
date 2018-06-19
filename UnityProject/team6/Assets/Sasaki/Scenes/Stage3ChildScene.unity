@@ -214,9 +214,9 @@ GameObject:
   - component: {fileID: 18742148}
   - component: {fileID: 18742147}
   - component: {fileID: 18742146}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (21)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,9 +305,9 @@ GameObject:
   - component: {fileID: 38911345}
   - component: {fileID: 38911344}
   - component: {fileID: 38911343}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (18)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -396,9 +396,9 @@ GameObject:
   - component: {fileID: 72616260}
   - component: {fileID: 72616259}
   - component: {fileID: 72616258}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (13)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -415,7 +415,7 @@ Transform:
   m_LocalScale: {x: 0.5125014, y: 0.10000006, z: 0.5669912}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &72616258
 MeshRenderer:
@@ -487,9 +487,9 @@ GameObject:
   - component: {fileID: 108334614}
   - component: {fileID: 108334613}
   - component: {fileID: 108334612}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (22)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -698,9 +698,9 @@ GameObject:
   - component: {fileID: 180627134}
   - component: {fileID: 180627133}
   - component: {fileID: 180627132}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (26)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -777,6 +777,71 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 180627130}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &190456760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 190456762}
+  - component: {fileID: 190456761}
+  m_Layer: 0
+  m_Name: Directional light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!108 &190456761
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 190456760}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &190456762
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 190456760}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 3.7762861, y: 4.09813, z: 1.3320858}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &220792445
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,9 +854,9 @@ GameObject:
   - component: {fileID: 220792449}
   - component: {fileID: 220792448}
   - component: {fileID: 220792447}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (12)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -808,7 +873,7 @@ Transform:
   m_LocalScale: {x: 0.5125014, y: 0.10000006, z: 0.5669912}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &220792447
 MeshRenderer:
@@ -1144,7 +1209,6 @@ Transform:
   - {fileID: 1073842068}
   - {fileID: 1442128160}
   - {fileID: 1514161648}
-  - {fileID: 1211263665}
   - {fileID: 1691235840}
   - {fileID: 829257439}
   - {fileID: 527875503}
@@ -1181,9 +1245,9 @@ GameObject:
   - component: {fileID: 357098445}
   - component: {fileID: 357098444}
   - component: {fileID: 357098443}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (9)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1200,7 +1264,7 @@ Transform:
   m_LocalScale: {x: 0.5125014, y: 0.10000006, z: 0.5784458}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &357098443
 MeshRenderer:
@@ -1482,7 +1546,7 @@ GameObject:
   - component: {fileID: 456987341}
   - component: {fileID: 456987340}
   - component: {fileID: 456987339}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall_A_04 (4)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -1766,9 +1830,9 @@ GameObject:
   - component: {fileID: 493921594}
   - component: {fileID: 493921593}
   - component: {fileID: 493921592}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (28)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1888,9 +1952,9 @@ GameObject:
   - component: {fileID: 527839218}
   - component: {fileID: 527839217}
   - component: {fileID: 527839216}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (3)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1907,7 +1971,7 @@ Transform:
   m_LocalScale: {x: 0.51250094, y: 0.10000006, z: 0.5669912}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &527839216
 MeshRenderer:
@@ -1979,9 +2043,9 @@ GameObject:
   - component: {fileID: 527875506}
   - component: {fileID: 527875505}
   - component: {fileID: 527875504}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1998,7 +2062,7 @@ Transform:
   m_LocalScale: {x: 0.51250094, y: 0.10000006, z: 0.5784458}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &527875504
 MeshRenderer:
@@ -2070,9 +2134,9 @@ GameObject:
   - component: {fileID: 582053314}
   - component: {fileID: 582053313}
   - component: {fileID: 582053312}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (29)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2161,9 +2225,9 @@ GameObject:
   - component: {fileID: 590440133}
   - component: {fileID: 590440132}
   - component: {fileID: 590440131}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (25)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2252,9 +2316,9 @@ GameObject:
   - component: {fileID: 646528132}
   - component: {fileID: 646528131}
   - component: {fileID: 646528130}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (24)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2621,7 +2685,7 @@ Transform:
   - {fileID: 2118271955}
   - {fileID: 835840242}
   m_Father: {fileID: 341713297}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &835840241
 GameObject:
@@ -2635,9 +2699,9 @@ GameObject:
   - component: {fileID: 835840245}
   - component: {fileID: 835840244}
   - component: {fileID: 835840243}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (29)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2726,9 +2790,9 @@ GameObject:
   - component: {fileID: 838005442}
   - component: {fileID: 838005441}
   - component: {fileID: 838005440}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (10)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2745,7 +2809,7 @@ Transform:
   m_LocalScale: {x: 0.5125014, y: 0.10000006, z: 0.5784458}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &838005440
 MeshRenderer:
@@ -2805,6 +2869,129 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 838005438}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &843234595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 843234599}
+  - component: {fileID: 843234598}
+  - component: {fileID: 843234597}
+  - component: {fileID: 843234596}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &843234596
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843234595}
+  m_Enabled: 1
+--- !u!124 &843234597
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843234595}
+  m_Enabled: 1
+--- !u!20 &843234598
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843234595}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &843234599
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843234595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.98, y: 4.044795, z: 1.64}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &883545083
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4973118231168036, guid: 0da95728040fc5a4caccee505864c728, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973118231168036, guid: 0da95728040fc5a4caccee505864c728, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973118231168036, guid: 0da95728040fc5a4caccee505864c728, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973118231168036, guid: 0da95728040fc5a4caccee505864c728, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973118231168036, guid: 0da95728040fc5a4caccee505864c728, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973118231168036, guid: 0da95728040fc5a4caccee505864c728, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973118231168036, guid: 0da95728040fc5a4caccee505864c728, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973118231168036, guid: 0da95728040fc5a4caccee505864c728, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0da95728040fc5a4caccee505864c728, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &910548725
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,9 +3093,9 @@ GameObject:
   - component: {fileID: 931522687}
   - component: {fileID: 931522686}
   - component: {fileID: 931522685}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (5)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2925,7 +3112,7 @@ Transform:
   m_LocalScale: {x: 0.58425117, y: 0.10000006, z: 0.5669912}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &931522685
 MeshRenderer:
@@ -2997,9 +3184,9 @@ GameObject:
   - component: {fileID: 932490899}
   - component: {fileID: 932490898}
   - component: {fileID: 932490897}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (19)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3088,9 +3275,9 @@ GameObject:
   - component: {fileID: 997207688}
   - component: {fileID: 997207687}
   - component: {fileID: 997207686}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (24)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3179,9 +3366,9 @@ GameObject:
   - component: {fileID: 1008591820}
   - component: {fileID: 1008591819}
   - component: {fileID: 1008591818}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (15)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3198,7 +3385,7 @@ Transform:
   m_LocalScale: {x: 0.5125014, y: 0.10000006, z: 0.55374986}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &1008591818
 MeshRenderer:
@@ -3407,7 +3594,7 @@ GameObject:
   - component: {fileID: 1073842071}
   - component: {fileID: 1073842070}
   - component: {fileID: 1073842069}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall_A_04 (5)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -3513,9 +3700,9 @@ GameObject:
   - component: {fileID: 1086439973}
   - component: {fileID: 1086439972}
   - component: {fileID: 1086439971}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (23)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3725,9 +3912,9 @@ GameObject:
   - component: {fileID: 1105540355}
   - component: {fileID: 1105540354}
   - component: {fileID: 1105540353}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall_D_03
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3744,7 +3931,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!111 &1105540353
 Animation:
@@ -4019,9 +4206,9 @@ GameObject:
   - component: {fileID: 1135913405}
   - component: {fileID: 1135913404}
   - component: {fileID: 1135913403}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (21)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4110,9 +4297,9 @@ GameObject:
   - component: {fileID: 1136682113}
   - component: {fileID: 1136682112}
   - component: {fileID: 1136682111}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (7)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4129,7 +4316,7 @@ Transform:
   m_LocalScale: {x: 0.51250094, y: 0.10000006, z: 0.55374986}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &1136682111
 MeshRenderer:
@@ -4220,92 +4407,6 @@ Transform:
   m_Father: {fileID: 735701233}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1211263664
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1427479381161476, guid: 62583b27b295ee449b408659dd92edf4,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1211263665}
-  - component: {fileID: 1211263668}
-  - component: {fileID: 1211263667}
-  - component: {fileID: 1211263666}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1211263665
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4672164654593206, guid: 62583b27b295ee449b408659dd92edf4,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1211263664}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 1.5, z: -17}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 341713297}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &1211263666
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 81246791869240408, guid: 62583b27b295ee449b408659dd92edf4,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1211263664}
-  m_Enabled: 1
---- !u!124 &1211263667
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 124438662258367906, guid: 62583b27b295ee449b408659dd92edf4,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1211263664}
-  m_Enabled: 1
---- !u!20 &1211263668
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 20348822179593080, guid: 62583b27b295ee449b408659dd92edf4,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1211263664}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
 --- !u!1 &1222667646
 GameObject:
   m_ObjectHideFlags: 0
@@ -4407,9 +4508,9 @@ GameObject:
   - component: {fileID: 1245293258}
   - component: {fileID: 1245293257}
   - component: {fileID: 1245293256}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (25)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4486,6 +4587,73 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1245293254}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1253891194
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764463117283666, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 13.085415
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764463117283666, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 22.217808
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764463117283666, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1.5084661
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764463117283666, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764463117283666, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764463117283666, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764463117283666, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764463117283666, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: stageObj
+      value: 
+      objectReference: {fileID: 341713296}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: MainCam
+      value: 
+      objectReference: {fileID: 843234595}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.data[1]
+      value: 
+      objectReference: {fileID: 1514161647}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.data[0]
+      value: 
+      objectReference: {fileID: 1124750204}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1277279462
 GameObject:
   m_ObjectHideFlags: 0
@@ -4569,9 +4737,9 @@ GameObject:
   - component: {fileID: 1343686135}
   - component: {fileID: 1343686134}
   - component: {fileID: 1343686133}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (8)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4588,7 +4756,7 @@ Transform:
   m_LocalScale: {x: 0.58425117, y: 0.10000006, z: 0.55374986}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &1343686133
 MeshRenderer:
@@ -4660,9 +4828,9 @@ GameObject:
   - component: {fileID: 1346728430}
   - component: {fileID: 1346728429}
   - component: {fileID: 1346728428}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (27)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4840,9 +5008,9 @@ GameObject:
   - component: {fileID: 1412921980}
   - component: {fileID: 1412921979}
   - component: {fileID: 1412921978}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (14)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4859,7 +5027,7 @@ Transform:
   m_LocalScale: {x: 0.58425164, y: 0.10000006, z: 0.5669912}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &1412921978
 MeshRenderer:
@@ -4998,7 +5166,7 @@ GameObject:
   - component: {fileID: 1442128163}
   - component: {fileID: 1442128162}
   - component: {fileID: 1442128161}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall_A_04 (6)
   m_TagString: stage
   m_Icon: {fileID: 0}
@@ -5135,9 +5303,9 @@ GameObject:
   - component: {fileID: 1465973352}
   - component: {fileID: 1465973351}
   - component: {fileID: 1465973350}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (17)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5154,7 +5322,7 @@ Transform:
   m_LocalScale: {x: 0.58425164, y: 0.10000006, z: 0.55374986}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &1465973350
 MeshRenderer:
@@ -5226,9 +5394,9 @@ GameObject:
   - component: {fileID: 1504320464}
   - component: {fileID: 1504320463}
   - component: {fileID: 1504320462}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (16)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5245,7 +5413,7 @@ Transform:
   m_LocalScale: {x: 0.5125014, y: 0.10000006, z: 0.55374986}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 28
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &1504320462
 MeshRenderer:
@@ -5416,9 +5584,9 @@ GameObject:
   - component: {fileID: 1585031095}
   - component: {fileID: 1585031094}
   - component: {fileID: 1585031093}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (11)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5435,7 +5603,7 @@ Transform:
   m_LocalScale: {x: 0.58425164, y: 0.10000006, z: 0.5784458}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &1585031093
 MeshRenderer:
@@ -5507,9 +5675,9 @@ GameObject:
   - component: {fileID: 1587552118}
   - component: {fileID: 1587552117}
   - component: {fileID: 1587552116}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (27)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5598,9 +5766,9 @@ GameObject:
   - component: {fileID: 1598183249}
   - component: {fileID: 1598183248}
   - component: {fileID: 1598183247}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (18)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5689,9 +5857,9 @@ GameObject:
   - component: {fileID: 1607814121}
   - component: {fileID: 1607814120}
   - component: {fileID: 1607814119}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (4)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5708,7 +5876,7 @@ Transform:
   m_LocalScale: {x: 0.51250094, y: 0.10000006, z: 0.5669912}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &1607814119
 MeshRenderer:
@@ -5928,7 +6096,7 @@ Transform:
   - {fileID: 493921591}
   - {fileID: 582053311}
   m_Father: {fileID: 341713297}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1694566841
 GameObject:
@@ -5942,9 +6110,9 @@ GameObject:
   - component: {fileID: 1694566845}
   - component: {fileID: 1694566844}
   - component: {fileID: 1694566843}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (6)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5961,7 +6129,7 @@ Transform:
   m_LocalScale: {x: 0.51250094, y: 0.10000006, z: 0.55374986}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &1694566843
 MeshRenderer:
@@ -6184,9 +6352,9 @@ GameObject:
   - component: {fileID: 1778993517}
   - component: {fileID: 1778993516}
   - component: {fileID: 1778993515}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (1)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6203,7 +6371,7 @@ Transform:
   m_LocalScale: {x: 0.51250094, y: 0.10000006, z: 0.5784458}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &1778993515
 MeshRenderer:
@@ -6275,9 +6443,9 @@ GameObject:
   - component: {fileID: 1796984185}
   - component: {fileID: 1796984184}
   - component: {fileID: 1796984183}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (22)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6366,9 +6534,9 @@ GameObject:
   - component: {fileID: 1847568931}
   - component: {fileID: 1847568930}
   - component: {fileID: 1847568929}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (20)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6577,9 +6745,9 @@ GameObject:
   - component: {fileID: 1911145216}
   - component: {fileID: 1911145215}
   - component: {fileID: 1911145214}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (19)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6668,9 +6836,9 @@ GameObject:
   - component: {fileID: 1926734204}
   - component: {fileID: 1926734203}
   - component: {fileID: 1926734202}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (2)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6687,7 +6855,7 @@ Transform:
   m_LocalScale: {x: 0.58425117, y: 0.10000006, z: 0.5784458}
   m_Children: []
   m_Father: {fileID: 341713297}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &1926734202
 MeshRenderer:
@@ -6968,9 +7136,9 @@ GameObject:
   - component: {fileID: 1955676873}
   - component: {fileID: 1955676872}
   - component: {fileID: 1955676871}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (26)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7148,9 +7316,9 @@ GameObject:
   - component: {fileID: 2022501552}
   - component: {fileID: 2022501551}
   - component: {fileID: 2022501550}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (23)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7239,9 +7407,9 @@ GameObject:
   - component: {fileID: 2030746441}
   - component: {fileID: 2030746440}
   - component: {fileID: 2030746439}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (20)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7419,9 +7587,9 @@ GameObject:
   - component: {fileID: 2118271958}
   - component: {fileID: 2118271957}
   - component: {fileID: 2118271956}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tile 5 prefab (28)
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

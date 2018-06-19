@@ -228,7 +228,7 @@ public class Player : MonoBehaviour
         //if (Physics.Raycast(transform.position, -Vector3.up, rayRange_, LayerMask.GetMask("Wall", "Production")))
         if (Physics.SphereCast(charaRay.transform.position, 0.5f, -Vector3.up, out hit, rayRange_, LayerMask.GetMask("Wall", "Production")))
         {
-            if(hit.collider.CompareTag("stage") || hit.collider.CompareTag("ChangeObject"))
+            if(hit.collider.CompareTag("stage") || hit.collider.CompareTag("ChangeObject") || hit.collider.CompareTag("GravityObj"))
             {
                 isGround_ = true;
             }
