@@ -7262,7 +7262,7 @@ Prefab:
         type: 2}
       propertyPath: stageObj
       value: 
-      objectReference: {fileID: 841912884}
+      objectReference: {fileID: 400155144}
     - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
         type: 2}
       propertyPath: light.Array.data[0]
