@@ -7,13 +7,9 @@ public class W_Enemy : MonoBehaviour
 
     private Transform target;
     private Vector3 targetPoint;
-    //private Vector3 moveTargetPoint;
-    //private int arrCount;
-    private float accelaration;
-    private bool detect;
-    //private bool movePointHit;
 
-    //public GameObject[] movePoint;
+    private float accelaration;
+  
     public float velocity = 2.0f;
     public float accel;
     public float detectionRange;
@@ -30,25 +26,6 @@ public class W_Enemy : MonoBehaviour
         MoveToPlayer();
     }
 
-    //void MoveToPoint()
-    //{
-    //    Vector3 movePosition;
-    //    Debug.Log(arrCount);
-    //    movePosition = movePoint[arrCount].transform.position;
-    //    moveTargetPoint = movePosition - transform.position;
-
-    //    if (movePointHit == false)
-    //    {
-    //        transform.Translate(Vector3.forward * velocity);
-    //        velocity += accel * Time.deltaTime;
-    //        transform.LookAt(movePosition);
-    //    }
-    //    if (movePointHit == true)
-    //    {
-    //        velocity = 0;
-    //        arrCount = 1;
-    //    }
-    //}
     void MoveToPlayer()
     {
         gameObject.GetComponent<EnemyNavi>().enabled = true;
