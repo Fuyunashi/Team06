@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114130193912874006}
   - component: {fileID: 54470131672078430}
   - component: {fileID: 136655779080429358}
-  - component: {fileID: 114933608051662558}
+  - component: {fileID: 114154486972778030}
   m_Layer: 8
   m_Name: FPSPlayer
   m_TagString: Player
@@ -86,7 +86,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &114130193912874006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,7 +112,7 @@ MonoBehaviour:
   rayDistance: 20
   laserPointer: {fileID: 0}
   estimateMat: {fileID: 2100000, guid: 41a7f52bfe47d6f4fb230bfd1cf0446b, type: 2}
---- !u!114 &114933608051662558
+--- !u!114 &114154486972778030
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -120,19 +120,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109964019208686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03b300d3a09d4294b8003e3a24bd4c5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a549b5ccaa811f44a28875061c330da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fowardSpeed_: 100
-  sideSpeed_: 90
+  fowardSpeed_: 10
+  sideSpeed_: 9
   isGround_: 0
   charaRay_: {fileID: 4797010635188466}
   rayRange_: 0.2
-  jumpPower_: 10
+  jumpPower_: 100
   deathTime_: 100
-  deathDistance_: 5
+  deathDistance_: 50
   isDead_: 0
-  Gravity_: 500
+  Gravity_: 200
   randomRange_: 3
   camera_: {fileID: 0}
 --- !u!136 &136655779080429358

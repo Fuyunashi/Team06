@@ -110,24 +110,13 @@ public class Player : MonoBehaviour
         isGround();
         isGoalFlag();
         isDead();
-
         
-
-        //ジャンプ
-        if (isGround_ && !isJump_ && (Input.GetButton("Jump") || Input.GetKey(KeyCode.Space)))
+        if (!isGround_)
         {
-            SoundManager.GetInstance.PlaySE("Janp_SE");
-            totalFallTime_ = 0.0f;
-            rb_.velocity = new Vector3(0, Mathf.Sqrt(jumpPower_ * 9.8f * 2), 0);
-            isGround_ = false;
-            isJump_ = true;
+            rb_.AddForce(new Vector3(0, -Gravity_ * rb_.mass, 0));
+            
         }
-        if (isJump_ && isGround_)
-        {
-            SoundManager.GetInstance.PlaySE("Landing_SE");
-            isJump_ = false;
-        }
-
+        
         //死亡したら
         if (isDead())
         {
@@ -141,21 +130,21 @@ public class Player : MonoBehaviour
                 tutorialControll_.playerDeadFrag = true;
             }
         }
-
         
-
+        
     }
 
     void FixedUpdate()
     {
-        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal") * sideSpeed_, 0, Input.GetAxis("Vertical") * fowardSpeed_);
-        targetVelocity = camera_.transform.TransformDirection(targetVelocity);
+        
+        var cameraForward = Vector3.Scale(camera_.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 targetVelocity = cameraForward * Input.GetAxis("Vertical") + camera_.transform.right * Input.GetAxis("Horizontal");
 
         //移動
         if (targetVelocity.magnitude > 0.01)
         {
             FootSound();
-            rb_.velocity = targetVelocity * Time.deltaTime;
+            rb_.velocity = targetVelocity * fowardSpeed_;
         }
         else
         {
@@ -163,11 +152,22 @@ public class Player : MonoBehaviour
             targetVelocity = Vector3.zero;
             rb_.velocity = Vector3.zero;
         }
-
-        //重力
-        totalFallTime_ += Time.deltaTime;
-        rb_.AddForce(new Vector3(targetVelocity.x, (-Gravity_ * rb_.mass) * totalFallTime_, targetVelocity.z));
-
+        
+        //ジャンプ
+        if (isGround_ && !isJump_ && (Input.GetButton("Jump") || Input.GetKey(KeyCode.Space)))
+        {
+            Debug.Log("ジャンプしてます");
+            SoundManager.GetInstance.PlaySE("Janp_SE");
+            rb_.velocity += new Vector3(0, jumpPower_, 0);
+            isGround_ = false;
+            isJump_ = true;
+        }
+        if (isJump_ && isGround_)
+        {
+            SoundManager.GetInstance.PlaySE("Landing_SE");
+            isJump_ = false;
+        }
+        
     }
 
     void isGround()
