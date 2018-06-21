@@ -111,11 +111,7 @@ public class Player : MonoBehaviour
         isGoalFlag();
         isDead();
         
-        if (!isGround_)
-        {
-            rb_.AddForce(new Vector3(0, -Gravity_ * rb_.mass, 0));
-            
-        }
+        rb_.AddForce(new Vector3(0, -Gravity_ * rb_.mass, 0));
         
         //死亡したら
         if (isDead())
