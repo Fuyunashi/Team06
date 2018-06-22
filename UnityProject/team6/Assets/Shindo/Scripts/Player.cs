@@ -1,65 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
-using UnityEngine.UI;
 using System;
+using XInputDotNetPure;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 public class Player : MonoBehaviour
 {
-    
-    //移動速度
-    [SerializeField, Tooltip("移動速度")]
-    private float moveSpeed_ = 5.0f;
-    [SerializeField, Tooltip("移動速度")]
-    private float sideSpeed_ = 4.0f;
-    //地面に達しているかどうか
+
+    //前後の速さ
+    [SerializeField]
+    private float fowardSpeed_;
+    //左右の速さ
+    [SerializeField]
+    private float sideSpeed_;
+    //接地判定
+    [SerializeField]
     private bool isGround_;
     [SerializeField]
-    private Transform charaRay;
+    private Transform charaRay_;
     [SerializeField]
     private float rayRange_;
-    //ジャンプの強さ
-    [SerializeField, Tooltip("ジャンプの強さ")]
-    private float jumpPower_ = 5f;
-    //rigidbody
-    private Rigidbody rb_;
-    
-    //死ぬ秒数（60fps）
-    [SerializeField, Tooltip("死ぬ秒数")]
-    private float deathTime_ = 2.0f;
-    //空中に浮いている時間
-    private float deathTimer_ = 0.0f;
-    //落ちた距離
-    private float distance_;
-    //落ちた地点
-    private float fallPosition_;
-    //死ぬ高さ
-    [SerializeField, Tooltip("死ぬ高さ")]
-    private float deadDistance_ = 5f;
     [SerializeField]
-    private float Gravity = 9.8f;
+    private float jumpPower_;
 
-    //足音を鳴らす間隔
-    [SerializeField, Tooltip("足音を鳴らす間隔")]
+    private Rigidbody rb_;
+
+    [SerializeField]
+    private float deathTime_;
+    private float deathTimer_;
+    private float distance_;
+    private float fallPos_;
+    [SerializeField]
+    private float deathDistance_;
+    [SerializeField]
+    private bool isDead_;
+    [SerializeField]
+    private float Gravity_;
+    private float totalFallTime_;
+
+    [SerializeField]
     private const float interval_sec_ = 0.4f;
-    //最後になった時間
     private DateTime lastStepTime_;
-    [SerializeField, Tooltip("足音の数")]
+    [SerializeField]
     private int randomRange_ = 3;
-
-    private bool isJumping_;
+    private bool isJump_;
 
     public Camera camera_;
     public bool isStop_ { get; set; }
-    
-    //シーン関連
-    PlayControll playControll;
-    GameObject obj_playerContoroll_;
-    TutorialControll tutorialControll;
+
+    PlayControll playControll_;
+    GameObject obj_playControll_;
+    TutorialControll tutorialControll_;
     GameObject obj_tutorialControll_;
 
     //Xinput関連
@@ -70,43 +64,160 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        GetComponent<Rigidbody>().freezeRotation = true;
-        GetComponent<Rigidbody>().useGravity = false;
+        rb_ = GetComponent<Rigidbody>();
     }
 
     // Use this for initialization
     void Start()
     {
-        
+        rb_.freezeRotation = true;
+        rb_.useGravity = false;
+
+        //プレイヤーの認識
         if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
         {
-            obj_playerContoroll_ = GameObject.Find("PlayControll");
-            playControll = obj_playerContoroll_.GetComponent<PlayControll>();
+            obj_playControll_ = GameObject.Find("PlayControll");
+            playControll_ = obj_playControll_.GetComponent<PlayControll>();
+
         }
         else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
         {
             obj_tutorialControll_ = GameObject.Find("TutorialControll");
-            tutorialControll = obj_tutorialControll_.GetComponent<TutorialControll>();
+            tutorialControll_ = obj_tutorialControll_.GetComponent<TutorialControll>();
         }
-        
+
         isStop_ = false;
-        isJumping_ = false;
+        isJump_ = false;
         lastStepTime_ = DateTime.Now;
-        fallPosition_ = transform.position.y;
+        fallPos_ = transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Player停止
-        if(isStop_ == true) { return; }
 
-        
+        if (isStop_) return;
+
+        //Xinput関連
+        if (!playerInputSet_ || !prevState_.IsConnected)
+        {
+            playerIndex_ = (PlayerIndex)0;
+            playerInputSet_ = true;
+        }
+        prevState_ = padState_;
+        padState_ = GamePad.GetState(playerIndex_);
+
         isGround();
         isGoalFlag();
+        isDead();
+        
+        rb_.AddForce(new Vector3(0, -Gravity_ * rb_.mass, 0));
+        
+        //死亡したら
+        if (isDead())
+        {
+            SoundManager.GetInstance.PlaySE("FallDead_SE");
+            if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
+            {
+                playControll_.playerDeadFrag = true;
+            }
+            else if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
+            {
+                tutorialControll_.playerDeadFrag = true;
+            }
+        }
+        
+        
+    }
 
-        //足音
+    void FixedUpdate()
+    {
+        
+        var cameraForward = Vector3.Scale(camera_.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 targetVelocity = cameraForward * Input.GetAxis("Vertical") + camera_.transform.right * Input.GetAxis("Horizontal");
+
+        //移動
+        if (targetVelocity.magnitude > 0.01)
+        {
+            FootSound();
+            rb_.velocity = targetVelocity * fowardSpeed_;
+        }
+        else
+        {
+            //初期化
+            targetVelocity = Vector3.zero;
+            rb_.velocity = Vector3.zero;
+        }
+        
+        //ジャンプ
+        if (isGround_ && !isJump_ && (Input.GetButton("Jump") || Input.GetKey(KeyCode.Space)))
+        {
+            Debug.Log("ジャンプしてます");
+            SoundManager.GetInstance.PlaySE("Janp_SE");
+            rb_.velocity += new Vector3(0, jumpPower_, 0);
+            isGround_ = false;
+            isJump_ = true;
+        }
+        if (isJump_ && isGround_)
+        {
+            SoundManager.GetInstance.PlaySE("Landing_SE");
+            isJump_ = false;
+        }
+        
+    }
+
+    void isGround()
+    {
+        RaycastHit hit;
+        if (Physics.SphereCast(charaRay_.transform.position, 0.2f, -Vector3.up, out hit, rayRange_))
+        {
+            if (hit.collider.CompareTag("stage") || hit.collider.CompareTag("ChangeObject") || hit.collider.CompareTag("GravityObj"))
+            {
+                isGround_ = true;
+            }
+            else
+            {
+                isGround_ = false;
+            }
+        }
+        Debug.Log("接地判定" + isGround_);
+    }
+
+    bool isDead()
+    {
+        //死亡判定用
+        if (!isGround_)
+        {
+            distance_ = fallPos_ - transform.position.y;
+            deathTimer_ += Time.deltaTime;
+
+            if (distance_ >= deathDistance_)
+            {
+                Debug.Log("死亡しました");
+                return true;
+            }
+            //Debug.Log(distance_ + "m 落ちました");
+        }
+        else
+        {
+            deathTimer_ = 0.0f;
+            return false;
+        }
+
+        if (deathTimer_ >= deathTime_)
+        {
+            Debug.Log("死亡しました");
+            return true;
+        }
+
+
+        return false;
+    }
+
+    void FootSound()
+    {
         int num_ = UnityEngine.Random.Range(0, randomRange_);
+
         if ((DateTime.Now - lastStepTime_).TotalSeconds < interval_sec_)
         {
             return;
@@ -124,127 +235,16 @@ public class Player : MonoBehaviour
                 case 2:
                     SoundManager.GetInstance.PlaySE("Walk_SE_3");
                     break;
+
             }
             lastStepTime_ = DateTime.Now;
         }
-
-        //高さで死ぬ処理
-        fallPosition_ = Mathf.Max(fallPosition_, transform.position.y);
-
-        //死亡処理
-        if (!isGround_)
-        {
-            deathTimer_ += Time.deltaTime;
-        }
-
-        if (!isGround_) {
-
-            //Debug.Log("落下しました");
-            distance_ = fallPosition_ - transform.position.y;
-
-            if (distance_ >= deadDistance_)
-            {
-                SoundManager.GetInstance.PlaySE("FallDead_SE");
-
-                if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
-                {
-                    playControll.playerDeadFrag = true;
-                }
-                else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
-                {
-                    tutorialControll.playerDeadFrag = true;
-                }
-                Debug.Log("死にました");
-                Destroy(gameObject);
-            }
-        }
-        
-        //時間がたったら死ぬ
-        if (deathTimer_ >= deathTime_)
-        {
-            //死亡時の処理
-            SoundManager.GetInstance.PlaySE("FallDead_SE");
-            if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
-            {
-                playControll.playerDeadFrag = true;
-            }
-            else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
-            {
-                tutorialControll.playerDeadFrag = true;
-            }
-            Destroy(gameObject);
-        }
-        else
-        {
-            deathTimer_ = 0.0f;
-
-        }
-
-        if (isJumping_ && isGround_)
-        {
-            SoundManager.GetInstance.PlaySE("Landing_SE");
-            isJumping_ = false;
-        }
-        
-    }
-
-    void FixedUpdate()
-    {
-
-        //Xinput関連
-        if (!playerInputSet_ || !prevState_.IsConnected)
-        {
-            playerIndex_ = (PlayerIndex)0;
-            playerInputSet_ = true;
-        }
-        prevState_ = padState_;
-        padState_ = GamePad.GetState(playerIndex_);
-
-        //進行方向を向く
-        //Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal") * sideSpeed_, 0, Input.GetAxis("Vertical") * moveSpeed_);
-        Vector3 cameraForward = Vector3.Scale(camera_.transform.forward, new Vector3(1, 0, 1)).normalized;
-        Vector3 targetVelocity = cameraForward * Input.GetAxis("Vertical") + camera_.transform.right * Input.GetAxis("Horizontal");
-        targetVelocity = transform.TransformDirection(targetVelocity);
-
-        Vector3 velocity = GetComponent<Rigidbody>().velocity;
-        Vector3 velocityChange = (targetVelocity - velocity);
-        velocityChange.y = 0;
-        GetComponent<Rigidbody>().AddForce(velocityChange, ForceMode.VelocityChange);
-
-        if (!isJumping_ && isGround_ && Input.GetButton("Jump") /*(prevState_.Buttons.A == ButtonState.Released && padState_.Buttons.A == ButtonState.Pressed)*/)
-        {
-            GetComponent<Rigidbody>().velocity = new Vector3(velocity.x, Mathf.Sqrt(2 * jumpPower_ * Gravity), velocity.z);
-            isGround_ = false;
-            isJumping_ = true;
-        }
-
-        GetComponent<Rigidbody>().AddForce(new Vector3(0, -Gravity * GetComponent<Rigidbody>().mass, 0));
-
-    }
-
-    void isGround()
-    {
-        RaycastHit hit;
-        //if (Physics.Raycast(transform.position, -Vector3.up, rayRange_, LayerMask.GetMask("Wall", "Production")))
-        if (Physics.SphereCast(charaRay.transform.position, 0.5f, -Vector3.up, out hit, rayRange_, LayerMask.GetMask("Wall", "Production")))
-        {
-            if(hit.collider.CompareTag("stage") || hit.collider.CompareTag("ChangeObject") || hit.collider.CompareTag("GravityObj"))
-            {
-                isGround_ = true;
-            }
-            else
-            {
-                isGround_ = false;
-            }
-        }
-        Debug.Log("接地判定" + isGround_);
-        //Debug.Log("レイの中身" + hit.collider.tag);
     }
 
     void isGoalFlag()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.forward, out hit, rayRange_))
+        if (Physics.Raycast(camera_.transform.position, camera_.transform.forward, out hit, rayRange_))
         {
 
             if (hit.collider.CompareTag("GoleObject") || hit.collider.CompareTag("GoalObject"))
@@ -252,18 +252,19 @@ public class Player : MonoBehaviour
 
                 if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
                 {
-                    playControll.stageClearFrag = true;
+                    playControll_.stageClearFrag = true;
+                    SoundManager.GetInstance.PlaySE("Goal_SE");
                 }
                 else if (SceneManager.GetActiveScene().name == SceneName.TutorialScene.ToString())
 
                 {
-                    tutorialControll.stageClearFrag = true;
+                    tutorialControll_.stageClearFrag = true;
+                    SoundManager.GetInstance.PlaySE("Goal_SE");
                 }
 
             }
 
         }
-        
+
     }
-    
 }
