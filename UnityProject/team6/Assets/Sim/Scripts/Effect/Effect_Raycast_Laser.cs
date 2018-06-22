@@ -29,10 +29,10 @@ public class Effect_Raycast_Laser : MonoBehaviour {
         if (hit.collider.gameObject)
         {
             hitObject = hit.collider.gameObject;
-
+            SoundManager.GetInstance.PlaySE("Laser_SE");
             if (hitObject.tag == "Player")
             {
-                soundManager.instance.LaserHit();
+                SoundManager.GetInstance.PlaySE("LaserHit_SE");
                 Destroy(hitObject);
             }
         }
