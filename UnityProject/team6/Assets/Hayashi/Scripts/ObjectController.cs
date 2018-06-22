@@ -31,8 +31,8 @@ public class ObjectController : MonoBehaviour
         destroyEffectPref = Resources.Load("Particles/Particles Systems/BleakEff") as GameObject;
         isPositionMove = false;
         isHitObj = false;
-        basePosition = transform.parent.transform.parent.position;
-        baseScale = transform.parent.localScale;
+        basePosition = transform.parent.parent.position;
+        baseScale = transform.parent.parent.localScale;
         shoter = null;
 
     }
