@@ -610,9 +610,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee322750053c04d826e9a610ce8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Raybody: {fileID: 1019491394907080}
-  ScaleDistance: {fileID: 1984838612811920}
-  RayResult: {fileID: 1081531063044116}
+  raybody: {fileID: 1019491394907080}
+  scaleDistance: {fileID: 1984838612811920}
+  rayResult: {fileID: 1081531063044116}
 --- !u!114 &114814001758903664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -624,9 +624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee322750053c04d826e9a610ce8ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Raybody: {fileID: 1019491394907080}
-  ScaleDistance: {fileID: 1984838612811920}
-  RayResult: {fileID: 1081531063044116}
+  raybody: {fileID: 0}
+  scaleDistance: {fileID: 0}
+  rayResult: {fileID: 0}
 --- !u!198 &198092823989824036
 ParticleSystem:
   m_ObjectHideFlags: 1
