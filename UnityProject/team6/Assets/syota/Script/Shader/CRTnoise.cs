@@ -176,7 +176,7 @@ public class CRTnoise : MonoBehaviour
         //nextStageがNoneの場合演出用のカメラなので下の処理は行わなくて良い
         if (nextStage == NextStage.None) return;
 
-       
+
         //Debug.Log("次のシーンはこれだ！" + stageInstructs.CurrentStage);
         //自身の列挙型の型が選んでいるステージと同じであるならフラグを消す
         if (nextStage == stageInstructs.CurrentStage)
@@ -222,16 +222,16 @@ public class CRTnoise : MonoBehaviour
     {
         if (NoiseTime % 10 == 0)
         {
-            if (NoiseTime > 70)
+            if (NoiseTime > 180)
             {
                 ScanLineTail = 2f;
                 CRTFlag = false;
                 return;
             }
             NoiseX = UnityEngine.Random.Range(0.0f, 1.0f);
-            NoiseTime += 10;
-            if (NoiseTime > 40)
-                ScanLineTail = UnityEngine.Random.Range(.0f, 1.0f);
+            NoiseTime += 9;
+            if (NoiseTime > 100)
+                ScanLineTail = UnityEngine.Random.Range(.0f, 2.0f);
         }
         NoiseTime++;
     }
@@ -245,6 +245,7 @@ public class CRTnoise : MonoBehaviour
         if (NoiseTime % 30 == 0)
         {
             NoiseX = UnityEngine.Random.Range(0.0f, 0.5f);
+            ScanLineTail = 0;
             NoiseTime = 0;
         }
         else if (NoiseTime < 10)

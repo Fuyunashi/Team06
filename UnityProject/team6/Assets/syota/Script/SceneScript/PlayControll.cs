@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class PlayControll : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class PlayControll : MonoBehaviour
 
     GameObject MianCam;
     GameObject SubCam;
+
 
     [SerializeField]
     Image[] PouseRogo;
@@ -76,10 +78,12 @@ public class PlayControll : MonoBehaviour
         playerDeadFrag = false;
 
         pouseSelect = PouseSelect.ToContinue;
+
     }
 
     void Update()
     {
+       
         //インプット関連
         if (!playerInputSet_ || !prevState_.IsConnected)
         {
