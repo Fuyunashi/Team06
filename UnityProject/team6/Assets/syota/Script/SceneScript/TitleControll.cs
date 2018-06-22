@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using UnityEngine.UI;
 
 
 
@@ -23,6 +24,9 @@ public class TitleControll : MonoBehaviour
     GameObject obj_cameraInformation;
     CameraInformation cameraInformation;
     public bool sceneChangeFrag;
+
+    [SerializeField]
+    Image image_black;
 
     public bool playerDeadFrag { get; set; }
 
@@ -47,18 +51,22 @@ public class TitleControll : MonoBehaviour
         //演出の関係上必要になったフラグ
         sceneChangeFrag = false;
 
+        image_black.enabled = false;
+
         //SoundManager.GetInstance.PlayBGM("6815");
     }
     void Update()
     {
         sceneChangeIcon = GameObject.Find("SceneChangeIcon");
-        
+
         //ノイズが行われてたらシーン移行フラグを入れる
         if (crtNoise.CRTFlag)
             sceneChangeFrag = true;
         //シーンのフラグが入り、ノイズが終わった報告があったらしーんを移行する
         if (!crtNoise.CRTFlag && sceneChangeFrag)
         {
+            image_black.enabled = true;
+
             //SoundManager.GetInstance.StopBGM();
             //カメラ情報の譲渡
             cameraInformation.CameraPos = MainCam.transform.position;
