@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     private float rayRange_;
     [SerializeField]
     private float jumpPower_;
+    [SerializeField]
+    private float jumpHeight_;
 
     private Rigidbody rb_;
 
@@ -47,6 +49,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int randomRange_ = 3;
     private bool isJump_;
+
+    [SerializeField]
+    private float LerpTimer_;
 
     public Camera camera_;
     public bool isStop_ { get; set; }
@@ -110,8 +115,8 @@ public class Player : MonoBehaviour
         isGround();
         isGoalFlag();
         isDead();
-        
-        rb_.AddForce(new Vector3(0, -Gravity_ * rb_.mass, 0));
+
+        if (isGround_) { rb_.AddForce(new Vector3(0, -Gravity_ * rb_.mass, 0)); }
         
         //死亡したら
         if (isDead())
@@ -126,8 +131,6 @@ public class Player : MonoBehaviour
                 tutorialControll_.playerDeadFrag = true;
             }
         }
-        
-        
     }
 
     void FixedUpdate()
@@ -154,15 +157,29 @@ public class Player : MonoBehaviour
         {
             Debug.Log("ジャンプしてます");
             SoundManager.GetInstance.PlaySE("Janp_SE");
-            rb_.velocity += new Vector3(0, jumpPower_, 0);
+            
+            //rb_.velocity += new Vector3(0, jumpPower_, 0);
             isGround_ = false;
             isJump_ = true;
+
         }
-        if (isJump_ && isGround_)
+        if(isJump_)
         {
-            SoundManager.GetInstance.PlaySE("Landing_SE");
-            isJump_ = false;
+            var startPos = new Vector3(0, transform.position.y, 0);
+            var endPos = new Vector3(0, transform.position.y + jumpHeight_, 0);
+            rb_.velocity = Vector3.Lerp(startPos, endPos, LerpTimer_ / 30.0f);
+            LerpTimer_++;
+            if(LerpTimer_ >= 30.0f)
+            {
+                isJump_ = false;
+                LerpTimer_ = 0.0f;
+            }
         }
+        //if (isJump_ && isGround_)
+        //{
+        //    SoundManager.GetInstance.PlaySE("Landing_SE");
+        //    isJump_ = false;
+        //}
         
     }
 
@@ -175,15 +192,15 @@ public class Player : MonoBehaviour
             {
                 isGround_ = true;
             }
-            else
-            {
-                isGround_ = false;
-            }
+        }
+        else
+        {
+            isGround_ = false;
         }
         Debug.Log("接地判定" + isGround_);
     }
 
-    bool isDead()
+    public bool isDead()
     {
         //死亡判定用
         if (!isGround_)
@@ -196,7 +213,6 @@ public class Player : MonoBehaviour
                 Debug.Log("死亡しました");
                 return true;
             }
-            //Debug.Log(distance_ + "m 落ちました");
         }
         else
         {
