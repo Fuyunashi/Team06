@@ -52,7 +52,7 @@ public class TitleControll : MonoBehaviour
         sceneChangeFrag = false;
 
         image_black.enabled = false;
-
+        
         //SoundManager.GetInstance.PlayBGM("6815");
     }
     void Update()
