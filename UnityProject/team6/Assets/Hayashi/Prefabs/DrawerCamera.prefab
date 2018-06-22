@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 20129370046441758}
   - component: {fileID: 124996609354546912}
   - component: {fileID: 114578917936515138}
+  - component: {fileID: 81312084126309916}
   m_Layer: 0
   m_Name: DrawerCamera
   m_TagString: Untagged
@@ -78,6 +79,13 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!81 &81312084126309916
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1659298710910002}
+  m_Enabled: 1
 --- !u!114 &114578917936515138
 MonoBehaviour:
   m_ObjectHideFlags: 1

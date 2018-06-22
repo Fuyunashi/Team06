@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -390,6 +390,36 @@ Prefab:
       propertyPath: m_TagString
       value: stage
       objectReference: {fileID: 0}
+    - target: {fileID: 114438764366753454, guid: 0b7908644e405f74fa521bcdf442cffd,
+        type: 2}
+      propertyPath: raybody
+      value: 
+      objectReference: {fileID: 648249019}
+    - target: {fileID: 114438764366753454, guid: 0b7908644e405f74fa521bcdf442cffd,
+        type: 2}
+      propertyPath: scaleDistance
+      value: 
+      objectReference: {fileID: 648249018}
+    - target: {fileID: 114438764366753454, guid: 0b7908644e405f74fa521bcdf442cffd,
+        type: 2}
+      propertyPath: rayResult
+      value: 
+      objectReference: {fileID: 648249017}
+    - target: {fileID: 114676201054194018, guid: 0b7908644e405f74fa521bcdf442cffd,
+        type: 2}
+      propertyPath: raybody
+      value: 
+      objectReference: {fileID: 648249016}
+    - target: {fileID: 114676201054194018, guid: 0b7908644e405f74fa521bcdf442cffd,
+        type: 2}
+      propertyPath: scaleDistance
+      value: 
+      objectReference: {fileID: 648249015}
+    - target: {fileID: 114676201054194018, guid: 0b7908644e405f74fa521bcdf442cffd,
+        type: 2}
+      propertyPath: rayResult
+      value: 
+      objectReference: {fileID: 648249014}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b7908644e405f74fa521bcdf442cffd, type: 2}
   m_IsPrefabParent: 0
@@ -401,6 +431,36 @@ Transform:
 --- !u!1 &648249013 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1863264258311586, guid: 0b7908644e405f74fa521bcdf442cffd,
+    type: 2}
+  m_PrefabInternal: {fileID: 648249011}
+--- !u!1 &648249014 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1616576610831644, guid: 0b7908644e405f74fa521bcdf442cffd,
+    type: 2}
+  m_PrefabInternal: {fileID: 648249011}
+--- !u!1 &648249015 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1085211882371346, guid: 0b7908644e405f74fa521bcdf442cffd,
+    type: 2}
+  m_PrefabInternal: {fileID: 648249011}
+--- !u!1 &648249016 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1251659240154654, guid: 0b7908644e405f74fa521bcdf442cffd,
+    type: 2}
+  m_PrefabInternal: {fileID: 648249011}
+--- !u!1 &648249017 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1649654660263020, guid: 0b7908644e405f74fa521bcdf442cffd,
+    type: 2}
+  m_PrefabInternal: {fileID: 648249011}
+--- !u!1 &648249018 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1228638082053724, guid: 0b7908644e405f74fa521bcdf442cffd,
+    type: 2}
+  m_PrefabInternal: {fileID: 648249011}
+--- !u!1 &648249019 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1300600978071564, guid: 0b7908644e405f74fa521bcdf442cffd,
     type: 2}
   m_PrefabInternal: {fileID: 648249011}
 --- !u!1 &967717186

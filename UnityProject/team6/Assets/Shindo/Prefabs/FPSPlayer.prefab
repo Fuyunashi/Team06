@@ -19,10 +19,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4435036070339272}
-  - component: {fileID: 114068953293129980}
   - component: {fileID: 114130193912874006}
   - component: {fileID: 54470131672078430}
   - component: {fileID: 136655779080429358}
+  - component: {fileID: 114154486972778030}
   m_Layer: 8
   m_Name: FPSPlayer
   m_TagString: Player
@@ -66,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1845039474006150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4435036070339272}
@@ -86,28 +86,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &114068953293129980
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1109964019208686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a549b5ccaa811f44a28875061c330da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed_: 10
-  sideSpeed_: 9
-  charaRay: {fileID: 4797010635188466}
-  rayRange_: 1
-  jumpPower_: 5
-  deathTime_: 8
-  deadDistance_: 5
-  Gravity: 9.8
-  randomRange_: 3
-  camera_: {fileID: 0}
+  m_CollisionDetection: 1
 --- !u!114 &114130193912874006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,6 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa79566a0953ea4a83610abb1c5ec8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  changeTex: {fileID: 0}
+  shotTex: {fileID: 0}
+  axisTex: {fileID: 0}
   gunMat: {fileID: 2100000, guid: 3273360bbb61cb14f9e044f7f7a8ee84, type: 2}
   laserPointMat: {fileID: 2100000, guid: 27971dbe6c1efa249ab0ec1f6c73a148, type: 2}
   shotPos: {fileID: 0}
@@ -130,6 +112,29 @@ MonoBehaviour:
   rayDistance: 20
   laserPointer: {fileID: 0}
   estimateMat: {fileID: 2100000, guid: 41a7f52bfe47d6f4fb230bfd1cf0446b, type: 2}
+--- !u!114 &114154486972778030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1109964019208686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a549b5ccaa811f44a28875061c330da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fowardSpeed_: 10
+  sideSpeed_: 9
+  isGround_: 0
+  charaRay_: {fileID: 4797010635188466}
+  rayRange_: 0.2
+  jumpPower_: 100
+  deathTime_: 100
+  deathDistance_: 50
+  isDead_: 0
+  Gravity_: 200
+  randomRange_: 3
+  camera_: {fileID: 0}
 --- !u!136 &136655779080429358
 CapsuleCollider:
   m_ObjectHideFlags: 1
