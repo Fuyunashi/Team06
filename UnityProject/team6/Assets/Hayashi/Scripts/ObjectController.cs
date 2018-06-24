@@ -8,27 +8,19 @@ public class ObjectController : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 10f;
 
-    private GameObject crashEffectPref;
-    private GameObject m_crashEffect;
-
-    private GameObject destroyEffectPref;
-    private GameObject m_destroyEffect;
-
-    private Vector3 basePosition;
-    private Vector3 baseScale;
+    public Vector3 basePosition;
+    public Vector3 baseScale;
 
     private Vector3 value;
-    private bool isPositionMove;
-    private bool isScaleMove;
-    private bool isHitObj;
+    public bool isPositionMove { get; set; }
+    public bool isScaleMove { get; set; }
+    public bool isHitObj { get; set; }
 
-    private Shooter shoter;
+    public Shooter shoter;
 
     // Use this for initialization
     void Start()
     {
-        crashEffectPref = Resources.Load("Particles/Particles Systems/BlockCollEff") as GameObject;
-        destroyEffectPref = Resources.Load("Particles/Particles Systems/BleakEff") as GameObject;
         isPositionMove = false;
         isHitObj = false;
         basePosition = transform.parent.parent.position;
@@ -105,47 +97,12 @@ public class ObjectController : MonoBehaviour
     public void SetOutline()
     {
         this.gameObject.AddComponent<Outline>();
-        this.gameObject.GetComponent<Outline>().OutlineColor = new Color(255, 0, 0);
+        this.gameObject.GetComponent<Outline>().OutlineColor = new Color(1, 0, 0,1f);
         this.gameObject.GetComponent<Outline>().OutlineWidth = 10.0f;
     }
 
     public void DeleteOutline()
     {
         Destroy(this.gameObject.GetComponent<Outline>());
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (SceneManager.GetActiveScene().name == SceneName.SelectScene.ToString()) return;
-        Vector3 hitPos = Vector3.zero;
-        foreach (ContactPoint point in collision.contacts)
-        {
-            hitPos = point.point;
-        }
-        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet")
-        {
-            m_destroyEffect = Instantiate(destroyEffectPref, transform.position, Quaternion.identity);
-            Destroy(m_destroyEffect, 1.0f);
-            SoundManager.GetInstance.PlaySE("Break_SE");
-            isHitObj = true;
-            isPositionMove = false;
-            isScaleMove = false;
-            DeleteOutline();
-            LeanTween.alpha(gameObject, 0.0f, 1.0f).setOnComplete(() =>
-              {
-                  shoter.MovingEnd();
-                  transform.parent.parent.position = basePosition;
-                  transform.parent.parent.localScale = baseScale;
-
-                  LeanTween.alpha(gameObject, 1.0f, 2.0f).setOnComplete(() => { isHitObj = false; });
-                  SoundManager.GetInstance.PlaySE("Born_SE");
-              });
-        }
-        else if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "GravityObj" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "ChangeObject")
-        {
-            m_crashEffect = Instantiate(crashEffectPref, hitPos, Quaternion.identity);
-            Destroy(m_crashEffect, 1.0f);
-            SoundManager.GetInstance.PlaySE("Crash_SE");
-        }
     }
 }

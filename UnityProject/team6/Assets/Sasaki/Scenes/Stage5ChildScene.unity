@@ -4471,6 +4471,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  basePosition: {x: 0, y: 0, z: 0}
+  baseScale: {x: 0, y: 0, z: 0}
+  shoter: {fileID: 0}
 --- !u!54 &160852908
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4533,7 +4536,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.95, y: 0.95, z: 0.95}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &160852911
 MeshFilter:
@@ -27505,6 +27508,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  basePosition: {x: 0, y: 0, z: 0}
+  baseScale: {x: 0, y: 0, z: 0}
+  shoter: {fileID: 0}
 --- !u!54 &952021635
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27567,7 +27573,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.95, y: 0.95, z: 0.95}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &952021638
 MeshFilter:
@@ -27797,6 +27803,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  basePosition: {x: 0, y: 0, z: 0}
+  baseScale: {x: 0, y: 0, z: 0}
+  shoter: {fileID: 0}
 --- !u!54 &1042238268
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27859,7 +27868,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.95, y: 0.95, z: 0.95}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1042238271
 MeshFilter:
@@ -36045,9 +36054,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f4268bfd7d4a24aaf1b7a51ec3fd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 0
-  accel: 0.05
-  detectionRange: 10
+  enemyState: 0
+  traceDist: 10
+  attackDist: 2
 --- !u!54 &1432808467
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36236,9 +36245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f4268bfd7d4a24aaf1b7a51ec3fd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 0
-  accel: 0.05
-  detectionRange: 10
+  enemyState: 0
+  traceDist: 10
+  attackDist: 2
 --- !u!54 &1483619800
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58831,6 +58840,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  basePosition: {x: 0, y: 0, z: 0}
+  baseScale: {x: 0, y: 0, z: 0}
+  shoter: {fileID: 0}
 --- !u!54 &1882497814
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58893,7 +58905,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.95, y: 0.95, z: 0.95}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1882497817
 MeshFilter:
@@ -63210,6 +63222,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  basePosition: {x: 0, y: 0, z: 0}
+  baseScale: {x: 0, y: 0, z: 0}
+  shoter: {fileID: 0}
 --- !u!54 &2090258704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63272,7 +63287,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.95, y: 0.95, z: 0.95}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &2090258707
 MeshFilter:

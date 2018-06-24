@@ -99,7 +99,7 @@ public class ValueDrawerController : MonoBehaviour
             transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotate, 1);
         }
 
-        if (isTween == false)
+        if (isTween == false && drawObj!=null)
             transform.position = new Vector3(drawObj.transform.parent.position.x, drawObj.transform.parent.position.y, drawObj.transform.parent.position.z)+
                                  new Vector3(0,drawObj.transform.localScale.y/2+0.5f,0);
 
