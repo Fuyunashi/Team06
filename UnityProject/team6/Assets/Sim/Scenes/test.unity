@@ -267,7 +267,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4281389914390640, guid: c1b74ae79ec0f5a4fb0030fe0649c0bb, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.691865
+      value: -0.63
       objectReference: {fileID: 0}
     - target: {fileID: 4281389914390640, guid: c1b74ae79ec0f5a4fb0030fe0649c0bb, type: 2}
       propertyPath: m_LocalPosition.y
@@ -275,7 +275,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4281389914390640, guid: c1b74ae79ec0f5a4fb0030fe0649c0bb, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -4.219354
+      value: 5.36
       objectReference: {fileID: 0}
     - target: {fileID: 4281389914390640, guid: c1b74ae79ec0f5a4fb0030fe0649c0bb, type: 2}
       propertyPath: m_LocalRotation.x
@@ -383,7 +383,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 624569875}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 60.32
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -484,11 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96dedbc72526ce45aa6a08150051fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wayPoint:
-  - {fileID: 1609841744}
-  - {fileID: 664434272}
-  - {fileID: 297027242}
-  - {fileID: 854278541}
+  wayPoint: []
 --- !u!82 &903370909
 AudioSource:
   m_ObjectHideFlags: 0
@@ -749,7 +745,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4355960475728630, guid: 86841b76499a8f24182fb477fa39768a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -13.46
+      value: 1.58
       objectReference: {fileID: 0}
     - target: {fileID: 4355960475728630, guid: 86841b76499a8f24182fb477fa39768a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -757,7 +753,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4355960475728630, guid: 86841b76499a8f24182fb477fa39768a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 5.81
+      value: 0.37
       objectReference: {fileID: 0}
     - target: {fileID: 4355960475728630, guid: 86841b76499a8f24182fb477fa39768a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1000,21 +996,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f4268bfd7d4a24aaf1b7a51ec3fd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 2
-  accel: 0.05
-  detectionRange: 10
+  enemyState: 0
+  traceDist: 10
+  attackDist: 2
 --- !u!114 &2004248853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2004248851}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d96dedbc72526ce45aa6a08150051fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoint: []
+--- !u!195 &2004248854
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2004248851}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1
+  m_Acceleration: 1
+  avoidancePriority: 50
+  m_AngularSpeed: 340
+  m_StoppingDistance: 2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: -0.2
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!136 &2004248856
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1024,22 +1041,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 1.5
+  m_Radius: 0.58
+  m_Height: 1.99
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!54 &2004248857
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2004248851}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Center: {x: 0, y: 1.3, z: 0}

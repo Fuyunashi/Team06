@@ -49,8 +49,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int randomRange_ = 3;
     private bool isJump_;
-
-    [SerializeField]
     private float LerpTimer_;
 
     public Camera camera_;
@@ -116,7 +114,7 @@ public class Player : MonoBehaviour
         isGoalFlag();
         isDead();
 
-        if (isGround_) { rb_.AddForce(new Vector3(0, -Gravity_ * rb_.mass, 0)); }
+        if (!isGround_)  rb_.AddForce(new Vector3(0, -Gravity_ * rb_.mass, 0)); 
         
         //死亡したら
         if (isDead())
@@ -135,7 +133,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+        if (isStop_) return;
+
         var cameraForward = Vector3.Scale(camera_.transform.forward, new Vector3(1, 0, 1)).normalized;
         Vector3 targetVelocity = cameraForward * Input.GetAxis("Vertical") + camera_.transform.right * Input.GetAxis("Horizontal");
 
@@ -167,19 +166,15 @@ public class Player : MonoBehaviour
         {
             var startPos = new Vector3(0, transform.position.y, 0);
             var endPos = new Vector3(0, transform.position.y + jumpHeight_, 0);
-            rb_.velocity = Vector3.Lerp(startPos, endPos, LerpTimer_ / 30.0f);
+            rb_.velocity = Vector3.Lerp(startPos, endPos, LerpTimer_ / 15.0f);
             LerpTimer_++;
-            if(LerpTimer_ >= 30.0f)
+            if(LerpTimer_ >= 15.0f)
             {
                 isJump_ = false;
+                SoundManager.GetInstance.PlaySE("Landing_SE");
                 LerpTimer_ = 0.0f;
             }
         }
-        //if (isJump_ && isGround_)
-        //{
-        //    SoundManager.GetInstance.PlaySE("Landing_SE");
-        //    isJump_ = false;
-        //}
         
     }
 
