@@ -104,13 +104,12 @@ MonoBehaviour:
   charaRay_: {fileID: 4030830429550446}
   rayRange_: 0.2
   jumpPower_: 100
-  jumpHeight_: 5
+  jumpHeight_: 10
   deathTime_: 1000000
   deathDistance_: 5
   isDead_: 0
   Gravity_: 200
   randomRange_: 3
-  LerpTimer_: 0
   camera_: {fileID: 0}
 --- !u!114 &114756877396320634
 MonoBehaviour:

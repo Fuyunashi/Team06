@@ -17,6 +17,8 @@ public class TutorialTextManager : MonoBehaviour {
     SceneControll scene_;
 
     int textCount_ = 0;
+    int temp;
+    public int playerStopCounter_ { get; set; }
 
     private bool isTextEnable_;
     private bool isTextEnd_;
@@ -58,9 +60,10 @@ public class TutorialTextManager : MonoBehaviour {
         player_ = GameObject.Find("FPSPlayer").GetComponent<Player>();
         textCount_ = 0;
         deleteTimer_ = 0.0f;
+        playerStopCounter_ = 0;
+        isTextEnd_ = false;
         //debug
         player_.isStop_ = true;
-        isTextEnd_ = false;
     }
 
     void Update()
@@ -77,7 +80,7 @@ public class TutorialTextManager : MonoBehaviour {
 
         //更新
         TutorialImageEnabled();
-        
+
         //
         if (player_.isStop_)
         {
@@ -85,22 +88,28 @@ public class TutorialTextManager : MonoBehaviour {
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed){
                 textCount_++;
             }
+            if(playerStopCounter_ >= 2)
+            {
+                textCount_ = temp;
+            }
         }
         else
         {
-            
+            if (playerStopCounter_ >= 2)
+            {
+                temp = textCount_;
+            }
         }
 
         if (textCount_ >= tutorial_1_text.Length) deleteTimer_ += 0.1f;
         if (textCount_ >= tutorial_2_text.Length) deleteTimer_ += 0.1f;
 
-        //if(tutorialImages_[0].enabled == false || tutorialImages_[1].enabled == false) deleteTimer_ = 0; 
-
-        Debug.Log(player_.isStop_);
+        //Debug.Log(player_.isStop_);
         //Debug.Log(textCount_);
-        Debug.Log(deleteTimer_);
-        Debug.Log(tutorial_2_text.Length);
-        Debug.Log(scene_.CurrentStage);
+        //Debug.Log(deleteTimer_);
+        //Debug.Log(tutorial_2_text.Length);
+        //Debug.Log(scene_.CurrentStage);
+        //Debug.Log(playerStopCounter_);
     }
 
     //チュートリアルのウィンドウ切り替え
