@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4973118231168036}
   - component: {fileID: 114018737551768080}
   - component: {fileID: 114446888187415262}
+  - component: {fileID: 114458568703048948}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -63,3 +64,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8fc1fbc5c0f8143a8cbafe997e9563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114458568703048948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1483707792532972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b38739481b70c408d7a41f47ffd32c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorial_1_text:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  tutorial_2_text:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  tutorialImages_:
+  - {fileID: 0}
+  - {fileID: 0}
