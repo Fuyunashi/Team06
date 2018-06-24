@@ -104,7 +104,8 @@ MonoBehaviour:
   charaRay_: {fileID: 4030830429550446}
   rayRange_: 0.2
   jumpPower_: 100
-  deathTime_: 8
+  jumpHeight_: 10
+  deathTime_: 1000000
   deathDistance_: 5
   isDead_: 0
   Gravity_: 200

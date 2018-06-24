@@ -19,20 +19,15 @@ public class Shooter : MonoBehaviour
         Position, //位置
         Scale    //大きさ
     }
-    //銃のタイプ指定
-    enum ShotType
-    {
-        Getting,    //取得
-        Setting    //転置
-    }
 
     private AxisType axisType = AxisType.X;
     private ChangeType changeType = ChangeType.Position;
-    private ShotType shotType = ShotType.Getting;
     [SerializeField]
-    private Text changeTex;
+    private Image changeTex;
     [SerializeField]
-    private Text shotTex;
+    private Sprite positionMark;
+    [SerializeField]
+    private Sprite scaleMark;
     [SerializeField]
     private Text axisTex;
 
@@ -58,9 +53,9 @@ public class Shooter : MonoBehaviour
     private GameObject objValPref_ray;
     [SerializeField]
     private GameObject objValPref;
-    private GameObject objVal_origin_ray;
+    private GameObject objVal_ray;
     private GameObject objVal_origin;
-    private GameObject objVal_target_ray;
+    private GameObject objVal_originCopy;
     private GameObject objVal_target;
     [SerializeField]
     private GameObject drawerCameraPref;
@@ -78,23 +73,21 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private LineRenderer laserPointer;
     private int layerMask;
-    private GameObject rayOriginObj;
-    private GameObject rayTargetObj;
+    private GameObject rayHitObj;
     private bool isRayHit;
     private bool isOriginGet;
     private bool isTargetGet;
-    
+
     [SerializeField]
     private Material estimateMat;
-    private GameObject m_estimateObj = null;
+    private GameObject m_estimateObj;
 
     // Use this for initialization
     void Start()
     {
-        changeTex.text = "Position";
-        shotTex.text = "Get";
+        changeTex.sprite = positionMark;
         axisTex.text = "X";
-        
+
         //各変数の初期化
         prevOriginObj = null;
         originObject = null;
@@ -102,14 +95,15 @@ public class Shooter : MonoBehaviour
         originPositionValue = Vector3.zero;
         originScaleValue = Vector3.zero;
 
-        objVal_origin_ray = null;
+        objVal_ray = null;
         objVal_origin = null;
-        objVal_target_ray = null;
         objVal_target = null;
         isTargetMove = false;
 
         pushRTrigger = false;
         pushLTrigger = false;
+
+        m_estimateObj = null;
 
         layerMask = ~(1 << 9 | 1 << 8);
     }
@@ -130,10 +124,10 @@ public class Shooter : MonoBehaviour
             SoundManager.GetInstance.PlaySE("Change_SE");
             //軸の切り替え
             SwitchAxisType();
-            if (isRayHit == true && shotType == ShotType.Setting)
+            if (isRayHit == true && isOriginGet == true)
             {
                 if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
-                InstantEstimateObject(rayTargetObj.transform.parent.parent.gameObject);
+                InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
             }
         }
         //値切り替えボタンが押されたら
@@ -142,22 +136,14 @@ public class Shooter : MonoBehaviour
             SoundManager.GetInstance.PlaySE("Change_SE");
             //値の切り替え
             SwitchChangeType();
-            if (isRayHit == true && shotType == ShotType.Setting)
+            if (isRayHit == true && isOriginGet == true)
             {
                 if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
-                InstantEstimateObject(rayTargetObj.transform.parent.parent.gameObject);
+                InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
             }
         }
-        //弾が発射されていないかつショットタイプ切り替えボタンが押されたら
-        if ((Input.GetKeyDown(KeyCode.R) || padState.Triggers.Left >= 0.8f) && pushLTrigger == false)
-        {
-            SoundManager.GetInstance.PlaySE("Change_SE");
-            //ショットタイプの切り替え
-            SwitchShotType();
-            if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
-            pushLTrigger = true;
-        }
-        if (pushLTrigger == true && (Input.GetKeyUp(KeyCode.R) || padState.Triggers.Left <= 0.3f)) pushLTrigger = false;
+
+        if (pushLTrigger == true && (padState.Triggers.Left <= 0.3f || Input.GetMouseButtonUp(1))) pushLTrigger = false;
 
         if (pushRTrigger == true && (padState.Triggers.Right <= 0.3f || Input.GetMouseButtonUp(0))) pushRTrigger = false;
 
@@ -165,22 +151,7 @@ public class Shooter : MonoBehaviour
         GetObject_Ray();
         if (isRayHit == true)
         {
-            switch (shotType)
-            {
-                case ShotType.Getting:
-                    if (isTargetGet == false)
-                        ObjectsValueDraw_Ray(rayOriginObj.transform.parent.gameObject, null);
-                    break;
-                case ShotType.Setting:
-                    if (isOriginGet == false)
-                        ObjectsValueDraw_Ray(null, rayTargetObj.transform.parent.gameObject);
-                    else
-                    {
-                        if (originObject != null)
-                            ObjectsValueDraw_Ray(originObject.transform.parent.gameObject, rayTargetObj.transform.parent.gameObject);
-                    }
-                    break;
-            }
+            ObjectsValueDraw_Ray(rayHitObj.transform.parent.parent.gameObject);
         }
 
         if (isOriginGet == true) ObjectsValueDraw_Origin();
@@ -195,65 +166,48 @@ public class Shooter : MonoBehaviour
             if (rayhit.collider.gameObject.tag == "ChangeObject")
             {
                 isRayHit = true;
-                switch (shotType)
+                rayHitObj = rayhit.collider.transform.gameObject;
+                if (objVal_ray == null)
                 {
-                    case ShotType.Getting:
-                        rayOriginObj = rayhit.collider.transform.gameObject;
-                        if (objVal_target_ray != null) Destroy(objVal_target_ray.gameObject);
-                        if (objVal_origin_ray == null)
-                        {
-                            objVal_origin_ray = Instantiate(objValPref_ray,
-                                                     new Vector3(
-                                                         rayOriginObj.transform.parent.parent.position.x,
-                                                         rayOriginObj.transform.parent.parent.position.y,
-                                                         rayOriginObj.transform.parent.parent.position.z) +
-                                                         new Vector3(0, rayOriginObj.transform.parent.parent.localScale.y / 2 + 0.5f, 0),
-                                                     Quaternion.identity
-                                                    );
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayOriginObj.transform.parent.gameObject);
-                        }
-                        //射撃ボタンが押されたら
-                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && pushRTrigger == false)
-                        {
-                            SoundManager.GetInstance.PlaySE("Gun_SE");
-                            //発射
-                            Shot(rayOriginObj);
-                            //弾を撃った
-                            pushRTrigger = true;
-                        }
-                        break;
-                    case ShotType.Setting:
-                        rayTargetObj = rayhit.collider.transform.gameObject;
-                        if (objVal_origin_ray != null) Destroy(objVal_origin_ray.gameObject);
-                        if (objVal_target_ray == null)
-                        {
-                            objVal_target_ray = Instantiate(objValPref_ray,
-                                                     new Vector3(
-                                                         rayTargetObj.transform.parent.parent.position.x,
-                                                         rayTargetObj.transform.parent.parent.position.y,
-                                                         rayTargetObj.transform.parent.parent.position.z) +
-                                                         new Vector3(0, rayTargetObj.transform.parent.parent.localScale.y / 2 + 0.5f, 0),
-                                                     Quaternion.identity
-                                                    );
-                            objVal_target_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayTargetObj.transform.parent.gameObject);
-                        }
-                        InstantEstimateObject(rayTargetObj.transform.parent.parent.gameObject);
-                        //射撃ボタンが押されたら
-                        if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && pushRTrigger == false)
-                        {
-                            SoundManager.GetInstance.PlaySE("Gun_SE");
-                            //発射
-                            Shot(rayTargetObj);
-                            //弾を撃った
-                            pushRTrigger = true;
-                        }
-                        break;
+                    objVal_ray = Instantiate(objValPref_ray,
+                                             new Vector3(
+                                                 rayHitObj.transform.parent.parent.position.x,
+                                                 rayHitObj.transform.parent.parent.position.y,
+                                                 rayHitObj.transform.parent.parent.position.z) +
+                                                 new Vector3(0, rayHitObj.transform.parent.parent.localScale.y / 2 + 0.5f, 0),
+                                             Quaternion.identity
+                                            );
+                    objVal_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayHitObj.transform.parent.gameObject);
+                }
+                //射撃ボタンが押されたら
+                if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && pushRTrigger == false)
+                {
+                    SoundManager.GetInstance.PlaySE("Gun_SE");
+                    //発射
+                    GetShot(rayHitObj);
+                    //弾を撃った
+                    pushRTrigger = true;
+                }
+
+                if (isOriginGet == true && isTargetGet == false)
+                {
+                    InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
+                    //射撃ボタンが押されたら
+                    if ((Input.GetMouseButtonDown(1) || padState.Triggers.Left >= 0.8f) && pushLTrigger == false)
+                    {
+                        if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
+
+                        SoundManager.GetInstance.PlaySE("Gun_SE");
+                        //発射
+                        SetShot(rayHitObj);
+                        //弾を撃った
+                        pushLTrigger = true;
+                    }
                 }
             }
             else
             {
-                if (objVal_origin_ray != null) Destroy(objVal_origin_ray.gameObject);
-                if (objVal_target_ray != null) Destroy(objVal_target_ray.gameObject);
+                if (objVal_ray != null) Destroy(objVal_ray.gameObject);
                 if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
                 isRayHit = false;
             }
@@ -261,15 +215,14 @@ public class Shooter : MonoBehaviour
         }
         else
         {
-            if (objVal_origin_ray != null) Destroy(objVal_origin_ray.gameObject);
-            if (objVal_target_ray != null) Destroy(objVal_target_ray.gameObject);
+            if (objVal_ray != null) Destroy(objVal_ray.gameObject);
             if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
             isRayHit = false;
             laserPointer.SetPosition(1, ray.origin + ray.direction * rayDistance);
         }
     }
     //取得、転置オブジェクトの数値の表示
-    private void ObjectsValueDraw_Ray(GameObject originObj, GameObject targetObj)
+    private void ObjectsValueDraw_Ray(GameObject originObj)
     {
         switch (changeType)
         {
@@ -277,22 +230,16 @@ public class Shooter : MonoBehaviour
                 switch (axisType)
                 {
                     case AxisType.X:
-                        if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.position.x);
-                        if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.position.x);
+                        if (originObj != null && objVal_ray != null)
+                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.position.x);
                         break;
                     case AxisType.Y:
-                        if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.position.y);
-                        if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.position.y);
+                        if (originObj != null && objVal_ray != null)
+                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.position.y);
                         break;
                     case AxisType.Z:
-                        if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.position.z);
-                        if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.position.z);
+                        if (originObj != null && objVal_ray != null)
+                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.position.z);
                         break;
                 }
                 break;
@@ -300,22 +247,16 @@ public class Shooter : MonoBehaviour
                 switch (axisType)
                 {
                     case AxisType.X:
-                        if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localScale.x);
-                        if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localScale.x);
+                        if (originObj != null && objVal_ray != null)
+                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.x);
                         break;
                     case AxisType.Y:
-                        if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localScale.y);
-                        if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localScale.y);
+                        if (originObj != null && objVal_ray != null)
+                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.y);
                         break;
                     case AxisType.Z:
-                        if (originObj != null && objVal_origin_ray != null)
-                            objVal_origin_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.parent.localScale.z);
-                        if (targetObj != null && objVal_target_ray != null)
-                            objVal_target_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObj.transform.parent.localScale.z);
+                        if (originObj != null && objVal_ray != null)
+                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.z);
                         break;
                 }
                 break;
@@ -400,8 +341,9 @@ public class Shooter : MonoBehaviour
     //コピー後の予測の生成
     private void InstantEstimateObject(GameObject obj)
     {
-        if (m_estimateObj == null && isOriginGet == true)
+        if (m_estimateObj == null)
         {
+            Debug.Log("通った");
             switch (changeType)
             {
                 case ChangeType.Position:
@@ -471,21 +413,6 @@ public class Shooter : MonoBehaviour
                 Destroy(m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<MeshCollider>());
         }
     }
-    //銃のタイプ切り替え
-    private void SwitchShotType()
-    {
-        switch (shotType)
-        {
-            case ShotType.Getting:
-                shotType = ShotType.Setting;
-                shotTex.text = "Set";
-                break;
-            case ShotType.Setting:
-                shotType = ShotType.Getting;
-                shotTex.text = "Get";
-                break;
-        }
-    }
     //軸切り替え
     private void SwitchAxisType()
     {
@@ -512,46 +439,38 @@ public class Shooter : MonoBehaviour
         {
             case ChangeType.Position:
                 changeType = ChangeType.Scale;
-                changeTex.text = "Scale";
+                changeTex.sprite = scaleMark;
                 break;
             case ChangeType.Scale:
                 changeType = ChangeType.Position;
-                changeTex.text = "Position";
+                changeTex.sprite = positionMark;
                 break;
         }
     }
     //銃の各タイプごとの色の設定処理
     private void GunMaterialSet()
     {
-        switch (shotType)
+        switch (axisType)
         {
-            case ShotType.Getting:
-                gunMat.SetColor("_EmissionColor", Color.white);
+            case AxisType.X:
+                gunMat.SetColor("_EmissionColor", new Color(2.0f, 0.0f, 0.0f));
                 break;
-            case ShotType.Setting:
-                switch (axisType)
-                {
-                    case AxisType.X:
-                        gunMat.SetColor("_EmissionColor", Color.red);
-                        break;
-                    case AxisType.Y:
-                        gunMat.SetColor("_EmissionColor", Color.blue);
-                        break;
-                    case AxisType.Z:
-                        gunMat.SetColor("_EmissionColor", Color.green);
-                        break;
-                }
+            case AxisType.Y:
+                gunMat.SetColor("_EmissionColor", new Color(0.0f, 0.0f, 2.0f));
+                break;
+            case AxisType.Z:
+                gunMat.SetColor("_EmissionColor", new Color(0.0f, 2.0f, 0.0f));
                 break;
         }
+
         switch (changeType)
         {
             case ChangeType.Position:
-                laserPointMat.SetColor("_EmissionColor", Color.yellow);
+                laserPointMat.SetColor("_EmissionColor", new Color(1.48f, 1.5f, 0.12f));
                 break;
             case ChangeType.Scale:
-                laserPointMat.SetColor("_EmissionColor", new Color(1.78f, 0.16f, 2f));
+                laserPointMat.SetColor("_EmissionColor", new Color(1.335f, 0.12f, 1.5f));
                 break;
-
         }
     }
 
@@ -559,63 +478,34 @@ public class Shooter : MonoBehaviour
     /// 弾が当たった時の処理
     /// </summary>
     /// <param name="hitObject">当たったオブジェクト</param>
-    public void Shot(GameObject hitObject)
+    public void GetShot(GameObject hitObject)
     {
         //取得するオブジェクトと転置するオブジェクトが動いていなければ
         if (isTargetMove == false)
         {
-            //当たった時の銃のタイプによりそれぞれ処理
-            switch (shotType)
+            //取得するオブジェクトに当たったオブジェクトを格納
+            prevOriginObj = originObject;
+            originObject = hitObject.transform.gameObject;
+            if (prevOriginObj != null && prevOriginObj != originObject)
             {
-                //取得タイプなら
-                case ShotType.Getting:
-                    //取得するオブジェクトに当たったオブジェクトを格納
-                    prevOriginObj = originObject;
-                    originObject = hitObject.transform.gameObject;
-                    if (prevOriginObj != null && prevOriginObj != originObject)
-                    {
-                        prevOriginObj.GetComponent<ObjectController>().DeleteOutline();
-                    }
-                    if (prevOriginObj != originObject)
-                    {
-                        originObject.GetComponent<ObjectController>().SetOutline();
-                        Destroy(objVal_origin);
-                        objVal_origin = Instantiate(objValPref,
-                                                        new Vector3(
-                                                            originObject.transform.parent.parent.position.x,
-                                                            originObject.transform.parent.parent.position.y,
-                                                            originObject.transform.parent.parent.position.z) +
-                                                            new Vector3(0, originObject.transform.parent.parent.localScale.y + 0.5f, 0),
-                                                        Quaternion.identity
-                                                       );
-                        objVal_origin.GetComponent<ValueDrawerController>().GetDrawBaseObj(originObject.transform.parent.gameObject);
-                        //取得するオブジェクトの値を取得
-                        GetOriginAxisLength();
-                        isOriginGet = true;
-                    }
-                    break;
-                //転置タイプなら
-                case ShotType.Setting:
-                    //取得するオブジェクトが空でなければ
-                    if (originObject != null && targetObject == null)
-                    {
-                        //転置するオブジェクトに当たったオブジェクトを格納                   
-                        targetObject = hitObject.transform.gameObject;
-                        targetObject.GetComponent<ObjectController>().SetOutline();
-                        Destroy(objVal_target);
-                        objVal_target = Instantiate(objValPref,
-                                                     new Vector3(
-                                                         targetObject.transform.parent.parent.position.x,
-                                                         targetObject.transform.parent.parent.position.y,
-                                                         targetObject.transform.parent.parent.position.z) +
-                                                         new Vector3(0, targetObject.transform.parent.parent.localScale.y + 0.5f, 0),
-                                                     Quaternion.identity
-                                                    );
-                        objVal_target.GetComponent<ValueDrawerController>().GetDrawBaseObj(targetObject.transform.parent.gameObject);
-                        isTargetGet = true;
-                        SettingAnimation(targetObject.transform.parent.gameObject);
-                    }
-                    break;
+                prevOriginObj.GetComponent<ObjectController>().DeleteOutline();
+            }
+            if (prevOriginObj != originObject)
+            {
+                originObject.GetComponent<ObjectController>().SetOutline();
+                Destroy(objVal_origin);
+                objVal_origin = Instantiate(objValPref,
+                                                new Vector3(
+                                                    originObject.transform.parent.parent.position.x,
+                                                    originObject.transform.parent.parent.position.y,
+                                                    originObject.transform.parent.parent.position.z) +
+                                                    new Vector3(0, originObject.transform.parent.parent.localScale.y + 0.5f, 0),
+                                                Quaternion.identity
+                                               );
+                objVal_origin.GetComponent<ValueDrawerController>().GetDrawBaseObj(originObject.transform.parent.gameObject);
+                //取得するオブジェクトの値を取得
+                GetOriginAxisLength();
+                isOriginGet = true;
             }
         }
     }
@@ -625,6 +515,34 @@ public class Shooter : MonoBehaviour
     {
         originPositionValue = originObject.transform.parent.parent.position;
         originScaleValue = originObject.transform.parent.parent.localScale;
+    }
+
+    public void SetShot(GameObject hitObject)
+    {
+        //取得するオブジェクトと転置するオブジェクトが動いていなければ
+        if (isTargetMove == false)
+        {
+            //取得するオブジェクトが空でなければ
+            if (targetObject == null)
+            {
+                //転置するオブジェクトに当たったオブジェクトを格納                   
+                targetObject = hitObject.transform.gameObject;
+                targetObject.GetComponent<ObjectController>().SetOutline();
+                targetObject.AddComponent<ObjectCollider>();
+                Destroy(objVal_target);
+                objVal_target = Instantiate(objValPref,
+                                             new Vector3(
+                                                 targetObject.transform.parent.parent.position.x,
+                                                 targetObject.transform.parent.parent.position.y,
+                                                 targetObject.transform.parent.parent.position.z) +
+                                                 new Vector3(0, targetObject.transform.parent.parent.localScale.y + 0.5f, 0),
+                                             Quaternion.identity
+                                            );
+                objVal_target.GetComponent<ValueDrawerController>().GetDrawBaseObj(targetObject.transform.parent.gameObject);
+                isTargetGet = true;
+                SettingAnimation(targetObject.transform.parent.gameObject);
+            }
+        }
     }
 
     //指定した変更する値の軸を切り替え
@@ -689,38 +607,34 @@ public class Shooter : MonoBehaviour
     {
         if (targetObject != null)
         {
-            LeanTween.delayedCall(1.0f, () =>
-            {
-                isTargetGet = false;
-                originObject = null;
-                targetObject = null;
-                Destroy(objVal_target);
-                isTargetMove = false;
-            });
+            isTargetGet = false;
+            Destroy(targetObject.GetComponent<ObjectCollider>());
+            targetObject = null;
+            Destroy(objVal_target);
+            isTargetMove = false;
         }
     }
     //コピー時の演出アニメーション処理
     private void SettingAnimation(GameObject target)
     {
+        objVal_originCopy = Instantiate(objVal_origin, objVal_origin.transform.position, objVal_origin.transform.rotation);
         m_drawerCamera = Instantiate(drawerCameraPref, this.transform.position + new Vector3(0, 1f, 0), GameObject.FindGameObjectWithTag("PlayCamera").transform.rotation);
-        m_drawerCamera.GetComponent<DrawerCamera>().SetDrawerObj(objVal_origin);
+        m_drawerCamera.GetComponent<DrawerCamera>().SetDrawerObj(objVal_originCopy);
 
         LeanTween.delayedCall(1.0f, () =>
         {
-            objVal_origin.GetComponent<ValueDrawerController>().IsTween(true);
-            LeanTween.move(objVal_origin, target.transform.parent.position + new Vector3(0, target.transform.localScale.y / 2 + 1.0f, 0), 1.0f).setOnComplete(() =>
+            objVal_originCopy.GetComponent<ValueDrawerController>().IsTween(true);
+            LeanTween.move(objVal_originCopy, target.transform.parent.position + new Vector3(0, target.transform.localScale.y / 2 + 1.0f, 0), 1.0f).setOnComplete(() =>
             {
-                LeanTween.scale(objVal_origin, new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
-                LeanTween.moveY(objVal_origin, objVal_origin.transform.position.y - 1.0f, 0.5f).setOnComplete(() =>
+                LeanTween.scale(objVal_originCopy, new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
+                LeanTween.moveY(objVal_originCopy, objVal_originCopy.transform.position.y - 1.0f, 0.5f).setOnComplete(() =>
                 {
-                    Destroy(objVal_origin);
                     m_drawerCamera.GetComponent<DrawerCamera>().TrackingEnd();
                     SoundManager.GetInstance.PlaySE("Move_SE");
+                    Destroy(objVal_originCopy);
                     //指定した変更する値の軸を切り替え
                     ChangeObjectAxis();
 
-                    originObject.transform.GetComponent<ObjectController>().DeleteOutline();
-                    SwitchShotType();
                 });
             });
         });
