@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -494,7 +494,7 @@ Prefab:
         type: 2}
       propertyPath: shotPos
       value: 
-      objectReference: {fileID: 985572129}
+      objectReference: {fileID: 1422600852}
     - target: {fileID: 114756877396320634, guid: 7cd9967f2e9bad04bbe42c2a97348251,
         type: 2}
       propertyPath: changeTex
@@ -577,23 +577,6 @@ LineRenderer:
   m_PrefabParentObject: {fileID: 120668000242430658, guid: 15fb047aa61968d4a9b195162d7e6e0a,
     type: 2}
   m_PrefabInternal: {fileID: 985572128}
---- !u!1 &985572131 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1335948942405802, guid: 15fb047aa61968d4a9b195162d7e6e0a,
-    type: 2}
-  m_PrefabInternal: {fileID: 985572128}
---- !u!114 &985572132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 985572131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e297f830e4eecbf449e9866f8ec33b9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laserPointer: {fileID: 985572130}
 --- !u!224 &1093091579
 RectTransform:
   m_ObjectHideFlags: 0

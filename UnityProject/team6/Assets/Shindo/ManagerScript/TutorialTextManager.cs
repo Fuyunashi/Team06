@@ -35,6 +35,13 @@ public class TutorialTextManager : MonoBehaviour {
 
     void Awake()
     {
+        
+        
+    }
+
+    void Start()
+    {
+
         //すべてEnableにする
         for (int i = 0; i < tutorialImages_.Length; i++)
         {
@@ -51,11 +58,7 @@ public class TutorialTextManager : MonoBehaviour {
             //Debug.Log("消しました");
             tutorial_2_text[i].enabled = false;
         }
-        
-    }
 
-    void Start()
-    {
         scene_ = GameObject.Find("SceneController").GetComponent<SceneControll>();
         player_ = GameObject.Find("FPSPlayer").GetComponent<Player>();
         textCount_ = 0;
