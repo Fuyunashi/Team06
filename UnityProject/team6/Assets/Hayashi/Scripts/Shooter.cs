@@ -640,4 +640,14 @@ public class Shooter : MonoBehaviour
         });
 
     }
+
+    public GameObject GetOriginObj()
+    {
+        return originObject;
+    }
+
+    public GameObject GetTargetObj()
+    {
+        return targetObject;
+    }
 }
