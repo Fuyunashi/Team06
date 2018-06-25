@@ -27,6 +27,9 @@ public class PlayControll : MonoBehaviour
     [SerializeField]
     Image[] PouseRogo;
 
+    [SerializeField]
+    GameObject outBlack;
+
     GameObject portalPosObj;
 
     //必要なスクリプトを保持
@@ -55,6 +58,8 @@ public class PlayControll : MonoBehaviour
     /// </summary>
     public bool stageClearFrag { get; set; }
 
+
+    bool outBlackAlpha;
     void Start()
     {
         //必要なスクリプトを所持
@@ -76,14 +81,23 @@ public class PlayControll : MonoBehaviour
         changeSceneFrag = false;
         stageClearFrag = false;
         playerDeadFrag = false;
+        outBlackAlpha = true;
 
         pouseSelect = PouseSelect.ToContinue;
 
+        //シーン移行の際につかう黒い画像なので最初は表示しない
+        // LeanTween.colorText(outBlack.GetComponent<RectTransform>(), new Color(1, 1, 1, 0), 0.5f);
     }
+
 
     void Update()
     {
-       
+        if (outBlack.GetComponent<Image>().color.a >= 0.0f && outBlackAlpha)
+        {
+            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, outBlack.GetComponent<Image>().color.a - 0.2f);
+        }
+
+
         //インプット関連
         if (!playerInputSet_ || !prevState_.IsConnected)
         {
@@ -98,7 +112,7 @@ public class PlayControll : MonoBehaviour
 
         if (!sceneControll.PuseFrag)
             PuseDisposal();
-        if (Input.GetKeyDown(KeyCode.L)) stageClearFrag = true;
+        if (Input.GetKeyDown(KeyCode.L)) playerDeadFrag = true;
 
 
         //次ステージにはポウズ中には行けない
@@ -116,12 +130,7 @@ public class PlayControll : MonoBehaviour
                 //Debug.Log("クリアしたよ" + sceneControll.CurrentStage);
             }
         }
-        //プレイアーが死んだらリスタート
-        if (playerDeadFrag)
-        {
-            sceneControll.NextScene = SceneName.PlayCurrentScene;
-            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
-        }
+        
 
         //ポウズ中の処理
         if (sceneControll.PuseFrag)
@@ -147,11 +156,13 @@ public class PlayControll : MonoBehaviour
                         break;
                     //続きから始める
                     case 1:
-                        Debug.Log("リスタート白や：" + (PouseSelect)pouseSelectIndex);
-                        sceneControll.PuseFrag = false;
+                        //Debug.Log("リスタート白や：" + (PouseSelect)pouseSelectIndex);
+                        //sceneControll.PuseFrag = false;
                         Time.timeScale = 1;
-                        sceneControll.NextScene = SceneName.PlayCurrentScene;
-                        sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+                        //ノイズが行われてたらシーン移行フラグを入れる
+                        crtNoise.CRTFlag = true;
+                        changeSceneFrag = true;
+
                         break;
                     //セレクトシーンへ戻る
                     case 2:
@@ -169,23 +180,57 @@ public class PlayControll : MonoBehaviour
 
             //シーンのフラグが入り、ノイズが終わった報告があったらしーんを移行する
         }
+        if (!crtNoise.CRTFlag && changeSceneFrag && playerDeadFrag)
+        {
+            //画面を暗くする
+            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            outBlackAlpha = false;
+            sceneControll.PuseFrag = false;
+            playerDeadFrag = false;
+
+            sceneControll.NextScene = SceneName.PlayCurrentScene;
+            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+
+            changeSceneFrag = false;
+        }
         //セレクトシーンに移行の際の演出処理
         if (!crtNoise.CRTFlag && changeSceneFrag && sceneControll.PuseFrag)
         {
+            //画面を暗くする
+            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            outBlackAlpha = false;
             sceneControll.PuseFrag = false;
-            sceneControll.NextScene = SceneName.SelectScene;
-            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+            switch (pouseSelectIndex)
+            {
+                case 1:
+                    sceneControll.NextScene = SceneName.PlayCurrentScene;
+                    sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+                    break;
+                case 2:
+                    sceneControll.NextScene = SceneName.SelectScene;
+                    sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+                    break;
+            }
+
             changeSceneFrag = false;
         }
         //次ステージへ移動する際の演出処理
         if (distortPortal.portalTime <= 0 && changeSceneFrag)
         {
+
             sceneControll.NextScene = SceneName.PlayCurrentScene;
             sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
             sceneControll.CurrentStage = sceneControll.CurrentStage + 1;
             changeSceneFrag = false;
         }
 
+        //プレイアーが死んだらリスタート
+        if (playerDeadFrag)
+        {
+            if (!crtNoise.CRTFlag)
+                crtNoise.CRTFlag = true;
+            changeSceneFrag = true;
+        }
     }
     /// <summary>
     /// ポウズ中に行うシーン選択
