@@ -15,9 +15,11 @@ public class TutorialTextManager : MonoBehaviour {
     private Image[] tutorialImages_; 
 
     SceneControll scene_;
+    KeyRestriction key_;
+    Shooter shooter_;
 
     int textCount_ = 0;
-    int temp;
+   
     public int playerStopCounter_ { get; set; }
 
     private bool isTextEnable_;
@@ -32,12 +34,6 @@ public class TutorialTextManager : MonoBehaviour {
     private PlayerIndex playerIndex_;
     private GamePadState padState_;
     private GamePadState prevState_;
-
-    void Awake()
-    {
-        
-        
-    }
 
     void Start()
     {
@@ -61,6 +57,8 @@ public class TutorialTextManager : MonoBehaviour {
 
         scene_ = GameObject.Find("SceneController").GetComponent<SceneControll>();
         player_ = GameObject.Find("FPSPlayer").GetComponent<Player>();
+        key_ = player_.GetComponent<KeyRestriction>();
+        shooter_ = player_.GetComponent<Shooter>();
         textCount_ = 0;
         deleteTimer_ = 0.0f;
         playerStopCounter_ = 0;
@@ -91,28 +89,19 @@ public class TutorialTextManager : MonoBehaviour {
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed){
                 textCount_++;
             }
-            if(playerStopCounter_ >= 2)
-            {
-                textCount_ = temp;
-            }
+            
         }
         else
         {
-            if (playerStopCounter_ >= 2)
-            {
-                temp = textCount_;
-            }
+            textCount_ += 1;
         }
 
-        if (textCount_ >= tutorial_1_text.Length) deleteTimer_ += 0.1f;
-        if (textCount_ >= tutorial_2_text.Length) deleteTimer_ += 0.1f;
-
-        //Debug.Log(player_.isStop_);
-        //Debug.Log(textCount_);
+        Debug.Log(player_.isStop_);
+        Debug.Log(textCount_);
         //Debug.Log(deleteTimer_);
         //Debug.Log(tutorial_2_text.Length);
         //Debug.Log(scene_.CurrentStage);
-        //Debug.Log(playerStopCounter_);
+        
     }
 
     //チュートリアルのウィンドウ切り替え
@@ -122,12 +111,12 @@ public class TutorialTextManager : MonoBehaviour {
         {
             tutorialImages_[0].enabled = true;
             Tutorial_1_TextMng();
+            Tutorial1KeyContoroll();
 
-            if (textCount_ >= tutorial_1_text.Length && deleteTimer_ >= 1.0f)
+            if (textCount_ >= tutorial_1_text.Length)
             {
                 tutorialImages_[0].enabled = false;
                 textCount_ = 0;
-                //deleteTimer_ = 0;
                 player_.isStop_ = false;
                 isTextEnable_ = false;
             }
@@ -137,16 +126,100 @@ public class TutorialTextManager : MonoBehaviour {
         {
             tutorialImages_[1].enabled = true;
             Tutorial_2_TextMng();
+            Tutorial2KeyContoroll();
 
-            if (textCount_ >= tutorial_2_text.Length && deleteTimer_ >= 1.0f)
+            if (textCount_ >= tutorial_2_text.Length)
             {
                 tutorialImages_[1].enabled = false;
                 textCount_ = 0;
-                //deleteTimer_ = 0;
                 player_.isStop_ = false;
                 isTextEnable_ = false;
             }
         }
+    }
+
+    void Tutorial1KeyContoroll()
+    {
+        bool isGet = false;
+        if (textCount_ == 3)
+        {
+            player_.isStop_ = false;
+            GameObject obj = GameObject.Find("ObjectParPar (1)");
+            key_.currentUseKey = UseKey.TriggersLeft;
+            if(shooter_.GetOriginObj() != null)
+            {
+                player_.isStop_ = true;
+            }
+            
+        }
+        else if(textCount_ == 4)
+        {
+            player_.isStop_ = false;
+            GameObject obj = GameObject.Find("ObjectParPar");
+            key_.currentUseKey = UseKey.TriggersRight;
+            if(shooter_.GetTargetObj() != null)
+            {
+                player_.isStop_ = true;
+            }
+        }
+        else if(textCount_ == 7)
+        {
+            player_.isStop_ = false;
+            
+            GameObject obj = GameObject.Find("ObjectParPar (2)");
+            
+            key_.currentUseKey = UseKey.TriggersLeft;
+            if(padState_.Triggers.Left >= 0.8f && shooter_.GetOriginObj() != null)
+            {
+                isGet = true;
+                
+            }
+            if (isGet) player_.isStop_ = true;
+        }
+        else if(textCount_ == 8)
+        {
+            player_.isStop_ = false;
+            GameObject obj = GameObject.Find("ObjectParPar (1)");
+            if(isGet) key_.currentUseKey = UseKey.RightShoulder;
+            if (isGet == true && (padState_.Buttons.RightShoulder == ButtonState.Pressed && prevState_.Buttons.RightShoulder == ButtonState.Released))
+            {
+                isGet = false;
+                key_.currentUseKey = UseKey.TriggersRight;
+                if (shooter_.GetTargetObj() != null)
+                {
+                    player_.isStop_ = true;
+                }
+            }
+        }
+        else
+        {
+            //key_.currentUseKey = UseKey.None;
+        }
+
+    }
+
+    void Tutorial2KeyContoroll()
+    {
+        
+        if(textCount_ == 1)
+        {
+            player_.isStop_ = false;
+            key_.currentUseKey = UseKey.LeftShoulder;
+            if(padState_.Buttons.LeftShoulder == ButtonState.Pressed && prevState_.Buttons.LeftShoulder == ButtonState.Released)
+            {
+                player_.isStop_ = true;
+            }
+        }
+        if(textCount_ == 3)
+        {
+            player_.isStop_ = false;
+            if(padState_.Buttons.RightShoulder == ButtonState.Pressed && prevState_.Buttons.RightShoulder == ButtonState.Released)
+            {
+                player_.isStop_ = true;
+            }
+        }
+        
+        
     }
 
     //チュートリアル1

@@ -12,8 +12,7 @@ public class Player : MonoBehaviour
 
     //前後の速さ
     [SerializeField]
-    private float fowardSpeed_;
-    //左右の速さ
+    private float forwardSpeed_;
     [SerializeField]
     private float sideSpeed_;
     //接地判定
@@ -25,14 +24,9 @@ public class Player : MonoBehaviour
     private float rayRange_;
     [SerializeField]
     private float jumpPower_;
-    [SerializeField]
-    private float jumpHeight_;
 
     private Rigidbody rb_;
 
-    [SerializeField]
-    private float deathTime_;
-    private float deathTimer_;
     private float distance_;
     private float fallPos_;
     [SerializeField]
@@ -59,9 +53,7 @@ public class Player : MonoBehaviour
     GameObject obj_playControll_;
     TutorialControll tutorialControll_;
     GameObject obj_tutorialControll_;
-
-    TutorialTextManager TTM;
-
+    
     //Xinput関連
     private bool playerInputSet_ = false;
     private PlayerIndex playerIndex_;
@@ -77,7 +69,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb_.freezeRotation = true;
-        rb_.useGravity = false;
+        rb_.useGravity = true;
 
         //プレイヤーの認識
         if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
@@ -92,13 +84,12 @@ public class Player : MonoBehaviour
             tutorialControll_ = obj_tutorialControll_.GetComponent<TutorialControll>();
         }
 
-        TTM = GameObject.Find("Manager").GetComponent<TutorialTextManager>();
         isStop_ = false;
         isJump_ = false;
         lastStepTime_ = DateTime.Now;
         isMaxHeight_ = false;
         fallPos_ = transform.position.y;
-        TTM.playerStopCounter_++;
+        
     }
 
     // Update is called once per frame
@@ -106,7 +97,7 @@ public class Player : MonoBehaviour
     {
 
         if (isStop_) return;
-        
+
         //Xinput関連
         if (!playerInputSet_ || !prevState_.IsConnected)
         {
@@ -116,20 +107,12 @@ public class Player : MonoBehaviour
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
 
-        if (prevState_.Buttons.Y == ButtonState.Released && padState_.Buttons.Y == ButtonState.Pressed)
-        {
-            isStop_ = true;
-        }
-
         isGround();
         isGoalFlag();
         isDead();
-
         
-        if(!isJump_) rb_.AddForce(new Vector3(0, -Gravity_ * rb_.mass, 0));
+        if (isJump_ && isGround_) SoundManager.GetInstance.PlaySE("Landing_SE");
         
-        if(isJump_ && isGround_) SoundManager.GetInstance.PlaySE("Landing_SE");
-
         //死亡したら
         if (isDead())
         {
@@ -147,45 +130,56 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector3 targetVelocity = Vector3.zero;
         if (isStop_) return;
-
-        var cameraForward = Vector3.Scale(camera_.transform.forward, new Vector3(1, 0, 1)).normalized;
-        Vector3 targetVelocity = cameraForward * Input.GetAxis("Vertical") + camera_.transform.right * Input.GetAxis("Horizontal");
+        
+        if (padState_.ThumbSticks.Left.Y >= 0.8f)
+        {
+            //前
+            targetVelocity = camera_.transform.forward * forwardSpeed_;
+            
+        }
+        if(padState_.ThumbSticks.Left.Y <= -0.8f)
+        {
+            //後
+            targetVelocity = -camera_.transform.forward * forwardSpeed_;
+            
+        }
+        if(padState_.ThumbSticks.Left.X >= 0.8f)
+        {
+            //右
+            targetVelocity = camera_.transform.right * sideSpeed_;
+        }
+        if(padState_.ThumbSticks.Left.X <= -0.8f)
+        {
+            //左
+            targetVelocity = -camera_.transform.right * sideSpeed_;
+        }
+        
 
         //移動
         if (targetVelocity.magnitude > 0.01)
         {
             FootSound();
-            rb_.velocity = targetVelocity * fowardSpeed_;
+            
+            Move(targetVelocity);
         }
         else
         {
             //初期化
             targetVelocity = Vector3.zero;
-            rb_.velocity = Vector3.zero;
+            rb_.velocity = new Vector3(0, rb_.velocity.y, 0);
         }
-        
+
         //ジャンプ
-        if (isGround_ && !isJump_ && (Input.GetButton("Jump") || Input.GetKey(KeyCode.Space)))
+        if (isGround_ && (Input.GetButton("Jump") || Input.GetKey(KeyCode.Space)))
         {
             Debug.Log("ジャンプしてます");
             SoundManager.GetInstance.PlaySE("Janp_SE");
-            
+            rb_.velocity = new Vector3(0, targetVelocity.y + jumpPower_, 0);
             isGround_ = false;
-            isJump_ = true;
+            //isJump_ = true;
 
-        }
-        if(isJump_)
-        {
-            var startPos = new Vector3(0, transform.position.y, 0);
-            var endPos = new Vector3(0, transform.position.y + jumpHeight_, 0);
-            rb_.velocity = Vector3.Lerp(startPos, endPos, LerpTimer_ / 15.0f);
-            LerpTimer_++;
-            if(LerpTimer_ >= 15.0f)
-            {
-                isJump_ = false;
-                LerpTimer_ = 0.0f;
-            }
         }
         
     }
@@ -204,7 +198,7 @@ public class Player : MonoBehaviour
         {
             isGround_ = false;
         }
-        //Debug.Log("接地判定" + isGround_);
+        Debug.Log("接地判定" + isGround_);
     }
 
     public bool isDead()
@@ -213,7 +207,6 @@ public class Player : MonoBehaviour
         if (!isGround_)
         {
             distance_ = fallPos_ - transform.position.y;
-            deathTimer_ += Time.deltaTime;
 
             if (distance_ >= deathDistance_)
             {
@@ -223,16 +216,8 @@ public class Player : MonoBehaviour
         }
         else
         {
-            deathTimer_ = 0.0f;
             return false;
         }
-
-        if (deathTimer_ >= deathTime_)
-        {
-            //Debug.Log("死亡しました");
-            return true;
-        }
-
 
         return false;
     }
@@ -290,4 +275,10 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    public void Move(Vector3 moveVelocity)
+    {
+        rb_.velocity = new Vector3(moveVelocity.x, 0.0f + rb_.velocity.y, moveVelocity.z);
+    }
+    
 }
