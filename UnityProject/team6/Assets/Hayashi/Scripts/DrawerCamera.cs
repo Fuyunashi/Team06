@@ -8,6 +8,7 @@ public class DrawerCamera : MonoBehaviour
     private Quaternion targetRotate;
     private GameObject player;
     private GameObject playCamera;
+    private Transform m_CameraPos;
     private bool isDrawEnd;
     void Awake()
     {
@@ -25,27 +26,22 @@ public class DrawerCamera : MonoBehaviour
             transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotate, 2.0f*Time.deltaTime);
             transform.position = Vector3.Lerp(transform.position, target.transform.position + new Vector3(0, 0, -2f), 2.0f*Time.deltaTime);
         }
-        if (isDrawEnd == true)
-        {
-            transform.position = Vector3.Lerp(transform.position, player.transform.position + new Vector3(0, 1f, 0), 5.0f*Time.deltaTime);
-            if (Vector3.Distance(transform.position, player.transform.position + new Vector3(0, 1f, 0)) <= 0.3f)
-            {
-                player.GetComponent<Player>().isStop_ = false;
-                playCamera.SetActive(true);
-                Destroy(this.gameObject);
-            }
-        }
     }
 
     public void SetDrawerObj(GameObject drawer)
     {
         target = drawer;
         player.GetComponent<Player>().isStop_ = true;
+        m_CameraPos = playCamera.transform;
         playCamera.SetActive(false);
     }
 
     public void TrackingEnd()
     {
-        isDrawEnd = true;
+        LeanTween.move(this.gameObject, m_CameraPos.transform.position, 1.0f).setOnComplete(() => {
+            player.GetComponent<Player>().isStop_ = false;
+            playCamera.SetActive(true);
+            Destroy(this.gameObject);
+        });
     }
 }

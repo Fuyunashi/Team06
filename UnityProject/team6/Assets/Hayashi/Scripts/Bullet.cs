@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour {
         if (other.gameObject.tag == "ChangeObject")
         {
             hitObject = other.gameObject;
-            m_Shooter.Shot(hitObject);
+            m_Shooter.GetShot(hitObject);
         }
         Destroy(this.gameObject);
     }
