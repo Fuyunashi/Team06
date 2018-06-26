@@ -98,17 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a549b5ccaa811f44a28875061c330da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fowardSpeed_: 10
+  forwardSpeed_: 10
   sideSpeed_: 9
   isGround_: 0
   charaRay_: {fileID: 4030830429550446}
-  rayRange_: 0.2
-  jumpPower_: 100
-  jumpHeight_: 10
-  deathTime_: 1000000
+  rayRange_: 0.3
+  jumpPower_: 5
   deathDistance_: 5
   isDead_: 0
-  Gravity_: 200
+  Gravity_: 0
   randomRange_: 3
   camera_: {fileID: 0}
 --- !u!114 &114756877396320634
@@ -123,7 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTex: {fileID: 0}
-  shotTex: {fileID: 0}
+  positionMark: {fileID: 21300000, guid: e90bacf5af22da149ad8de65e627d6f1, type: 3}
+  scaleMark: {fileID: 21300000, guid: 655937aaf57fa214e8af90a8fe5cb64e, type: 3}
   axisTex: {fileID: 0}
   gunMat: {fileID: 2100000, guid: 3273360bbb61cb14f9e044f7f7a8ee84, type: 2}
   laserPointMat: {fileID: 2100000, guid: 27971dbe6c1efa249ab0ec1f6c73a148, type: 2}
