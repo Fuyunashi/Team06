@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
             tutorialControll_ = obj_tutorialControll_.GetComponent<TutorialControll>();
         }
 
-        isStop_ = false;
+        //isStop_ = false;
         isJump_ = false;
         lastStepTime_ = DateTime.Now;
         isMaxHeight_ = false;
@@ -174,9 +174,9 @@ public class Player : MonoBehaviour
         //ジャンプ
         if (isGround_ && (Input.GetButton("Jump") || Input.GetKey(KeyCode.Space)))
         {
-            Debug.Log("ジャンプしてます");
+            //Debug.Log("ジャンプしてます");
             SoundManager.GetInstance.PlaySE("Janp_SE");
-            rb_.velocity = new Vector3(0, targetVelocity.y + jumpPower_, 0);
+            rb_.velocity = new Vector3(0, jumpPower_, 0);
             isGround_ = false;
             //isJump_ = true;
 
@@ -198,7 +198,7 @@ public class Player : MonoBehaviour
         {
             isGround_ = false;
         }
-        Debug.Log("接地判定" + isGround_);
+        //Debug.Log("接地判定" + isGround_);
     }
 
     public bool isDead()
@@ -278,7 +278,7 @@ public class Player : MonoBehaviour
 
     public void Move(Vector3 moveVelocity)
     {
-        rb_.velocity = new Vector3(moveVelocity.x, 0.0f + rb_.velocity.y, moveVelocity.z);
+        rb_.velocity = new Vector3(moveVelocity.x, 0.0f/* + rb_.velocity.y*/, moveVelocity.z);
     }
     
 }
