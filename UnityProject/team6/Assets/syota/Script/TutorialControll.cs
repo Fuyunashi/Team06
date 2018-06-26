@@ -117,9 +117,8 @@ public class TutorialControll : MonoBehaviour
                 SoundManager.GetInstance.PlaySE("Goal_SE");
 
                 GameObject.Find("FPSPlayer").GetComponent<Player>().isStop_ = true;
-                distortPortal.portalPos = portalPosObj.transform.position;
+                distortPortal.portalPos = obj_portal.transform.localPosition + obj_portal.transform.forward;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
-                distortPortal.portalPos = portalPosObj.transform.position;
                 distortPortal.PortalFlag = true;
                 changeSceneFrag = true;
                 stageClearFrag = false;
