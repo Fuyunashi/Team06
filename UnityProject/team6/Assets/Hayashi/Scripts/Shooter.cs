@@ -650,4 +650,14 @@ public class Shooter : MonoBehaviour
     {
         return targetObject;
     }
+
+    public string GetChangeType()
+    {
+        return changeType.ToString();
+    }
+
+    public string GetAxisType()
+    {
+        return axisType.ToString();
+    }
 }
