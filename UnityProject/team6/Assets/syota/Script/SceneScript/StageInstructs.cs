@@ -35,9 +35,9 @@ public class StageInstructs : MonoBehaviour
 
     public NextStage CurrentStage;
 
-  
+
     void Start()
-    {       
+    {
     }
 
     void Update()
@@ -56,6 +56,8 @@ public class StageInstructs : MonoBehaviour
         //Debug.Log("次のシーン：" + CurrentStage);
         if (prevState_.DPad.Up == ButtonState.Released && padState_.DPad.Up == ButtonState.Pressed)
         {
+            SoundManager.GetInstance.PlaySE("input_SE1");
+
             foreach (var stage in movingStage)
             {
                 if (stage.currentStage != CurrentStage || stage.up_tv == NextStage.None) continue;
@@ -65,6 +67,7 @@ public class StageInstructs : MonoBehaviour
         }
         if (prevState_.DPad.Right == ButtonState.Released && padState_.DPad.Right == ButtonState.Pressed)
         {
+            SoundManager.GetInstance.PlaySE("input_SE1");
             foreach (var stage in movingStage)
             {
                 //Debug.Log("おらがめあすだ：" + stage.currentStage + "みぎ：" + stage.right_tv);
@@ -75,6 +78,7 @@ public class StageInstructs : MonoBehaviour
         }
         if (prevState_.DPad.Left == ButtonState.Released && padState_.DPad.Left == ButtonState.Pressed)
         {
+            SoundManager.GetInstance.PlaySE("input_SE1");
             foreach (var stage in movingStage)
             {
                 if (stage.currentStage != CurrentStage || stage.left_tv == NextStage.None) continue;
@@ -84,6 +88,7 @@ public class StageInstructs : MonoBehaviour
         }
         if (prevState_.DPad.Down == ButtonState.Released && padState_.DPad.Down == ButtonState.Pressed)
         {
+            SoundManager.GetInstance.PlaySE("input_SE1");
             foreach (var stage in movingStage)
             {
                 if (stage.currentStage != CurrentStage || stage.dwon_tv == NextStage.None) continue;

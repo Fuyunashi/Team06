@@ -112,7 +112,7 @@ public class PlayControll : MonoBehaviour
 
         if (!sceneControll.PuseFrag)
             PuseDisposal();
-        if (Input.GetKeyDown(KeyCode.L)) playerDeadFrag = true;
+        if (Input.GetKeyDown(KeyCode.L)) stageClearFrag = true;
 
 
         //次ステージにはポウズ中には行けない
@@ -120,6 +120,7 @@ public class PlayControll : MonoBehaviour
         {
             if (stageClearFrag)
             {
+                SoundManager.GetInstance.PlaySE("Goal_SE");
                 GameObject.Find("FPSPlayer").GetComponent<Player>().isStop_ = true;
                 distortPortal.portalPos = portalPosObj.transform.position;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
@@ -141,6 +142,8 @@ public class PlayControll : MonoBehaviour
             PoseIconColor();
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
             {
+                SoundManager.GetInstance.PlaySE("input_SE3");
+
                 //キャンバスを最初は消しておく
                 foreach (var image in PouseRogo)
                     image.enabled = false;
@@ -239,6 +242,8 @@ public class PlayControll : MonoBehaviour
     {
         if (prevState_.DPad.Up == ButtonState.Released && padState_.DPad.Up == ButtonState.Pressed)
         {
+            SoundManager.GetInstance.PlaySE("input_SE1");
+
             pouseSelectIndex--;
             pouseSelectIndex += pouseCount;
             pouseSelectIndex = pouseSelectIndex % pouseCount;
@@ -246,6 +251,8 @@ public class PlayControll : MonoBehaviour
         }
         else if (prevState_.DPad.Down == ButtonState.Released && padState_.DPad.Down == ButtonState.Pressed)
         {
+            SoundManager.GetInstance.PlaySE("input_SE1");
+
             pouseSelectIndex++;
             pouseSelectIndex = pouseSelectIndex % pouseCount;
         }

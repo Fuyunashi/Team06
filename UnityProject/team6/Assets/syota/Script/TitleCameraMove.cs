@@ -67,8 +67,8 @@ public class TitleCameraMove : MonoBehaviour
         prevState_.Buttons.X == ButtonState.Released && padState_.Buttons.X == ButtonState.Pressed ||
             prevState_.Buttons.Y == ButtonState.Released && padState_.Buttons.Y == ButtonState.Pressed)
         {
+            SoundManager.GetInstance.PlaySE("input_SE3");
             if (!noiseParticle.skipFrag) { noiseParticle.skipFrag = true; return; }
-
             sceneChangeFlag = true;
         }
 

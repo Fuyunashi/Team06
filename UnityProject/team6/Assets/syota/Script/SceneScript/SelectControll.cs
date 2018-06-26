@@ -79,12 +79,14 @@ public class SelectControll : MonoBehaviour
         }
         if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
         {
+            if ((int)stageInstructs.CurrentStage < 10)
+                ChangeSceneFrag = true;
+            SoundManager.GetInstance.PlaySE("input_SE2");
+
             if (stageInstructs.CurrentStage == NextStage.Exit)
             {
                 Application.Quit();
             }
-            if ((int)stageInstructs.CurrentStage < 10)
-                ChangeSceneFrag = true;
         }
         if (ChangeSceneFrag)
         {
