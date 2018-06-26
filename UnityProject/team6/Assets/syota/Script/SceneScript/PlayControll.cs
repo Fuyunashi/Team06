@@ -94,7 +94,7 @@ public class PlayControll : MonoBehaviour
     {
         if (outBlack.GetComponent<Image>().color.a >= 0.0f && outBlackAlpha)
         {
-            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, outBlack.GetComponent<Image>().color.a - 0.2f);
+            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, outBlack.GetComponent<Image>().color.a - 0.1f);
         }
 
 
@@ -157,7 +157,7 @@ public class PlayControll : MonoBehaviour
                         Time.timeScale = 1;
                         sceneControll.PuseFrag = false;
                         break;
-                    //続きから始める
+                    //最初から
                     case 1:
                         //Debug.Log("リスタート白や：" + (PouseSelect)pouseSelectIndex);
                         //sceneControll.PuseFrag = false;
@@ -226,6 +226,10 @@ public class PlayControll : MonoBehaviour
             sceneControll.CurrentStage = sceneControll.CurrentStage + 1;
             changeSceneFrag = false;
         }
+        if (distortPortal.portalTime <= .7f)
+        {
+            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, outBlack.GetComponent<Image>().color.a + 0.2f);
+        }
 
         //プレイアーが死んだらリスタート
         if (playerDeadFrag)
@@ -280,20 +284,20 @@ public class PlayControll : MonoBehaviour
         {
             //最初からやり直す
             case 0:
-                PouseRogo[1].GetComponent<Image>().color = Color.red;
+                PouseRogo[1].GetComponent<Image>().color = Color.green;
                 PouseRogo[2].GetComponent<Image>().color = Color.white;
                 PouseRogo[3].GetComponent<Image>().color = Color.white;
 
                 break;
             //続きから始める
             case 1:
-                PouseRogo[2].GetComponent<Image>().color = Color.red;
+                PouseRogo[2].GetComponent<Image>().color = Color.green;
                 PouseRogo[1].GetComponent<Image>().color = Color.white;
                 PouseRogo[3].GetComponent<Image>().color = Color.white;
                 break;
             //セレクトシーンへ戻る
             case 2:
-                PouseRogo[3].GetComponent<Image>().color = Color.red;
+                PouseRogo[3].GetComponent<Image>().color = Color.green;
                 PouseRogo[2].GetComponent<Image>().color = Color.white;
                 PouseRogo[1].GetComponent<Image>().color = Color.white;
                 break;

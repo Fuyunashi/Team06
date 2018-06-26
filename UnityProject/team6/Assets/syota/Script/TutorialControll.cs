@@ -25,6 +25,8 @@ public class TutorialControll : MonoBehaviour
 
     [SerializeField]
     Image[] PouseRogo;
+    [SerializeField]
+    GameObject outBlack;
 
     GameObject portalPosObj;
 
@@ -54,6 +56,8 @@ public class TutorialControll : MonoBehaviour
     /// </summary>
     public bool stageClearFrag { get; set; }
 
+    bool outBlackAlpha;
+
     void Start()
     {
         //必要なスクリプトを所持
@@ -76,10 +80,18 @@ public class TutorialControll : MonoBehaviour
         changeSceneFrag = false;
         stageClearFrag = false;
         playerDeadFrag = false;
+        outBlackAlpha = true;
+
+        pouseSelect = PouseSelect.ToContinue;
     }
 
     void Update()
     {
+        if (outBlack.GetComponent<Image>().color.a >= 0.0f && outBlackAlpha)
+        {
+            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, outBlack.GetComponent<Image>().color.a - 0.1f);
+        }
+
         //インプット関連
         if (!playerInputSet_ || !prevState_.IsConnected)
         {
@@ -93,6 +105,8 @@ public class TutorialControll : MonoBehaviour
 
         if (!sceneControll.PuseFrag)
             PuseDisposal();
+        if (Input.GetKeyDown(KeyCode.L)) stageClearFrag = true;
+
 
         //次ステージにはポウズ中には行けない
         if (!sceneControll.PuseFrag)
@@ -100,6 +114,8 @@ public class TutorialControll : MonoBehaviour
             //次ステージに行く際の条件
             if (stageClearFrag)
             {
+                SoundManager.GetInstance.PlaySE("Goal_SE");
+
                 GameObject.Find("FPSPlayer").GetComponent<Player>().isStop_ = true;
                 distortPortal.portalPos = portalPosObj.transform.position;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
@@ -109,12 +125,6 @@ public class TutorialControll : MonoBehaviour
                 stageClearFrag = false;
             }
         }
-        //プレイアーが死んだらリスタート
-        if (playerDeadFrag)
-        {
-            sceneControll.NextScene = SceneName.TutorialCurrentScene;
-            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
-        }
 
         //ポウズ中の処理
         if (sceneControll.PuseFrag)
@@ -123,6 +133,8 @@ public class TutorialControll : MonoBehaviour
             PoseIconColor();
             if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
             {
+                SoundManager.GetInstance.PlaySE("input_SE3");
+
                 //キャンバスを最初は消しておく
                 foreach (var image in PouseRogo)
                     image.enabled = false;
@@ -135,12 +147,13 @@ public class TutorialControll : MonoBehaviour
                         Time.timeScale = 1;
                         sceneControll.PuseFrag = false;
                         break;
-                    //続きから始める
+                    //最初から
                     case 1:
-                        sceneControll.PuseFrag = false;
                         Time.timeScale = 1;
-                        sceneControll.NextScene = SceneName.TutorialCurrentScene;
-                        sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+                        //ノイズが行われてたらシーン移行フラグを入れる
+                        crtNoise.CRTFlag = true;
+                        changeSceneFrag = true;
+
                         break;
                     //セレクトシーンへ戻る
                     case 2:
@@ -157,12 +170,41 @@ public class TutorialControll : MonoBehaviour
             }
 
         }
+        //プレイヤーが死亡した際のリスタート演出
+        if (!crtNoise.CRTFlag && changeSceneFrag && playerDeadFrag)
+        {
+            //画面を暗くする
+            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            outBlackAlpha = false;
+            sceneControll.PuseFrag = false;
+            playerDeadFrag = false;
+
+            sceneControll.NextScene = SceneName.TutorialCurrentScene;
+            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+
+            changeSceneFrag = false;
+        }
         //セレクトシーンに移行の際の演出処理
         if (!crtNoise.CRTFlag && changeSceneFrag && sceneControll.PuseFrag)
-        {
+        { //画面を暗くする
+            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            outBlackAlpha = false;
             sceneControll.PuseFrag = false;
-            sceneControll.NextScene = SceneName.SelectScene;
-            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+            switch (pouseSelectIndex)
+            {
+                //最初から（しーんをや有り直す）
+                case 1:
+                    sceneControll.NextScene = SceneName.TutorialCurrentScene;
+                    sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+                    break;
+                //次のしーんへ移行
+                case 2:
+                    sceneControll.NextScene = SceneName.SelectScene;
+                    sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+                    break;
+            }
+
+
             changeSceneFrag = false;
         }
         //次ステージへ移行する際の演出処理
@@ -181,6 +223,17 @@ public class TutorialControll : MonoBehaviour
             sceneControll.CurrentStage = sceneControll.CurrentStage + 1;
             changeSceneFrag = false;
         }
+        if (distortPortal.portalTime <= .7f)
+        {
+            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, outBlack.GetComponent<Image>().color.a + 0.2f);
+        }
+        //プレイアーが死んだらリスタート
+        if (playerDeadFrag)
+        {
+            if (!crtNoise.CRTFlag)
+                crtNoise.CRTFlag = true;
+            changeSceneFrag = true;
+        }
 
     }
     /// <summary>
@@ -190,6 +243,8 @@ public class TutorialControll : MonoBehaviour
     {
         if (prevState_.DPad.Up == ButtonState.Released && padState_.DPad.Up == ButtonState.Pressed)
         {
+            SoundManager.GetInstance.PlaySE("input_SE1");
+
             pouseSelectIndex--;
             pouseSelectIndex += pouseCount;
             pouseSelectIndex = pouseSelectIndex % pouseCount;
@@ -197,6 +252,8 @@ public class TutorialControll : MonoBehaviour
         }
         else if (prevState_.DPad.Down == ButtonState.Released && padState_.DPad.Down == ButtonState.Pressed)
         {
+            SoundManager.GetInstance.PlaySE("input_SE1");
+
             pouseSelectIndex++;
             pouseSelectIndex = pouseSelectIndex % pouseCount;
         }
@@ -223,20 +280,20 @@ public class TutorialControll : MonoBehaviour
         {
             //最初からやり直す
             case 0:
-                PouseRogo[1].GetComponent<Image>().color = Color.red;
+                PouseRogo[1].GetComponent<Image>().color = Color.blue;
                 PouseRogo[2].GetComponent<Image>().color = Color.white;
                 PouseRogo[3].GetComponent<Image>().color = Color.white;
 
                 break;
             //続きから始める
             case 1:
-                PouseRogo[2].GetComponent<Image>().color = Color.red;
+                PouseRogo[2].GetComponent<Image>().color = Color.blue;
                 PouseRogo[1].GetComponent<Image>().color = Color.white;
                 PouseRogo[3].GetComponent<Image>().color = Color.white;
                 break;
             //セレクトシーンへ戻る
             case 2:
-                PouseRogo[3].GetComponent<Image>().color = Color.red;
+                PouseRogo[3].GetComponent<Image>().color = Color.blue;
                 PouseRogo[2].GetComponent<Image>().color = Color.white;
                 PouseRogo[1].GetComponent<Image>().color = Color.white;
                 break;
