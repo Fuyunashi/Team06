@@ -19,6 +19,8 @@ public class NoiseParticle : MonoBehaviour
     [SerializeField]
     GameObject title;
     [SerializeField]
+    GameObject teamRogo;
+    [SerializeField]
     GameObject[] gun_model;
     [SerializeField]
     GameObject[] ligth;
@@ -56,6 +58,8 @@ public class NoiseParticle : MonoBehaviour
             LeanTween.alpha(gun_model[0], 1.0f, 0);
             LeanTween.alpha(gun_model[1], 1.0f, 0);
             LeanTween.alpha(title, 1.0f, 0);
+            LeanTween.alpha(teamRogo, .0f, 0);
+
             gun_model[0].transform.Rotate(0, 0, 20f * Time.deltaTime);
             ligth[0].GetComponent<Light>().intensity = 1;
             ligth[1].GetComponent<Light>().intensity = 1;
@@ -72,13 +76,14 @@ public class NoiseParticle : MonoBehaviour
         switch (performanceMode)
         {
             case PerformanceMode.Title:
-                if (title_frag) LeanTween.alpha(title, 0.0f, 2).setOnComplete(() => { performanceMode = PerformanceMode.Gun; Count = 0; }); title_frag = false;
+                if (title_frag) LeanTween.alpha(teamRogo, 0.0f, 2).setOnComplete(() => { performanceMode = PerformanceMode.Gun; Count = 0; }); title_frag = false;
                 horizonValue = Mathf.Lerp(0, 0.6f, Count / 120);
                 Count++;
                 break;
             case PerformanceMode.Gun:
                 if (gun_frag)
                 {
+                    Debug.Log("がん消えろ");
                     LeanTween.alpha(title, 1.0f, 1);
                     LeanTween.alpha(gun_model[0], 1.0f, 1);
                     LeanTween.alpha(gun_model[1], 1.0f, 1); gun_frag = false;
