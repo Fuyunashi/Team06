@@ -46,7 +46,7 @@ public class TutorialControll : MonoBehaviour
     /// <summary>
     /// シーンを移行する際に状態管理のフラグ
     /// </summary>
-    bool changeSceneFrag { get; set; }
+    public  bool changeSceneFrag { get; set; }
     /// <summary>
     /// プレイヤーが死亡したかの判断を煽るフラグ
     /// </summary>
@@ -117,9 +117,8 @@ public class TutorialControll : MonoBehaviour
                 SoundManager.GetInstance.PlaySE("Goal_SE");
 
                 GameObject.Find("FPSPlayer").GetComponent<Player>().isStop_ = true;
-                distortPortal.portalPos = portalPosObj.transform.position;
+                distortPortal.portalPos = obj_portal.transform.localPosition + obj_portal.transform.forward;
                 sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
-                distortPortal.portalPos = portalPosObj.transform.position;
                 distortPortal.PortalFlag = true;
                 changeSceneFrag = true;
                 stageClearFrag = false;

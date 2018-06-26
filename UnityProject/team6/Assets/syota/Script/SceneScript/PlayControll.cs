@@ -58,7 +58,7 @@ public class PlayControll : MonoBehaviour
     /// </summary>
     public bool stageClearFrag { get; set; }
 
-
+    bool lastStageClearFrag { get; set; }
     bool outBlackAlpha;
     void Start()
     {
@@ -82,6 +82,8 @@ public class PlayControll : MonoBehaviour
         stageClearFrag = false;
         playerDeadFrag = false;
         outBlackAlpha = true;
+
+        lastStageClearFrag = false;
 
         pouseSelect = PouseSelect.ToContinue;
 
@@ -122,16 +124,18 @@ public class PlayControll : MonoBehaviour
             {
                 SoundManager.GetInstance.PlaySE("Goal_SE");
                 GameObject.Find("FPSPlayer").GetComponent<Player>().isStop_ = true;
-                distortPortal.portalPos = portalPosObj.transform.position;
-                sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
-                distortPortal.portalPos = portalPosObj.transform.position;
+                distortPortal.portalPos = obj_portal.transform.localPosition + obj_portal.transform.forward;
+                if (sceneControll.CurrentStage == NextStage.Stage8)
+                    sceneControll.AddToScene.Add((sceneControll.CurrentStage - 1).ToString() + AddToScene.ChildScene);
+                else
+                    sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
                 distortPortal.PortalFlag = true;
                 changeSceneFrag = true;
                 stageClearFrag = false;
                 //Debug.Log("クリアしたよ" + sceneControll.CurrentStage);
             }
         }
-        
+
 
         //ポウズ中の処理
         if (sceneControll.PuseFrag)
@@ -217,16 +221,37 @@ public class PlayControll : MonoBehaviour
 
             changeSceneFrag = false;
         }
+        if (distortPortal.portalTime <= 1.2f && changeSceneFrag)
+        {
+            //最後のステージの際は
+            if (sceneControll.CurrentStage == NextStage.Stage8)
+            {
+                crtNoise.CRTFlag = true;
+                changeSceneFrag = false;
+                distortPortal.PortalFlag = false;
+                lastStageClearFrag = true;
+            }
+        }
+        if (!crtNoise.CRTFlag && lastStageClearFrag)
+        {
+            Debug.Log("セレクトしーんへ遷移白");
+            outBlack.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            sceneControll.NextScene = SceneName.SelectScene;
+            sceneControll.AddToScene.Add(sceneControll.CurrentStage.ToString() + AddToScene.ChildScene);
+            lastStageClearFrag = false;
+        }
         //次ステージへ移動する際の演出処理
         if (distortPortal.portalTime <= 0 && changeSceneFrag)
         {
-
-            sceneControll.NextScene = SceneName.PlayCurrentScene;
-            sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
-            sceneControll.CurrentStage = sceneControll.CurrentStage + 1;
-            changeSceneFrag = false;
+            if (sceneControll.CurrentStage != NextStage.Stage8)
+            {
+                sceneControll.NextScene = SceneName.PlayCurrentScene;
+                sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
+                sceneControll.CurrentStage = sceneControll.CurrentStage + 1;
+                changeSceneFrag = false;
+            }
         }
-        if (distortPortal.portalTime <= .7f)
+        if (distortPortal.portalTime <= .7f && sceneControll.CurrentStage != NextStage.Stage8)
         {
             outBlack.GetComponent<Image>().color = new Color(1, 1, 1, outBlack.GetComponent<Image>().color.a + 0.2f);
         }
