@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 54890988156023184}
   - component: {fileID: 136097316524439758}
   - component: {fileID: 114006895528318466}
+  - component: {fileID: 114631801444297914}
   m_Layer: 8
   m_Name: FPSPlayer
   m_TagString: Player
@@ -109,6 +110,18 @@ MonoBehaviour:
   Gravity_: 0
   randomRange_: 3
   camera_: {fileID: 0}
+--- !u!114 &114631801444297914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942858018097396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae0962d7c92ad546a42d70da9606174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentUseKey: 4
 --- !u!114 &114756877396320634
 MonoBehaviour:
   m_ObjectHideFlags: 1
