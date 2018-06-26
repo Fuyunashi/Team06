@@ -296,7 +296,7 @@ public class CRTnoise : MonoBehaviour
             ScanLineTail = UnityEngine.Random.Range(.0f, 2.0f);
             NoiseX = UnityEngine.Random.Range(0.0f, 1.0f);
             NoiseTime += Time.deltaTime;
-            Debug.Log("のいずのたいむ：" + NoiseTime);
+
         }
         else
         {
