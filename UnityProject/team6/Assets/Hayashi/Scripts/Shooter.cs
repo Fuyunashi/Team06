@@ -180,7 +180,7 @@ public class Shooter : MonoBehaviour
                     objVal_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayHitObj.transform.parent.gameObject);
                 }
                 //射撃ボタンが押されたら
-                if ((Input.GetMouseButtonDown(0) || padState.Triggers.Right >= 0.8f) && pushRTrigger == false)
+                if ((Input.GetMouseButtonDown(0) || padState.Triggers.Left >= 0.8f) && pushRTrigger == false)
                 {
                     SoundManager.GetInstance.PlaySE("Gun_SE");
                     //発射
@@ -193,7 +193,7 @@ public class Shooter : MonoBehaviour
                 {
                     InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
                     //射撃ボタンが押されたら
-                    if ((Input.GetMouseButtonDown(1) || padState.Triggers.Left >= 0.8f) && pushLTrigger == false)
+                    if ((Input.GetMouseButtonDown(1) || padState.Triggers.Right >= 0.8f) && pushLTrigger == false)
                     {
                         if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
 
