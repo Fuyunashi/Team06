@@ -46,7 +46,7 @@ public class TutorialControll : MonoBehaviour
     /// <summary>
     /// シーンを移行する際に状態管理のフラグ
     /// </summary>
-    bool changeSceneFrag { get; set; }
+    public  bool changeSceneFrag { get; set; }
     /// <summary>
     /// プレイヤーが死亡したかの判断を煽るフラグ
     /// </summary>
