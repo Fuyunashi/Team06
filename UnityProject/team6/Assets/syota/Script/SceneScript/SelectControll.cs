@@ -83,7 +83,8 @@ public class SelectControll : MonoBehaviour
             {
                 Application.Quit();
             }
-            ChangeSceneFrag = true;
+            if ((int)stageInstructs.CurrentStage < 10)
+                ChangeSceneFrag = true;
         }
         if (ChangeSceneFrag)
         {

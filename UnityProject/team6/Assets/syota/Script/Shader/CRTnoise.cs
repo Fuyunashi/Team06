@@ -168,7 +168,7 @@ public class CRTnoise : MonoBehaviour
                 //タイトルシーンで使う
                 case CameraName.TitleCamera: TitleCameraNoise(); break;
                 //セレクトシーンのタイトル画面を写すTV
-                case CameraName.TitleRoomCamera: NonSelectCamera(); break;
+                case CameraName.TitleRoomCamera: BeforSatgeCamera(); break;
                 //タイトルシーンで使う
                 case CameraName.PlayCamera: TitleCameraNoise(); break;
             }
@@ -187,8 +187,11 @@ public class CRTnoise : MonoBehaviour
         {
             //選ばれていないステージの場合ノイズの、Shaderをかけてあげる
             CRTFlag = true;
+            if ((int)nextStage >= 10)
+                NonSelectCameraKey();
             //ノイズ値はランダム指定
-            NonSelectCamera();
+            else
+                NonSelectCamera();
         }
 
         //Debug.Log("風ラグ：" + CRTFlag);
@@ -261,7 +264,45 @@ public class CRTnoise : MonoBehaviour
         //NoiseTime += Time.deltaTime;
         ScanLineSpeed = 10;
     }
+    private void NonSelectCameraKey()
+    {
+        //Debug.Log("シーンはこれ：" + cameraName);
+        surveillanceCameraOn = 1;
+        if (NoiseTime % 30 == 0)
+        {
+            NoiseX = UnityEngine.Random.Range(0.0f, 0.1f);
+            ScanLineTail = 0;
+            NoiseTime = 0;
+        }
+        else if (NoiseTime < 10)
+        {
+            ScanLineTail = UnityEngine.Random.Range(.0f, 0.3f);
+            NoiseX = 0;
+        }
+        if (NoiseTime % 20 == 0)
+        {
+            ScanLineTail = 2;
+            sinNoiseScale = UnityEngine.Random.Range(.0f, 0.5f);
+        }
+        //NoiseTime += Time.deltaTime;
+        ScanLineSpeed = 10;
+    }
 
+    private void BeforSatgeCamera()
+    {
+        //Debug.Log("シーンはこれ：" + cameraName);
+        if (NoiseTime <= 1.3)
+        {
+            ScanLineTail = UnityEngine.Random.Range(.0f, 2.0f);
+            NoiseX = UnityEngine.Random.Range(0.0f, 1.0f);
+            NoiseTime += Time.deltaTime;
+            Debug.Log("のいずのたいむ：" + NoiseTime);
+        }
+        else
+        {
+            NonSelectCamera();
+        }
+    }
     /// <summary>
     /// ノイズをかけないためすべての値を初期化
     /// </summary>
