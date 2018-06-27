@@ -137,7 +137,7 @@ public class TutorialControll : MonoBehaviour
                 //キャンバスを最初は消しておく
                 foreach (var image in PouseRogo)
                     image.enabled = false;
-                PouseRogo[0].transform.position = new Vector3(-1000, 0, 0);
+                //PouseRogo[0].transform.position = new Vector3(-1000, 0, 0);
                 switch (pouseSelectIndex)
                 {
                     //最初からやり直す

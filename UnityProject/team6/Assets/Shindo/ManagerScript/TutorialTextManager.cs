@@ -14,6 +14,9 @@ public class TutorialTextManager : MonoBehaviour {
     [SerializeField]
     private Image[] tutorialImages_;
 
+    [SerializeField]
+    private Image[] controllerGuide_;
+
     tutorialMoveObjGet moveObjget_;
     SceneControll scene_;
     KeyRestriction key_;
@@ -51,6 +54,10 @@ public class TutorialTextManager : MonoBehaviour {
         {
             //Debug.Log("消しました");
             tutorial_2_text[i].enabled = false;
+        }
+        for(int i = 0; i < controllerGuide_.Length; i++)
+        {
+            controllerGuide_[i].enabled = false;
         }
 
         //スクリプト読み込み
@@ -90,9 +97,22 @@ public class TutorialTextManager : MonoBehaviour {
             }
             
         }
+
+        if (scene_.PuseFrag)
+        {
+            tutorial_1_text[textCount_].enabled = false;
+            tutorial_2_text[textCount_].enabled = false;
+            tutorialImages_[0].enabled = false;
+            tutorialImages_[1].enabled = false;
+            controllerGuide_[0].enabled = false;
+            controllerGuide_[1].enabled = false;
+            controllerGuide_[2].enabled = false;
+            controllerGuide_[3].enabled = false;
+        }
         
 
         Debug.Log(player_.isStop_);
+        Debug.Log(scene_.PuseFrag);
         //Debug.Log(textCount_);
         //Debug.Log(key_);
         //Debug.Log(tutorial_1_text.Length);
@@ -171,6 +191,10 @@ public class TutorialTextManager : MonoBehaviour {
         {
             player_.isStop_ = true;
         }
+        else if(textCount_ == 6)
+        {
+            player_.isStop_ = true;
+        }
         else if(textCount_ == 7)
         {
             player_.isStop_ = false;
@@ -188,29 +212,37 @@ public class TutorialTextManager : MonoBehaviour {
             if (shooter_.GetAxisType() != "Z")
             {
                 key_.currentUseKey = UseKey.RightShoulder;
+                controllerGuide_[3].enabled = true;
+                controllerGuide_[2].enabled = false;
             }
             else if(shooter_.GetAxisType() == "Z")
             {
                 isAxisX = true;
+                controllerGuide_[2].enabled = true;
+                controllerGuide_[3].enabled = false;
                 key_.currentUseKey = UseKey.TriggersRight;
             }
             else
             {
                 isAxisX = false;
+                controllerGuide_[3].enabled = true;
+                controllerGuide_[2].enabled = false;
             }
                 
             if (isAxisX && shooter_.GetTargetObj() == moveObjget_.tutorial1_moveObj_1)
             {
+                controllerGuide_[3].enabled = false;
                 Debug.Log("来てます");
                 player_.isStop_ = true;
                 isAxisX = false;
                 textCount_ += 1;
             }
-            //Debug.Log(shooter_.GetAxisType());
+            
         }
         else if (textCount_ == 9)
         {
             player_.isStop_ = true;
+            controllerGuide_[2].enabled = false;
         }
 
 
@@ -265,13 +297,20 @@ public class TutorialTextManager : MonoBehaviour {
                     tutorial_1_text[2].enabled = true; break;
             case 3:
                     tutorial_1_text[2].enabled = false;
-                    tutorial_1_text[3].enabled = true; break;
+                    tutorial_1_text[3].enabled = true;
+                    controllerGuide_[0].enabled = true;
+                    break;
             case 4:
                     tutorial_1_text[3].enabled = false;
-                    tutorial_1_text[4].enabled = true; break;
+                    tutorial_1_text[4].enabled = true;
+                    controllerGuide_[0].enabled = false;
+                    controllerGuide_[2].enabled = true;
+                    break;
             case 5:
                     tutorial_1_text[4].enabled = false;
-                    tutorial_1_text[5].enabled = true; break;
+                    tutorial_1_text[5].enabled = true;
+                    controllerGuide_[2].enabled = false;
+                     break;
             case 6:
                     tutorial_1_text[5].enabled = false;
                     tutorial_1_text[6].enabled = true; break;
@@ -304,16 +343,24 @@ public class TutorialTextManager : MonoBehaviour {
                 tutorial_2_text[0].enabled = true; break;
             case 1:      
                 tutorial_2_text[0].enabled = false;
-                tutorial_2_text[1].enabled = true; break;
+                tutorial_2_text[1].enabled = true;
+                controllerGuide_[1].enabled = true;
+                break;
             case 2:      
                 tutorial_2_text[1].enabled = false;
-                tutorial_2_text[2].enabled = true; break;
+                tutorial_2_text[2].enabled = true;
+                controllerGuide_[1].enabled = false;
+                break;
             case 3:      
                 tutorial_2_text[2].enabled = false;
-                tutorial_2_text[3].enabled = true; break;
+                tutorial_2_text[3].enabled = true;
+                controllerGuide_[3].enabled = true;
+                break;
             case 4:      
                 tutorial_2_text[3].enabled = false;
-                tutorial_2_text[4].enabled = true; break;
+                tutorial_2_text[4].enabled = true;
+                controllerGuide_[3].enabled = false;
+                break;
             case 5:      
                 tutorial_2_text[4].enabled = false;
                 tutorial_2_text[5].enabled = true; break;

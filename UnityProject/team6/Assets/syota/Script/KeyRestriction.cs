@@ -38,9 +38,7 @@ public class KeyRestriction : MonoBehaviour
         }
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
-
-
-
+        
     }
     public void Restriction()
     {
@@ -55,12 +53,12 @@ public class KeyRestriction : MonoBehaviour
 
 
         //切り替えボタン
-        if (padState_.Buttons.RightShoulder == ButtonState.Released && padState_.Buttons.RightShoulder == ButtonState.Pressed)
+        if (prevState_.Buttons.RightShoulder == ButtonState.Released && padState_.Buttons.RightShoulder == ButtonState.Pressed)
             if (currentUseKey != UseKey.RightShoulder) return;
 
 
         //チェンジ
-        if (padState_.Buttons.LeftShoulder == ButtonState.Released && padState_.Buttons.LeftShoulder == ButtonState.Pressed)
+        if (prevState_.Buttons.LeftShoulder == ButtonState.Released && padState_.Buttons.LeftShoulder == ButtonState.Pressed)
             if (currentUseKey != UseKey.LeftShoulder) return;
     }
 
