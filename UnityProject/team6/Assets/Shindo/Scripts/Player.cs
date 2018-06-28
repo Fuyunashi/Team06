@@ -254,12 +254,13 @@ public class Player : MonoBehaviour
     void isGoalFlag()
     {
         RaycastHit hit;
-        if (Physics.Raycast(camera_.transform.position, camera_.transform.forward, out hit, rayRange_))
+        if (Physics.Raycast(camera_.transform.position, camera_.transform.forward, out hit, 1.5f))
         {
-
+            
+            //Debug.Log(hit.collider.gameObject);
             if (hit.collider.CompareTag("GoleObject") || hit.collider.CompareTag("GoalObject"))
             {
-
+              
                 if (SceneManager.GetActiveScene().name == SceneName.PlayScene.ToString())
                 {
                     playControll_.stageClearFrag = true;
@@ -275,6 +276,7 @@ public class Player : MonoBehaviour
             }
 
         }
+        //Debug.DrawRay(camera_.transform.position, camera_.transform.forward * rayRange_,Color.red);
 
     }
 
