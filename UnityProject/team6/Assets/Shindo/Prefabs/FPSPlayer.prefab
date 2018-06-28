@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 54890988156023184}
   - component: {fileID: 136097316524439758}
   - component: {fileID: 114006895528318466}
+  - component: {fileID: 114631801444297914}
   m_Layer: 8
   m_Name: FPSPlayer
   m_TagString: Player
@@ -79,7 +80,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942858018097396}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -98,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a549b5ccaa811f44a28875061c330da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed_: 10
-  sideSpeed_: 9
+  forwardSpeed_: 5
+  sideSpeed_: 3
   isGround_: 0
   charaRay_: {fileID: 4030830429550446}
   rayRange_: 0.3
@@ -109,6 +110,18 @@ MonoBehaviour:
   Gravity_: 0
   randomRange_: 3
   camera_: {fileID: 0}
+--- !u!114 &114631801444297914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942858018097396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae0962d7c92ad546a42d70da9606174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentUseKey: 4
 --- !u!114 &114756877396320634
 MonoBehaviour:
   m_ObjectHideFlags: 1

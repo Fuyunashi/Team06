@@ -156,7 +156,6 @@ public class Player : MonoBehaviour
             targetVelocity = -camera_.transform.right * sideSpeed_;
         }
         
-
         //移動
         if (targetVelocity.magnitude > 0.01)
         {
@@ -167,7 +166,7 @@ public class Player : MonoBehaviour
         else
         {
             //初期化
-            targetVelocity = Vector3.zero;
+            targetVelocity = new Vector3(0, targetVelocity.y, 0);
             rb_.velocity = new Vector3(0, rb_.velocity.y, 0);
         }
 
@@ -177,10 +176,13 @@ public class Player : MonoBehaviour
             //Debug.Log("ジャンプしてます");
             SoundManager.GetInstance.PlaySE("Janp_SE");
             rb_.velocity = new Vector3(0, jumpPower_, 0);
+            //totalFallTime_ = 0.0f;
             isGround_ = false;
-            //isJump_ = true;
-
+        
         }
+
+        //totalFallTime_ = Time.deltaTime;
+        //rb_.velocity = Physics.gravity;
         
     }
 
@@ -278,7 +280,7 @@ public class Player : MonoBehaviour
 
     public void Move(Vector3 moveVelocity)
     {
-        rb_.velocity = new Vector3(moveVelocity.x, 0.0f/* + rb_.velocity.y*/, moveVelocity.z);
+        rb_.velocity = new Vector3(moveVelocity.x,  0.0f + rb_.velocity.y, moveVelocity.z);
     }
     
 }
