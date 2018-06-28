@@ -124,7 +124,7 @@ public class TutorialTextManager : MonoBehaviour {
     {
         if (scene_.CurrentStage == NextStage.Tutrial1 && isTextEnable_ &&  !tutorialcontroll_.changeSceneFrag)
         {
-                
+            key_.currentUseKey = UseKey.TriggersLeft;
             tutorialImages_[0].enabled = true;
             Tutorial_1_TextMng();
             Tutorial1KeyContoroll();
@@ -167,14 +167,14 @@ public class TutorialTextManager : MonoBehaviour {
         if (textCount_ == 3)
         {
             player_.isStop_ = false;
-            key_.currentUseKey = UseKey.None;
+            //key_.currentUseKey = UseKey.None;
             if(shooter_.GetRayObj() == moveObjget_.tutorial1_moveObj_3)
             {
                 key_.currentUseKey = UseKey.TriggersLeft;
                 if (shooter_.GetIsShot())
                 {
                     player_.isStop_ = true;
-                    key_.currentUseKey = UseKey.None;
+                    //key_.currentUseKey = UseKey.None;
                     textCount_ += 1;
                 }
 
@@ -184,14 +184,14 @@ public class TutorialTextManager : MonoBehaviour {
         else if(textCount_ == 4)
         {
             player_.isStop_ = false;
-            key_.currentUseKey = UseKey.None;
+            //key_.currentUseKey = UseKey.None;
             if(shooter_.GetRayObj() == moveObjget_.tutorial1_moveObj_2)
             {
                 key_.currentUseKey = UseKey.TriggersRight;
                 if (shooter_.GetIsShot())
                 {
                     player_.isStop_ = true;
-                    key_.currentUseKey = UseKey.None;
+                    //key_.currentUseKey = UseKey.None;
                     textCount_ += 1;
                 }
             }
@@ -268,6 +268,7 @@ public class TutorialTextManager : MonoBehaviour {
         else if(textCount_ == 10)
         {
             player_.isStop_ = true;
+            key_.currentUseKey = UseKey.None;
         }
 
 
