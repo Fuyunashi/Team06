@@ -216,9 +216,10 @@ public class Player : MonoBehaviour
         //死亡判定用
         if (!isGround_)
         {
-            if (Vector3.Distance(transform.position, fallPos_) >= 4.5f)
+
+            if (Mathf.Abs(fallPos_.y - transform.position.y) >= 4.5f)
             {
-                Debug.Log("通った2");
+                //Debug.Log("通った2");
                 return true;
             }
         }
@@ -260,7 +261,7 @@ public class Player : MonoBehaviour
     void isGoalFlag()
     {
         RaycastHit hit;
-        if (Physics.Raycast(camera_.transform.position, camera_.transform.forward, out hit, 1.5f))
+        if (Physics.Raycast(camera_.transform.position, camera_.transform.forward, out hit, 1f))
         {
 
             //Debug.Log(hit.collider.gameObject);
