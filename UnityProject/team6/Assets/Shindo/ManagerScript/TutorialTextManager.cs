@@ -17,6 +17,9 @@ public class TutorialTextManager : MonoBehaviour {
     [SerializeField]
     private Image[] controllerGuide_;
 
+    [SerializeField]
+    private Image ButtonImage_;
+
     tutorialMoveObjGet moveObjget_;
     SceneControll scene_;
     KeyRestriction key_;
@@ -59,6 +62,7 @@ public class TutorialTextManager : MonoBehaviour {
         {
             controllerGuide_[i].enabled = false;
         }
+        ButtonImage_.enabled = false;
 
         //スクリプト読み込み
         scene_ = GameObject.Find("SceneController").GetComponent<SceneControll>();
@@ -98,6 +102,15 @@ public class TutorialTextManager : MonoBehaviour {
             
         }
 
+        if (player_.isStop_ && (scene_.CurrentStage == NextStage.Tutrial1 || scene_.CurrentStage == NextStage.Tutrial2))
+        {
+            ButtonImage_.enabled = true;
+        }
+        else
+        {
+            ButtonImage_.enabled = false;
+        }
+
         if (scene_.PuseFrag || tutorialcontroll_.changeSceneFrag)
         {
             tutorial_1_text[textCount_].enabled = false;
@@ -108,6 +121,7 @@ public class TutorialTextManager : MonoBehaviour {
             controllerGuide_[1].enabled = false;
             controllerGuide_[2].enabled = false;
             controllerGuide_[3].enabled = false;
+            ButtonImage_.enabled = false;
         }
         
 
