@@ -82,6 +82,9 @@ public class Shooter : MonoBehaviour
     private Material estimateMat;
     private GameObject m_estimateObj;
 
+    private KeyRestriction key_;
+    private bool isShot;
+
     // Use this for initialization
     void Start()
     {
@@ -106,6 +109,7 @@ public class Shooter : MonoBehaviour
         m_estimateObj = null;
 
         layerMask = ~(1 << 9 | 1 << 8);
+        key_ = GameObject.Find("FPSPlayer").GetComponent<KeyRestriction>();
     }
 
     // Update is called once per frame
@@ -118,6 +122,10 @@ public class Shooter : MonoBehaviour
         }
         prevState = padState;
         padState = GamePad.GetState(playerIndex);
+
+        if (!key_.Restriction()) return;
+
+        isShot = false;
         //軸切り替えボタンが押されたら
         if (Input.GetKeyDown(KeyCode.E) || (prevState.Buttons.RightShoulder == ButtonState.Released && padState.Buttons.RightShoulder == ButtonState.Pressed))
         {
@@ -480,6 +488,7 @@ public class Shooter : MonoBehaviour
     /// <param name="hitObject">当たったオブジェクト</param>
     public void GetShot(GameObject hitObject)
     {
+        isShot = true;
         //取得するオブジェクトと転置するオブジェクトが動いていなければ
         if (isTargetMove == false)
         {
@@ -519,6 +528,7 @@ public class Shooter : MonoBehaviour
 
     public void SetShot(GameObject hitObject)
     {
+        isShot = true;
         //取得するオブジェクトと転置するオブジェクトが動いていなければ
         if (isTargetMove == false)
         {
@@ -641,14 +651,9 @@ public class Shooter : MonoBehaviour
 
     }
 
-    public GameObject GetOriginObj()
+    public GameObject GetRayObj()
     {
-        return originObject;
-    }
-
-    public GameObject GetTargetObj()
-    {
-        return targetObject;
+        return rayHitObj;
     }
 
     public string GetChangeType()
@@ -659,5 +664,10 @@ public class Shooter : MonoBehaviour
     public string GetAxisType()
     {
         return axisType.ToString();
+    }
+
+    public bool GetIsShot()
+    {
+        return isShot;
     }
 }

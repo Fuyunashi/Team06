@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     private Rigidbody rb_;
 
     private float distance_;
-    private float fallPos_;
+    private Vector3 fallPos_;
     [SerializeField]
     private float deathDistance_;
     [SerializeField]
@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     private int randomRange_ = 3;
     private bool isJump_;
     private float LerpTimer_;
+    private bool inAir = false;
 
     public Camera camera_;
     private bool isMaxHeight_;
@@ -53,7 +54,7 @@ public class Player : MonoBehaviour
     GameObject obj_playControll_;
     TutorialControll tutorialControll_;
     GameObject obj_tutorialControll_;
-    
+
     //Xinput関連
     private bool playerInputSet_ = false;
     private PlayerIndex playerIndex_;
@@ -88,8 +89,8 @@ public class Player : MonoBehaviour
         isJump_ = false;
         lastStepTime_ = DateTime.Now;
         isMaxHeight_ = false;
-        fallPos_ = transform.position.y;
-        
+        //fallPos_ = transform.position.y;
+
     }
 
     // Update is called once per frame
@@ -110,9 +111,9 @@ public class Player : MonoBehaviour
         isGround();
         isGoalFlag();
         isDead();
-        
+
         if (isJump_ && isGround_) SoundManager.GetInstance.PlaySE("Landing_SE");
-        
+
         //死亡したら
         if (isDead())
         {
@@ -132,42 +133,41 @@ public class Player : MonoBehaviour
     {
         Vector3 targetVelocity = Vector3.zero;
         if (isStop_) return;
-        
+
         if (padState_.ThumbSticks.Left.Y >= 0.8f)
         {
             //前
             targetVelocity = camera_.transform.forward * forwardSpeed_;
-            
+
         }
-        if(padState_.ThumbSticks.Left.Y <= -0.8f)
+        if (padState_.ThumbSticks.Left.Y <= -0.8f)
         {
             //後
             targetVelocity = -camera_.transform.forward * forwardSpeed_;
-            
+
         }
-        if(padState_.ThumbSticks.Left.X >= 0.8f)
+        if (padState_.ThumbSticks.Left.X >= 0.8f)
         {
             //右
             targetVelocity = camera_.transform.right * sideSpeed_;
         }
-        if(padState_.ThumbSticks.Left.X <= -0.8f)
+        if (padState_.ThumbSticks.Left.X <= -0.8f)
         {
             //左
             targetVelocity = -camera_.transform.right * sideSpeed_;
         }
-        
 
         //移動
         if (targetVelocity.magnitude > 0.01)
         {
             FootSound();
-            
+
             Move(targetVelocity);
         }
         else
         {
             //初期化
-            targetVelocity = Vector3.zero;
+            targetVelocity = new Vector3(0, targetVelocity.y, 0);
             rb_.velocity = new Vector3(0, rb_.velocity.y, 0);
         }
 
@@ -177,11 +177,14 @@ public class Player : MonoBehaviour
             //Debug.Log("ジャンプしてます");
             SoundManager.GetInstance.PlaySE("Janp_SE");
             rb_.velocity = new Vector3(0, jumpPower_, 0);
+            //totalFallTime_ = 0.0f;
             isGround_ = false;
-            //isJump_ = true;
 
         }
-        
+
+        //totalFallTime_ = Time.deltaTime;
+        //rb_.velocity = Physics.gravity;
+
     }
 
     void isGround()
@@ -192,25 +195,30 @@ public class Player : MonoBehaviour
             if (hit.collider.CompareTag("stage") || hit.collider.CompareTag("ChangeObject") || hit.collider.CompareTag("GravityObj"))
             {
                 isGround_ = true;
+                inAir = false;
             }
         }
         else
         {
             isGround_ = false;
+            if (inAir == false)
+            {
+                fallPos_ = transform.position;
+                inAir = true;
+            }
         }
         //Debug.Log("接地判定" + isGround_);
     }
 
     public bool isDead()
     {
+
         //死亡判定用
         if (!isGround_)
         {
-            distance_ = fallPos_ - transform.position.y;
-
-            if (distance_ >= deathDistance_)
+            if (Vector3.Distance(transform.position, fallPos_) >= 4.5f)
             {
-                //Debug.Log("死亡しました");
+                Debug.Log("通った2");
                 return true;
             }
         }
@@ -252,9 +260,10 @@ public class Player : MonoBehaviour
     void isGoalFlag()
     {
         RaycastHit hit;
-        if (Physics.Raycast(camera_.transform.position, camera_.transform.forward, out hit, rayRange_))
+        if (Physics.Raycast(camera_.transform.position, camera_.transform.forward, out hit, 1.5f))
         {
 
+            //Debug.Log(hit.collider.gameObject);
             if (hit.collider.CompareTag("GoleObject") || hit.collider.CompareTag("GoalObject"))
             {
 
@@ -273,12 +282,13 @@ public class Player : MonoBehaviour
             }
 
         }
+        //Debug.DrawRay(camera_.transform.position, camera_.transform.forward * rayRange_,Color.red);
 
     }
 
     public void Move(Vector3 moveVelocity)
     {
-        rb_.velocity = new Vector3(moveVelocity.x, 0.0f/* + rb_.velocity.y*/, moveVelocity.z);
+        rb_.velocity = new Vector3(moveVelocity.x, 0.0f + rb_.velocity.y, moveVelocity.z);
     }
-    
+
 }

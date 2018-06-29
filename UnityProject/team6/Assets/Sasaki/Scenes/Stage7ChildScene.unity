@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -754,7 +754,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4029346504649674, guid: 4ab22cd800e970441b9654251bdbf299, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.0437422
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4029346504649674, guid: 4ab22cd800e970441b9654251bdbf299, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -1567,7 +1567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -2217,7 +2217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -2463,7 +2463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -3555,7 +3555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -5167,7 +5167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}

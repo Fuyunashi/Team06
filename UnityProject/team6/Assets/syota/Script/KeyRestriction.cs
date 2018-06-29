@@ -9,6 +9,7 @@ public enum UseKey
     TriggersLeft,
     RightShoulder,
     LeftShoulder,
+    AllKey,
     None,
 }
 public class KeyRestriction : MonoBehaviour
@@ -38,30 +39,41 @@ public class KeyRestriction : MonoBehaviour
         }
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
-
-
-
+        
     }
-    public void Restriction()
+    public bool Restriction()
     {
+        if(currentUseKey == UseKey.None)
+        {
+            return true;
+        }
         //セット
         if (padState_.Triggers.Right >= 0.8f)
-            if (currentUseKey != UseKey.TriggersRight) return;
+        {
+            if (currentUseKey != UseKey.TriggersRight) return false;
+        }
 
 
         //ゲット
         if (padState_.Triggers.Left >= 0.8f)
-            if (currentUseKey != UseKey.TriggersLeft) return;
+        {
+            if (currentUseKey != UseKey.TriggersLeft) return false;
+        }
 
 
         //切り替えボタン
-        if (padState_.Buttons.RightShoulder == ButtonState.Released && padState_.Buttons.RightShoulder == ButtonState.Pressed)
-            if (currentUseKey != UseKey.RightShoulder) return;
-
+        if (prevState_.Buttons.RightShoulder == ButtonState.Released && padState_.Buttons.RightShoulder == ButtonState.Pressed)
+        {
+            if (currentUseKey != UseKey.RightShoulder) return  false;
+        }
 
         //チェンジ
-        if (padState_.Buttons.LeftShoulder == ButtonState.Released && padState_.Buttons.LeftShoulder == ButtonState.Pressed)
-            if (currentUseKey != UseKey.LeftShoulder) return;
+        if (prevState_.Buttons.LeftShoulder == ButtonState.Released && padState_.Buttons.LeftShoulder == ButtonState.Pressed)
+        {
+            if (currentUseKey != UseKey.LeftShoulder) return false;
+        }
+        
+        return true;
     }
 
 

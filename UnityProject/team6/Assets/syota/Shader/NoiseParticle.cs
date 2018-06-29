@@ -83,7 +83,7 @@ public class NoiseParticle : MonoBehaviour
             case PerformanceMode.Gun:
                 if (gun_frag)
                 {
-                    Debug.Log("がん消えろ");
+
                     LeanTween.alpha(title, 1.0f, 1);
                     LeanTween.alpha(gun_model[0], 1.0f, 1);
                     LeanTween.alpha(gun_model[1], 1.0f, 1); gun_frag = false;
