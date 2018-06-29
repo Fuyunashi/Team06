@@ -94,11 +94,13 @@ public class SceneControll : MonoBehaviour
         {
             SceneManager.LoadScene(MainScene[SceneName.PlayScene], LoadSceneMode.Single);
             NextScene = SceneName.PlayScene;
+            Time.timeScale = 1;
         }
         if (scene == SceneName.TutorialCurrentScene)
         {
             SceneManager.LoadScene(MainScene[SceneName.TutorialScene], LoadSceneMode.Single);
             NextScene = SceneName.TutorialScene;
+            Time.timeScale = 1;
         }
 
         if (scene != SceneName.PlayCurrentScene && scene != SceneName.TutorialCurrentScene)
@@ -109,6 +111,7 @@ public class SceneControll : MonoBehaviour
                 SceneManager.LoadScene(MainScene[scene], LoadSceneMode.Single);
                 //シーンが切り替わったら現在のシーンを更新
                 CurrentScene = scene;
+                Time.timeScale = 1;
 
                 //Debug.Log("シーン切替時：次のシーンだお：" + scene);
             }
