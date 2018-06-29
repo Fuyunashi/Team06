@@ -261,7 +261,7 @@ public class Player : MonoBehaviour
     void isGoalFlag()
     {
         RaycastHit hit;
-        if (Physics.Raycast(camera_.transform.position, camera_.transform.forward, out hit, 1.5f))
+        if (Physics.Raycast(camera_.transform.position, camera_.transform.forward, out hit, 1f))
         {
 
             //Debug.Log(hit.collider.gameObject);
