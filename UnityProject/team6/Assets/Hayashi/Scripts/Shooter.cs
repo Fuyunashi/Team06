@@ -351,7 +351,6 @@ public class Shooter : MonoBehaviour
     {
         if (m_estimateObj == null)
         {
-            Debug.Log("通った");
             switch (changeType)
             {
                 case ChangeType.Position:
@@ -413,6 +412,13 @@ public class Shooter : MonoBehaviour
             }
             m_estimateObj.transform.GetChild(0).localPosition = obj.transform.GetChild(0).localPosition;
             m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = estimateMat;
+            if (m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Outline>() == null)
+            {
+                m_estimateObj.transform.GetChild(0).GetChild(0).gameObject.AddComponent<Outline>();
+                m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Outline>().OutlineColor = Color.green;
+                m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Outline>().OutlineWidth = 10;
+            }
+
             Destroy(m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<ObjectController>());
             Destroy(m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>());
             if (m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<BoxCollider>())
@@ -533,7 +539,7 @@ public class Shooter : MonoBehaviour
         if (isTargetMove == false)
         {
             //取得するオブジェクトが空でなければ
-            if (targetObject == null)
+            if (targetObject == null && targetObject != originObject)
             {
                 //転置するオブジェクトに当たったオブジェクトを格納                   
                 targetObject = hitObject.transform.gameObject;
