@@ -46,7 +46,7 @@ public class TutorialControll : MonoBehaviour
     /// <summary>
     /// シーンを移行する際に状態管理のフラグ
     /// </summary>
-    public  bool changeSceneFrag { get; set; }
+    public bool changeSceneFrag { get; set; }
     /// <summary>
     /// プレイヤーが死亡したかの判断を煽るフラグ
     /// </summary>
@@ -103,7 +103,7 @@ public class TutorialControll : MonoBehaviour
         //インプット関連
 
 
-        if (!sceneControll.PuseFrag)
+        if (!sceneControll.PuseFrag && outBlack.GetComponent<Image>().color.a <= 0)
             PuseDisposal();
         if (Input.GetKeyDown(KeyCode.L)) stageClearFrag = true;
 
