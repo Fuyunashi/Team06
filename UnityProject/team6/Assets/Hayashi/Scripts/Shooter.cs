@@ -55,7 +55,7 @@ public class Shooter : MonoBehaviour
     private GameObject objValPref;
     private GameObject objVal_ray;
     private GameObject objVal_origin;
-    private GameObject objVal_originCopy;
+    private GameObject m_objVal_origin;
     private GameObject objVal_target;
     [SerializeField]
     private GameObject drawerCameraPref;
@@ -413,6 +413,12 @@ public class Shooter : MonoBehaviour
             }
             m_estimateObj.transform.GetChild(0).localPosition = obj.transform.GetChild(0).localPosition;
             m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = estimateMat;
+            if (m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Outline>() == null)
+            {
+                m_estimateObj.transform.GetChild(0).GetChild(0).gameObject.AddComponent<Outline>();
+                m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Outline>().OutlineWidth = 10;
+                m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Outline>().OutlineColor = Color.green;
+            }
             Destroy(m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<ObjectController>());
             Destroy(m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>());
             if (m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<BoxCollider>())
@@ -533,7 +539,7 @@ public class Shooter : MonoBehaviour
         if (isTargetMove == false)
         {
             //取得するオブジェクトが空でなければ
-            if (targetObject == null)
+            if (targetObject == null && hitObject != originObject)
             {
                 //転置するオブジェクトに当たったオブジェクトを格納                   
                 targetObject = hitObject.transform.gameObject;
@@ -627,21 +633,21 @@ public class Shooter : MonoBehaviour
     //コピー時の演出アニメーション処理
     private void SettingAnimation(GameObject target)
     {
-        objVal_originCopy = Instantiate(objVal_origin, objVal_origin.transform.position, objVal_origin.transform.rotation);
+        m_objVal_origin = Instantiate(objVal_origin, objVal_origin.transform.position, objVal_origin.transform.rotation);
         m_drawerCamera = Instantiate(drawerCameraPref, this.transform.position + new Vector3(0, 1f, 0), GameObject.FindGameObjectWithTag("PlayCamera").transform.rotation);
-        m_drawerCamera.GetComponent<DrawerCamera>().SetDrawerObj(objVal_originCopy);
+        m_drawerCamera.GetComponent<DrawerCamera>().SetDrawerObj(m_objVal_origin);
 
         LeanTween.delayedCall(1.0f, () =>
         {
-            objVal_originCopy.GetComponent<ValueDrawerController>().IsTween(true);
-            LeanTween.move(objVal_originCopy, target.transform.parent.position + new Vector3(0, target.transform.localScale.y / 2 + 1.0f, 0), 1.0f).setOnComplete(() =>
+            m_objVal_origin.GetComponent<ValueDrawerController>().IsTween(true);
+            LeanTween.move(m_objVal_origin, target.transform.parent.position + new Vector3(0, target.transform.localScale.y / 2 + 1.0f, 0), 1.0f).setOnComplete(() =>
             {
-                LeanTween.scale(objVal_originCopy, new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
-                LeanTween.moveY(objVal_originCopy, objVal_originCopy.transform.position.y - 1.0f, 0.5f).setOnComplete(() =>
+                LeanTween.scale(m_objVal_origin, new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
+                LeanTween.moveY(m_objVal_origin, m_objVal_origin.transform.position.y - 1.0f, 0.5f).setOnComplete(() =>
                 {
                     m_drawerCamera.GetComponent<DrawerCamera>().TrackingEnd();
                     SoundManager.GetInstance.PlaySE("Move_SE");
-                    Destroy(objVal_originCopy);
+                    Destroy(m_objVal_origin);
                     //指定した変更する値の軸を切り替え
                     ChangeObjectAxis();
 
