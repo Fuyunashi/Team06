@@ -134,27 +134,27 @@ public class Player : MonoBehaviour
         Vector3 targetVelocity = Vector3.zero;
         if (isStop_) return;
 
-        if (padState_.ThumbSticks.Left.Y >= 0.8f)
+        if (padState_.ThumbSticks.Left.Y >= 0.3f)
         {
             //前
-            targetVelocity = camera_.transform.forward * forwardSpeed_;
+            targetVelocity = camera_.transform.forward * (padState_.ThumbSticks.Left.Y * forwardSpeed_);
 
         }
-        if (padState_.ThumbSticks.Left.Y <= -0.8f)
+        if (padState_.ThumbSticks.Left.Y <= -0.3f)
         {
             //後
-            targetVelocity = -camera_.transform.forward * forwardSpeed_;
+            targetVelocity = -camera_.transform.forward * (-padState_.ThumbSticks.Left.Y * forwardSpeed_);
 
         }
-        if (padState_.ThumbSticks.Left.X >= 0.8f)
+        if (padState_.ThumbSticks.Left.X >= 0.3f)
         {
             //右
-            targetVelocity = camera_.transform.right * sideSpeed_;
+            targetVelocity = camera_.transform.right * (padState_.ThumbSticks.Left.X * sideSpeed_);
         }
-        if (padState_.ThumbSticks.Left.X <= -0.8f)
+        if (padState_.ThumbSticks.Left.X <= -0.3f)
         {
             //左
-            targetVelocity = -camera_.transform.right * sideSpeed_;
+            targetVelocity = -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_);
         }
 
         //移動
