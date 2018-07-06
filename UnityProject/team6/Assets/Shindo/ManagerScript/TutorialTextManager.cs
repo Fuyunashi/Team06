@@ -408,7 +408,10 @@ public class TutorialTextManager : MonoBehaviour {
                 tutorial_2_text[5].enabled = false;
                 tutorial_2_text[6].enabled = true; break;
             case 7:
-                tutorial_2_text[6].enabled = false; break;
+                tutorial_2_text[6].enabled = false;
+                tutorial_2_text[7].enabled = true; break;
+            case 8:
+                tutorial_2_text[7].enabled = false; break;
         }
 
     }
