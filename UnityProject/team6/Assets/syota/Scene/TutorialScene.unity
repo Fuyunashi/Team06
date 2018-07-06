@@ -451,6 +451,11 @@ Prefab:
       propertyPath: m_CullingMask.m_Bits
       value: 4294965247
       objectReference: {fileID: 0}
+    - target: {fileID: 114271436155051350, guid: de0d6a8d663c91242abbb6b6cc5b4d03,
+        type: 2}
+      propertyPath: distance_
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114634125494973914, guid: de0d6a8d663c91242abbb6b6cc5b4d03, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: de0d6a8d663c91242abbb6b6cc5b4d03, type: 2}
@@ -992,6 +997,36 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114630244626252762, guid: 28e292fd56d5ed04ca5dbeab4e4b10f8,
+        type: 2}
+      propertyPath: m_Text
+      value: "\u8A66\u3057\u306B\u5DE6\u524D\u306E\u57CB\u307E\u3063\u3066\u308B\u30D6\u30ED\u30C3\u30AF\u306E\u60C5\u5831\u3092\u53D6\u5F97\u3057\u3066\u307F\u308D\n\u2015\u2015\u300ELT\u300F\u3060"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114136633067605242, guid: 28e292fd56d5ed04ca5dbeab4e4b10f8,
+        type: 2}
+      propertyPath: m_Text
+      value: "\u3088\u3057\u2015\u2015\n\u6B21\u306F\u53F3\u4E0A\u306E\u30D6\u30ED\u30C3\u30AF\u306B\u60C5\u5831\u3092\u5410\u304D\u51FA\u305B\u300ERT\u300F\u3060"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114553504919931838, guid: 28e292fd56d5ed04ca5dbeab4e4b10f8,
+        type: 2}
+      propertyPath: m_Text
+      value: "\u5F8C\u308D\u306B\u3042\u308B\u30D6\u30ED\u30C3\u30AF\u306B\u60C5\u5831\u3092\n\u300ERB\u300F\u3067Z\u8EF8\u3078\u5909\u66F4\u3060\n\u51FA\u6765\u305F\u3089\u300ERT\u300F\u3067\u79FB\u305B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114973579732236884, guid: 28e292fd56d5ed04ca5dbeab4e4b10f8,
+        type: 2}
+      propertyPath: m_Text
+      value: "\u305D\u308C\u3067\u3044\u3044\u3000\uFF65\uFF65\uFF65\uFF65\uFF65\uFF65\u3088\u304F\u3084\u3063\u305F\n\u3053\u308C\u3067\u300EZ\u8EF8\u306EPosition\u300F\u304C\u79FB\u3063\u305F\u3060\u308D\u3046"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114346991407607572, guid: 28e292fd56d5ed04ca5dbeab4e4b10f8,
+        type: 2}
+      propertyPath: m_Text
+      value: "\u307E\u305A\u306F\u53D6\u5F97\u3059\u308B\u30BF\u30A4\u30D7\u3092\u5207\u308A\u66FF\u3048\u308D\n\u2015\u2015\u300ELB\u300F\u3060"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114337263087141294, guid: 28e292fd56d5ed04ca5dbeab4e4b10f8,
+        type: 2}
+      propertyPath: m_Text
+      value: "\u6B21\u306B\u300ERB\u300F\u3067Y\u8EF8\u306B\u5909\u3048\u3066\u307F\u308D\n\u300EY\u8EF8\u300F\u3063\u3066\u306E\u306F\u2015\u2015\u9AD8\u3055\u3060"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28e292fd56d5ed04ca5dbeab4e4b10f8, type: 2}

@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(charaRay_.transform.position, 0.2f, -Vector3.up, out hit, rayRange_))
         {
-            if (hit.collider.CompareTag("stage") || hit.collider.CompareTag("ChangeObject") || hit.collider.CompareTag("GravityObj"))
+            if (hit.collider.CompareTag("stage") || hit.collider.CompareTag("ChangeObject") || hit.collider.CompareTag("GravityObj") || hit.collider.CompareTag("GravityObject"))
             {
                 isGround_ = true;
                 inAir = false;
