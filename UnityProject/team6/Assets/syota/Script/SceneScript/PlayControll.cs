@@ -112,7 +112,7 @@ public class PlayControll : MonoBehaviour
 
 
 
-        if (!sceneControll.PuseFrag)
+        if (!sceneControll.PuseFrag && outBlack.GetComponent<Image>().color.a <= 0)
             PuseDisposal();
         if (Input.GetKeyDown(KeyCode.L)) stageClearFrag = true;
 
