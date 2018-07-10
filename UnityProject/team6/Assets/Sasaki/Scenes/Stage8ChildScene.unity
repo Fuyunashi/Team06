@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -10909,7 +10909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -11032,7 +11032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -22249,7 +22249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -38388,7 +38388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -43160,7 +43160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}
@@ -43461,7 +43461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05582d09737d564aa06c3470b67ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 2
   basePosition: {x: 0, y: 0, z: 0}
   baseScale: {x: 0, y: 0, z: 0}
   shoter: {fileID: 0}

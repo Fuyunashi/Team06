@@ -24,7 +24,7 @@ public class DrawerCamera : MonoBehaviour
         {
             targetRotate = Quaternion.LookRotation(target.transform.position - this.transform.position);
             transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotate, 2.0f*Time.deltaTime);
-            transform.position = Vector3.Lerp(transform.position, target.transform.position + new Vector3(0, 0, -2f), 2.0f*Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, target.transform.position, 2.0f*Time.deltaTime);
         }
     }
 

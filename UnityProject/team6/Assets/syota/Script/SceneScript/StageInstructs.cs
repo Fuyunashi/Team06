@@ -34,10 +34,13 @@ public class StageInstructs : MonoBehaviour
     public MovingStage[] movingStage;
 
     public NextStage CurrentStage;
+    private SelectControll selectControll;
 
 
     void Start()
     {
+        selectControll = GameObject.Find("SelectControll").GetComponent<SelectControll>();
+
     }
 
     void Update()
@@ -51,7 +54,7 @@ public class StageInstructs : MonoBehaviour
         prevState_ = padState_;
         padState_ = GamePad.GetState(playerIndex_);
         //Xinput関連
-
+        if (selectControll.ChangeSceneFrag) return;
 
         //Debug.Log("次のシーン：" + CurrentStage);
         if (prevState_.DPad.Up == ButtonState.Released && padState_.DPad.Up == ButtonState.Pressed)
