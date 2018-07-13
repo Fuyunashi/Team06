@@ -689,6 +689,24 @@ Prefab:
       propertyPath: axisTex
       value: 
       objectReference: {fileID: 873138714}
+    - target: {fileID: 114549095055825894, guid: 431fbaa6c7e260048a2b740c776a5b81,
+        type: 2}
+      propertyPath: estimateArrowPref
+      value: 
+      objectReference: {fileID: 1703137426121370, guid: 0e65d0405b65fd846971dd18e611d7ac,
+        type: 2}
+    - target: {fileID: 114549095055825894, guid: 431fbaa6c7e260048a2b740c776a5b81,
+        type: 2}
+      propertyPath: estimatePositionArrowPref
+      value: 
+      objectReference: {fileID: 1703137426121370, guid: 0e65d0405b65fd846971dd18e611d7ac,
+        type: 2}
+    - target: {fileID: 114549095055825894, guid: 431fbaa6c7e260048a2b740c776a5b81,
+        type: 2}
+      propertyPath: estimateScaleArrowPref
+      value: 
+      objectReference: {fileID: 1346226339907998, guid: 0111fd2933d03794b8902a47342b1f53,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 431fbaa6c7e260048a2b740c776a5b81, type: 2}
   m_IsPrefabParent: 0

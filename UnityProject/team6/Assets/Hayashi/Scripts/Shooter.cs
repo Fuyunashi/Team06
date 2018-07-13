@@ -79,6 +79,11 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private Material estimateMat;
     private GameObject m_estimateObj;
+    [SerializeField]
+    private GameObject estimatePositionArrowPref;
+    [SerializeField]
+    private GameObject estimateScaleArrowPref;
+    private GameObject m_estimateArrow;
 
     private KeyRestriction key_;
     private bool isShot;
@@ -105,6 +110,7 @@ public class Shooter : MonoBehaviour
         pushLTrigger = false;
 
         m_estimateObj = null;
+        m_estimateArrow = null;
 
         layerMask = ~(1 << 9 | 1 << 8);
         key_ = GameObject.Find("FPSPlayer").GetComponent<KeyRestriction>();
@@ -133,6 +139,7 @@ public class Shooter : MonoBehaviour
             if (isRayHit == true && originObject != null)
             {
                 if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
+                if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
                 InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
             }
         }
@@ -145,6 +152,7 @@ public class Shooter : MonoBehaviour
             if (isRayHit == true && originObject != null)
             {
                 if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
+                if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
                 InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
             }
         }
@@ -202,7 +210,7 @@ public class Shooter : MonoBehaviour
                     if ((Input.GetMouseButtonDown(1) || padState.Triggers.Right >= 0.8f) && pushLTrigger == false)
                     {
                         if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
-
+                        if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
                         SoundManager.GetInstance.PlaySE("Gun_SE");
                         //発射
                         SetShot(rayHitObj);
@@ -215,6 +223,7 @@ public class Shooter : MonoBehaviour
             {
                 if (objVal_ray != null) Destroy(objVal_ray.gameObject);
                 if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
+                if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
                 isRayHit = false;
             }
             laserPointer.SetPosition(1, rayhit.point);
@@ -223,6 +232,7 @@ public class Shooter : MonoBehaviour
         {
             if (objVal_ray != null) Destroy(objVal_ray.gameObject);
             if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
+            if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
             isRayHit = false;
             laserPointer.SetPosition(1, ray.origin + ray.direction * rayDistance);
         }
@@ -360,6 +370,14 @@ public class Shooter : MonoBehaviour
                                                 obj.transform.position.y,
                                                 obj.transform.position.z
                                                 ), obj.transform.localRotation);
+                            if(originObject.transform.position.x >= obj.transform.position.x)
+                            {
+                                m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0,0,0));
+                            }
+                            else
+                            {
+                                m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0,180,0));
+                            }
                             break;
                         case AxisType.Y:
                             m_estimateObj = Instantiate(obj, new Vector3(
@@ -367,6 +385,14 @@ public class Shooter : MonoBehaviour
                                                originPositionValue.y,
                                                obj.transform.position.z
                                                ), obj.transform.localRotation);
+                            if (originObject.transform.position.y >= obj.transform.position.y)
+                            {
+                                m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0, 0, 90));
+                            }
+                            else
+                            {
+                                m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0, 0, -90));
+                            }
                             break;
                         case AxisType.Z:
                             m_estimateObj = Instantiate(obj, new Vector3(
@@ -374,6 +400,14 @@ public class Shooter : MonoBehaviour
                                                obj.transform.position.y,
                                                originPositionValue.z
                                                ), obj.transform.localRotation);
+                            if (originObject.transform.position.z >= obj.transform.position.z)
+                            {
+                                m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0, -90, 0));
+                            }
+                            else
+                            {
+                                m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0, 90, 0));
+                            }
                             break;
                     }
                     m_estimateObj.transform.localScale = new Vector3(
@@ -392,18 +426,21 @@ public class Shooter : MonoBehaviour
                                 originScaleValue.x,
                                 obj.transform.localScale.y,
                                 obj.transform.localScale.z);
+                            m_estimateArrow = Instantiate(estimateScaleArrowPref, obj.transform.position, Quaternion.Euler(0, 0, 0));
                             break;
                         case AxisType.Y:
                             m_estimateObj.transform.localScale = new Vector3(
                                obj.transform.localScale.x,
                                originScaleValue.y,
                                obj.transform.localScale.z);
+                            m_estimateArrow = Instantiate(estimateScaleArrowPref, obj.transform.position, Quaternion.Euler(0, 0, 90));
                             break;
                         case AxisType.Z:
                             m_estimateObj.transform.localScale = new Vector3(
                                 obj.transform.localScale.x,
                                 obj.transform.localScale.y,
                                 originScaleValue.z);
+                            m_estimateArrow = Instantiate(estimateScaleArrowPref, obj.transform.position, Quaternion.Euler(0, 90, 0));
                             break;
                     }
                     break;

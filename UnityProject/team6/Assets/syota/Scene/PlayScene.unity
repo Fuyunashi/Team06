@@ -552,6 +552,18 @@ Prefab:
       propertyPath: deathDistance_
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114756877396320634, guid: 7cd9967f2e9bad04bbe42c2a97348251,
+        type: 2}
+      propertyPath: estimatePositionArrowPref
+      value: 
+      objectReference: {fileID: 1703137426121370, guid: 0e65d0405b65fd846971dd18e611d7ac,
+        type: 2}
+    - target: {fileID: 114756877396320634, guid: 7cd9967f2e9bad04bbe42c2a97348251,
+        type: 2}
+      propertyPath: estimateScaleArrowPref
+      value: 
+      objectReference: {fileID: 1346226339907998, guid: 0111fd2933d03794b8902a47342b1f53,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7cd9967f2e9bad04bbe42c2a97348251, type: 2}
   m_IsPrefabParent: 0
