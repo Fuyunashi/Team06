@@ -73,7 +73,8 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private LineRenderer laserPointer;
     private int layerMask;
-    private GameObject rayHitObj;
+    private GameObject prevRayHitObj;
+    private GameObject currentRayHitObj;
     private bool isRayHit;
 
     [SerializeField]
@@ -136,11 +137,13 @@ public class Shooter : MonoBehaviour
             SoundManager.GetInstance.PlaySE("Change_SE");
             //軸の切り替え
             SwitchAxisType();
-            if (isRayHit == true && originObject != null)
-            {
-                if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
-                if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
-                InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
+            if (currentRayHitObj != null && originObject != null)
+            { 
+                Destroy(m_estimateObj.gameObject);
+                Destroy(m_estimateArrow.gameObject);
+                m_estimateObj = null;
+                m_estimateArrow = null;
+                InstantEstimateObject(currentRayHitObj.transform.parent.parent.gameObject);
             }
         }
         //値切り替えボタンが押されたら
@@ -149,11 +152,13 @@ public class Shooter : MonoBehaviour
             SoundManager.GetInstance.PlaySE("Change_SE");
             //値の切り替え
             SwitchChangeType();
-            if (isRayHit == true && originObject != null)
+            if (currentRayHitObj != null && originObject != null)
             {
-                if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
-                if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
-                InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
+                Destroy(m_estimateObj.gameObject);
+                Destroy(m_estimateArrow.gameObject);
+                m_estimateObj = null;
+                m_estimateArrow = null;
+                InstantEstimateObject(currentRayHitObj.transform.parent.parent.gameObject);
             }
         }
 
@@ -165,7 +170,7 @@ public class Shooter : MonoBehaviour
         GetObject_Ray();
         if (isRayHit == true)
         {
-            ObjectsValueDraw_Ray(rayHitObj.transform.parent.parent.gameObject);
+            ObjectsValueDraw_Ray(currentRayHitObj.transform.parent.parent.gameObject);
         }
 
         if (originObject != null) ObjectsValueDraw_Origin();
@@ -180,32 +185,39 @@ public class Shooter : MonoBehaviour
             if (rayhit.collider.gameObject.tag == "ChangeObject")
             {
                 isRayHit = true;
-                rayHitObj = rayhit.collider.transform.gameObject;
+                prevRayHitObj = currentRayHitObj;
+                currentRayHitObj = rayhit.collider.transform.gameObject;
+                if(prevRayHitObj != currentRayHitObj)
+                {
+                    if (objVal_ray != null) Destroy(objVal_ray.gameObject);
+                    if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
+                    if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
+                }
                 if (objVal_ray == null)
                 {
                     objVal_ray = Instantiate(objValPref_ray,
                                              new Vector3(
-                                                 rayHitObj.transform.parent.parent.position.x,
-                                                 rayHitObj.transform.parent.parent.position.y,
-                                                 rayHitObj.transform.parent.parent.position.z) +
-                                                 new Vector3(0, rayHitObj.transform.parent.parent.localScale.y / 2 + 0.5f, 0),
+                                                 currentRayHitObj.transform.parent.parent.position.x,
+                                                 currentRayHitObj.transform.parent.parent.position.y,
+                                                 currentRayHitObj.transform.parent.parent.position.z) +
+                                                 new Vector3(0, currentRayHitObj.transform.parent.parent.localScale.y / 2 + 0.5f, 0),
                                              Quaternion.identity
                                             );
-                    objVal_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(rayHitObj.transform.parent.gameObject);
+                    objVal_ray.GetComponent<ValueDrawerController>().GetDrawBaseObj(currentRayHitObj.transform.parent.gameObject);
                 }
                 //射撃ボタンが押されたら
                 if ((Input.GetMouseButtonDown(0) || padState.Triggers.Left >= 0.8f) && pushRTrigger == false)
                 {
                     SoundManager.GetInstance.PlaySE("Gun_SE");
                     //発射
-                    GetShot(rayHitObj);
+                    GetShot(currentRayHitObj);
                     //弾を撃った
                     pushRTrigger = true;
                 }
 
-                if ((originObject != null) && (targetObject == null) && (rayHitObj != originObject))
+                if ((originObject != null) && (targetObject == null) && (currentRayHitObj != originObject))
                 {
-                    InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
+                    InstantEstimateObject(currentRayHitObj.transform.parent.parent.gameObject);
                     //射撃ボタンが押されたら
                     if ((Input.GetMouseButtonDown(1) || padState.Triggers.Right >= 0.8f) && pushLTrigger == false)
                     {
@@ -213,7 +225,11 @@ public class Shooter : MonoBehaviour
                         if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
                         SoundManager.GetInstance.PlaySE("Gun_SE");
                         //発射
-                        SetShot(rayHitObj);
+                        SetShot(currentRayHitObj);
+                        Destroy(m_estimateObj.gameObject);
+                        Destroy(m_estimateArrow.gameObject);
+                        m_estimateObj = null;
+                        m_estimateArrow = null;
                         //弾を撃った
                         pushLTrigger = true;
                     }
@@ -222,8 +238,6 @@ public class Shooter : MonoBehaviour
             else
             {
                 if (objVal_ray != null) Destroy(objVal_ray.gameObject);
-                if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
-                if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
                 isRayHit = false;
             }
             laserPointer.SetPosition(1, rayhit.point);
@@ -231,8 +245,6 @@ public class Shooter : MonoBehaviour
         else
         {
             if (objVal_ray != null) Destroy(objVal_ray.gameObject);
-            if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
-            if (m_estimateArrow != null) Destroy(m_estimateArrow.gameObject);
             isRayHit = false;
             laserPointer.SetPosition(1, ray.origin + ray.direction * rayDistance);
         }
@@ -690,7 +702,7 @@ public class Shooter : MonoBehaviour
 
     public GameObject GetRayObj()
     {
-        return rayHitObj;
+        return currentRayHitObj;
     }
 
     public string GetChangeType()
