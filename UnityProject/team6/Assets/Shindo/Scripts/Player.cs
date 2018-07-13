@@ -140,21 +140,41 @@ public class Player : MonoBehaviour
             targetVelocity = camera_.transform.forward * (padState_.ThumbSticks.Left.Y * forwardSpeed_);
 
         }
-        if (padState_.ThumbSticks.Left.Y <= -0.3f)
+        else if (padState_.ThumbSticks.Left.Y <= -0.3f)
         {
             //後
             targetVelocity = -camera_.transform.forward * (-padState_.ThumbSticks.Left.Y * forwardSpeed_);
 
         }
-        if (padState_.ThumbSticks.Left.X >= 0.3f)
+        else if (padState_.ThumbSticks.Left.X >= 0.3f)
         {
             //右
             targetVelocity = camera_.transform.right * (padState_.ThumbSticks.Left.X * sideSpeed_);
         }
-        if (padState_.ThumbSticks.Left.X <= -0.3f)
+        else if (padState_.ThumbSticks.Left.X <= -0.3f)
         {
             //左
             targetVelocity = -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_);
+        }
+        //左前
+        if(padState_.ThumbSticks.Left.Y >= 0.3f && padState_.ThumbSticks.Left.X <= -0.3f)
+        {
+            targetVelocity = (camera_.transform.forward * (padState_.ThumbSticks.Left.Y * forwardSpeed_) + -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_));
+        }
+        //右前
+        if (padState_.ThumbSticks.Left.Y >= 0.3f && padState_.ThumbSticks.Left.X >= 0.3f)
+        {
+            targetVelocity = (camera_.transform.forward * (padState_.ThumbSticks.Left.Y * forwardSpeed_) + camera_.transform.right * (padState_.ThumbSticks.Left.X * sideSpeed_));
+        }
+        //左後
+        if(padState_.ThumbSticks.Left.Y <= -0.3f && padState_.ThumbSticks.Left.X <= -0.3f)
+        {
+            targetVelocity = (-camera_.transform.forward * (-padState_.ThumbSticks.Left.Y * forwardSpeed_) + -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_));
+        }
+        //右後
+        if(padState_.ThumbSticks.Left.Y <= -0.3f && padState_.ThumbSticks.Left.X >= 0.3f)
+        {
+            targetVelocity = (-camera_.transform.forward * (-padState_.ThumbSticks.Left.Y * forwardSpeed_) + camera_.transform.right * (padState_.ThumbSticks.Left.X * sideSpeed_));
         }
 
         //移動
