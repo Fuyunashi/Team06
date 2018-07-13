@@ -5407,7 +5407,7 @@ Prefab:
     - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
         type: 2}
       propertyPath: light.Array.size
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4764463117283666, guid: 4946f775bcb1397439ef2177542ecb40, type: 2}
       propertyPath: m_LocalPosition.x
@@ -5479,6 +5479,31 @@ Prefab:
     - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
         type: 2}
       propertyPath: light.Array.data[1]
+      value: 
+      objectReference: {fileID: 1848820527}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.data[2]
+      value: 
+      objectReference: {fileID: 1839735528}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.data[3]
+      value: 
+      objectReference: {fileID: 1488935677}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.data[4]
+      value: 
+      objectReference: {fileID: 1706306043}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.data[5]
+      value: 
+      objectReference: {fileID: 1657640117}
+    - target: {fileID: 114259071549080904, guid: 4946f775bcb1397439ef2177542ecb40,
+        type: 2}
+      propertyPath: light.Array.data[6]
       value: 
       objectReference: {fileID: 1848820527}
     m_RemovedComponents: []
