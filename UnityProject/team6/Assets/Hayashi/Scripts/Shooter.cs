@@ -75,8 +75,6 @@ public class Shooter : MonoBehaviour
     private int layerMask;
     private GameObject rayHitObj;
     private bool isRayHit;
-    private bool isOriginGet;
-    private bool isTargetGet;
 
     [SerializeField]
     private Material estimateMat;
@@ -132,7 +130,7 @@ public class Shooter : MonoBehaviour
             SoundManager.GetInstance.PlaySE("Change_SE");
             //軸の切り替え
             SwitchAxisType();
-            if (isRayHit == true && isOriginGet == true)
+            if (isRayHit == true && originObject != null)
             {
                 if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
                 InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
@@ -144,7 +142,7 @@ public class Shooter : MonoBehaviour
             SoundManager.GetInstance.PlaySE("Change_SE");
             //値の切り替え
             SwitchChangeType();
-            if (isRayHit == true && isOriginGet == true)
+            if (isRayHit == true && originObject != null)
             {
                 if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
                 InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
@@ -162,8 +160,8 @@ public class Shooter : MonoBehaviour
             ObjectsValueDraw_Ray(rayHitObj.transform.parent.parent.gameObject);
         }
 
-        if (isOriginGet == true) ObjectsValueDraw_Origin();
-        if (isTargetGet == true) ObjectsValueDraw_Target();
+        if (originObject != null) ObjectsValueDraw_Origin();
+        if (targetObject != null) ObjectsValueDraw_Target();
     }
     //レイで取得・転置オブジェクトを取得
     private void GetObject_Ray()
@@ -197,7 +195,7 @@ public class Shooter : MonoBehaviour
                     pushRTrigger = true;
                 }
 
-                if (isOriginGet == true && isTargetGet == false)
+                if ((originObject != null) && (targetObject == null) && (rayHitObj != originObject))
                 {
                     InstantEstimateObject(rayHitObj.transform.parent.parent.gameObject);
                     //射撃ボタンが押されたら
@@ -351,7 +349,6 @@ public class Shooter : MonoBehaviour
     {
         if (m_estimateObj == null)
         {
-            Debug.Log("通った");
             switch (changeType)
             {
                 case ChangeType.Position:
@@ -520,7 +517,6 @@ public class Shooter : MonoBehaviour
                 objVal_origin.GetComponent<ValueDrawerController>().GetDrawBaseObj(originObject.transform.parent.gameObject);
                 //取得するオブジェクトの値を取得
                 GetOriginAxisLength();
-                isOriginGet = true;
             }
         }
     }
@@ -539,7 +535,7 @@ public class Shooter : MonoBehaviour
         if (isTargetMove == false)
         {
             //取得するオブジェクトが空でなければ
-            if (targetObject == null && hitObject != originObject)
+            if (targetObject == null)
             {
                 //転置するオブジェクトに当たったオブジェクトを格納                   
                 targetObject = hitObject.transform.gameObject;
@@ -555,7 +551,6 @@ public class Shooter : MonoBehaviour
                                              Quaternion.identity
                                             );
                 objVal_target.GetComponent<ValueDrawerController>().GetDrawBaseObj(targetObject.transform.parent.gameObject);
-                isTargetGet = true;
                 SettingAnimation(targetObject.transform.parent.gameObject);
             }
         }
@@ -623,7 +618,6 @@ public class Shooter : MonoBehaviour
     {
         if (targetObject != null)
         {
-            isTargetGet = false;
             Destroy(targetObject.GetComponent<ObjectCollider>());
             targetObject = null;
             Destroy(objVal_target);
