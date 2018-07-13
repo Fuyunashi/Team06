@@ -138,11 +138,8 @@ public class Shooter : MonoBehaviour
             //軸の切り替え
             SwitchAxisType();
             if (currentRayHitObj != null && originObject != null)
-            { 
-                Destroy(m_estimateObj.gameObject);
-                Destroy(m_estimateArrow.gameObject);
-                m_estimateObj = null;
-                m_estimateArrow = null;
+            {
+                ResetEstimateObj();
                 InstantEstimateObject(currentRayHitObj.transform.parent.parent.gameObject);
             }
         }
@@ -154,10 +151,7 @@ public class Shooter : MonoBehaviour
             SwitchChangeType();
             if (currentRayHitObj != null && originObject != null)
             {
-                Destroy(m_estimateObj.gameObject);
-                Destroy(m_estimateArrow.gameObject);
-                m_estimateObj = null;
-                m_estimateArrow = null;
+                ResetEstimateObj();
                 InstantEstimateObject(currentRayHitObj.transform.parent.parent.gameObject);
             }
         }
@@ -187,7 +181,7 @@ public class Shooter : MonoBehaviour
                 isRayHit = true;
                 prevRayHitObj = currentRayHitObj;
                 currentRayHitObj = rayhit.collider.transform.gameObject;
-                if(prevRayHitObj != currentRayHitObj)
+                if (prevRayHitObj != currentRayHitObj)
                 {
                     if (objVal_ray != null) Destroy(objVal_ray.gameObject);
                     if (m_estimateObj != null) Destroy(m_estimateObj.gameObject);
@@ -226,10 +220,7 @@ public class Shooter : MonoBehaviour
                         SoundManager.GetInstance.PlaySE("Gun_SE");
                         //発射
                         SetShot(currentRayHitObj);
-                        Destroy(m_estimateObj.gameObject);
-                        Destroy(m_estimateArrow.gameObject);
-                        m_estimateObj = null;
-                        m_estimateArrow = null;
+                        ResetEstimateObj();
                         //弾を撃った
                         pushLTrigger = true;
                     }
@@ -252,83 +243,33 @@ public class Shooter : MonoBehaviour
     //取得、転置オブジェクトの数値の表示
     private void ObjectsValueDraw_Ray(GameObject originObj)
     {
-        switch (changeType)
+        if (originObj != null && objVal_ray != null)
         {
-            case ChangeType.Position:
-                switch (axisType)
-                {
-                    case AxisType.X:
-                        if (originObj != null && objVal_ray != null)
-                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.position.x);
-                        break;
-                    case AxisType.Y:
-                        if (originObj != null && objVal_ray != null)
-                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.position.y);
-                        break;
-                    case AxisType.Z:
-                        if (originObj != null && objVal_ray != null)
-                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.position.z);
-                        break;
-                }
-                break;
-            case ChangeType.Scale:
-                switch (axisType)
-                {
-                    case AxisType.X:
-                        if (originObj != null && objVal_ray != null)
-                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.x);
-                        break;
-                    case AxisType.Y:
-                        if (originObj != null && objVal_ray != null)
-                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.y);
-                        break;
-                    case AxisType.Z:
-                        if (originObj != null && objVal_ray != null)
-                            objVal_ray.GetComponent<ValueDrawerController>().ObjectAxisValue(originObj.transform.localScale.z);
-                        break;
-                }
-                break;
+            switch (changeType)
+            {
+                case ChangeType.Position:
+                    SetObjectValue(objVal_ray, originObj.transform.position);
+                    break;
+                case ChangeType.Scale:
+                    SetObjectValue(objVal_ray, originObj.transform.localScale);
+                    break;
+            }
         }
     }
     //取得オブジェクトの数値表示処理
     private void ObjectsValueDraw_Origin()
     {
-        switch (changeType)
+        if (objVal_origin != null)
         {
-            case ChangeType.Position:
-                switch (axisType)
-                {
-                    case AxisType.X:
-                        if (objVal_origin != null)
-                            objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originPositionValue.x);
-                        break;
-                    case AxisType.Y:
-                        if (objVal_origin != null)
-                            objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originPositionValue.y);
-                        break;
-                    case AxisType.Z:
-                        if (objVal_origin != null)
-                            objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originPositionValue.z);
-                        break;
-                }
-                break;
-            case ChangeType.Scale:
-                switch (axisType)
-                {
-                    case AxisType.X:
-                        if (objVal_origin != null)
-                            objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originScaleValue.x);
-                        break;
-                    case AxisType.Y:
-                        if (objVal_origin != null)
-                            objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originScaleValue.y);
-                        break;
-                    case AxisType.Z:
-                        if (objVal_origin != null)
-                            objVal_origin.GetComponent<ValueDrawerController>().ObjectAxisValue(originScaleValue.z);
-                        break;
-                }
-                break;
+            switch (changeType)
+            {
+                case ChangeType.Position:
+                    SetObjectValue(objVal_origin, originPositionValue);
+                    break;
+                case ChangeType.Scale:
+                    SetObjectValue(objVal_origin, originScaleValue);
+                    break;
+            }
         }
     }
     //転置オブジェクトの数値表示処理
@@ -337,32 +278,25 @@ public class Shooter : MonoBehaviour
         switch (changeType)
         {
             case ChangeType.Position:
-                switch (axisType)
-                {
-                    case AxisType.X:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.position.x);
-                        break;
-                    case AxisType.Y:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.position.y);
-                        break;
-                    case AxisType.Z:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.position.z);
-                        break;
-                }
+                SetObjectValue(objVal_target, targetObject.transform.parent.parent.position);
                 break;
             case ChangeType.Scale:
-                switch (axisType)
-                {
-                    case AxisType.X:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localScale.x);
-                        break;
-                    case AxisType.Y:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localScale.y);
-                        break;
-                    case AxisType.Z:
-                        objVal_target.GetComponent<ValueDrawerController>().ObjectAxisValue(targetObject.transform.parent.parent.localScale.z);
-                        break;
-                }
+                SetObjectValue(objVal_target, targetObject.transform.parent.parent.localScale);
+                break;
+        }
+    }
+    private void SetObjectValue(GameObject valObj, Vector3 values)
+    {
+        switch (axisType)
+        {
+            case AxisType.X:
+                valObj.GetComponent<ValueDrawerController>().SetObjectAxisValue(values.x);
+                break;
+            case AxisType.Y:
+                valObj.GetComponent<ValueDrawerController>().SetObjectAxisValue(values.y);
+                break;
+            case AxisType.Z:
+                valObj.GetComponent<ValueDrawerController>().SetObjectAxisValue(values.z);
                 break;
         }
     }
@@ -382,14 +316,10 @@ public class Shooter : MonoBehaviour
                                                 obj.transform.position.y,
                                                 obj.transform.position.z
                                                 ), obj.transform.localRotation);
-                            if(originObject.transform.position.x >= obj.transform.position.x)
-                            {
-                                m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0,0,0));
-                            }
+                            if (originObject.transform.position.x >= obj.transform.position.x)
+                                m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0, 0, 0));
                             else
-                            {
-                                m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0,180,0));
-                            }
+                                m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0, 180, 0));
                             break;
                         case AxisType.Y:
                             m_estimateObj = Instantiate(obj, new Vector3(
@@ -398,13 +328,9 @@ public class Shooter : MonoBehaviour
                                                obj.transform.position.z
                                                ), obj.transform.localRotation);
                             if (originObject.transform.position.y >= obj.transform.position.y)
-                            {
                                 m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0, 0, 90));
-                            }
                             else
-                            {
                                 m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0, 0, -90));
-                            }
                             break;
                         case AxisType.Z:
                             m_estimateObj = Instantiate(obj, new Vector3(
@@ -413,13 +339,9 @@ public class Shooter : MonoBehaviour
                                                originPositionValue.z
                                                ), obj.transform.localRotation);
                             if (originObject.transform.position.z >= obj.transform.position.z)
-                            {
                                 m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0, -90, 0));
-                            }
                             else
-                            {
                                 m_estimateArrow = Instantiate(estimatePositionArrowPref, obj.transform.position, Quaternion.Euler(0, 90, 0));
-                            }
                             break;
                     }
                     m_estimateObj.transform.localScale = new Vector3(
@@ -472,6 +394,14 @@ public class Shooter : MonoBehaviour
             if (m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<MeshCollider>())
                 Destroy(m_estimateObj.transform.GetChild(0).GetChild(0).GetComponent<MeshCollider>());
         }
+    }
+    //予測オブジェクトを初期化
+    private void ResetEstimateObj()
+    {
+        Destroy(m_estimateObj.gameObject);
+        Destroy(m_estimateArrow.gameObject);
+        m_estimateObj = null;
+        m_estimateArrow = null;
     }
     //軸切り替え
     private void SwitchAxisType()
@@ -697,7 +627,6 @@ public class Shooter : MonoBehaviour
                 });
             });
         });
-
     }
 
     public GameObject GetRayObj()
