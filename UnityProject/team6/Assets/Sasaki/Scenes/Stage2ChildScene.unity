@@ -7405,6 +7405,7 @@ GameObject:
   - component: {fileID: 1108393647}
   - component: {fileID: 1108393646}
   - component: {fileID: 1108393645}
+  - component: {fileID: 1108393648}
   - component: {fileID: 1108393644}
   m_Layer: 10
   m_Name: Block
@@ -7499,6 +7500,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1108393642}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1108393648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1108393642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76e4393eab2f04d4f83b2b6c7f1d578f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1111401130
 Prefab:
   m_ObjectHideFlags: 0
@@ -8108,6 +8120,7 @@ GameObject:
   - component: {fileID: 1292699945}
   - component: {fileID: 1292699944}
   - component: {fileID: 1292699943}
+  - component: {fileID: 1292699946}
   - component: {fileID: 1292699942}
   m_Layer: 10
   m_Name: Block (1)
@@ -8124,7 +8137,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1292699940}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: -5.986}
+  m_LocalPosition: {x: 0, y: -1.5, z: -6}
   m_LocalScale: {x: 1, y: 2, z: 0.9}
   m_Children: []
   m_Father: {fileID: 1014898588}
@@ -8202,6 +8215,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1292699940}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1292699946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1292699940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76e4393eab2f04d4f83b2b6c7f1d578f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1304812687
 GameObject:
   m_ObjectHideFlags: 0
