@@ -110,7 +110,7 @@ public class ValueDrawerController : MonoBehaviour
         drawObj = m_obj;
     }
 
-    public void ObjectAxisValue(float value)
+    public void SetObjectAxisValue(float value)
     {
         str_value = value.ToString("f2");
         m_value = value;

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using XInputDotNetPure;
+﻿using UnityEngine;
 
 public class FpsCam : MonoBehaviour {
 
@@ -17,13 +14,6 @@ public class FpsCam : MonoBehaviour {
 
     Player player_;
 
-    //Xinput関連
-    private bool playerInputSet_ = false;
-    private PlayerIndex playerIndex_;
-    private GamePadState padState_;
-    private GamePadState prevState_;
-
-    // Use this for initialization
     void Start () {
         mouse.x = -0.5f;
         mouse.y = 0.5f;
@@ -39,23 +29,10 @@ public class FpsCam : MonoBehaviour {
         {
             return;
         }
-
-        //Xinput関連
-        if (!playerInputSet_ || !prevState_.IsConnected)
-        {
-            playerIndex_ = (PlayerIndex)0;
-            playerInputSet_ = true;
-        }
-        prevState_ = padState_;
-        padState_ = GamePad.GetState(playerIndex_);
-
+        
         // マウスの移動の取得
-        if (padState_.ThumbSticks.Right.X >= 0.8f || padState_.ThumbSticks.Right.X <= 0.8f || 
-            padState_.ThumbSticks.Right.Y >= 0.8f || padState_.ThumbSticks.Right.Y <= 0.8f)
-        {
-            mouse += new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
-        }
-
+        mouse += new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
+        
         var lookAt = target_.position + Vector3.up * cameraHeight_;
         this.transform.position = lookAt - transform.forward * distance_;
 
