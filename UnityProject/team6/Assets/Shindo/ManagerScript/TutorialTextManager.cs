@@ -10,6 +10,8 @@ public class TutorialTextManager : MonoBehaviour {
     private Text[] tutorial_1_text;
     [SerializeField]
     private Text[] tutorial_2_text;
+    [SerializeField]
+    private Text[] tutorial_3_text;
 
     [SerializeField]
     private Image[] tutorialImages_;
@@ -61,6 +63,10 @@ public class TutorialTextManager : MonoBehaviour {
             //Debug.Log("消しました");
             tutorial_2_text[i].enabled = false;
         }
+        for(int i = 0; i < tutorial_3_text.Length; i++)
+        {
+            tutorial_3_text[i].enabled = false;
+        }
         for(int i = 0; i < controllerGuide_.Length; i++)
         {
             controllerGuide_[i].enabled = false;
@@ -105,17 +111,8 @@ public class TutorialTextManager : MonoBehaviour {
             }
 
         }
-        if (scene_.CurrentStage == NextStage.Tutrial1 && textCount_ >= tutorial_1_text.Length)
-        {
-            textCount_ = tutorial_1_text.Length;
-        }
-        else if(scene_.CurrentStage == NextStage.Tutrial2 && textCount_ >= tutorial_2_text.Length)
-        {
-            textCount_ = tutorial_2_text.Length;
-        }
         
-
-        if (player_.isStop_ && (scene_.CurrentStage == NextStage.Tutrial1 || scene_.CurrentStage == NextStage.Tutrial2))
+        if (player_.isStop_ && (scene_.CurrentStage == NextStage.Tutrial1 || scene_.CurrentStage == NextStage.Tutrial2 /*|| scene_.CurrentStage == NextStage.Tutrial3*/))
         {
             ButtonImage_.enabled = true;
         }
@@ -128,6 +125,7 @@ public class TutorialTextManager : MonoBehaviour {
         {
             tutorialImages_[0].enabled = false;
             tutorialImages_[1].enabled = false;
+            tutorialImages_[2].enabled = false;
             controllerGuide_[0].enabled = false;
             controllerGuide_[1].enabled = false;
             controllerGuide_[2].enabled = false;
@@ -165,6 +163,7 @@ public class TutorialTextManager : MonoBehaviour {
             {
                 tutorialImages_[0].enabled = false;
                 //textCount_ = 0;
+                textCount_ = tutorial_1_text.Length;
                 player_.isStop_ = false;
                 isTextEnable_ = false;
             }
@@ -181,11 +180,27 @@ public class TutorialTextManager : MonoBehaviour {
             {
                 tutorialImages_[1].enabled = false;
                 //textCount_ = 0;
+                textCount_ = tutorial_2_text.Length;
                 player_.isStop_ = false;
                 isTextEnable_ = false;
             }
         }
-
+        /*
+        if(scene_.CurrentStage == NextStage.tutorial3 && isTextEnable_ && !tutorialcontroll_.changeSceneFrag)
+        {
+            tutorialImages_[2].enabled = true;
+            Tutorial_3_TextMng();
+            
+            if (textCount_ >= tutorial_3_text.Length)
+            {
+                tutorialImages_[2].enabled = false;
+                //textCount_ = 0;
+                textCount_ = tutorial_3_text.Length;
+                player_.isStop_ = false;
+                isTextEnable_ = false;
+            }
+        }
+        */
         if(scene_.CurrentScene == SceneName.SelectScene || tutorialcontroll_.changeSceneFrag)
         {
             textCount_ = 0;
@@ -470,6 +485,16 @@ public class TutorialTextManager : MonoBehaviour {
                 tutorial_2_text[7].enabled = false; break;
         }
 
+    }
+
+    //チュートリアル３
+    void Tutorial_3_TextMng()
+    {
+        switch (textCount_)
+        {
+            case 0: break;
+
+        }
     }
 
     void FadeImage(Image img)
