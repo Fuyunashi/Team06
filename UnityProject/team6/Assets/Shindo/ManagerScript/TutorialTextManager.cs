@@ -33,6 +33,9 @@ public class TutorialTextManager : MonoBehaviour {
 
     private TutorialControll tutorialcontroll_;
 
+    private int sinCount_ = 0;
+    private float temp;
+
     //Xinput関連
     private bool playerInputSet_ = false;
     private PlayerIndex playerIndex_;
@@ -96,11 +99,21 @@ public class TutorialTextManager : MonoBehaviour {
         if (player_.isStop_)
         {
             isTextEnable_ = true;
-            if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed){
+            if (prevState_.Buttons.B == ButtonState.Released && padState_.Buttons.B == ButtonState.Pressed)
+            {
                 textCount_++;
             }
-            
+
         }
+        if (scene_.CurrentStage == NextStage.Tutrial1 && textCount_ >= tutorial_1_text.Length)
+        {
+            textCount_ = tutorial_1_text.Length;
+        }
+        else if(scene_.CurrentStage == NextStage.Tutrial2 && textCount_ >= tutorial_2_text.Length)
+        {
+            textCount_ = tutorial_2_text.Length;
+        }
+        
 
         if (player_.isStop_ && (scene_.CurrentStage == NextStage.Tutrial1 || scene_.CurrentStage == NextStage.Tutrial2))
         {
@@ -113,18 +126,23 @@ public class TutorialTextManager : MonoBehaviour {
 
         if (scene_.PuseFrag || tutorialcontroll_.changeSceneFrag)
         {
-            tutorial_1_text[textCount_].enabled = false;
-            tutorial_2_text[textCount_].enabled = false;
             tutorialImages_[0].enabled = false;
             tutorialImages_[1].enabled = false;
             controllerGuide_[0].enabled = false;
             controllerGuide_[1].enabled = false;
             controllerGuide_[2].enabled = false;
             controllerGuide_[3].enabled = false;
+            controllerGuide_[4].enabled = false;
+            controllerGuide_[5].enabled = false;
             ButtonImage_.enabled = false;
+            tutorial_1_text[textCount_].enabled = false;
+            tutorial_2_text[textCount_].enabled = false;
         }
         
+        temp = Mathf.Sin(Mathf.PI * 2 / 360 * sinCount_) * 1.0f;        
+        sinCount_++;
 
+        //Debug.Log(temp);
         //Debug.Log(player_.isStop_);
         //Debug.Log(scene_.PuseFrag);
         Debug.Log(textCount_);
@@ -159,7 +177,6 @@ public class TutorialTextManager : MonoBehaviour {
             Tutorial_2_TextMng();
             Tutorial2KeyContoroll();
             
-
             if (textCount_ >= tutorial_2_text.Length)
             {
                 tutorialImages_[1].enabled = false;
@@ -238,54 +255,61 @@ public class TutorialTextManager : MonoBehaviour {
 
             bool isAxisX = false;
             player_.isStop_ = false;
-            //key_.currentUseKey = UseKey.RightShoulder;
             if (shooter_.GetAxisType() != "Z")
             {
                 key_.currentUseKey = UseKey.RightShoulder;
-                controllerGuide_[3].enabled = true;
-                controllerGuide_[2].enabled = false;
-            }
-            else if (shooter_.GetAxisType() == "Z")
-            {
-                isAxisX = true;
-                controllerGuide_[2].enabled = true;
-                controllerGuide_[3].enabled = false;
-                key_.currentUseKey = UseKey.TriggersRight;
+                //Lコントローラーを非表示
+                controllerGuide_[5].enabled = false;
+                //LTボタンを非表示
+                ImageEnable(controllerGuide_[0]);
+                //Rコントローラーを表示
+                controllerGuide_[4].enabled = true;
+                //Rボタンを表示
+                FadeImage(controllerGuide_[3]);
+                isAxisX = false;
             }
             else
             {
-                isAxisX = false;
-                controllerGuide_[3].enabled = true;
-                controllerGuide_[2].enabled = false;
-            }
+                isAxisX = true;
+                //Rボタンを非表示
+                ImageEnable(controllerGuide_[3]);
+                //LTボタンを表示
+                FadeImage(controllerGuide_[2]);
 
+                key_.currentUseKey = UseKey.TriggersRight;
+            }
+            
             if (isAxisX && shooter_.GetRayObj() == moveObjget_.tutorial1_moveObj_1)
             {
                 if (shooter_.GetIsShot())
                 {
-                    controllerGuide_[3].enabled = false;
+                    //Lコントローラーを非表示
+                    controllerGuide_[5].enabled = false;
+                    //Rコントローラーを表示
+                    controllerGuide_[4].enabled = true;
+                    //Lボタンを非表示
+                    ImageEnable(controllerGuide_[0]);
+                    //RTボタンを表示
+                    FadeImage(controllerGuide_[3]);
                     Debug.Log("来てます");
                     player_.isStop_ = true;
                     isAxisX = false;
                     textCount_ += 1;
                 }
             }
-
-
+            
         }
         else if (textCount_ == 9)
         {
             player_.isStop_ = true;
-            controllerGuide_[2].enabled = false;
-
+            
         }
         else if(textCount_ == 10)
         {
             player_.isStop_ = true;
             key_.currentUseKey = UseKey.None;
         }
-
-
+        
     }
 
     void Tutorial2KeyContoroll()
@@ -338,18 +362,30 @@ public class TutorialTextManager : MonoBehaviour {
             case 3:
                     tutorial_1_text[2].enabled = false;
                     tutorial_1_text[3].enabled = true;
-                    controllerGuide_[0].enabled = true;
+                    //LTボタンを点滅
+                    FadeImage(controllerGuide_[0]);
+                    //Lのコントローラーを表示
+                    controllerGuide_[5].enabled = true;
                     break;
             case 4:
                     tutorial_1_text[3].enabled = false;
                     tutorial_1_text[4].enabled = true;
-                    controllerGuide_[0].enabled = false;
-                    controllerGuide_[2].enabled = true;
+                    //LTボタンを非表示
+                    ImageEnable(controllerGuide_[0]);
+                    //Lコントローラーを非表示
+                    controllerGuide_[5].enabled = false;
+                    //RTボタンを点滅
+                    FadeImage(controllerGuide_[2]);
+                    //Rコントローラーを表示
+                    controllerGuide_[4].enabled = true;
                     break;
             case 5:
                     tutorial_1_text[4].enabled = false;
                     tutorial_1_text[5].enabled = true;
-                    controllerGuide_[2].enabled = false;
+                    //Rコントローラーを非表示
+                    controllerGuide_[4].enabled = false;
+                    //RTボタンを非表示
+                    ImageEnable(controllerGuide_[2]);
                      break;
             case 6:
                     tutorial_1_text[5].enabled = false;
@@ -357,14 +393,22 @@ public class TutorialTextManager : MonoBehaviour {
             case 7:
                     tutorial_1_text[6].enabled = false;
                     tutorial_1_text[7].enabled = true;
-                    controllerGuide_[0].enabled = true; break;
+                    //Lコントローラーを表示
+                    controllerGuide_[5].enabled = true;
+                    //LTボタンを点滅
+                    FadeImage(controllerGuide_[0]);
+                    break;
             case 8:
                     tutorial_1_text[7].enabled = false;
                     tutorial_1_text[8].enabled = true;
-                    controllerGuide_[0].enabled = false; break;
+                    
+                break;
             case 9:
                     tutorial_1_text[8].enabled = false;
-                    tutorial_1_text[9].enabled = true; break;
+                    tutorial_1_text[9].enabled = true;
+                    controllerGuide_[2].enabled = false;
+                    controllerGuide_[3].enabled = false;
+                    controllerGuide_[4].enabled = false; break;
             case 10:
                     tutorial_1_text[9].enabled = false;
                     tutorial_1_text[10].enabled = true; break;
@@ -386,22 +430,32 @@ public class TutorialTextManager : MonoBehaviour {
             case 1:      
                 tutorial_2_text[0].enabled = false;
                 tutorial_2_text[1].enabled = true;
-                controllerGuide_[1].enabled = true;
+                //Lコントローラーを表示
+                controllerGuide_[5].enabled = true;
+                //Lボタンを表示
+                FadeImage(controllerGuide_[1]);
                 break;
             case 2:      
                 tutorial_2_text[1].enabled = false;
                 tutorial_2_text[2].enabled = true;
-                controllerGuide_[1].enabled = false;
+                //Lコントローラーを非表示
+                controllerGuide_[5].enabled = false;
+                //Lボタンを削除
+                ImageEnable(controllerGuide_[1]);
                 break;
             case 3:      
                 tutorial_2_text[2].enabled = false;
                 tutorial_2_text[3].enabled = true;
-                controllerGuide_[3].enabled = true;
+                //Rコントローラーを表示
+                controllerGuide_[4].enabled = true;
+                //Rボタンを表示
+                FadeImage(controllerGuide_[3]);
                 break;
             case 4:      
                 tutorial_2_text[3].enabled = false;
                 tutorial_2_text[4].enabled = true;
-                controllerGuide_[3].enabled = false;
+                controllerGuide_[4].enabled = false;
+                ImageEnable(controllerGuide_[3]);
                 break;
             case 5:      
                 tutorial_2_text[4].enabled = false;
@@ -416,6 +470,21 @@ public class TutorialTextManager : MonoBehaviour {
                 tutorial_2_text[7].enabled = false; break;
         }
 
+    }
+
+    void FadeImage(Image img)
+    {
+        img.enabled = true;
+        temp = Mathf.Abs(temp);
+        img.GetComponent<Image>().color = new Color(255.0f,0.0f,0.0f,temp);
+        //color.a = Mathf.Abs(temp);
+        //Debug.Log(temp);
+    }
+
+    void ImageEnable(Image img)
+    {
+        img.enabled = false;
+        //temp = 0.0f;
     }
     
 }
