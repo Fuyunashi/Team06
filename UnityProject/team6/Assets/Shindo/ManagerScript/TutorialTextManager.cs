@@ -124,8 +124,8 @@ public class TutorialTextManager : MonoBehaviour {
         if (scene_.PuseFrag || tutorialcontroll_.changeSceneFrag)
         {
             tutorialImages_[0].enabled = false;
-            tutorialImages_[1].enabled = false;
-            tutorialImages_[2].enabled = false;
+            //tutorialImages_[1].enabled = false;
+            //tutorialImages_[2].enabled = false;
             controllerGuide_[0].enabled = false;
             controllerGuide_[1].enabled = false;
             controllerGuide_[2].enabled = false;
@@ -172,35 +172,35 @@ public class TutorialTextManager : MonoBehaviour {
         if (scene_.CurrentStage == NextStage.Tutrial2 && isTextEnable_ && !tutorialcontroll_.changeSceneFrag)
         {
                 
-            tutorialImages_[1].enabled = true;
+            tutorialImages_[0].enabled = true;
             Tutorial_2_TextMng();
             Tutorial2KeyContoroll();
             
             if (textCount_ >= tutorial_2_text.Length)
             {
-                tutorialImages_[1].enabled = false;
+                tutorialImages_[0].enabled = false;
                 //textCount_ = 0;
                 textCount_ = tutorial_2_text.Length;
                 player_.isStop_ = false;
                 isTextEnable_ = false;
             }
         }
-        /*
-        if(scene_.CurrentStage == NextStage.tutorial3 && isTextEnable_ && !tutorialcontroll_.changeSceneFrag)
+        
+        if(scene_.CurrentStage == NextStage. && isTextEnable_ && !tutorialcontroll_.changeSceneFrag)
         {
-            tutorialImages_[2].enabled = true;
+            tutorialImages_[0].enabled = true;
             Tutorial_3_TextMng();
             
             if (textCount_ >= tutorial_3_text.Length)
             {
-                tutorialImages_[2].enabled = false;
+                tutorialImages_[0].enabled = false;
                 //textCount_ = 0;
                 textCount_ = tutorial_3_text.Length;
                 player_.isStop_ = false;
                 isTextEnable_ = false;
             }
         }
-        */
+        
         if(scene_.CurrentScene == SceneName.SelectScene || tutorialcontroll_.changeSceneFrag)
         {
             textCount_ = 0;
