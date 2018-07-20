@@ -31,6 +31,7 @@ public enum NextStage
     Stage18,
     None,
     Exit,
+    Tutrial3,
 }
 [ExecuteInEditMode()]
 public class CRTnoise : MonoBehaviour

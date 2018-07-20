@@ -118,10 +118,28 @@ public class TutorialControll : MonoBehaviour
 
                 GameObject.Find("FPSPlayer").GetComponent<Player>().isStop_ = true;
                 distortPortal.portalPos = obj_portal.transform.localPosition + obj_portal.transform.forward;
-                sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
-                distortPortal.PortalFlag = true;
-                changeSceneFrag = true;
-                stageClearFrag = false;
+                if (sceneControll.CurrentStage == NextStage.Tutrial2)
+                {
+                    sceneControll.AddToScene.Add((NextStage.Tutrial3).ToString() + AddToScene.ChildScene);
+                    distortPortal.PortalFlag = true;
+                    changeSceneFrag = true;
+                    stageClearFrag = false;
+                    return;
+                }
+                else if(sceneControll.CurrentStage == NextStage.Tutrial2)
+                {
+                    sceneControll.AddToScene.Add((NextStage.Stage1).ToString() + AddToScene.ChildScene);
+                    distortPortal.PortalFlag = true;
+                    changeSceneFrag = true;
+                    stageClearFrag = false;
+                }
+                else
+                {
+                    sceneControll.AddToScene.Add((NextStage.Tutrial2).ToString() + AddToScene.ChildScene);
+                    distortPortal.PortalFlag = true;
+                    changeSceneFrag = true;
+                    stageClearFrag = false;
+                }
             }
         }
 
@@ -209,11 +227,19 @@ public class TutorialControll : MonoBehaviour
         //次ステージへ移行する際の演出処理
         if (distortPortal.portalTime <= 0 && changeSceneFrag)
         {
-            if (sceneControll.CurrentStage == NextStage.Tutrial2)
+            if (sceneControll.CurrentStage == NextStage.Tutrial3)
             {
                 sceneControll.NextScene = SceneName.PlayScene;
-                sceneControll.AddToScene.Add((sceneControll.CurrentStage + 1).ToString() + AddToScene.ChildScene);
-                sceneControll.CurrentStage = sceneControll.CurrentStage + 1;
+                sceneControll.AddToScene.Add((NextStage.Stage1).ToString() + AddToScene.ChildScene);
+                sceneControll.CurrentStage = NextStage.Stage1;
+                changeSceneFrag = false;
+                return;
+            }
+            else if (sceneControll.CurrentStage == NextStage.Tutrial2)
+            {
+                sceneControll.NextScene = SceneName.TutorialCurrentScene;
+                sceneControll.AddToScene.Add((NextStage.Tutrial3).ToString() + AddToScene.ChildScene);
+                sceneControll.CurrentStage = NextStage.Tutrial3;
                 changeSceneFrag = false;
                 return;
             }
