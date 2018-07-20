@@ -112,7 +112,7 @@ public class TutorialTextManager : MonoBehaviour {
 
         }
         
-        if (player_.isStop_ && (scene_.CurrentStage == NextStage.Tutrial1 || scene_.CurrentStage == NextStage.Tutrial2 /*|| scene_.CurrentStage == NextStage.Tutrial3*/))
+        if (player_.isStop_ && (scene_.CurrentStage == NextStage.Tutrial1 || scene_.CurrentStage == NextStage.Tutrial2 || scene_.CurrentStage == NextStage.Tutrial3))
         {
             ButtonImage_.enabled = true;
         }
@@ -135,6 +135,7 @@ public class TutorialTextManager : MonoBehaviour {
             ButtonImage_.enabled = false;
             tutorial_1_text[textCount_].enabled = false;
             tutorial_2_text[textCount_].enabled = false;
+            tutorial_3_text[textCount_].enabled = false;
         }
         
         temp = Mathf.Sin(Mathf.PI * 2 / 360 * sinCount_) * 1.0f;        
@@ -145,6 +146,7 @@ public class TutorialTextManager : MonoBehaviour {
         //Debug.Log(scene_.PuseFrag);
         Debug.Log(textCount_);
         Debug.Log(key_.currentUseKey);
+        Debug.Log(scene_.CurrentStage);
         //Debug.Log(tutorial_1_text.Length);
         
     }
@@ -186,7 +188,7 @@ public class TutorialTextManager : MonoBehaviour {
             }
         }
         
-        if(scene_.CurrentStage == NextStage. && isTextEnable_ && !tutorialcontroll_.changeSceneFrag)
+        if(scene_.CurrentStage == NextStage.Tutrial3 && isTextEnable_ && !tutorialcontroll_.changeSceneFrag)
         {
             tutorialImages_[0].enabled = true;
             Tutorial_3_TextMng();
@@ -201,10 +203,10 @@ public class TutorialTextManager : MonoBehaviour {
             }
         }
         
-        if(scene_.CurrentScene == SceneName.SelectScene || tutorialcontroll_.changeSceneFrag)
-        {
-            textCount_ = 0;
-        }
+        //if(scene_.CurrentScene == SceneName.SelectScene || tutorialcontroll_.changeSceneFrag)
+        //{
+        //    textCount_ = 0;
+        //}
     }
 
     void Tutorial1KeyContoroll()
@@ -492,8 +494,18 @@ public class TutorialTextManager : MonoBehaviour {
     {
         switch (textCount_)
         {
-            case 0: break;
 
+            case 0:
+                tutorial_3_text[0].enabled = true; break;
+            case 1:
+                tutorial_3_text[0].enabled = false;
+                tutorial_3_text[1].enabled = true; break;
+            case 2:
+                tutorial_3_text[1].enabled = false;
+                tutorial_3_text[2].enabled = true; break;
+            case 3:
+                tutorial_3_text[2].enabled = false; break;
+            
         }
     }
 

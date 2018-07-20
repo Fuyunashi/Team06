@@ -157,7 +157,7 @@ public class Player : MonoBehaviour
         else if (padState_.ThumbSticks.Left.X <= -0.3f && isGround_)
         {
             //左
-            targetVelocity = -camera_.transform.right * (-padState_.ThumbSticks.Left.X * halfSide);
+            targetVelocity = -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_);
         }
         //空中にいるとき
         if (padState_.ThumbSticks.Left.Y >= 0.3f && !isGround_)
@@ -180,7 +180,7 @@ public class Player : MonoBehaviour
         else if (padState_.ThumbSticks.Left.X <= -0.3f && !isGround_)
         {
             //左
-            targetVelocity = -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_);
+            targetVelocity = -camera_.transform.right * (-padState_.ThumbSticks.Left.X * halfSide);
         }
 
         //地面にいるとき

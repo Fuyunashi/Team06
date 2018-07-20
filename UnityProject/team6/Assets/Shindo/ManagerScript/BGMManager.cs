@@ -33,7 +33,8 @@ public class BGMManager : MonoBehaviour {
 
         //1~5
         if((scene_.CurrentStage == NextStage.Tutrial1)
-            || (scene_.CurrentStage == NextStage.Tutrial2))
+            || (scene_.CurrentStage == NextStage.Tutrial2)
+            || (scene_.CurrentStage == NextStage.Tutrial3))
         {
             //Debug.Log(scene_.CurrentStage + "流れてます");
             SoundManager.GetInstance.PlayBGM("8811");
