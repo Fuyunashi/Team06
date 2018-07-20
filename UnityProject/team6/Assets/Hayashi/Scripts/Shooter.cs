@@ -23,25 +23,25 @@ public class Shooter : MonoBehaviour
     private AxisType axisType = AxisType.X;
     private ChangeType changeType = ChangeType.Position;
     [SerializeField]
-    private Image changeTex;
+    private Image changeTex;        //現在の変更する値を画像表示
     [SerializeField]
-    private Sprite positionMark;
+    private Sprite positionMark;    //位置変更を表す画像
     [SerializeField]
-    private Sprite scaleMark;
+    private Sprite scaleMark;       //大きさ変更を表す画像
     [SerializeField]
-    private Text axisTex;
+    private Text axisTex;           //現在の軸タイプを文字表示
 
     private bool playerIndexSet = false;
     private PlayerIndex playerIndex;
-    private GamePadState padState;
-    private GamePadState prevState;
+    private GamePadState padState;      //前回のゲームパッドの入力状態
+    private GamePadState prevState;     //現在のゲームパッドの入力状態
 
     [SerializeField]
-    private Material gunMat;
+    private Material gunMat;            //銃の核部分のマテリアル
     [SerializeField]
-    private Material laserPointMat;
+    private Material laserPointMat;     //レーザーのマテリアル
     [SerializeField]
-    private Transform shotPos;    //発射位置
+    private Transform shotPos;          //発射位置
 
     private GameObject prevOriginObj;    //前回の取得するオブジェクト
     private GameObject originObject;     //数値を取得するオブジェクト
@@ -50,41 +50,40 @@ public class Shooter : MonoBehaviour
     private Vector3 originScaleValue;    //取得するオブジェクトの大きさの数値
 
     [SerializeField]
-    private GameObject objValPref_ray;
+    private GameObject objValPref_ray;      //Rayでの数値表示時オブジェクトプレハブ
     [SerializeField]
-    private GameObject objValPref;
-    private GameObject objVal_ray;
-    private GameObject objVal_origin;
-    private GameObject m_objVal_origin;
-    private GameObject objVal_target;
+    private GameObject objValPref;          //取得後での数値表示時オブジェクトプレハブ
+    private GameObject objVal_ray;          //Rayでの数値表示時オブジェクト
+    private GameObject objVal_origin;       //取得後での数値表示時オブジェクト
+    private GameObject m_objVal_origin;     //コピー演出用数値表示時オブジェクト
+    private GameObject objVal_target;       //コピー先の数値表示時オブジェクト
     [SerializeField]
-    private GameObject drawerCameraPref;
-    private GameObject m_drawerCamera;
+    private GameObject drawerCameraPref;    //コピー演出用カメラプレハブ
+    private GameObject m_drawerCamera;      //コピー演出用カメラ
 
     private bool isTargetMove;   //転置するオブジェクトが動いているか
     private bool pushRTrigger;   //Rトリガーが押されたか
     private bool pushLTrigger;   //Lトリガーが押されたか
 
-    //レイ・レーザーポインタ用変数
-    private Ray ray;
-    private RaycastHit rayhit;
+    private Ray ray;                        //レーザーポインタ用Ray
+    private RaycastHit rayhit;              //Hit判定用
     [SerializeField]
-    private float rayDistance = 20.0f;
+    private float rayDistance = 20.0f;      //Rayの長さ
     [SerializeField]
-    private LineRenderer laserPointer;
-    private int layerMask;
-    private GameObject prevRayHitObj;
-    private GameObject currentRayHitObj;
-    private bool isRayHit;
+    private LineRenderer laserPointer;      //レーザーポインタ用
+    private int layerMask;                  //レイヤーマスク
+    private GameObject prevRayHitObj;       //前回Rayで取得したオブジェクト
+    private GameObject currentRayHitObj;    //現在Rayで取得したオブジェクト
+    private bool isRayHit;                  //レイが当たってるか判定用
 
     [SerializeField]
-    private Material estimateMat;
-    private GameObject m_estimateObj;
+    private Material estimateMat;                   //予測オブジェクトのマテリアル
+    private GameObject m_estimateObj;               //予測オブジェクトオブジェクト
     [SerializeField]
-    private GameObject estimatePositionArrowPref;
+    private GameObject estimatePositionArrowPref;   //予測矢印オブジェクトプレハブ(位置)
     [SerializeField]
-    private GameObject estimateScaleArrowPref;
-    private GameObject m_estimateArrow;
+    private GameObject estimateScaleArrowPref;      //予測矢印オブジェクトプレハブ(大きさ)
+    private GameObject m_estimateArrow;             //予測矢印オブジェクト
 
     private KeyRestriction key_;
     private bool isShot;
@@ -285,6 +284,11 @@ public class Shooter : MonoBehaviour
                 break;
         }
     }
+    /// <summary>
+    /// 数値表示オブジェクトに数値を格納
+    /// </summary>
+    /// <param name="valObj">数値表示オブジェクト</param>
+    /// <param name="values">格納する値</param>
     private void SetObjectValue(GameObject valObj, Vector3 values)
     {
         switch (axisType)
