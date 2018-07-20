@@ -132,49 +132,98 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 targetVelocity = Vector3.zero;
+        float halfForward = forwardSpeed_ / 2;
+        float halfSide = sideSpeed_ / 2;
         if (isStop_) return;
-
-        if (padState_.ThumbSticks.Left.Y >= 0.3f)
+        
+        //地面にいるとき
+        if (padState_.ThumbSticks.Left.Y >= 0.3f && isGround_)
         {
             //前
             targetVelocity = camera_.transform.forward * (padState_.ThumbSticks.Left.Y * forwardSpeed_);
 
         }
-        else if (padState_.ThumbSticks.Left.Y <= -0.3f)
+        else if (padState_.ThumbSticks.Left.Y <= -0.3f && isGround_)
         {
             //後
             targetVelocity = -camera_.transform.forward * (-padState_.ThumbSticks.Left.Y * forwardSpeed_);
 
         }
-        else if (padState_.ThumbSticks.Left.X >= 0.3f)
+        else if (padState_.ThumbSticks.Left.X >= 0.3f && isGround_)
         {
             //右
             targetVelocity = camera_.transform.right * (padState_.ThumbSticks.Left.X * sideSpeed_);
         }
-        else if (padState_.ThumbSticks.Left.X <= -0.3f)
+        else if (padState_.ThumbSticks.Left.X <= -0.3f && isGround_)
+        {
+            //左
+            targetVelocity = -camera_.transform.right * (-padState_.ThumbSticks.Left.X * halfSide);
+        }
+        //空中にいるとき
+        if (padState_.ThumbSticks.Left.Y >= 0.3f && !isGround_)
+        {
+            //前
+            targetVelocity = camera_.transform.forward * (padState_.ThumbSticks.Left.Y * halfForward);
+
+        }
+        else if (padState_.ThumbSticks.Left.Y <= -0.3f && !isGround_)
+        {
+            //後
+            targetVelocity = -camera_.transform.forward * (-padState_.ThumbSticks.Left.Y * halfForward);
+
+        }
+        else if (padState_.ThumbSticks.Left.X >= 0.3f && !isGround_)
+        {
+            //右
+            targetVelocity = camera_.transform.right * (padState_.ThumbSticks.Left.X * halfSide);
+        }
+        else if (padState_.ThumbSticks.Left.X <= -0.3f && !isGround_)
         {
             //左
             targetVelocity = -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_);
         }
+
+        //地面にいるとき
         //左前
-        if(padState_.ThumbSticks.Left.Y >= 0.3f && padState_.ThumbSticks.Left.X <= -0.3f)
+        if (padState_.ThumbSticks.Left.Y >= 0.3f && padState_.ThumbSticks.Left.X <= -0.3f && isGround_)
         {
             targetVelocity = (camera_.transform.forward * (padState_.ThumbSticks.Left.Y * forwardSpeed_) + -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_));
         }
         //右前
-        if (padState_.ThumbSticks.Left.Y >= 0.3f && padState_.ThumbSticks.Left.X >= 0.3f)
+        if (padState_.ThumbSticks.Left.Y >= 0.3f && padState_.ThumbSticks.Left.X >= 0.3f && isGround_)
         {
             targetVelocity = (camera_.transform.forward * (padState_.ThumbSticks.Left.Y * forwardSpeed_) + camera_.transform.right * (padState_.ThumbSticks.Left.X * sideSpeed_));
         }
         //左後
-        if(padState_.ThumbSticks.Left.Y <= -0.3f && padState_.ThumbSticks.Left.X <= -0.3f)
+        if(padState_.ThumbSticks.Left.Y <= -0.3f && padState_.ThumbSticks.Left.X <= -0.3f && isGround_)
         {
             targetVelocity = (-camera_.transform.forward * (-padState_.ThumbSticks.Left.Y * forwardSpeed_) + -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_));
         }
         //右後
-        if(padState_.ThumbSticks.Left.Y <= -0.3f && padState_.ThumbSticks.Left.X >= 0.3f)
+        if(padState_.ThumbSticks.Left.Y <= -0.3f && padState_.ThumbSticks.Left.X >= 0.3f && isGround_)
         {
             targetVelocity = (-camera_.transform.forward * (-padState_.ThumbSticks.Left.Y * forwardSpeed_) + camera_.transform.right * (padState_.ThumbSticks.Left.X * sideSpeed_));
+        }
+        //空中にいるとき
+        //左前
+        if (padState_.ThumbSticks.Left.Y >= 0.3f && padState_.ThumbSticks.Left.X <= -0.3f && !isGround_)
+        {
+            targetVelocity = (camera_.transform.forward * (padState_.ThumbSticks.Left.Y * halfForward) + -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_));
+        }
+        //右前
+        if (padState_.ThumbSticks.Left.Y >= 0.3f && padState_.ThumbSticks.Left.X >= 0.3f && !isGround_)
+        {
+            targetVelocity = (camera_.transform.forward * (padState_.ThumbSticks.Left.Y * halfForward) + camera_.transform.right * (padState_.ThumbSticks.Left.X * sideSpeed_));
+        }
+        //左後
+        if (padState_.ThumbSticks.Left.Y <= -0.3f && padState_.ThumbSticks.Left.X <= -0.3f && !isGround_)
+        {
+            targetVelocity = (-camera_.transform.forward * (-padState_.ThumbSticks.Left.Y * halfForward) + -camera_.transform.right * (-padState_.ThumbSticks.Left.X * sideSpeed_));
+        }
+        //右後
+        if (padState_.ThumbSticks.Left.Y <= -0.3f && padState_.ThumbSticks.Left.X >= 0.3f && !isGround_)
+        {
+            targetVelocity = (-camera_.transform.forward * (-padState_.ThumbSticks.Left.Y * halfForward) + camera_.transform.right * (padState_.ThumbSticks.Left.X * sideSpeed_));
         }
 
         //移動
@@ -199,7 +248,7 @@ public class Player : MonoBehaviour
             rb_.velocity = new Vector3(0, jumpPower_, 0);
             //totalFallTime_ = 0.0f;
             isGround_ = false;
-
+            
         }
 
         //totalFallTime_ = Time.deltaTime;
@@ -216,11 +265,13 @@ public class Player : MonoBehaviour
             {
                 isGround_ = true;
                 inAir = false;
+                
             }
         }
         else
         {
             isGround_ = false;
+            
             if (inAir == false)
             {
                 fallPos_ = transform.position;
