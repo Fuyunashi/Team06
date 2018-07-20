@@ -45,6 +45,7 @@ public class StageInstructs : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("現在のステージは：" + CurrentStage);
         //Xinput関連
         if (!playerInputSet_ || !prevState_.IsConnected)
         {

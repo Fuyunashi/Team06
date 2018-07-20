@@ -39,6 +39,7 @@ TagManager:
   - GoalObject
   - GoleObject
   - Stage13
+  - Tutrial3
   layers:
   - Default
   - TransparentFX

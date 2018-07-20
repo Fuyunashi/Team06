@@ -34,7 +34,7 @@ public class ChangeCamera : MonoBehaviour
         if (f_move_time >= 0) return;
 
 
-        if ((int)stageInstructs.CurrentStage >= 0 && (int)stageInstructs.CurrentStage <= 1)
+        if ((int)stageInstructs.CurrentStage >= 0 && (int)stageInstructs.CurrentStage <= 1 || stageInstructs.CurrentStage == NextStage.Tutrial3)
         {
             v_camrea[1].Priority = 12;
             v_camrea[2].Priority = 10;

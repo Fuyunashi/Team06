@@ -123,32 +123,7 @@ public class SelectCameraRotate : MonoBehaviour
 
                 break;
         }
-        //if (Input.GetKeyDown(KeyCode.RightArrow))
-        //    currrentIndex = (currrentIndex + 1) % dirctionNumLength;
-        //else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        //    currrentIndex = (currrentIndex - 1 + dirctionNumLength) % dirctionNumLength;
-
-        ////Debug.Log("カメラの向き：" + currrentIndex);
-        //switch (currrentIndex)
-        //{
-        //    case 0:
-        //        transform.rotation = Quaternion.Euler(.0f, .0f, .0f);
-        //        break;
-        //    case 1:
-        //        transform.rotation = Quaternion.Euler(.0f, 90.0f, .0f);
-        //        break;
-        //    case 2:
-        //        transform.rotation = Quaternion.Euler(.0f, 180.0f, .0f);
-        //        break;
-        //    case 3:
-        //        transform.rotation = Quaternion.Euler(.0f, -90.0f, .0f);
-        //        break;
-        //}
     }
-    private void CameraMove()
-    {
-
-    }
-
+ 
 
 }

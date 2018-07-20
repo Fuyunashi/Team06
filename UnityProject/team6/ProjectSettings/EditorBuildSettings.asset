@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Sasaki/Scenes/Tutrial2ChildScene.unity
     guid: 9d12a889cac23ae48a7fe241e6238e28
   - enabled: 1
+    path: Assets/Sasaki/Scenes/Tutrial3ChildScene.unity
+    guid: 9cc5692e013a5134b93b418f09bc24cc
+  - enabled: 1
     path: Assets/Sasaki/Scenes/Stage1ChildScene.unity
     guid: fad51162fc54ea94da65b950cb5e6dff
   - enabled: 1
